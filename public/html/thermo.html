@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Infrared Thermometer Simulation – Realtime</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.min.js"></script>
+</head>
+<body>
+<script>
+let objects = [];
+let crosshair;
+let currentTemp = 24;
+let targetName = "Air";
+let imgs = {};
+
+function preload() {
+  imgs.ice = loadImage("/ice.png");
+  imgs.water = loadImage("/water.png");
+  imgs.metal = loadImage("/metal.png");
+  imgs.flame = loadImage("/flame.png");
+  crosshair = loadImage("/crosshair.png");
+}
+
+function setup() {
+  createCanvas(800, 500);
+  noCursor();
+  textAlign(CENTER, CENTER);
+  imageMode(CENTER);
+
+  objects = [
+    {name: "Ice", temp: -10, x: 150, y: 300, img: imgs.ice},
+    {name: "Water", temp: 22, x: 350, y: 320, img: imgs.water},
+    {name: "Metal", temp: 120, x: 550, y: 320, img: imgs.metal},
+    {name: "Flame", temp: 850, x: 720, y: 260, img: imgs.flame}
+  ];
+}
+
+function draw() {
+  background(20);
+
+  // Draw scene
+  for (let o of objects) image(o.img, o.x, o.y, 120, 120);
+
+  // Detect aimed object
+  let aimed = detectTarget(mouseX, mouseY);
+
+  if (aimed) {
+    let noise = random(-1, 1);
+    currentTemp = (aimed.temp + noise).toFixed(1);
+    targetName = aimed.name;
+  } else {
+    currentTemp = (24 + random(-0.5, 0.5)).toFixed(1);
+    targetName = "Air";
+  }
+
+  drawLaser();
+  drawUI();
+  drawCrosshair();
+}
+
+function detectTarget(mx, my) {
+  for (let o of objects) {
+    let d = dist(mx, my, o.x, o.y);
+    if (d < 60) return o;
+  }
+  return null;
+}
+
+function drawLaser() {
+  stroke(255, 0, 0);
+  strokeWeight(2);
+  line(width / 2, height - 20, mouseX, mouseY);
+}
+
+function drawUI() {
+  noStroke();
+  fill(255);
+  textSize(16);
+  text("Aim to read temperature (realtime)", width / 2, 30);
+
+  fill(255);
+  textSize(22);
+  text(`${targetName}: ${currentTemp} °C`, width / 2, 70);
+}
+
+function drawCrosshair() {
+  image(crosshair, mouseX, mouseY, 40, 40);
+}
+</script>
+</body>
+</html>

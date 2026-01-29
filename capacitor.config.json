@@ -1,0 +1,17 @@
+{
+  "appId": "com.dclnhs.science7",
+  "appName": "Science 7 Interactive Module – DCLNHS",
+  "webDir": "src-capacitor/www",
+
+  "android": {
+    "fullscreen": false
+  },
+
+  "plugins": {
+    "StatusBar": {
+      "overlaysWebView": false,
+      "style": "DARK",
+      "backgroundColor": "#000000"
+    }
+  }
+}

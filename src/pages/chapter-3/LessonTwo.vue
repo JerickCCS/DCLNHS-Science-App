@@ -1,0 +1,339 @@
+<template>
+    <q-layout view="hHh lpR fFf">
+        <q-header class="bg-white text-black">
+            <q-toolbar>
+                <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="q-mr-sm" />
+                <q-toolbar-title class="navbar-title">Lesson 2: Solubility and Saturation</q-toolbar-title>
+                <div class="row items-center q-gutter-sm">
+                    <div class="text-subtitle2">{{ currentPage + 1 }} / {{ pages.length }}</div>
+                    <q-btn flat dense round :icon="isBookmarked ? 'bookmark' : 'bookmark_border'" color="primary"
+                        @click="toggleBookmark" />
+                </div>
+            </q-toolbar>
+        </q-header>
+
+        <q-page-container class="night-sky">
+            <q-page>
+                <div class="stars"></div>
+                <div class="lesson-container">
+                    <div id="viewer">
+                        <transition name="fade-slide" mode="out-in">
+                            <div :key="currentPage" v-html="pages[currentPage]"></div>
+                        </transition>
+                    </div>
+
+                    <div class="buttons">
+                        <q-btn class="nav-button" :disable="currentPage === 0" @click="prevPage"
+                            no-caps>Previous</q-btn>
+
+                        <div class="progress-section">
+                            <div class="page-count">{{ currentPage + 1 }} / {{ pages.length }}</div>
+                            <q-linear-progress :value="progress" size="10px" color="primary" />
+                        </div>
+
+                        <q-btn class="nav-button" @click="nextPage"
+                            :label="currentPage === pages.length - 1 ? 'Finish' : 'Next'"
+                            :style="currentPage === pages.length - 1 ? finishButtonStyle : null" no-caps />
+                    </div>
+
+                    <div class="speak-btn" @click="toggleAudio">
+                        <img :src="isPlaying ? '/icons/stop.png' : '/icons/speak.png'" alt="Speak Button"
+                            class="cursor-pointer" style="width: 20px; height: 20px;" />
+                    </div>
+                </div>
+            </q-page>
+        </q-page-container>
+
+        <audio id="lesson-complete-audio" src="assets/audio/completed.mp3" preload="auto"></audio>
+
+        <q-dialog v-model="showLessonComplete" @show="startConfetti" @hide="stopConfetti" persistent>
+            <q-card class="lesson-complete-card q-pa-md text-center relative-position">
+                <q-card-section>
+                    <div class="stars-row flex justify-center items-center q-gutter-md">
+                        <img src="assets/icons/five-stars.gif" class="star-icon big-star" />
+                    </div>
+                </q-card-section>
+                <q-card-section>
+                    <div class="text-h6 text-bold">🎉 Congratulations!</div>
+                    <div class="text-subtitle2 q-mt-sm">You have completed this lesson.</div>
+                </q-card-section>
+                <q-card-actions align="center">
+                    <q-btn label="OK" color="primary" unelevated rounded class="lesson-ok-btn" v-close-popup />
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
+    </q-layout>
+</template>
+
+<script>
+import { ref, computed, onMounted, onUnmounted, watch } from "vue"
+import { useRoute, useRouter } from "vue-router"
+import { useTTS } from "src/composables/useTTS"
+import confetti from "canvas-confetti"
+import { getCurrentUser, setCurrentUser } from "src/utils/session"
+import { flatLessons } from "src/utils/lessons"
+import { LocalStorage } from "quasar"
+import '@google/model-viewer';
+import { audioManager } from "src/utils/audioManager"
+import { onBeforeRouteLeave } from "vue-router"
+
+export default {
+    name: "ScientificModelsLesson",
+    setup() {
+        const route = useRoute()
+        const router = useRouter()
+        const currentPage = ref(0)
+        const progress = ref(0)
+        const showLessonComplete = ref(false)
+
+        // --- TTS composable ---
+        const { isPlaying, toggleAudio, stopSpeaking } = useTTS()
+
+        const currentUser = ref(getCurrentUser())
+        let confettiInterval = null
+        const lesson = flatLessons.find(l => l.route === route.path)
+        const lessonId = lesson ? String(lesson.id) : "17"
+
+        const bookmarkedPages = ref([])
+
+        // --- Lesson pages ---
+        const pages = ref([
+            `
+    <div>
+      <!-- Card 1 -->
+      <div class="header">
+        <div class="title">Lesson 2 Solubility and Saturation</div>
+      </div>
+      <p>What are the properties of solutions?</p>
+      <p>What happens when a few sugar crystals are dissolved in a glass of water? What property of solution is evident here? As more sugar crystals are added, however, the dissolution slows down until eventually, added crystals remain undissolved and settle at the bottom of the container. This means that the solution has reached its solubility.</p>
+    </div>
+    `,
+            `
+    <div>
+      <!-- Card 2 -->
+      <p>Solubility is the maximum amount of solute that can be dissolved in a given amount of solvent at a specific temperature. Thus, solubility may be described as the saturation point of a solution at a given temperature. It is commonly expressed in grams of solute per 100 grams (or per 100 milliliters) of solvent. Consider potassium nitrate and sodium nitrate as examples. At 25°C, the solubility of potassium nitrate is 38 grams per 100 grams of water; that of sodium nitrate at the same temperature is 90 grams per 100 grams of water.</p>
+    </div>
+    `,
+            `
+    <div>
+      <!-- Card 3 -->
+      <p>Solutions can be described according to the three degrees of saturation: saturated, unsaturated, and supersaturated. A saturated solution contains the maximum amount of dissolved solute for a given amount of solvent. If the amount of solute in a solution is less than that in the saturated solution, the solution is said to be unsaturated. A solution containing more dissolved solute than the saturated solution is described as supersaturated. A supersaturated solution can be prepared by adding more solute to a saturated solution while increasing its temperature.</p>
+    </div>
+    `,
+            `
+    <div>
+      <!-- Card 4 -->
+      <p>The additional solute will remain dissolved in the solution when the solution is allowed to cool slowly and undisturbed. However, a supersaturated solution is an unstable system; disturbing it, such as by stirring or shaking, will recrystallize the excess solute and return it to a saturated condition. Adding a small crystal of the solute, called seed crystal, can also recrystallize the excess solute from a supersaturated solution. Figure 3-2 illustrates saturated, unsaturated, and supersaturated solutions.</p>
+      <div class="illustration">
+        <img src="assets/img" alt="Figure 3-2. Based on the amount of dissolved solute, solutions can be described as (A) saturated, (B) unsaturated, or (C) supersaturated.">
+        <div class="caption">Figure 3-2. Based on the amount of dissolved solute, solutions can be described as (A) saturated, (B) unsaturated, or (C) supersaturated.</div>
+      </div>
+    </div>
+    `,
+            `
+    <div>
+      <!-- Card 5 -->
+      <div class="info-card">
+  <div class="info-title">MINI TEST 3-2</div>
+  <div class="info-content">
+    <div class="info-text">
+      <div class="mini-questions">
+        <p><strong>1.</strong> When a large amount of solute is present in a given solution, the solution is said to be concentrated. Is a saturated solution always a concentrated solution? Explain your answer.</p>
+      </div>
+      <div class="start-btn-container">
+        <q-btn data-route="/mini-test-3-2" unelevated class="start-btn">
+          Answer
+        </q-btn>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+    `
+        ])
+
+        // --- Lesson completion ---
+        const isLessonComplete = computed(() =>
+            currentUser.value?.progress?.[lessonId]?.completed || false
+        )
+
+        const markLessonComplete = () => {
+            if (!currentUser.value) return
+            if (!currentUser.value.progress) currentUser.value.progress = {}
+
+            currentUser.value.progress[lessonId] = {
+                ...currentUser.value.progress[lessonId],
+                completed: true
+            }
+
+            setCurrentUser(currentUser.value)
+
+            let students = LocalStorage.getItem("students") || []
+            students = students.map(student =>
+                student.id === currentUser.value.id
+                    ? { ...student, progress: currentUser.value.progress }
+                    : student
+            )
+            LocalStorage.set("students", students)
+            currentUser.value = getCurrentUser()
+        }
+
+        const finishButtonStyle = {
+            background: "linear-gradient(90deg,rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 0%, rgba(252, 176, 69, 1) 79%)",
+            color: "#fff",
+        }
+
+        // --- Bookmarks ---
+        const saveBookmarks = (bookmarksArr) => {
+            const user = getCurrentUser()
+            if (!user) return
+            const key = user.studentId ?? user.id ?? user.name
+            let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
+            allBookmarks[key] = bookmarksArr
+            localStorage.setItem("bookmarks", JSON.stringify(allBookmarks))
+        }
+
+        const loadBookmarks = () => {
+            const user = getCurrentUser()
+            if (!user) return []
+            const key = user.studentId ?? user.id ?? user.name
+            let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
+            return allBookmarks[key] || []
+        }
+
+        const toggleBookmark = () => {
+            const bookmark = { route: route.name || route.path, page: currentPage.value, lessonId }
+            let existing = loadBookmarks()
+            const index = existing.findIndex(b => b.route === bookmark.route && b.page === bookmark.page)
+            if (index !== -1) existing.splice(index, 1)
+            else existing.push(bookmark)
+            saveBookmarks(existing)
+            bookmarkedPages.value = loadBookmarks()
+        }
+
+        const isBookmarked = computed(() =>
+            bookmarkedPages.value.some(
+                b => b.route === (route.name || route.path) && b.page === currentPage.value
+            )
+        )
+
+        // --- Progress & Navigation ---
+        const updateProgress = () => { progress.value = (currentPage.value + 1) / pages.value.length }
+
+        onBeforeRouteLeave(() => {
+            stopSpeaking()
+        })
+
+        const nextPage = () => {
+            if (isPlaying.value) stopSpeaking()
+            if (currentPage.value < pages.value.length - 1) {
+                currentPage.value++
+                updateProgress()
+            } else {
+                markLessonComplete()
+                showLessonComplete.value = true
+            }
+        }
+
+        const prevPage = () => {
+            if (isPlaying.value) stopSpeaking()
+            if (currentPage.value > 0) {
+                currentPage.value--
+                updateProgress()
+            }
+        }
+
+        const goBack = () => {
+            if (window.history.length > 1) router.back()
+            else router.push("/chapters")
+        }
+
+        watch(currentPage, (newPage) => {
+            router.replace({ path: route.path, query: { page: newPage } })
+        })
+
+        // --- Confetti ---
+        const startConfetti = () => {
+            stopConfetti()
+            const audio = document.getElementById("lesson-complete-audio")
+            if (audio) { audio.currentTime = 0; audio.play().catch(() => { }) }
+            confettiInterval = setInterval(() => {
+                confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } })
+            }, 500)
+        }
+
+        const stopConfetti = () => {
+            if (confettiInterval) { clearInterval(confettiInterval); confettiInterval = null }
+        }
+
+        // --- Lifecycle ---
+        onMounted(() => {
+            if (!route.query._reloaded) {
+                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } }).then(() => {
+                    window.location.reload()
+                })
+                return
+            }
+
+            currentUser.value = getCurrentUser()
+            bookmarkedPages.value = loadBookmarks()
+            updateProgress()
+
+            const pageFromQuery = parseInt(route.query.page, 10)
+            if (!isNaN(pageFromQuery) && pageFromQuery < pages.value.length) currentPage.value = pageFromQuery
+
+            // Stars animation
+            const starContainer = document.querySelector('.stars')
+            if (starContainer) {
+                for (let i = 0; i < 100; i++) {
+                    const star = document.createElement('div')
+                    star.classList.add('star')
+                    star.style.top = Math.random() * 100 + '%'
+                    star.style.left = Math.random() * 100 + '%'
+                    star.style.width = (Math.random() * 2 + 1) + 'px'
+                    star.style.height = star.style.width
+                    star.style.animationDuration = (2 + Math.random() * 3) + 's'
+                    star.style.animationDelay = (Math.random() * 3) + 's'
+                    starContainer.appendChild(star)
+                }
+            }
+
+            // Click to navigate mini-tests
+            const viewer = document.querySelector('#viewer')
+            if (viewer) {
+                viewer.addEventListener('click', (e) => {
+                    const target = e.target.closest('[data-route]')
+                    if (target) router.push(target.dataset.route)
+                })
+            }
+        })
+
+        onUnmounted(() => { audioManager.restoreBg() })
+
+        return {
+            currentPage,
+            isPlaying,
+            pages,
+            showLessonComplete,
+            bookmarkedPages,
+            progress,
+            isBookmarked,
+            finishButtonStyle,
+            toggleAudio: () => toggleAudio(pages.value[currentPage.value]),
+            nextPage,
+            prevPage,
+            goBack,
+            toggleBookmark,
+            startConfetti,
+            stopConfetti,
+            currentUser,
+            isLessonComplete,
+            markLessonComplete
+        }
+    }
+}
+</script>
+
+
+<style src="src/css/lessonBackground.css"></style>
+<style src="src/css/lesson.css" scoped></style>

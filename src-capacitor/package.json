@@ -1,0 +1,13 @@
+{
+  "name": "e-learning",
+  "version": "0.0.1",
+  "description": "Development of a mobile e-learning application for grade 7 science subject",
+  "author": "Jerick V., Michelle P., Evha May T.",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^7.4.5",
+    "@capacitor/app": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/core": "^7.0.0"
+  }
+}

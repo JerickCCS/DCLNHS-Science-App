@@ -1,0 +1,63 @@
+// app global css in SCSS form
+/* ================================
+   Custom Font: MyFont
+   Place TTF files in /public/fonts/
+   ================================ */
+@font-face {
+  font-family: 'MyFont';
+  src: url('/fonts/Baloo2-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('/fonts/Baloo2-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ================================
+   Custom Font: OtherFont
+   Place TTF files in /public/fonts/
+   ================================ */
+@font-face {
+  font-family: 'OtherFont';
+  src: url('/fonts/fredoka-one.one-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ================================
+   ROOT & VIEWPORT FIX (CRITICAL)
+   ================================ */
+html,
+body,
+#q-app {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================================
+   Global Font Setup
+   ================================ */
+html,
+body {
+  font-family: 'MyFont', 'OtherFont', sans-serif;
+  font-weight: 400;
+}
+
+/* Apply to all Quasar components */
+* {
+  font-family: 'MyFont', 'OtherFont', sans-serif;
+}
+
+/* ================================
+   Safe-area helpers (Android 13+)
+   ================================ */
+.safe-fullscreen {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}

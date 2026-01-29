@@ -1,0 +1,22 @@
+{
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.codeActionsOnSave": [
+    "source.fixAll.eslint"
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "vue"
+  ],
+  "liveServer.settings.port": 5501,
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  }
+}

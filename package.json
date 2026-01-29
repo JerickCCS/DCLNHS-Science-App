@@ -1,0 +1,50 @@
+{
+  "name": "e-learning",
+  "version": "0.0.1",
+  "description": "Development of a mobile e-learning application for grade 7 science subject",
+  "productName": "DCLNHS Science App",
+  "author": "Jerick V., Michelle P., Evha May T.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{js,cjs,mjs,vue}\"",
+    "test": "echo \"No test specified\" && exit 0",
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "postinstall": "quasar prepare"
+  },
+  "dependencies": {
+    "@capacitor-community/text-to-speech": "^6.0.0",
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/app": "^7.1.1",
+    "@capacitor/cli": "^7.4.3",
+    "@capacitor/core": "^7.4.3",
+    "@google/model-viewer": "^4.1.0",
+    "@quasar/extras": "^1.16.4",
+    "canvas-confetti": "^1.9.3",
+    "chart.js": "^4.5.1",
+    "dexie": "^4.2.1",
+    "idb": "^8.0.3",
+    "katex": "^0.16.27",
+    "marked": "^16.3.0",
+    "quasar": "^2.16.0",
+    "vue": "^3.4.18",
+    "vue-chartjs": "^5.3.2",
+    "vue-router": "^4.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.14.0",
+    "@quasar/app-vite": "^2.0.0",
+    "autoprefixer": "^10.4.2",
+    "eslint": "^9.14.0",
+    "eslint-plugin-vue": "^9.30.0",
+    "globals": "^15.12.0",
+    "postcss": "^8.4.14",
+    "vite-plugin-checker": "^0.8.0"
+  },
+  "engines": {
+    "node": "^28 || ^26 || ^24 || ^22 || ^20 || ^18",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}

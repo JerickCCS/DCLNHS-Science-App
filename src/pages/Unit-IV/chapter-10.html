@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1 - Nature of Science</title>
+    <!-- Quasar Framework CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.12.0/dist/quasar.min.css" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1976d2;
+            --primary-dark: #1565c0;
+            --success-color: #10b981;
+            --success-dark: #086143;
+            --warning-color: #f59e0b;
+            --warning-dark: #996305;
+            --info-color: #3b82f6;
+            --info-dark: #1f4d97;
+            --gray-light: #e0e0e0;
+            --gray-medium: #666;
+            --gray-dark: #333;
+            --white: #ffffff;
+            --light-bg: #f5f3ff;
+            --border-color: #c4b5fd;
+            --shadow-light: rgba(139, 92, 246, 0.15);
+        }
+
+        body {
+            font-family: "Roboto", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--white);
+            color: var(--gray-dark);
+            min-height: 100vh;
+        }
+
+        .chapter-page {
+            min-height: 100vh;
+            padding-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .top-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            width: 100%;
+            margin: 0;
+            background: var(--light-bg);
+            border: 2px solid var(--border-color);
+            border-bottom: 4px solid #8b5cf6;
+            box-shadow: 0 3px 8px var(--shadow-light);
+            border-radius: 0;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+
+        .tabs-container {
+            display: flex;
+            width: 100%;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px 16px;
+            min-height: 48px;
+            font-weight: 600;
+            color: #4b5563;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            background: #ddd6fe;
+            color: #4c1d95;
+        }
+
+        .tab-button.active {
+            background: #8b5cf6;
+            color: white !important;
+            box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .content-area {
+            width: 95%;
+            margin: 0 auto;
+            padding-top: 70px;
+            padding-bottom: 20px;
+        }
+
+        /* Introduction Styles - Mobile First */
+        .introduction-content {
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 16px;
+        }
+
+        .intro-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .intro-image-container {
+            width: 100%;
+            text-align: center;
+        }
+
+        .intro-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .intro-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray-medium);
+            margin-bottom: 20px;
+        }
+
+        .intro-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            border-radius: 8px;
+            min-height: 60px;
+            border: none;
+            background: var(--info-color);
+            border-bottom: 4px solid #000ba1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 4px;
+        }
+
+        .objectives-section .objectives-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 12px;
+        }
+
+        .learning-objectives {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .learning-objectives li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .learning-objectives li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Lessons Styles */
+        .icon-btn {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+        }
+
+        .lessons-content {
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 16px;
+        }
+
+        .lessons-header {
+            margin-bottom: 2px;
+        }
+
+        .lessons-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .lessons-subtitle {
+            font-size: 14px;
+            color: var(--gray-medium);
+            margin-bottom: 1em;
+        }
+
+        .lessons-timeline {
+            position: relative;
+        }
+
+        .lesson-item {
+            position: relative;
+            display: flex;
+            margin-bottom: 32px;
+            cursor: pointer;
+            min-height: 72px;
+        }
+
+        .lesson-item.locked {
+            cursor: not-allowed;
+        }
+
+        .lesson-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-side {
+            position: relative;
+            flex-shrink: 0;
+            width: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 72px;
+        }
+
+        .timeline-circle {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 0px;
+        }
+
+        .circle-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            background: var(--gray-light);
+            color: var(--gray-medium);
+            border: 2px solid var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--gray-light);
+            z-index: 1;
+        }
+
+        .timeline-line.completed-line {
+            background: #4caf50;
+        }
+
+        .lesson-content {
+            flex: 1;
+            margin-left: 12px;
+        }
+
+        .lesson-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            min-height: 48px;
+            overflow: hidden;
+            background: var(--gray-light);
+        }
+
+        .lesson-card:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 currentColor !important;
+        }
+
+        .lesson-card.completed-card {
+            border: none;
+            background: var(--success-color);
+            border-bottom: 4px solid var(--success-dark);
+        }
+
+        .lesson-card.current-card {
+            border: none;
+            background: var(--info-color);
+            border-bottom: 4px solid var(--info-dark);
+            position: relative;
+        }
+
+        .lesson-card.locked-card {
+            border: none;
+            background: var(--warning-color);
+            border-bottom: 4px solid var(--warning-dark);
+        }
+
+        .lesson-card.completed-card .lesson-title,
+        .lesson-card.completed-card .lesson-description,
+        .lesson-card.current-card .lesson-title,
+        .lesson-card.current-card .lesson-description,
+        .lesson-card.locked-card .lesson-title,
+        .lesson-card.locked-card .lesson-description {
+            color: white;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .lesson-card.current-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .lesson-card-section {
+            padding: 12px 16px;
+        }
+
+        .lesson-content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .lesson-text-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .lesson-text-content .lesson-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin: 0 0 8px 0;
+            line-height: 1.3;
+        }
+
+        .lesson-text-content .lesson-description {
+            font-size: 14px;
+            color: var(--gray-medium);
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+        }
+
+        .lesson-action {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .action-button.completed {
+            background-color: #4caf50;
+        }
+
+        .action-button.current {
+            background-color: var(--primary-color);
+        }
+
+        .action-button.locked {
+            background-color: #9e9e9e;
+        }
+
+        /* Lesson Status Colors */
+        .lesson-item.completed .circle-number {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .lesson-item.current .circle-number {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+        }
+
+        .lesson-item.locked .circle-number {
+            background: #bdbdbd;
+            color: white;
+        }
+
+        /* Tablet and Desktop Optimizations */
+        @media (min-width: 600px) {
+            .top-navbar {
+                width: 100%;
+                margin: 0;
+            }
+
+            .tab-button {
+                font-size: 16px;
+                padding: 16px 24px;
+            }
+
+            .content-area {
+                width: 90%;
+                padding-top: 70px;
+            }
+
+            .introduction-content,
+            .lessons-content {
+                padding: 24px;
+            }
+
+            .intro-container {
+                display: grid;
+                grid-template-columns: 1fr 1.5fr;
+                gap: 32px;
+                align-items: start;
+            }
+
+            .intro-title {
+                font-size: 28px;
+            }
+
+            .intro-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+
+            .stat-card .stat-number {
+                font-size: 20px;
+            }
+
+            .lessons-timeline {
+                max-width: 700px;
+                margin: 0 auto;
+            }
+
+            .timeline-side {
+                width: 60px;
+            }
+
+            .timeline-circle .circle-number {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .timeline-line {
+                top: 40px;
+            }
+
+            .lesson-content {
+                margin-left: 20px;
+            }
+
+            .lesson-card:hover:not(.locked-card) {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .lesson-text-content .lesson-title {
+                font-size: 18px;
+            }
+
+            .lesson-text-content .lesson-description {
+                font-size: 15px;
+            }
+
+            .icon-btn {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .introduction-content,
+            .lessons-content {
+                padding: 40px;
+            }
+
+            .intro-container {
+                gap: 40px;
+            }
+
+            .intro-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chapter-page">
+        <!-- Top Navigation Tabs -->
+        <div class="top-navbar">
+            <div class="tabs-container">
+                <button class="tab-button active" data-tab="introduction">Introduction</button>
+                <button class="tab-button" data-tab="lessons">Lessons</button>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Introduction -->
+            <div id="introduction-content" class="introduction-content">
+                <div class="intro-container">
+                    <div class="intro-image-container">
+                        <img src="img/earthquakeandfaults.png" alt="Earthquake and Faults" class="intro-image" />
+                    </div>
+
+                    <div class="intro-text">
+                        <h1 class="intro-title">Chapter 1 – Nature of Science</h1>
+                        <div class="intro-description">Explore the fundamental principles of science and how scientific investigations are conducted.</div>
+
+                        <!-- Stats -->
+                        <div class="intro-stats">
+                            <div class="stat-card">
+                                <div class="text-center q-pa-sm">
+                                    <div class="stat-number">8</div>
+                                    <div class="stat-label">Lessons</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="text-center q-pa-sm">
+                                    <div class="stat-number">8</div>
+                                    <div class="stat-label">Hours</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="text-center q-pa-sm">
+                                    <div class="stat-number">Beginner</div>
+                                    <div class="stat-label">Level</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Learning Objectives -->
+                        <div class="objectives-section">
+                            <div class="objectives-title">What you'll learn:</div>
+                            <ul class="learning-objectives">
+                                <li>Understand the nature and methods of science</li>
+                                <li>Learn to use scientific models effectively</li>
+                                <li>Handle laboratory tools and equipment safely</li>
+                                <li>Perform scientific investigations</li>
+                                <li>Organize and analyze scientific data</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lessons -->
+            <div id="lessons-content" class="lessons-content" style="display: none;">
+                <div class="lessons-header">
+                    <h2 class="lessons-title">Course Lessons</h2>
+                    <p class="lessons-subtitle">
+                        Follow the lessons in order to master the concepts
+                    </p>
+                </div>
+
+                <div class="lessons-timeline">
+                    <!-- Lesson 1 -->
+                    <div class="lesson-item current" data-lesson="1">
+                        <!-- Timeline Circle -->
+                        <div class="timeline-side">
+                            <div class="timeline-circle">
+                                <div class="circle-number">1</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+
+                        <!-- Lesson Card -->
+                        <div class="lesson-content">
+                            <div class="lesson-card current-card">
+                                <div class="lesson-card-section">
+                                    <div class="lesson-content-wrapper">
+                                        <div class="lesson-text-content">
+                                            <h3 class="lesson-title">Lesson 1: Scientific Models</h3>
+                                            <p class="lesson-description">Learn about scientific models</p>
+                                        </div>
+
+                                        <div class="lesson-action">
+                                            <button class="action-button current">
+                                                <span class="material-icons" style="color: white; font-size: 18px;">play_arrow</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 2 -->
+                    <div class="lesson-item locked" data-lesson="2">
+                        <!-- Timeline Circle -->
+                        <div class="timeline-side">
+                            <div class="timeline-circle">
+                                <div class="circle-number">🔒</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+
+                        <!-- Lesson Card -->
+                        <div class="lesson-content">
+                            <div class="lesson-card locked-card">
+                                <div class="lesson-card-section">
+                                    <div class="lesson-content-wrapper">
+                                        <div class="lesson-text-content">
+                                            <h3 class="lesson-title">Lesson 2: Measurements and Data Organization</h3>
+                                            <p class="lesson-description">Understanding measurements and organizing data</p>
+                                        </div>
+
+                                        <div class="lesson-action">
+                                            <button class="action-button locked">
+                                                <span class="material-icons" style="color: white; font-size: 18px;">lock</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 3 -->
+                    <div class="lesson-item locked" data-lesson="3">
+                        <!-- Timeline Circle -->
+                        <div class="timeline-side">
+                            <div class="timeline-circle">
+                                <div class="circle-number">🔒</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+
+                        <!-- Lesson Card -->
+                        <div class="lesson-content">
+                            <div class="lesson-card locked-card">
+                                <div class="lesson-card-section">
+                                    <div class="lesson-content-wrapper">
+                                        <div class="lesson-text-content">
+                                            <h3 class="lesson-title">Lesson 3: Common Laboratory Tools</h3>
+                                            <p class="lesson-description">Introduction to basic laboratory tools and equipment</p>
+                                        </div>
+
+                                        <div class="lesson-action">
+                                            <button class="action-button locked">
+                                                <span class="material-icons" style="color: white; font-size: 18px;">lock</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 4 -->
+                    <div class="lesson-item locked" data-lesson="4">
+                        <!-- Timeline Circle -->
+                        <div class="timeline-side">
+                            <div class="timeline-circle">
+                                <div class="circle-number">🔒</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+
+                        <!-- Lesson Card -->
+                        <div class="lesson-content">
+                            <div class="lesson-card locked-card">
+                                <div class="lesson-card-section">
+                                    <div class="lesson-content-wrapper">
+                                        <div class="lesson-text-content">
+                                            <h3 class="lesson-title">Lesson 4: Doing Scientific Investigations</h3>
+                                            <p class="lesson-description">Step-by-step guide to performing investigations</p>
+                                        </div>
+
+                                        <div class="lesson-action">
+                                            <button class="action-button locked">
+                                                <span class="material-icons" style="color: white; font-size: 18px;">lock</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 5 -->
+                    <div class="lesson-item locked" data-lesson="5">
+                        <!-- Timeline Circle -->
+                        <div class="timeline-side">
+                            <div class="timeline-circle">
+                                <div class="circle-number">🔒</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+
+                        <!-- Lesson Card -->
+                        <div class="lesson-content">
+                            <div class="lesson-card locked-card">
+                                <div class="lesson-card-section">
+                                    <div class="lesson-content-wrapper">
+                                        <div class="lesson-text-content">
+                                            <h3 class="lesson-title">Technology in Focus</h3>
+                                            <p class="lesson-description">Explore technology applications in scientific studies</p>
+                                        </div>
+
+                                        <div class="lesson-action">
+                                            <button class="action-button locked">
+                                                <span class="material-icons" style="color: white; font-size: 18px;">lock</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 6 -->
+                    <div class="lesson-item locked" data-lesson="6">
+                        <!-- Timeline Circle -->
+                        <div class="timeline-side">
+                            <div class="timeline-circle">
+                                <div class="circle-number">🔒</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+
+                        <!-- Lesson Card -->
+                        <div class="lesson-content">
+                            <div class="lesson-card locked-card">
+                                <div class="lesson-card-section">
+                                    <div class="lesson-content-wrapper">
+                                        <div class="lesson-text-content">
+                                            <h3 class="lesson-title">Chapter Review</h3>
+                                            <p class="lesson-description">Review key concepts</p>
+                                        </div>
+
+                                        <div class="lesson-action">
+                                            <button class="action-button locked">
+                                                <span class="material-icons" style="color: white; font-size: 18px;">lock</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 7 -->
+                    <div class="lesson-item locked" data-lesson="7">
+                        <!-- Timeline Circle -->
+                        <div class="timeline-side">
+                            <div class="timeline-circle">
+                                <div class="circle-number">🔒</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+
+                        <!-- Lesson Card -->
+                        <div class="lesson-content">
+                            <div class="lesson-card locked-card">
+                                <div class="lesson-card-section">
+                                    <div class="lesson-content-wrapper">
+                                        <div class="lesson-text-content">
+                                            <h3 class="lesson-title">Activity 1: Measurement</h3>
+                                            <p class="lesson-description">Practical activity to measure quantities</p>
+                                        </div>
+
+                                        <div class="lesson-action">
+                                            <button class="action-button locked">
+                                                <span class="material-icons" style="color: white; font-size: 18px;">lock</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 8 -->
+                    <div class="lesson-item locked" data-lesson="8">
+                        <!-- Timeline Circle -->
+                        <div class="timeline-side">
+                            <div class="timeline-circle">
+                                <div class="circle-number">🔒</div>
+                            </div>
+                            <div class="timeline-line"></div>
+                        </div>
+
+                        <!-- Lesson Card -->
+                        <div class="lesson-content">
+                            <div class="lesson-card locked-card">
+                                <div class="lesson-card-section">
+                                    <div class="lesson-content-wrapper">
+                                        <div class="lesson-text-content">
+                                            <h3 class="lesson-title">Chapter Test</h3>
+                                            <p class="lesson-description">Assess understanding</p>
+                                        </div>
+
+                                        <div class="lesson-action">
+                                            <button class="action-button locked">
+                                                <span class="material-icons" style="color: white; font-size: 18px;">lock</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const introductionContent = document.getElementById('introduction-content');
+            const lessonsContent = document.getElementById('lessons-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show/hide content based on selected tab
+                    const tab = this.getAttribute('data-tab');
+                    if (tab === 'introduction') {
+                        introductionContent.style.display = 'block';
+                        lessonsContent.style.display = 'none';
+                    } else if (tab === 'lessons') {
+                        introductionContent.style.display = 'none';
+                        lessonsContent.style.display = 'block';
+                    }
+                });
+            });
+
+            // Lesson selection functionality
+            const lessonItems = document.querySelectorAll('.lesson-item');
+            
+            lessonItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (!this.classList.contains('locked')) {
+                        const lessonId = this.getAttribute('data-lesson');
+                        alert(`Navigating to lesson ${lessonId}`);
+                        // In a real application, you would navigate to the lesson page
+                    }
+                });
+            });
+
+            // Simulate lesson completion (for demo purposes)
+            document.querySelector('.lesson-item.current .action-button').addEventListener('click', function(e) {
+                e.stopPropagation();
+                const currentLesson = document.querySelector('.lesson-item.current');
+                const nextLesson = currentLesson.nextElementSibling;
+                
+                if (nextLesson) {
+                    // Mark current lesson as completed
+                    currentLesson.classList.remove('current');
+                    currentLesson.classList.add('completed');
+                    currentLesson.querySelector('.circle-number').innerHTML = '✓';
+                    currentLesson.querySelector('.lesson-card').classList.remove('current-card');
+                    currentLesson.querySelector('.lesson-card').classList.add('completed-card');
+                    currentLesson.querySelector('.action-button').classList.remove('current');
+                    currentLesson.querySelector('.action-button').classList.add('completed');
+                    currentLesson.querySelector('.material-icons').textContent = 'check';
+                    
+                    // Unlock next lesson
+                    if (nextLesson.classList.contains('locked')) {
+                        nextLesson.classList.remove('locked');
+                        nextLesson.classList.add('current');
+                        nextLesson.querySelector('.circle-number').innerHTML = nextLesson.getAttribute('data-lesson');
+                        nextLesson.querySelector('.lesson-card').classList.remove('locked-card');
+                        nextLesson.querySelector('.lesson-card').classList.add('current-card');
+                        nextLesson.querySelector('.action-button').classList.remove('locked');
+                        nextLesson.querySelector('.action-button').classList.add('current');
+                        nextLesson.querySelector('.material-icons').textContent = 'play_arrow';
+                    }
+                    
+                    // Update timeline line
+                    const timelineLine = currentLesson.querySelector('.timeline-line');
+                    if (timelineLine) {
+                        timelineLine.classList.add('completed-line');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

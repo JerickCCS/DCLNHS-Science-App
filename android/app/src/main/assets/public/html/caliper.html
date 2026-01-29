@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Model Viewer with Hotspots</title>
+  <script type="module" src="/libs/model-viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 100vh;
+      background-color: #22222200;
+    }
+
+    .hotspot {
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: 0.2s;
+    }
+
+    .hotspot:hover {
+      background: #ffcc00;
+      color: black;
+    }
+
+    #info-box {
+      position: absolute;
+      background: rgba(240, 240, 240, 0.95);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 12px;
+      width: 220px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+      pointer-events: auto;
+      z-index: 10;
+      color: black;
+    }
+
+    #info-box.hidden {
+      display: none;
+    }
+
+    #close-btn {
+      background: #ffcc00;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <model-viewer
+    id="model"
+    src="/models/caliper.glb"
+    alt="3D Model"
+    camera-controls
+    auto-rotate
+    ar
+    interaction-prompt="none"
+  >
+    <!-- Hotspots -->
+    <button slot="hotspot-1" class="hotspot" data-position="-10.345903080083698m 0.2960510308941403m -3.1994032738846094m" data-normal="0.10786779719900645m 0.9935797033409358m -0.034116146270824065m" data-name="Internal Jaws">
+      Internal Jaws
+    </button>
+    <button slot="hotspot-3" class="hotspot" data-position="-5.060457160460218m -0.016348021557380576m -3.2240199239791654m" data-normal="-0.050656630885627385m -0.07797988167862492m -0.9956671350409759m" data-name="Locking Screw">
+      Locking Screw
+    </button>
+    <button slot="hotspot-4" class="hotspot" data-position="-7.861729893685759m 0.2999992673467172m 2.5540591503549415m" data-normal="0.0000015080477871791028m 0.9999999999987805m 4.0584099477805444e-7m" data-name="External Jaws">
+      External Jaws
+    </button>
+    <button slot="hotspot-5" class="hotspot" data-position="0.2590302377673481m 0.29000094255859554m -1.6350478691763932m" data-normal="8.271806125530279e-25m 0.9999999999999992m -4.3711388064693324e-8m" data-name="Imperial Scale">
+      Imperial Scale
+    </button>
+    <button slot="hotspot-6" class="hotspot" data-position="1.9749290472175995m 0.29611244659185026m -0.27921680126208714m" data-normal="-5.609457637972826e-10m 0.999851618372692m 0.017226178842355125m" data-name="Metric Scale">
+      Metric Scale
+    </button>
+  </model-viewer>
+
+  <div id="info-box" class="hidden">
+    <h2 id="info-title"></h2>
+    <p id="info-content"></p>
+    <button id="close-btn">Close</button>
+  </div>
+
+  <script>
+    const modelViewer = document.getElementById('model');
+    const hotspots = document.querySelectorAll('.hotspot');
+    const infoBox = document.getElementById('info-box');
+    const infoTitle = document.getElementById('info-title');
+    const infoContent = document.getElementById('info-content');
+    const closeBtn = document.getElementById('close-btn');
+
+    const hotspotData = {
+      "Internal Jaws": "The smaller, upper jaws of a caliper used to measure the inside diameter or internal width of objects such as holes, pipes, or slots.",
+      "Backpack": "This backpack contains the life-support system and tools.",
+      "Locking Screw": "A screw mechanism that secures the caliper's jaws in place after taking a measurement, ensuring accuracy and preventing movement.",
+      "External Jaws": "The larger, lower jaws of a caliper used to measure the outside diameter or external width of objects such as rods, bars, or outer edges.",
+      "Imperial Scale": "The part of the caliper marked in inches, divided into fractions or thousandths of an inch, used for measurements in the Imperial system instead of metric units.",
+      "Metric Scale": "The part of the caliper marked in millimeters (mm) and centimeters (cm), used for measurements in the metric system."
+    };
+
+    hotspots.forEach(hs => {
+      hs.addEventListener('click', (event) => {
+        const name = hs.dataset.name;
+        infoTitle.textContent = name;
+        infoContent.textContent = hotspotData[name] || "No info available.";
+
+        // Get hotspot screen position
+        const rect = hs.getBoundingClientRect();
+        const offsetX = 10;
+        const offsetY = 10;
+
+        // Place info box near clicked hotspot
+        infoBox.style.left = `${rect.left + offsetX}px`;
+        infoBox.style.top = `${rect.top + offsetY}px`;
+
+        infoBox.classList.remove('hidden');
+      });
+    });
+
+    let activeHotspot = null
+
+hotspots.forEach(hs => {
+  hs.addEventListener('click', () => {
+    const name = hs.dataset.name
+    infoTitle.textContent = name
+    infoContent.textContent = hotspotData[name] || "No info available."
+    activeHotspot = hs
+    infoBox.classList.remove('hidden')
+    updateInfoBoxPosition()
+  })
+})
+
+closeBtn.addEventListener('click', () => {
+  infoBox.classList.add('hidden')
+  activeHotspot = null
+})
+
+// update info box position continuously
+function updateInfoBoxPosition() {
+  if (!activeHotspot) return
+  const rect = activeHotspot.getBoundingClientRect()
+  const offsetX = 10
+  const offsetY = 10
+  infoBox.style.left = `${rect.left + offsetX}px`
+  infoBox.style.top = `${rect.top + offsetY}px`
+}
+
+// track frame rendering
+modelViewer.addEventListener('camera-change', updateInfoBoxPosition)
+modelViewer.addEventListener('frame', updateInfoBoxPosition)
+
+
+    closeBtn.addEventListener('click', () => infoBox.classList.add('hidden'));
+  </script>
+</body>
+</html>

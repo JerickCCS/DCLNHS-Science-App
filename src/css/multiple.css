@@ -1,0 +1,657 @@
+/* Cartoonish UI Styles with Bottom Border Design */
+.cartoon-card {
+    border: none !important;
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.15) !important;
+    border-radius: 12px !important;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cartoon-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    border-radius: 0 0 12px 12px;
+    transition: all 0.2s ease;
+}
+
+.cartoon-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+.cartoon-card:hover::after {
+    height: 9px;
+}
+
+.question-image-container {
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border: 3px solid #fff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #fff;
+}
+
+.question-image-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.question-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 300px;
+    object-fit: contain;
+    padding: 12px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.cartoon-btn {
+    border: none !important;
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15) !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cartoon-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 0 0 10px 10px;
+    transition: all 0.2s ease;
+}
+
+.cartoon-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+.cartoon-btn:hover:not(:disabled)::after {
+    height: 6px;
+}
+
+.cartoon-btn:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+.cartoon-btn:active:not(:disabled)::after {
+    height: 2px;
+}
+
+.cartoon-btn:disabled {
+    opacity: 0.6;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.cartoon-btn:disabled::after {
+    height: 3px;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /* optional spacing */
+    padding: 14px 20px;
+
+    /* optional layering */
+    z-index: 1000;
+}
+
+
+.nav-btn {
+    min-width: 140px;
+}
+
+/* Modal Backdrop with Blur Effect */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    z-index: 1;
+}
+
+/* Full Screen Modal */
+.fullscreen-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 16px;
+    padding: 60px 40px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    animation: modal-appear 0.3s ease-out;
+    border: none;
+    box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 0 0 16px 16px;
+}
+
+@keyframes modal-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Result Icon */
+.result-icon {
+    margin-bottom: 32px;
+}
+
+/* Result Title */
+.result-title {
+    margin-bottom: 32px;
+}
+
+/* Score Percentage */
+.score-percentage {
+    margin-bottom: 40px;
+}
+
+/* Brief Feedback */
+.brief-feedback {
+    margin-bottom: 48px;
+    line-height: 1.6;
+}
+
+/* Modal Actions */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+}
+
+/* Instructions Card - Now with bottom border design */
+.instructions-card {
+    background: linear-gradient(145deg, #FF6B35, #FF8540) !important;
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    border: none !important;
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.15) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.instructions-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: #E55A2B !important;
+    border-radius: 0 0 12px 12px;
+    transition: all 0.2s ease;
+}
+
+.instructions-card:hover::after {
+    height: 9px;
+}
+
+.instruction-icon-container {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 8px;
+    margin-right: 12px;
+    border: none;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.instruction-icon-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 0 0 8px 8px;
+}
+
+.instruction-title {
+    font-size: 1.25rem;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.instruction-text {
+    font-size: 0.95rem;
+    opacity: 0.95;
+    line-height: 1.5;
+}
+
+/* Section Title */
+.section-title {
+    padding-bottom: 8px;
+}
+
+/* Question Cards - Solid Colors with Bottom Borders */
+.question-card {
+    background: linear-gradient(145deg, #4A90E2, #5A9CE6) !important;
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    border: none !important;
+}
+
+.question-card::after {
+    background: #3A80D8 !important;
+}
+
+.question-card-2 {
+    background: linear-gradient(145deg, #7ED321, #8EE331) !important;
+}
+
+.question-card-2::after {
+    background: #6EC311 !important;
+}
+
+.question-card-3 {
+    background: linear-gradient(145deg, #FF4081, #FF5A95) !important;
+}
+
+.question-card-3::after {
+    background: #FF266D !important;
+}
+
+.question-card-4 {
+    background: linear-gradient(145deg, #FFC300, #FFD133) !important;
+    color: #333 !important;
+}
+
+.question-card-4::after {
+    background: #E6B000 !important;
+}
+
+.question-card-5 {
+    background: linear-gradient(145deg, #9B59B6, #AB69C6) !important;
+}
+
+.question-card-5::after {
+    background: #8B49A6 !important;
+}
+
+/* Question Card Text */
+.question-card .instruction-text {
+    color: white;
+    opacity: 0.95;
+}
+
+.question-card-4 .instruction-text {
+    color: #333;
+    opacity: 0.9;
+}
+
+/* Options Container */
+.options-container {
+    margin-top: 8px;
+}
+
+.option-item {
+    background: linear-gradient(145deg, #FFFFFF, #F8F9FA) !important;
+    border: none !important;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.option-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 12px 12px;
+    transition: all 0.2s ease;
+}
+
+.option-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.option-item:hover::after {
+    height: 6px;
+}
+
+.option-item.selected {
+    background: #0051ff6b !important;
+    /* Remove blue bottom border - keep neutral gray */
+}
+
+.option-item.correct {
+    background: linear-gradient(145deg, #E8F5E9, #D9E6DA) !important;
+}
+
+.option-item.correct::after {
+    background: rgba(0, 0, 0, 0.1) !important;
+    /* Keep neutral for all states */
+}
+
+.option-item.incorrect {
+    background: linear-gradient(145deg, #FFEBEE, #EFDCDE) !important;
+}
+
+.option-item.incorrect::after {
+    background: rgba(0, 0, 0, 0.1) !important;
+    /* Keep neutral for all states */
+}
+
+/* Option Letter */
+.option-letter {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(145deg, #333, #444);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 16px;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.option-letter::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 0 0 8px 8px;
+}
+
+.option-item:hover .option-letter {
+    transform: scale(1.05);
+}
+
+.option-item.selected .option-letter {
+    background: linear-gradient(145deg, #1976D2, #2A86E2) !important;
+}
+
+.option-item.selected .option-letter::after {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.option-item.correct .option-letter {
+    background: linear-gradient(145deg, #4CAF50, #5CBF60) !important;
+}
+
+.option-item.correct .option-letter::after {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.option-item.incorrect .option-letter {
+    background: linear-gradient(145deg, #F44336, #FF5347) !important;
+}
+
+.option-item.incorrect .option-letter::after {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.option-text {
+    flex: 1;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.option-item.selected .option-text {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.option-item.correct .option-text {
+    color: #2E7D32;
+    font-weight: 600;
+}
+
+.option-item.incorrect .option-text {
+    color: #C62828;
+    font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .cartoon-card {
+        box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .cartoon-card::after {
+        height: 4px;
+    }
+
+    .cartoon-card:hover {
+        box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .cartoon-card:hover::after {
+        height: 6px;
+    }
+
+    .cartoon-btn {
+        box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .cartoon-btn::after {
+        height: 3px;
+    }
+
+    .cartoon-btn:hover:not(:disabled) {
+        box-shadow: 0 5px 0 0 rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .cartoon-btn:hover:not(:disabled)::after {
+        height: 5px;
+    }
+
+    .nav-btn {
+        min-width: 120px;
+        font-size: 0.9rem;
+    }
+
+    .instruction-title {
+        font-size: 1.125rem;
+    }
+
+    .option-item {
+        padding: 14px 16px;
+        box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .option-item::after {
+        height: 3px;
+    }
+
+    .option-item:hover {
+        box-shadow: 0 5px 0 0 rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .option-item:hover::after {
+        height: 5px;
+    }
+
+    .option-text {
+        font-size: 0.95rem;
+    }
+
+    .modal-content {
+        padding: 40px 24px;
+        width: 95%;
+        max-width: 400px;
+        box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-content::after {
+        height: 6px;
+    }
+
+    .result-title .text-h4 {
+        font-size: 1.75rem;
+    }
+
+    .score-percentage .text-h3 {
+        font-size: 2.5rem;
+    }
+
+    .brief-feedback.text-body1 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-height: 600px) {
+    .modal-content {
+        padding: 30px 24px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .result-icon {
+        margin-bottom: 20px;
+    }
+
+    .result-title {
+        margin-bottom: 20px;
+    }
+
+    .score-percentage {
+        margin-bottom: 25px;
+    }
+
+    .brief-feedback {
+        margin-bottom: 30px;
+    }
+}
+
+/* Animation for correct/incorrect answers */
+@keyframes bounce {
+
+    0%,
+    20%,
+    60%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-3px);
+    }
+
+    80% {
+        transform: translateY(-1px);
+    }
+}
+
+.option-item.correct {
+    animation: bounce 0.5s ease;
+}
+
+.option-item.incorrect {
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-2px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(2px);
+    }
+}
+
+/* Dialog backdrop blur */
+:deep(.q-dialog__backdrop) {
+    backdrop-filter: blur(8px);
+}
+
+/* Center the dialog content */
+:deep(.q-dialog__inner) {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+}

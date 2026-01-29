@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Model Viewer with Hotspots</title>
+  <script type="module" src="/libs/model-viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 100vh;
+      background-color: #22222200;
+    }
+
+    .hotspot {
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: 0.2s;
+    }
+
+    .hotspot:hover {
+      background: #ffcc00;
+      color: black;
+    }
+
+    #info-box {
+      position: absolute;
+      background: rgba(240, 240, 240, 0.95);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 12px;
+      width: 220px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+      pointer-events: auto;
+      z-index: 10;
+      color: black;
+    }
+
+    #info-box.hidden {
+      display: none;
+    }
+
+    #close-btn {
+      background: #ffcc00;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <model-viewer
+    id="model"
+    src="/models/bunsen_burner.glb"
+    alt="3D Model"
+    camera-controls
+    
+    ar
+    interaction-prompt="none"
+  >
+    <!-- Hotspots -->
+    <button slot="hotspot-1" class="hotspot" data-position="0.002313199932813481m 0.002232092270822439m 0.05000000084262583m" data-normal="0m -4.3711388286737935e-8m 0.9999999999999991m" data-name="Stand">
+      Stand
+    </button>
+    <button slot="hotspot-3" class="hotspot" data-position="0.001674804410048949m 0.030548436290452362m 0.012353355331510427m" data-normal="0.2647835856975436m 1.8538826740114878e-7m 0.9643078620156103m" data-name="Air Holes">
+      Air Holes
+    </button>
+    <button slot="hotspot-4" class="hotspot" data-position="-0.0016466902177554726m 0.0057787350635812584m 0.004382707832105074m" data-normal="5.053054698427695e-8m 0.9999999999999646m 2.614682850935603e-7m" data-name="Gas Valve">
+      Gas Valve
+    </button>
+    <button slot="hotspot-5" class="hotspot" data-position="-0.0016991111854139512m 0.07732544377954773m 0.005921257692574568m" data-normal="-0.2588190030877477m 2.667520890957614e-10m 0.9659258375468919m" data-name="Barrel">
+      Barrel or Chimney
+    </button>
+    <button slot="hotspot-6" class="hotspot" data-position="0.04558936782363982m 0.020344454455987163m 0.0036786418231525117m" data-normal="0m -0.2588188640190162m 0.965925874810229m" data-name="Gas Intake">
+      Gas Intake
+    </button>
+    <button slot="hotspot-7" class="hotspot" data-position="-0.007582211606757525m 0.038407769380122726m 0.010507932579598131m" data-normal="-0.6698584943454978m 0.32027869333400144m 0.6698590569287299m" data-name="Collar">
+      Collar
+    </button>
+  </model-viewer>
+
+  <div id="info-box" class="hidden">
+    <h2 id="info-title"></h2>
+    <p id="info-content"></p>
+    <button id="close-btn">Close</button>
+  </div>
+
+  <script>
+    const modelViewer = document.getElementById('model');
+    const hotspots = document.querySelectorAll('.hotspot');
+    const infoBox = document.getElementById('info-box');
+    const infoTitle = document.getElementById('info-title');
+    const infoContent = document.getElementById('info-content');
+    const closeBtn = document.getElementById('close-btn');
+
+    const hotspotData = {
+      "Stand": "The sturdy bottom part of the Bunsen burner that provides stability and support, preventing tipping during use.",
+  "Air Holes": "An adjustable hole at the base of the barrel that allows air to mix with the gas, controlling the flame's temperature and appearance.",
+  "Gas Valve": "The connection point where the gas supply is attached, allowing fuel to enter the burner.",
+  "Barrel": "The metal tube through which the gas flows, directing the flame upwards. The length and diameter of the barrel influence the flame's characteristics.",
+  "Gas Intake": "The connection point where the gas is introduced into the Bunsen burner, enabling combustion to take place.",
+  "Collar": "A metal ring around the air vent that can be rotated to adjust the size of the air hole, thus modifying the air-to-gas ratio and altering the flame's intensity."
+    };
+
+    hotspots.forEach(hs => {
+      hs.addEventListener('click', (event) => {
+        const name = hs.dataset.name;
+        infoTitle.textContent = name;
+        infoContent.textContent = hotspotData[name] || "No info available.";
+
+        // Get hotspot screen position
+        const rect = hs.getBoundingClientRect();
+        const offsetX = 10;
+        const offsetY = 10;
+
+        // Place info box near clicked hotspot
+        infoBox.style.left = `${rect.left + offsetX}px`;
+        infoBox.style.top = `${rect.top + offsetY}px`;
+
+        infoBox.classList.remove('hidden');
+      });
+    });
+
+    let activeHotspot = null
+
+hotspots.forEach(hs => {
+  hs.addEventListener('click', () => {
+    const name = hs.dataset.name
+    infoTitle.textContent = name
+    infoContent.textContent = hotspotData[name] || "No info available."
+    activeHotspot = hs
+    infoBox.classList.remove('hidden')
+    updateInfoBoxPosition()
+  })
+})
+
+closeBtn.addEventListener('click', () => {
+  infoBox.classList.add('hidden')
+  activeHotspot = null
+})
+
+// update info box position continuously
+function updateInfoBoxPosition() {
+  if (!activeHotspot) return
+  const rect = activeHotspot.getBoundingClientRect()
+  const offsetX = 10
+  const offsetY = 10
+  infoBox.style.left = `${rect.left + offsetX}px`
+  infoBox.style.top = `${rect.top + offsetY}px`
+}
+
+// track frame rendering
+modelViewer.addEventListener('camera-change', updateInfoBoxPosition)
+modelViewer.addEventListener('frame', updateInfoBoxPosition)
+
+
+    closeBtn.addEventListener('click', () => infoBox.classList.add('hidden'));
+  </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+{
+  "lessonId": "unit1-chapter1-lesson1",
+  "unit": 1,
+  "chapter": 1,
+  "lesson": 1,
+  "title": "Scientific Models",
+  "subtitle": "An introduction to how scientists represent the world",
+  "pages": [
+    {
+      "blocks": [
+        { "type": "title", "text": "Lesson 1" },
+        { "type": "subtitle", "text": "Scientific Models" },
+        { "type": "section-title", "text": "An introduction to how scientists represent the world" },
+        { "type": "subheading", "text": "🔑 What are scientific models?" },
+        {
+          "type": "paragraph",
+          "text": "Scientific models are representations of concepts, systems, or ideas. They take many forms, such as three- or two-dimensional objects or diagrams, mathematical equations, and computer simulations. Models are made from established scientific knowledge and observed patterns that allow the prediction of patterns in different conditions or scenarios."
+        },
+        {
+          "type": "paragraph",
+          "text": "Models generally help explain and understand processes, phenomena, and ideas that are not commonly observed or easily imagined. In many cases, models allow scientists to test ideas and predict outcomes that cannot be easily done in the real world. Models also allow them to test the validity of other existing models."
+        }
+      ],
+      "audio": "/chapter1/audio/chap-1-lesson-1-1.mp3"
+    },
+    {
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Scientific models are commonly categorized into physical, conceptual, mathematical, and computer models."
+        },
+        {
+          "type": "paragraph",
+          "text": "Physical models are tangible objects that help one understand a concept or process. They are three-dimensional constructed copies of original objects that match their characteristics, such as shape. In some cases, a physical model represents an abstract idea."
+        }
+      ],
+      "audio": "/chapter1/audio/chap-1-lesson-1-2.mp3"
+    },
+        {
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Physical models can be life-size replicas or scale models, which are smaller than the original objects but otherwise identical. Examples include:"
+        },
+        { "type": "list-item", "text": "The globe (represents the Earth)" },
+        { "type": "list-item", "text": "Model of the human skeletal system" },
+        {
+          "type": "video",
+          "src": "/videos/physical-models.mp4",
+          "caption": "Understanding Physical Models in Science"
+        },
+        {
+          "type": "image",
+          "src": "/img/globe.png",
+          "alt": "Globe model"
+        },
+        {
+          "type": "image",
+          "src": "/img/skeleton.png",
+          "alt": "Physical models of Earth (globe) and the human skeletal system"
+        }
+      ],
+      "audio": "/chapter1/audio/chap-1-lesson-1-3.mp3"
+    },
+    {
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Conceptual models use familiar objects or expressions to present a concept or an abstract and complicated idea. They are also considered mental models (Victoria State Government, 2020)."
+        },
+        {
+          "type": "paragraph",
+          "text": "An example is the particle model of matter, which uses round particles to represent the composition of matter to explain their observable properties."
+        }
+      ],
+      "audio": "/chapter1/audio/chap-1-lesson-1-4.mp3"
+    },
+    {
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Some conceptual models show systems of ideas and relationships. An example is the taxonomic classification of organisms, which displays hierarchical groupings of organisms."
+        },
+        {
+          "type": "paragraph",
+          "text": "Other models are expressed through writing, speech, or diagrams and are referred to as expressed models (Victoria State Government, 2020)."
+        },
+        { "type": "subheading", "text": "Examples" },
+        { "type": "list-item", "text": "Diagrams" },
+        { "type": "list-item", "text": "Flowcharts" },
+        {
+          "type": "paragraph",
+          "text": "Flowcharts show decision options and corresponding outcomes using arrows and shapes."
+        }
+      ],
+      "audio": "/chapter1/audio/chap-1-lesson-1-5.mp3"
+    },
+    {
+      "blocks": [
+        {
+          "type": "image",
+          "src": "/img/solid-liquid-gas.png",
+          "alt": "(a)"
+        },
+        {
+          "type": "image",
+          "src": "/img/logic.png",
+          "alt": "(b)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Conceptual models:"
+        },
+        { "type": "list-item", "text": "(A) Particle model of matter" },
+        { "type": "list-item", "text": "(B) A flowchart" }
+      ],
+      "audio": "/chapter1/audio/chap-1-lesson-1-6.mp3"
+    },
+    {
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Mathematical models quantitatively represent relationships, patterns, and behavior using equations. These models are based on observations, theories, and measurements and may contain numbers, characters, letters, and symbols."
+        },
+        {
+          "type": "paragraph",
+          "text": "Example: Newton's Second Law of Motion (F = ma) describes the relationship among force, mass, and acceleration."
+        }
+      ],
+      "audio": "/chapter1/audio/chap-1-lesson-1-7.mp3"
+    },
+    {
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Computer models use software to study and simulate complex systems. They are usually mathematical in nature and involve processing large amounts of data."
+        },
+        {
+          "type": "paragraph",
+          "text": "They are widely used in many fields of science. In chemistry, computer simulations help explain the behavior of atoms and molecules."
+        },
+        {
+          "type": "model",
+          "src": "/models/dna-model.glb",
+          "caption": "Interactive 3D DNA Model - A Computer Simulation"
+        }
+      ],
+      "audio": "/chapter1/audio/chap-1-lesson-1-8.mp3"
+    },
+    {
+      "blocks": [
+        { "type": "subheading", "text": "✅ MINI TEST" },
+        {
+          "type": "list-item",
+          "text": "How do physical and conceptual models differ?"
+        },
+        {
+          "type": "list-item",
+          "text": "Give one example of a scientific model used in everyday life."
+        },
+        {
+          "type": "list-item",
+          "text": "Why do scientists use models when studying natural phenomena?"
+        },
+        {
+          "type": "list-item",
+          "text": "What are the limitations of scientific models?"
+        },
+        {
+          "type": "image",
+          "src": "/img/bohr.png",
+          "alt": "Bohr model"
+        }
+      ],
+      "audio": "/audio/page9.mp3"
+    }
+  ]
+}
+
