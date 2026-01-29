@@ -136,4 +136,22 @@ dist
 
 # Vite logs files
 vite.config.js.timestamp-*
+
+# Quasar internal
+.quasar/
+
+# Capacitor
+src-capacitor/android/.gradle/
+src-capacitor/android/app/build/
+src-capacitor/android/.idea/
+src-capacitor/ios/
+
+# Android outputs
+*.apk
+*.aab
+
+# Android signing keys (DO NOT UPLOAD)
+*.keystore
+*.jks
+
 vite.config.ts.timestamp-*
