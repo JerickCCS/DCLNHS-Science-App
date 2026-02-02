@@ -17,7 +17,6 @@
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:resizeableActivity="true"
-            android:windowLayoutInDisplayCutoutMode="shortEdges"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation">
 
             <intent-filter>
