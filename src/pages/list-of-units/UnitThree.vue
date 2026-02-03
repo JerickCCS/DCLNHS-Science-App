@@ -1,34 +1,35 @@
 <template>
-    <q-page class="q-pa-md chapters-page">
-
-        <!-- Header -->
-        <q-header class="bg-white no-shadow">
+    <q-page class="chapters-page">
+        <!-- Header inside page -->
+        <div class="page-header bg-white">
             <q-toolbar class="center-toolbar">
                 <q-btn flat dense class="btn-left custom-back-btn" @click="goBack" aria-label="Go back">
                     <img src="assets/icons/back-button.png" alt="Back" class="back-icon" />
                 </q-btn>
                 <div class="toolbar-title">Unit III</div>
             </q-toolbar>
-        </q-header>
-
-        <!-- Main Image -->
-        <div class="main-image q-mb-md">
-            <img src="assets/temp/Forces in Action.png" alt="Unit III" class="main-img" />
         </div>
 
-        <!-- Description -->
-        <div class="unit-description q-pb-xl text-body1">
-            <p>
-                Force, motion, and energy are fundamental concepts in physics that explain how objects
-                move and interact. Understanding these principles helps us describe the behavior of
-                everything from a rolling ball to the motion of planets.
-            </p>
-            <p>
-                This unit introduces the basic ideas of forces and how they cause motion, the different
-                types of energy, and how energy is transferred and transformed in everyday situations.
-            </p>
-        </div>
+        <!-- Main Content -->
+        <div class="page-content q-pa-md">
+            <!-- Main Image -->
+            <div class="main-image q-mb-md">
+                <img src="assets/temp/Forces in Action.png" alt="Unit III" class="main-img" />
+            </div>
 
+            <!-- Description -->
+            <div class="unit-description q-pb-xl text-body1">
+                <p>
+                    Force, motion, and energy are fundamental concepts in physics that explain how objects
+                    move and interact. Understanding these principles helps us describe the behavior of
+                    everything from a rolling ball to the motion of planets.
+                </p>
+                <p>
+                    This unit introduces the basic ideas of forces and how they cause motion, the different
+                    types of energy, and how energy is transferred and transformed in everyday situations.
+                </p>
+            </div>
+        </div>
 
         <!-- Bottom Sheet -->
         <div class="bottom-sheet" :style="{ transform: `translateY(${translateY}px)` }">
@@ -169,11 +170,19 @@ function goBack() {
     min-height: 100vh;
 }
 
-/* ---------- Header (Original Design) ---------- */
+/* ---------- Header (Now inside page) ---------- */
+.page-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .center-toolbar {
     display: flex;
     justify-content: center;
     position: relative;
+    min-height: 56px;
 }
 
 .toolbar-title {
@@ -204,6 +213,11 @@ function goBack() {
     height: 28px;
 }
 
+/* ---------- Page Content ---------- */
+.page-content {
+    background: #f8f9fa;
+}
+
 /* ---------- Main Image ---------- */
 .main-img {
     width: 100%;
@@ -211,15 +225,10 @@ function goBack() {
     height: 300px;
     margin: 0 auto;
     position: relative;
-    /* Added for positioning context */
     overflow: hidden;
-    /* Ensures blur stays within rounded corners */
-
-    /* Container for blurring */
     background-image: url("/icons/unit-3-cover.png");
     background-size: cover;
     background-position: center;
-
     border-radius: 16px;
     box-shadow: 0 8px 0 0 rgb(127, 133, 136);
 }
@@ -236,11 +245,8 @@ function goBack() {
     background-size: cover;
     background-position: center;
     filter: blur(20px);
-    /* Adjust this value for heavier blur */
     -webkit-filter: blur(20px);
-    /* Safari support */
     z-index: -1;
-    /* Places blur behind any content */
     border-radius: 16px;
 }
 
@@ -278,9 +284,10 @@ function goBack() {
     flex-direction: column;
     will-change: transform;
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 50;
 }
 
-/* ---------- Sheet Handle (Original Design) ---------- */
+/* ---------- Sheet Handle ---------- */
 .sheet-handle {
     background-color: #f8f9fb;
     padding: 8px 0;
@@ -320,13 +327,11 @@ function goBack() {
     border-radius: 16px;
     position: relative;
     border: none;
-    /* Solid color card with bottom shadow */
     box-shadow: 0 8px 0 0 var(--shadow-color) !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     min-height: 90px;
 }
 
-/* Remove default Quasar shadow */
 .chapter-card .q-card__section {
     padding: 0;
 }

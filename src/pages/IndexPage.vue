@@ -1,5 +1,5 @@
 <template>
-  <q-page class="dashboard-page">
+  <q-layout view="hHr LpR lFf">
     <!-- Header -->
     <q-header class="header-gradient">
       <q-toolbar class="q-pa-md">
@@ -29,324 +29,333 @@
         </div>
       </q-toolbar>
     </q-header>
+    <q-page-container>
+      <q-page class="dashboard-page" no-padding>
 
-    <!-- Sidebar -->
-    <q-drawer v-model="sidebarOpen" side="right" overlay bordered :width="220" class="sidebar-drawer">
-      <div class="q-pa-md">
-        <div class="sidebar-title text-h5 text-primary text-weight-bold text-center q-mb-md">
-          Menu
-        </div>
-        <q-list>
-          <q-item clickable v-ripple @click="openEditProfile">
-            <q-item-section avatar>
-              <img src="assets/icons/edit.png" style="width: 20px; height: 20px;" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label class="text-weight-large text-h6 text-bold text-black">Edit Profile</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple @click="settingsOpen = true">
-            <q-item-section avatar>
-              <img src="assets/icons/audio.png" style="width: 20px; height: 20px;" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label class="text-weight-large text-h6 text-bold text-black">Audio</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple>
-            <q-item-section avatar>
-              <img src="assets/icons/about.png" style="width: 20px; height: 20px;" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label class="text-weight-large text-h6 text-bold text-black">About</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple @click="logout">
-            <q-item-section avatar>
-              <img src="assets/icons/logout.png" style="width: 20px; height: 20px;" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label class="text-weight-large text-h6 text-bold text-black">Logout</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </div>
-    </q-drawer>
-
-    <!-- Edit Profile Modal -->
-    <q-dialog v-model="editProfileModal" persistent>
-      <q-card class="edit-profile-modal unified-card" style="min-width: 90vw; max-width: 500px; max-height: 80vh;">
-        <q-card-section class="bg-primary text-white">
-          <div class="text-h6">Edit Profile</div>
-        </q-card-section>
-
-        <q-scroll-area style="height: calc(80vh - 150px);" class="modal-scroll-area">
-          <q-card-section class="q-pt-lg">
-            <!-- Current Avatar Preview -->
-            <div class="row justify-center q-mb-lg">
-              <div class="current-avatar-preview-container">
-                <img :src="editForm.avatar || student.avatar || 'assets/temp/pfp.png'" class="current-avatar-image" />
-              </div>
+        <!-- Sidebar -->
+        <q-drawer v-model="sidebarOpen" side="right" overlay bordered :width="220" class="sidebar-drawer">
+          <div class="q-pa-md">
+            <div class="sidebar-title text-h5 text-primary text-weight-bold text-center q-mb-md">
+              Menu
             </div>
+            <q-list>
+              <q-item clickable v-ripple @click="openEditProfile">
+                <q-item-section avatar>
+                  <img src="assets/icons/edit.png" style="width: 20px; height: 20px;" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-weight-large text-h6 text-bold text-black">Edit Profile</q-item-label>
+                </q-item-section>
+              </q-item>
 
-            <!-- Name and Section Fields -->
-            <div class="form-fields q-px-sm">
-              <q-input v-model="editForm.name" label="Name" outlined class="q-mb-md unified-input"
-                :rules="[val => !!val || 'Name is required']" dense />
+              <q-item clickable v-ripple @click="settingsOpen = true">
+                <q-item-section avatar>
+                  <img src="assets/icons/audio.png" style="width: 20px; height: 20px;" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-weight-large text-h6 text-bold text-black">Audio</q-item-label>
+                </q-item-section>
+              </q-item>
 
-              <q-input v-model="editForm.section" label="Section" outlined class="q-mb-lg unified-input"
-                :rules="[val => !!val || 'Section is required']" dense />
+              <q-item clickable v-ripple>
+                <q-item-section avatar>
+                  <img src="assets/icons/about.png" style="width: 20px; height: 20px;" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-weight-large text-h6 text-bold text-black">About</q-item-label>
+                </q-item-section>
+              </q-item>
 
-              <!-- Avatar Selection -->
-              <div class="text-subtitle1 text-weight-medium q-mb-md text-primary">Choose Avatar</div>
-              <div class="avatar-grid">
-                <div v-for="(avatar, index) in avatars" :key="index" class="avatar-item unified-card"
-                  :class="{ 'avatar-selected': editForm.avatar === avatar }" @click="selectAvatar(avatar)">
-                  <img :src="avatar" class="avatar-option-image"
-                    :class="{ 'avatar-option-selected': editForm.avatar === avatar }" />
-                  <div v-if="editForm.avatar === avatar" class="avatar-selected-overlay">
-                    <q-icon name="check" color="white" size="24px" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </q-card-section>
-        </q-scroll-area>
+              <q-item clickable v-ripple @click="logout">
+                <q-item-section avatar>
+                  <img src="assets/icons/logout.png" style="width: 20px; height: 20px;" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-weight-large text-h6 text-bold text-black">Logout</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </div>
+        </q-drawer>
 
-        <q-card-actions align="right" class="q-pa-md modal-actions">
-          <q-btn flat label="Cancel" color="grey" @click="cancelEdit" :disabled="saving" class="unified-btn" />
-          <q-btn label="Save" color="primary" @click="saveProfile" :loading="saving"
-            :disable="!editForm.name || !editForm.section" class="unified-btn" />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-
-    <!-- Dashboard Content -->
-    <div class="q-pa-md dashboard-content q-pb-lg">
-      <!-- HOME TAB -->
-      <div v-if="activeTab === 'home'">
-        <q-card class="q-mb-lg overall-progress-card">
-          <q-card-section>
-            <div class="q-mb-xs">
-              <div class="text-h6 text-primary text-weight-bold q-mb-sm">Overall Progress</div>
-              <q-linear-progress :value="progress.overall / 100" size="12px" color="primary" class="q-mb-sm" rounded />
-
-              <!-- Even simpler single line -->
-              <div class="row justify-between items-center plain-progress-stats q-pt-xs">
-                <div class="column items-center">
-                  <div class="text-h6 text-primary text-weight-bold">{{ progress.overall }}%</div>
-                  <div class="text-caption text-grey-7">Progress</div>
-                </div>
-
-                <div class="column items-center">
-                  <div class="text-h6 text-primary text-weight-bold">{{ progress.completed }}</div>
-                  <div class="text-caption text-grey-7">Lessons Completed</div>
-                </div>
-
-                <div class="column items-center">
-                  <div class="text-h6 text-primary text-weight-bold">{{ TOTAL_LESSONS }}</div>
-                  <div class="text-caption text-grey-7">Total Lessons</div>
-                </div>
-              </div>
-            </div>
-          </q-card-section>
-        </q-card>
-
-        <div class="text-h5 text-primary text-weight-bold q-mb-md ">Units</div>
-        <div class="units-grid">
-          <q-card v-for="unit in units" :key="unit.id" class="unit-card" flat bordered @click="goToUnit(unit)">
-            <q-card-section class="q-pa-md">
-              <div class="row items-center justify-between">
-                <div class="row items-center">
-                  <q-avatar size="60px" class="q-mr-xs" :style="{ backgroundColor: unit.bgColor, borderRadius: '6px' }">
-                    <img :src="unit.icon" style="width: 38px; height: 38px;" />
-                  </q-avatar>
-
-                  <div>
-                    <div class="unit-title text-weight-bold">{{ unit.name }}</div>
-                    <div class="unit-description">{{ unit.description }}</div>
-                  </div>
-                </div>
-                <div>
-                  <img src="assets/icons/arrow.png" class="lock-icon" />
-                </div>
-              </div>
-              <q-linear-progress :value="unit.progress / 100" size="10px" color="blue-6" class="q-mt-sm" rounded />
+        <!-- Edit Profile Modal -->
+        <q-dialog v-model="editProfileModal" persistent>
+          <q-card class="edit-profile-modal unified-card" style="min-width: 90vw; max-width: 500px; max-height: 80vh;">
+            <q-card-section class="bg-primary text-white">
+              <div class="text-h6">Edit Profile</div>
             </q-card-section>
-          </q-card>
-        </div>
-      </div>
 
-      <!-- STATISTICS TAB -->
-      <div v-if="activeTab === 'stats'" class="stats-page">
-        <div class="text-h5 text-primary text-weight-bold q-mb-md">Progress Statistics</div>
-
-        <!-- Quiz Statistics Card -->
-        <q-card class="quiz-statistics-card q-mb-md" @click="goToQuizStats">
-          <q-card-section class="q-pa-md">
-            <div class="row items-center justify-between">
-              <div class="row items-center">
-                <q-avatar size="50px" class="q-mr-md" style="background-color: #2196F3; border-radius: 10px;">
-                  <img src="icons/brain.png" style="width: 28px; height: 28px;" />
-                </q-avatar>
-                <div>
-                  <div class="text-h6 text-weight-bold text-primary">Quiz Statistics</div>
-                  <div class="text-caption text-grey-7">View detailed quiz performance and analytics</div>
-                </div>
-              </div>
-              <div>
-                <img src="assets/icons/arrow.png" style="width: 24px; height: 24px;" />
-              </div>
-            </div>
-          </q-card-section>
-        </q-card>
-
-        <!-- Bar Chart: Unit progress -->
-        <q-card class="chart-card q-mb-md">
-          <q-card-section class="q-pa-md">
-            <div class="row items-center justify-between q-mb-md">
-              <div class="row items-center">
-                <q-avatar size="50px" class="q-mr-md" style="background-color: #9C27B0; border-radius: 10px;">
-                  <img src="icons/progress.png" style="width: 28px; height: 28px;" />
-                </q-avatar>
-                <div>
-                  <div class="text-h6 text-weight-bold text-primary">Unit Progress Overview</div>
-                  <div class="text-caption text-grey-7">Visual representation of your progress across all units</div>
-                </div>
-              </div>
-            </div>
-            <div style="height:250px">
-              <Bar :data="chartData" :options="chartOptions" />
-            </div>
-          </q-card-section>
-        </q-card>
-
-        <!-- Pie Chart Card -->
-        <q-card class="chart-card q-mb-md">
-          <q-card-section class="q-pa-md">
-            <div class="row items-center justify-between q-mb-md">
-              <div class="row items-center">
-                <q-avatar size="50px" class="q-mr-md" style="background-color: #FF9800; border-radius: 10px;">
-                  <img src="assets/icons/pie-graph.png" style="width: 28px; height: 28px;" />
-                </q-avatar>
-                <div>
-                  <div class="text-h6 text-weight-bold text-primary">Completion Distribution</div>
-                  <div class="text-caption text-grey-7">Overall lesson completion breakdown</div>
-                </div>
-              </div>
-            </div>
-            <div style="height:250px">
-              <Pie :data="pieData" :options="pieOptions" />
-            </div>
-          </q-card-section>
-        </q-card>
-
-        <!-- Chapter Test Summary Card -->
-        <q-card class="chapter-test-summary-card q-mb-md" @click="goToChapterTestStats">
-          <q-card-section class="q-pa-md">
-            <div class="row items-center justify-between">
-              <div class="row items-center">
-                <q-avatar size="50px" class="q-mr-md" style="background-color: #4CAF50; border-radius: 10px;">
-                  <img src="assets/icons/check-wrong.png" style="width: 28px; height: 28px;" />
-                </q-avatar>
-                <div>
-                  <div class="text-h6 text-weight-bold text-primary">Chapter Test Summary</div>
-                  <div class="text-caption text-grey-7">Performance analysis of chapter tests</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row justify-around items-center q-mt-md chapter-test-stats">
-              <div class="row items-center">
-                <div class="color-square" style="background-color: #4CAF50;"></div>
-                <div class="text-h6 q-ml-sm">Correct: {{ student.chapterTest.correct }}</div>
-              </div>
-
-              <div class="row items-center">
-                <div class="color-square" style="background-color: #F44336;"></div>
-                <div class="text-h6 q-ml-sm">Wrong: {{ student.chapterTest.wrong }}</div>
-              </div>
-            </div>
-          </q-card-section>
-        </q-card>
-
-        <!-- Unit Progress Cards with Expandable Lessons -->
-        <div v-for="unit in units" :key="unit.id" class="q-mb-md">
-          <q-card class="unit-progress-card">
-            <q-card-section class="q-pa-md">
-              <div class="row items-center justify-between" @click="toggleUnitDetails(unit)">
-                <div class="row items-center">
-                  <q-avatar size="50px" class="q-mr-md"
-                    :style="{ backgroundColor: unit.bgColor, borderRadius: '10px' }">
-                    <img :src="unit.icon" style="width: 28px; height: 28px;" />
-                  </q-avatar>
-                  <div>
-                    <div class="text-h6 text-weight-bold text-primary">{{ unit.name }}</div>
-                    <div class="text-caption text-grey-7">Progress: {{ unit.progress }}%</div>
+            <q-scroll-area style="height: calc(80vh - 150px);" class="modal-scroll-area">
+              <q-card-section class="q-pt-lg">
+                <!-- Current Avatar Preview -->
+                <div class="row justify-center q-mb-lg">
+                  <div class="current-avatar-preview-container">
+                    <img :src="editForm.avatar || student.avatar || 'assets/temp/pfp.png'"
+                      class="current-avatar-image" />
                   </div>
                 </div>
-                <div>
-                  <img src="assets/icons/arrow.png" :style="{
-                    transform: expandedUnit === unit.id ? 'rotate(90deg)' : 'rotate(0deg)',
-                    width: '20px'
-                  }" />
-                </div>
-              </div>
 
-              <q-linear-progress :value="unit.progress / 100" color="primary" size="12px" rounded class="q-mt-md" />
+                <!-- Name and Section Fields -->
+                <div class="form-fields q-px-sm">
+                  <q-input v-model="editForm.name" label="Name" outlined class="q-mb-md unified-input"
+                    :rules="[val => !!val || 'Name is required']" dense />
 
-              <!-- Expandable Lessons Section -->
-              <q-slide-transition>
-                <div v-if="expandedUnit === unit.id" class="lessons-expansion">
-                  <div class="text-subtitle2 text-weight-medium q-mt-md q-mb-sm" style="color: #5f6368;">Lessons</div>
-                  <div class="lesson-list">
-                    <div v-for="lessonId in UNIT_LESSON_IDS[unit.id]" :key="lessonId" class="lesson-row">
-                      <div class="lesson-title">{{ getLessonTitle(lessonId) }}</div>
-                      <img v-if="currentUser.progress[lessonId]?.completed" src="/icons/check.png" alt="completed"
-                        class="lesson-icon" />
-                      <img v-else src="/icons/incomplete.png" alt="incomplete" class="lesson-icon" />
+                  <q-input v-model="editForm.section" label="Section" outlined class="q-mb-lg unified-input"
+                    :rules="[val => !!val || 'Section is required']" dense />
+
+                  <!-- Avatar Selection -->
+                  <div class="text-subtitle1 text-weight-medium q-mb-md text-primary">Choose Avatar</div>
+                  <div class="avatar-grid">
+                    <div v-for="(avatar, index) in avatars" :key="index" class="avatar-item unified-card"
+                      :class="{ 'avatar-selected': editForm.avatar === avatar }" @click="selectAvatar(avatar)">
+                      <img :src="avatar" class="avatar-option-image"
+                        :class="{ 'avatar-option-selected': editForm.avatar === avatar }" />
+                      <div v-if="editForm.avatar === avatar" class="avatar-selected-overlay">
+                        <q-icon name="check" color="white" size="24px" />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </q-slide-transition>
+              </q-card-section>
+            </q-scroll-area>
+
+            <q-card-actions align="right" class="q-pa-md modal-actions">
+              <q-btn flat label="Cancel" color="grey" @click="cancelEdit" :disabled="saving" class="unified-btn" />
+              <q-btn label="Save" color="primary" @click="saveProfile" :loading="saving"
+                :disable="!editForm.name || !editForm.section" class="unified-btn" />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
+
+        <!-- Dashboard Content -->
+        <div class="q-pa-md dashboard-content q-pb-lg">
+          <!-- HOME TAB -->
+          <div v-if="activeTab === 'home'">
+            <q-card class="q-mb-lg overall-progress-card">
+              <q-card-section>
+                <div class="q-mb-xs">
+                  <div class="text-h6 text-white text-weight-bold q-mb-sm">Overall Progress</div>
+                  <q-linear-progress :value="progress.overall / 100" size="12px" color="white" class="q-mb-sm"
+                    rounded />
+
+                  <!-- Even simpler single line -->
+                  <div class="row justify-between items-center plain-progress-stats q-pt-xs">
+                    <div class="column items-center">
+                      <div class="text-h6 text-white text-weight-bold">{{ progress.overall }}%</div>
+                      <div class="text-caption text-white" style="opacity: 0.9;">Progress</div>
+                    </div>
+
+                    <div class="column items-center">
+                      <div class="text-h6 text-white text-weight-bold">{{ progress.completed }}</div>
+                      <div class="text-caption text-white" style="opacity: 0.9;">Lessons Completed</div>
+                    </div>
+
+                    <div class="column items-center">
+                      <div class="text-h6 text-white text-weight-bold">{{ TOTAL_LESSONS }}</div>
+                      <div class="text-caption text-white" style="opacity: 0.9;">Total Lessons</div>
+                    </div>
+                  </div>
+                </div>
+              </q-card-section>
+            </q-card>
+
+            <div class="text-h5 text-primary text-weight-bold q-mb-md section-title">Units</div>
+            <div class="units-grid">
+              <q-card v-for="unit in units" :key="unit.id" class="unit-card" flat bordered @click="goToUnit(unit)">
+                <q-card-section class="q-pa-md">
+                  <div class="row items-center justify-between">
+                    <div class="row items-center">
+                      <q-avatar size="60px" class="q-mr-xs"
+                        :style="{ backgroundColor: unit.bgColor, borderRadius: '6px' }">
+                        <img :src="unit.icon" style="width: 38px; height: 38px;" />
+                      </q-avatar>
+
+                      <div>
+                        <div class="unit-title text-weight-bold">{{ unit.name }}</div>
+                        <div class="unit-description">{{ unit.description }}</div>
+                      </div>
+                    </div>
+                    <div>
+                      <img src="assets/icons/arrow.png" class="lock-icon" />
+                    </div>
+                  </div>
+                  <q-linear-progress :value="unit.progress / 100" size="10px" color="blue-6" class="q-mt-sm" rounded />
+                </q-card-section>
+              </q-card>
+            </div>
+          </div>
+
+          <!-- STATISTICS TAB -->
+          <div v-if="activeTab === 'stats'" class="stats-page">
+            <div class="text-h5 text-primary text-weight-bold q-mb-md section-title">Progress Statistics</div>
+
+            <!-- Quiz Statistics Card -->
+            <q-card class="quiz-statistics-card q-mb-md" @click="goToQuizStats">
+              <q-card-section class="q-pa-md">
+                <div class="row items-center justify-between">
+                  <div class="row items-center">
+                    <q-avatar size="50px" class="q-mr-md" style="background-color: #2196F3; border-radius: 10px;">
+                      <img src="icons/brain.png" style="width: 28px; height: 28px;" />
+                    </q-avatar>
+                    <div>
+                      <div class="text-h6 text-weight-bold card-title">Quiz Statistics</div>
+                      <div class="text-caption card-subtitle">View detailed quiz performance and analytics</div>
+                    </div>
+                  </div>
+                  <div>
+                    <img src="assets/icons/arrow.png" style="width: 24px; height: 24px;" />
+                  </div>
+                </div>
+              </q-card-section>
+            </q-card>
+
+            <!-- Bar Chart: Unit progress -->
+            <q-card class="chart-card q-mb-md">
+              <q-card-section class="q-pa-md">
+                <div class="row items-center justify-between q-mb-md">
+                  <div class="row items-center">
+                    <q-avatar size="50px" class="q-mr-md" style="background-color: #9C27B0; border-radius: 10px;">
+                      <img src="icons/progress.png" style="width: 28px; height: 28px;" />
+                    </q-avatar>
+                    <div>
+                      <div class="text-h6 text-weight-bold card-title">Unit Progress Overview</div>
+                      <div class="text-caption card-subtitle">Visual representation of your progress across all units
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="height:250px">
+                  <Bar :data="chartData" :options="chartOptions" />
+                </div>
+              </q-card-section>
+            </q-card>
+
+            <!-- Pie Chart Card -->
+            <q-card class="chart-card q-mb-md">
+              <q-card-section class="q-pa-md">
+                <div class="row items-center justify-between q-mb-md">
+                  <div class="row items-center">
+                    <q-avatar size="50px" class="q-mr-md" style="background-color: #FF9800; border-radius: 10px;">
+                      <img src="assets/icons/pie-graph.png" style="width: 28px; height: 28px;" />
+                    </q-avatar>
+                    <div>
+                      <div class="text-h6 text-weight-bold card-title">Completion Distribution</div>
+                      <div class="text-caption card-subtitle">Overall lesson completion breakdown</div>
+                    </div>
+                  </div>
+                </div>
+                <div style="height:250px">
+                  <Pie :data="pieData" :options="pieOptions" />
+                </div>
+              </q-card-section>
+            </q-card>
+
+            <!-- Chapter Test Summary Card -->
+            <q-card class="chapter-test-summary-card q-mb-md" @click="goToChapterTestStats">
+              <q-card-section class="q-pa-md">
+                <div class="row items-center justify-between">
+                  <div class="row items-center">
+                    <q-avatar size="50px" class="q-mr-md" style="background-color: #4CAF50; border-radius: 10px;">
+                      <img src="assets/icons/check-wrong.png" style="width: 28px; height: 28px;" />
+                    </q-avatar>
+                    <div>
+                      <div class="text-h6 text-weight-bold card-title">Chapter Test Summary</div>
+                      <div class="text-caption card-subtitle">Performance analysis of chapter tests</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row justify-around items-center q-mt-md chapter-test-stats">
+                  <div class="row items-center">
+                    <div class="color-square" style="background-color: #4CAF50;"></div>
+                    <div class="text-h6 q-ml-sm stat-text">Correct: {{ student.chapterTest.correct }}</div>
+                  </div>
+
+                  <div class="row items-center">
+                    <div class="color-square" style="background-color: #F44336;"></div>
+                    <div class="text-h6 q-ml-sm stat-text">Wrong: {{ student.chapterTest.wrong }}</div>
+                  </div>
+                </div>
+              </q-card-section>
+            </q-card>
+
+            <!-- Unit Progress Cards with Expandable Lessons -->
+            <div v-for="unit in units" :key="unit.id" class="q-mb-md">
+              <q-card class="unit-progress-card">
+                <q-card-section class="q-pa-md">
+                  <div class="row items-center justify-between" @click="toggleUnitDetails(unit)">
+                    <div class="row items-center">
+                      <q-avatar size="50px" class="q-mr-md"
+                        :style="{ backgroundColor: unit.bgColor, borderRadius: '10px' }">
+                        <img :src="unit.icon" style="width: 28px; height: 28px;" />
+                      </q-avatar>
+                      <div>
+                        <div class="text-h6 text-weight-bold card-title">{{ unit.name }}</div>
+                        <div class="text-caption card-subtitle">Progress: {{ unit.progress }}%</div>
+                      </div>
+                    </div>
+                    <div>
+                      <img src="assets/icons/arrow.png" :style="{
+                        transform: expandedUnit === unit.id ? 'rotate(90deg)' : 'rotate(0deg)',
+                        width: '20px'
+                      }" />
+                    </div>
+                  </div>
+
+                  <q-linear-progress :value="unit.progress / 100" :color="getProgressColor(unit.bgColor)" size="12px"
+                    rounded class="q-mt-md" />
+
+                  <!-- Expandable Lessons Section -->
+                  <q-slide-transition>
+                    <div v-if="expandedUnit === unit.id" class="lessons-expansion">
+                      <div class="text-subtitle2 text-weight-medium q-mt-md q-mb-sm lessons-header">Lessons</div>
+                      <div class="lesson-list">
+                        <div v-for="lessonId in UNIT_LESSON_IDS[unit.id]" :key="lessonId" class="lesson-row">
+                          <div class="lesson-title">{{ getLessonTitle(lessonId) }}</div>
+                          <img v-if="currentUser.progress[lessonId]?.completed" src="/icons/check.png" alt="completed"
+                            class="lesson-icon" />
+                          <img v-else src="/icons/incomplete.png" alt="incomplete" class="lesson-icon" />
+                        </div>
+                      </div>
+                    </div>
+                  </q-slide-transition>
+                </q-card-section>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Footer Tabs -->
+        <div class="floating-footer">
+          <q-tabs v-model="activeTab" align="justify" indicator-color="transparent" active-color="yellow-5"
+            class="text-white footer-tabs">
+            <q-tab name="home">
+              <template v-slot:default>
+                <img src="assets/icons/home.png" style="width: 24px; height: 24px;" />
+              </template>
+            </q-tab>
+            <q-tab name="stats">
+              <template v-slot:default>
+                <img src="assets/icons/chart-histogram.png" style="width: 24px; height: 24px;" />
+              </template>
+            </q-tab>
+          </q-tabs>
+        </div>
+
+        <q-dialog v-model="settingsOpen">
+          <q-card style="min-width:300px;">
+            <q-card-section>
+              <div class="text-h6 text-primary">Audio Settings</div>
+
+              <q-toggle v-model="bgMusicEnabled" label="Background Music" @update:model-value="audioManager.toggleBg" />
+
+              <q-toggle v-model="sfxEnabled" label="Touch Sounds" @update:model-value="audioManager.toggleSfx" />
             </q-card-section>
           </q-card>
-        </div>
-      </div>
-    </div>
-
-    <!-- Floating Footer Tabs -->
-    <div class="floating-footer">
-      <q-tabs v-model="activeTab" align="justify" indicator-color="transparent" active-color="yellow-5"
-        class="text-white footer-tabs">
-        <q-tab name="home">
-          <template v-slot:default>
-            <img src="assets/icons/home.png" style="width: 24px; height: 24px;" />
-          </template>
-        </q-tab>
-        <q-tab name="stats">
-          <template v-slot:default>
-            <img src="assets/icons/chart-histogram.png" style="width: 24px; height: 24px;" />
-          </template>
-        </q-tab>
-      </q-tabs>
-    </div>
-
-    <q-dialog v-model="settingsOpen">
-      <q-card style="min-width:300px;">
-        <q-card-section>
-          <div class="text-h6 text-primary">Audio Settings</div>
-
-          <q-toggle v-model="bgMusicEnabled" label="Background Music" @update:model-value="audioManager.toggleBg" />
-
-          <q-toggle v-model="sfxEnabled" label="Touch Sounds" @update:model-value="audioManager.toggleSfx" />
-        </q-card-section>
-      </q-card>
-    </q-dialog>
-  </q-page>
+        </q-dialog>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script setup>
@@ -517,6 +526,18 @@ const router = useRouter()
 // Helper function to get lesson title
 const getLessonTitle = (lessonId) => {
   return LESSON_TITLES[lessonId] || `Lesson ${lessonId}`
+}
+
+// Helper function to get progress bar color based on unit color
+const getProgressColor = (bgColor) => {
+  // Return a matching color for the progress bar
+  const colorMap = {
+    '#42A5F5': 'blue-6',
+    '#66BB6A': 'green-6',
+    '#FFA726': 'orange-6',
+    '#AB47BC': 'purple-6'
+  }
+  return colorMap[bgColor] || 'primary'
 }
 
 const openEditProfile = () => {
@@ -820,9 +841,14 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.q-page-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
 .dashboard-page {
-  background-color: #e3f2fd;
-  min-height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  position: relative;
 }
 
 .header-gradient {
@@ -911,6 +937,12 @@ onMounted(() => {
   padding-bottom: calc(24px + env(safe-area-inset-bottom));
 }
 
+/* Section titles with white text for better contrast */
+.section-title {
+  color: white !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 
 /* ============================== */
 /* EDIT PROFILE MODAL STYLES */
@@ -918,7 +950,7 @@ onMounted(() => {
 
 /* Unified card design for modal */
 .edit-profile-modal.unified-card {
-  background: #ffffff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
   border-bottom: 6px solid #42A5F5;
   border-radius: 16px;
@@ -940,7 +972,7 @@ onMounted(() => {
   height: 120px;
   border-radius: 12px;
   overflow: hidden;
-  background: #f5f5f5;
+  background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   .current-avatar-image {
@@ -957,7 +989,8 @@ onMounted(() => {
 .unified-input {
   .q-field__control {
     border-radius: 8px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.95);
     transition: all 0.2s ease;
 
     &:hover {
@@ -986,14 +1019,14 @@ onMounted(() => {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: #ffffff;
-  border: 2px solid #e0e0e0;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
   height: 90px;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: rgba(255, 255, 255, 1);
     transform: scale(1.05);
     border-color: #42A5F5;
   }
@@ -1012,7 +1045,7 @@ onMounted(() => {
 }
 
 .avatar-selected {
-  background-color: #e3f2fd;
+  background-color: rgba(66, 165, 245, 0.2);
   border: 2px solid #42A5F5;
 
   .avatar-option-image {
@@ -1059,17 +1092,18 @@ onMounted(() => {
 .chapter-test-summary-card,
 .overall-progress-card,
 .unit-card {
-  background: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+  backdrop-filter: blur(10px);
   border: none;
-  border-radius: 12px;
+  border-radius: 16px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   overflow: hidden;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -1107,7 +1141,8 @@ onMounted(() => {
 }
 
 .overall-progress-card {
-  border-bottom: 6px solid #FF9800;
+  background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+  border-bottom: 6px solid #E65100;
 
   &:hover {
     border-bottom-width: 8px;
@@ -1115,11 +1150,24 @@ onMounted(() => {
 }
 
 .unit-card {
-  border-bottom: 6px solid #bdbfc1;
+  border-bottom: 6px solid #9575CD;
 
   &:hover {
     border-bottom-width: 8px;
   }
+}
+
+/* Card title and subtitle colors */
+.card-title {
+  color: #1a237e !important;
+}
+
+.card-subtitle {
+  color: #5f6368 !important;
+}
+
+.stat-text {
+  color: #1a237e !important;
 }
 
 /* Chapter test summary - ensure horizontal alignment on all screens */
@@ -1143,13 +1191,13 @@ onMounted(() => {
     .stat-number {
       font-size: 20px;
       font-weight: 700;
-      color: #1a237e;
+      color: white;
       line-height: 1;
       margin-bottom: 0;
     }
 
     .stat-label {
-      color: #5f6368;
+      color: rgba(255, 255, 255, 0.9);
       font-size: 11px;
       line-height: 1.2;
       margin-top: 0;
@@ -1208,7 +1256,7 @@ onMounted(() => {
 .unit-progress-card .q-avatar,
 .chapter-test-summary-card .q-avatar {
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
 }
 
@@ -1260,7 +1308,7 @@ onMounted(() => {
 .unit-progress-card .q-linear-progress {
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Chapter test summary specific styling */
@@ -1283,15 +1331,20 @@ onMounted(() => {
 /* ============================== */
 
 .lessons-expansion {
-  border-top: 1px solid #e0e0e0;
+  border-top: 2px solid rgba(66, 165, 245, 0.3);
   margin-top: 12px;
   padding-top: 12px;
+}
+
+.lessons-header {
+  color: #1a237e !important;
+  font-weight: 600;
 }
 
 .lesson-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   max-height: 200px;
   overflow-y: auto;
   padding-right: 4px;
@@ -1301,13 +1354,19 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
-  border-radius: 8px;
-  padding: 10px 12px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 10px;
+  padding: 12px 14px;
   font-size: 13px;
   font-weight: 500;
   color: #1a237e;
   transition: all 0.2s ease;
+  border: 1px solid rgba(66, 165, 245, 0.2);
+
+  &:hover {
+    background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
+    transform: translateX(4px);
+  }
 }
 
 .lesson-title {
@@ -1505,11 +1564,11 @@ onMounted(() => {
   /* Lesson list on mobile */
   .lesson-list {
     max-height: 160px;
-    gap: 5px;
+    gap: 6px;
   }
 
   .lesson-row {
-    padding: 8px 10px;
+    padding: 10px 12px;
     font-size: 12px;
   }
 
