@@ -1,4 +1,4 @@
-package com.jerick.scienceapp;
+package com.dclnhs.science7;
 
 import android.os.Build;
 import android.os.Bundle;

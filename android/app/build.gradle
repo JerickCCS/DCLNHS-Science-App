@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     namespace "com.dclnhs.science7"
     compileSdk rootProject.ext.compileSdkVersion
+
     defaultConfig {
         applicationId "com.dclnhs.science7"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -11,10 +12,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
-             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
-             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/Aaptassets.cpp#61
+            // Optional, leave empty
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,7 +25,9 @@ android {
 }
 
 repositories {
-    flatDir{
+    google()
+    mavenCentral()
+    flatDir {
         dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
     }
 }
@@ -35,10 +38,14 @@ dependencies {
     implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
     implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
     implementation project(':capacitor-android')
+    implementation project(':capacitor-cordova-android-plugins')
+
+    // ✅ Add Material Components
+    implementation 'com.google.android.material:material:1.11.0'
+
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
-    implementation project(':capacitor-cordova-android-plugins')
 }
 
 apply from: 'capacitor.build.gradle'
