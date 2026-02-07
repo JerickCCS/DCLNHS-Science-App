@@ -10,6 +10,7 @@
                     Statistics
                 </div>
             </q-toolbar>
+            <q-linear-progress :value="progress" size="4px" color="primary" class="header-progress" />
         </q-header>
 
         <q-page-container>

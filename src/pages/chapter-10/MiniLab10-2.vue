@@ -18,6 +18,7 @@
                     Page {{ isInstructionPage ? 'Instructions' : currentQuestionIndex + 1 }}/{{ totalPages }}
                 </div>
             </q-toolbar>
+            <q-linear-progress :value="progress" size="4px" color="primary" class="header-progress" />
         </q-header>
 
         <!-- Main Content -->

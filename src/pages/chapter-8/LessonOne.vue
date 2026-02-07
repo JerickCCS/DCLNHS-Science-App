@@ -6,10 +6,11 @@
         <q-toolbar-title class="navbar-title">Lesson 1: Basic Concepts of Motion</q-toolbar-title>
         <div class="row items-center q-gutter-sm">
           <div class="text-subtitle2">{{ currentPage + 1 }} / {{ pages.length }}</div>
-          <q-btn flat dense round :icon="isBookmarked ? 'bookmark' : 'bookmark_border'" color="primary"
+          <q-btn flat dense round :icon="isBookmarked ? 'bookmark' : 'bookmark_border'" color="yellow"
             @click="toggleBookmark" />
         </div>
       </q-toolbar>
+      <q-linear-progress :value="progress" size="4px" color="primary" class="header-progress" />
     </q-header>
 
     <q-page-container class="night-sky">
@@ -25,10 +26,10 @@
           <div class="buttons">
             <q-btn class="nav-button" :disable="currentPage === 0" @click="prevPage" no-caps>Previous</q-btn>
 
-            <div class="progress-section">
-              <div class="page-count">{{ currentPage + 1 }} / {{ pages.length }}</div>
-              <q-linear-progress :value="progress" size="10px" color="primary" />
-            </div>
+            <!-- <div class="progress-section">
+                            <div class="page-count">{{ currentPage + 1 }} / {{ pages.length }}</div>
+                            <q-linear-progress :value="progress" size="10px" color="primary" />
+                        </div> -->
 
             <q-btn class="nav-button" @click="nextPage" :label="currentPage === pages.length - 1 ? 'Finish' : 'Next'"
               :style="currentPage === pages.length - 1 ? finishButtonStyle : null" no-caps />

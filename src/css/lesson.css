@@ -15,7 +15,7 @@
 
 .q-header {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    border-bottom: 5px solid #9c9c9c;
+    /* border-bottom: 5px solid #9c9c9c; */
     font-family: 'OtherFont', sans-serif;
     font-weight: 800;
     font-size: 1.1rem;
@@ -193,15 +193,27 @@
     margin-bottom: 4px;
 }
 
+.header-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+/* Optional: Add transition for smooth progress updates */
+.header-progress :deep(.q-linear-progress__track) {
+    transition: transform 0.3s ease;
+}
+
 /* ============================
    Lesson Complete Modal
    ============================ */
 .lesson-complete-card {
     border: 2px solid #ccc;
     border-radius: 12px;
-    background: white;
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
-    border-bottom: 6px solid #6c63ff;
+    background: rgb(255, 255, 255);
+    box-shadow: 0px 6px 0px rgb(30, 28, 168);
 }
 
 .lesson-ok-btn {
@@ -215,7 +227,6 @@
     background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
     color: #fff;
     transition: 0.2s;
-    box-shadow: 0 8px 0 0 #5b21b6;
 }
 
 .lesson-ok-btn:hover {
