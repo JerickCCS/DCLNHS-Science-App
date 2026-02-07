@@ -203,10 +203,6 @@ export default {
       </div>
     </div>
 
-    <div class="illustration">
-      <img src="assets/img/chapter 10/slide6.png" alt="Placeholder">
-    </div>
-
     <div class="video-container">
           <video controls width="100%">
             <source src="assets/videos/chapter 10/IMG_20260124_191358_804fblite_video.mp4" controls alt="video" type="video/mp4">
@@ -329,20 +325,14 @@ export default {
     </div>
 
     <div class="illustration">
-      <img src="assets/img/chapter 10/Reverse Fault-13.png" alt="Placeholder">
+      <img src="assets/img/chapter 10/Reverse_Fault (1).gif" alt="Placeholder">
+      <div class="caption">Reverse Fault Animation</div>
     </div>
 
     <p>In a reverse fault, the hanging wall has moved upward relative to the footwall due to compressional force. Earthquakes happen due to this sudden movement.</p>
   </div>
   `,
 
-      `
-      <div class="illustration">
-      <img src="assets/img/chapter 10/Reverse_Fault (1).gif" alt="Placeholder">
-      <div class="caption">Reverse Fault Animation</div>
-    </div>
-      </div>
- `,
       `
   <div>
     <!-- Card 14 -->
@@ -353,21 +343,14 @@ export default {
     </div>
 
     <div class="illustration">
-      <img src="assets/img/chapter 10/Strike Fault-14.jpg" alt="Placeholder">
+      <img src="assets/img/chapter 10/Strike-Slip_Fault.gif" alt="Placeholder">
+      <div class="caption">Strike-Slip Fault Animation</div>
     </div>
 
     <p>In strike-slip faults, two plates move horizontally sideways in opposite directions. As the plates move against one another, strain is built up. As energy is released, earthquakes occur. Strike-slip faults can produce major earthquakes with a magnitude as great as 8.</p>
   </div>
   `,
 
-      `
-      <div>
-  <div class="illustration">
-      <img src="assets/img/chapter 10/Strike-Slip_Fault.gif" alt="Placeholder">
-      <div class="caption">Strike-Slip Fault Animation</div>
-    </div>
-      </div>
- `,
       `
   <div>
     <!-- Card 15 -->
@@ -412,13 +395,14 @@ export default {
           </video>
           <div class="caption">The Types of Faults in the Philippines Animation</div>
         </div>
+        <p>The Philippines is considered one of the most tectonically and seismically active areas in the world. PHIVOLCS records at least five earthquakes a day in the Philippines, all of which are due to active faults.</p>
   </div>
   `,
 
       `
   <div>
     <!-- Card 18 -->
-    <p>The Philippines is considered one of the most tectonically and seismically active areas in the world. PHIVOLCS records at least five earthquakes a day in the Philippines, all of which are due to active faults.</p>
+    
     <p>The Philippine Fault Zone (PFZ) is an important tectonic and seismic feature that cuts across the Philippine archipelago from northwestern Luzon to southeastern Mindanao. The PFZ is generally strike-slip in nature and is made up of several segments. Large magnitude earthquakes in recent years originated from this fault zone.</p>
 
     <div class="fun-fact-card">

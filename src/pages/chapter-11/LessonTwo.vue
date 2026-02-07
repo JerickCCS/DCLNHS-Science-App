@@ -232,32 +232,27 @@ section of the country. It affects the Philippines from late October to early Ma
           </video>
           <div class="caption">The intertropical convergence zone</div>
         </div>
+        <div class="illustration">
+        <img src="assets/img/chapter 11/figure 11-7.png" alt="Figure 11-7">
+        <div class="caption">Figure 11-7. The location of the ITCZ in July and in January</div>
+      </div>
+       <p>The poleward movement of the ITCZ is more noticeable over land than over water, and
+Over the Northern Hemisphere than over the Southern Hemisphere. During July and August,
+the ITCZ is situated between 5° and 15° north of the equator over the Atlantic Ocean and the
+Pacific Ocean; over the landmasses of Africa and Asia, it is further north. It may move up to
+30° north of the equator.</p>
     </div>
     `,
             `
     <div>
       <!-- Card 9 -->
-      <div class="illustration">
-        <img src="assets/img/chapter 11/figure 11-7.png" alt="Figure 11-7">
-        <div class="caption">Figure 11-7. The location of the ITCZ in July and in January</div>
-      </div>
-      <p>The poleward movement of the ITCZ is more noticeable over land than over water, and
-Over the Northern Hemisphere than over the Southern Hemisphere. During July and August,
-the ITCZ is situated between 5° and 15° north of the equator over the Atlantic Ocean and the
-Pacific Ocean; over the landmasses of Africa and Asia, it is further north. It may move up to
-30° north of the equator.</p>
       <p>The air in the ITCZ moves in a vertical motion so that there is little surface wind in the
 ITCZ. This is why sailors refer to the ITCZ as the doldrums or the calms."</p>
     </div>
-    `,
-            `
-    <div>
-      <!-- Card 10 -->
-      <div class="info-card"> <div class="info-title">Mini Test 11-4</div> <div class="info-content"> <div class="info-text"> <p><strong>1.</strong> How does the ITCZ affect the weather in the Philippines?</p> <p><strong>2.</strong> How does the ITCZ move in the Northern Hemisphere? in the Southern Hemisphere?</p>
+    <div class="info-card"> <div class="info-title">Mini Test 11-4</div> <div class="info-content"> <div class="info-text"> <p><strong>1.</strong> How does the ITCZ affect the weather in the Philippines?</p> <p><strong>2.</strong> How does the ITCZ move in the Northern Hemisphere? in the Southern Hemisphere?</p>
         <div class="start-btn-container">
             <q-btn data-route="/mini-test-11-4" unelevated class="start-btn">Answer</q-btn>
           </div> </div> </div> </div>
-    </div>
     `
         ])
 
@@ -288,8 +283,9 @@ ITCZ. This is why sailors refer to the ITCZ as the doldrums or the calms."</p>
         }
 
         const finishButtonStyle = {
-            background: "linear-gradient(90deg,rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 0%, rgba(252, 176, 69, 1) 79%)",
+            background: "#fe3223",
             color: "#fff",
+            boxShadow: "0 8px 0 0 #db0e00"
         }
 
         // --- Bookmarks ---

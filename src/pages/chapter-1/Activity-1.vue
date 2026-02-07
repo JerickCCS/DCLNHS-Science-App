@@ -245,8 +245,9 @@ export default {
         }
 
         const finishButtonStyle = {
-            background: "linear-gradient(90deg,rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 0%, rgba(252, 176, 69, 1) 79%)",
+            background: "#fe3223",
             color: "#fff",
+            boxShadow: "0 8px 0 0 #db0e00"
         }
 
         // --- Bookmarks ---

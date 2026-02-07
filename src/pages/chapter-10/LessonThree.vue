@@ -108,11 +108,11 @@ export default {
           <video controls width="100%">
             <source src="assets/videos/chapter 10/lv_0_20260116220654.mp4" controls alt="video" type="video/mp4">
           </video>
-    
+    </div>
 
            <div class="header">
       <div>
-        <div class="title" style="margin-top: 40px; margin-bottom: 10px;">What to Do Before an Earthquake</div>
+        <div class="title">What to Do Before an Earthquake</div>
       </div>
     </div>
 <p>&bull; Familiarize yourself with the earthquake hazards in your community.</p>
@@ -224,11 +224,11 @@ export default {
       `
   <div>
     <!-- Card 7 -->
-<div class="info-card" style="margin-top: 10vh; height: 400px;">
+<div class="info-card" style="margin-top: 10vh;">
       <div class="info-title">MINI LAB 10-5</div>
       <div class="info-content">
         <div class="info-text">
-          <p style="font-size: 18px;">1. Form a group of five members. Discuss creative ways of presenting preparedness during and after an earthquake. You should be able to demonstrate what should be done before, during, and after an earthquake in school, at home, or near coastal area settings.</p>
+          <p>1. Form a group of five members. Discuss creative ways of presenting preparedness during and after an earthquake. You should be able to demonstrate what should be done before, during, and after an earthquake in school, at home, or near coastal area settings.</p>
           <p style="font-size: 18px;">2. Write an essay in Filipino about your role in disaster preparedness during earthquakes.</p>
         </div>
       </div>

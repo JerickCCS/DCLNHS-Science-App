@@ -156,7 +156,7 @@ variable amounts of water vapor.</p>
       </div>
       <div class="video-container">
           <video controls width="100%">
-            <source src="assets/videos/lv_0_20260124213742.mp4" controls alt="video" type="video/mp4">
+            <source src="assets/videos/chapter 11/lv_0_20260124213742.mp4" controls alt="video" type="video/mp4">
           </video>
           <div class="caption">The stratosphere</div>
         </div>
@@ -167,7 +167,7 @@ variable amounts of water vapor.</p>
       <!-- Card 5 -->
       <div class="video-container">
           <video controls width="100%">
-            <source src="assets/videos/lv_0_20260125003748.mp4" controls alt="video" type="video/mp4">
+            <source src="assets/videos/chapter 11/lv_0_20260125003748.mp4" controls alt="video" type="video/mp4">
           </video>
           <div class="caption">The mesosphere</div>
         </div>
@@ -335,8 +335,9 @@ many professional opportunities.</p>
         }
 
         const finishButtonStyle = {
-            background: "linear-gradient(90deg,rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 0%, rgba(252, 176, 69, 1) 79%)",
+            background: "#fe3223",
             color: "#fff",
+            boxShadow: "0 8px 0 0 #db0e00"
         }
 
         // --- Bookmarks ---

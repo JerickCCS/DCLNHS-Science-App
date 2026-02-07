@@ -283,11 +283,12 @@ Intensity refers to the perceptible strength of an earthquake in a certain local
       <img src="assets/img/chapter 10/seismograph.png" alt="Placeholder">
       <div class="caption">Figure 10-4: Ground motions detected by a seismograph or seismometer are recorded on a seismogram.</div>
     </div>
-<p>INSERT VIDEO HERE TAS EDELETE NING CONTENT SA UBOS<p>
-    <p>Whereas intensity is a descriptive measure, magnitude is a quantitative measure of an earthquake's strength. The magnitude of an earthquake refers to the amount of energy released. This is determined from the amplitude of the surface waves recorded by a seismometer, a device that detects and records ground motions caused by earthquakes and volcanic eruptions.</p>
-
-    <p>The quantitative measure for earthquake magnitude is called the Richter scale (table 10–2), devised by American seismologist Charles Francis Richter. It is a logarithmic scale where an increase of one unit on the Richter scale is roughly equal to a tenfold increase in measured amplitude. For example, the wave amplitude of a magnitude 7 earthquake is 10 times greater than magnitude 6, and 100 times greater than magnitude 5. The energy released by an earthquake increases about 30 times with each step of the scale.</p>
-
+<div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 10/whereas.mp4" controls alt="intensity and magnitude" type="video/mp4">
+          </video>
+          <div class="caption">Intensity and Magnitude</div>
+        </div>
   </div>
   `,
 
@@ -402,25 +403,19 @@ Light earthquakes are felt by most people in the affected area and generally cau
       `
   <div>
     <!-- Card 12 -->
-<div class="info-card" style="margin-top: 30%; height: 50vh;">
+<div class="info-card" >
       <div class="info-title">MINI TEST 10-4</div>
       <div class="info-content">
         <div class="info-text">
-          <p  style="font-size: 18px;"> 1. Describe the intensity of an earthquake as you move farther from the epicenter.</p>
-          <p  style="font-size: 18px;">2. Define earthquake using the terms magnitude, intensity, and energy.</p>
+          <p  > 1. Describe the intensity of an earthquake as you move farther from the epicenter.</p>
+          <p  >2. Define earthquake using the terms magnitude, intensity, and energy.</p>
 
-          <div class="start-btn-container" style="margin-top: 50px;">
+          <div class="start-btn-container" >
             <q-btn data-route="/mini-test-10-4" unelevated class="start-btn">Answer</q-btn>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  `,
-
-      `
-  <div>
-    <!-- Card 13 -->
     <div class="header">
       <div>
         <div class="title">Earthquake Hazards</div>
@@ -432,24 +427,28 @@ Light earthquakes are felt by most people in the affected area and generally cau
           </video>
           <div class="caption">Earthquake Hazards Animation</div>
         </div>
+  </div>
+  `,
 
-    <div class="info-card">
-      <div class="info-title">Primary Earthquake Hazards</div>
-      <div class="info-content">
-        <div class="info-text">
+      `
+  <div>
+    <!-- Card 13 -->
+    <div class="header">
+      <div>
+        <div class="title">Primary Earthquake Hazards</div>
+      </div>
+    </div>
+
        <p>In brief, the hazards associated with earthquakes depend on the strength of the earthquake and the physical features of the areas it affects.</p>
 
           <div class="video-container">
           <video controls width="100%">
             <source src="assets/videos/ground-shaking.mp4" controls alt="figure 11-3" type="video/mp4">
           </video>
-          <p style="margin-top: 20px;">Ground shaking is the main cause of destruction during an earthquake. Vibrations may cause tall buildings to collapse, roads and railroad tracks to break, electric posts to topple, water pipes to dislodge, dams to fail, and landslides to occur.</p>
-        </div>
+          </div>
+          <p >Ground shaking is the main cause of destruction during an earthquake. Vibrations may cause tall buildings to collapse, roads and railroad tracks to break, electric posts to topple, water pipes to dislodge, dams to fail, and landslides to occur.</p>
+        
 
-          </div>
-          </div>
-          </div>
-          </div>
 
   </div>
   `,
@@ -457,87 +456,81 @@ Light earthquakes are felt by most people in the affected area and generally cau
       `
   <div>
     <!-- Card 14 -->
-    <div class="info-card">
-      <div class="info-title">Primary Earthquake Hazards</div>
-      <div class="info-content">
+    <div class="header">
+      <div>
+        <div class="title">Primary Earthquake Hazards</div>
+      </div>
+    </div>
           <div class="video-container">
           <video controls width="100%">
             <source src="assets/videos/chapter 10/liquefaction.mp4" controls alt="video" type="video/mp4">
           </video>
-          <p style="margin-top: 20px;">Liquefaction results in ground subsidence, and causes structures to sink or tilt. During earthquakes, loose sand and soil that are saturated with water become incapable of supporting structures, causing collapse.</p>
-        </div>
+          </div>
+        <p style="margin-top: 20px;">Liquefaction results in ground subsidence, and causes structures to sink or tilt. During earthquakes, loose sand and soil that are saturated with water become incapable of supporting structures, causing collapse.</p>
 
           <div class="video-container">
           <video controls width="100%">
             <source src="assets/videos/chapter 10/fblite_video-4.mp4" controls alt="video" type="video/mp4">
           </video>
-          <p style="margin-top: 20px;">Landslide refers to the downward movement of soil or rock. This happens because ground shaking can loosen rock and soil materials and reduce the cohesion among the particles. This makes it easier for the force of gravity to pull the materials downward.
-</p>
-        </div>
-      </div>
-    </div>
+        </div><p>Landslide refers to the downward movement of soil or rock. This happens because ground shaking can loosen rock and soil materials and reduce the cohesion among the particles. This makes it easier for the force of gravity to pull the materials downward.</p>
+      
   </div>
   `,
 
       `
   <div>
     <!-- Card 15 -->
-    <div class="info-card">
-      <div class="info-title">Primary Earthquake Hazards</div>
-      <div class="info-content">
-        <div class="info-text">
+    <div class="header">
+      <div>
+        <div class="title">Primary Earthquake Hazards</div>
+      </div>
+    </div>
           <div class="video-container">
           <video controls width="100%">
             <source src="assets/videos/chapter 10/fblite_video-2.mp4" controls alt="video" type="video/mp4">
           </video>
+          </div>
           <p style="margin-top: 20px;">Ground rupture is the deformation on the ground that occurs along existing faults. Places located on top of and along faults trace face a high risk of ground rupture. Structures on top of a ruptured fault are destroyed.</p>
-        </div>
 
           <div class="video-container">
           <video controls width="100%">
             <source src="assets/videos/chapter 10/fblite_video-1.mp4" controls alt="video" type="video/mp4">
           </video>
-          <p style="margin-top: 20px;">Tsunami is a Japanese term used to describe a series of ocean waves generated by the displacement of water due to underwater earthquakes or volcanic eruptions.</p>
-        </div>
-
-        </div>
-      </div>
-    </div>
+          </div>
+        <p>Tsunami is a Japanese term used to describe a series of ocean waves generated by the displacement of water due to underwater earthquakes or volcanic eruptions.</p>
   </div>
   `,
       `
   <div>
     <!-- Card 16 -->
-        <p style="margin-top: 12px;">The tsunami that hit the island of Sulawesi in Indonesia on September 28, 2018 shows the destruction that tsunamis can cause. This tsunami, triggered by a 7.5 magnitude earthquake, caused water to smash buildings and houses, killing more than 400 people and badly injuring another 400. The epicenter of the earthquake was located in the mountainous region of Donggala Regency in the Central Sulawesi Province of Indonesia. The earthquake was triggered by the movement of the Palu-Koro fault which is 20 kilometers deep.</p>
+        <p>The tsunami that hit the island of Sulawesi in Indonesia on September 28, 2018 shows the destruction that tsunamis can cause. This tsunami, triggered by a 7.5 magnitude earthquake, caused water to smash buildings and houses, killing more than 400 people and badly injuring another 400. The epicenter of the earthquake was located in the mountainous region of Donggala Regency in the Central Sulawesi Province of Indonesia. The earthquake was triggered by the movement of the Palu-Koro fault which is 20 kilometers deep.</p>
 
-    <p style="margin-top: 20px;">For a tsunami to be formed, an earthquake of great magnitude must have occurred. Earthquakes of magnitude between 6.5 and 7.5 do not usually produce tsunamis. Earthquakes of magnitude 7.9 and greater might produce destructive local tsunamis near the epicenter.<p>
+    <p>For a tsunami to be formed, an earthquake of great magnitude must have occurred. Earthquakes of magnitude between 6.5 and 7.5 do not usually produce tsunamis. Earthquakes of magnitude 7.9 and greater might produce destructive local tsunamis near the epicenter.<p>
  
   `,
 
       `
       
-    <p style="margin-top: 20px;">The source of energy should be big enough and close enough to the ocean floor. The energy of an 8.0 magnitude earthquake is equivalent to about 6,270,000 tons of TNT explosives. Most tsunamis are generated by earthquakes less than 100 kilometers below the Earth's surface.</p>
+    <p>The source of energy should be big enough and close enough to the ocean floor. The energy of an 8.0 magnitude earthquake is equivalent to about 6,270,000 tons of TNT explosives. Most tsunamis are generated by earthquakes less than 100 kilometers below the Earth's surface.</p>
 
-    <p style="margin-top: 20px;">The energy from such an earthquake causes the ocean floor to rise or fall, triggering a tsunami. Volcanic eruption under the ocean, submarine landslides or landslides in the mountains carrying a big volume of debris to the ocean can also cause tsunamis. Large meteorite plunging into the Ocean may also cause tsunamis.</p>
+    <p>The energy from such an earthquake causes the ocean floor to rise or fall, triggering a tsunami. Volcanic eruption under the ocean, submarine landslides or landslides in the mountains carrying a big volume of debris to the ocean can also cause tsunamis. Large meteorite plunging into the Ocean may also cause tsunamis.</p>
 
  `,
 
       `
   <div>
     <!-- Card 17 -->
-   <div class="info-card">
-      <div class="info-title">Tsunami Safety Measures</div>
-      <div class="info-content">
-        <div class="info-text">
+    <div class="header">
+      <div>
+        <div class="title">Tsunami Safety Measures</div>
+      </div>
+    </div>
           <div class="video-container">
           <video controls width="100%">
             <source src="assets/videos/chapter 10/lv_0_20260121155223.mp4" controls alt="video" type="video/mp4">
           </video>
           <div class="caption">Howto be safe from tsunamis?</div>
         </div>
-</div>
-      </div>
-    </div>
 
      <div class="info-card">
       <div class="info-title">Mini Lab 10-4</div>

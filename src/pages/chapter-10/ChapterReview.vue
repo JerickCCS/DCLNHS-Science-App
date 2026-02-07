@@ -99,11 +99,11 @@ export default {
       `
   <div>
     <!-- Card 1 -->
-
-    <div class="info-card">
-      <div class="info-title">CHAPTER REVIEW</div>
-      <div class="info-content">
-        <div class="info-text">
+<div class="header">
+      <div>
+        <div class="title">Chapter 10 Review</div>
+      </div>
+    </div>
  <p> <b>•</b> An earthquake refers to the vibration of rocks when the energy stored in them is released.
 <p>
 <p> • The focus or hypocenter is the point of origin of an earthquake. The point directly above the focus on the Earth’s surface is the epicenter.  </p>
@@ -112,9 +112,6 @@ export default {
 <p> • The Philippines is a seismologically active area because of its numerous earthquake generators such as faults. </p>
 <p> • Earthquakes provide knowledge about the nature of the Earth’s internal structure.<p> 
 <p> • Intensity and magnitude are two ways to describe the strength of an earthquake. The intensity of an earthquake is based on the effect or the extent of damage of an earthquake on people, infrastructure, natural objects, and land surfaces. The magnitude of an earthquake refers to the energy released at its point of origin or focus.</p>
-        </div>
-      </div>
-    </div>
    
   </div>
    

@@ -156,24 +156,19 @@ export default {
           </video>
           <div class="caption">The dry and wet seasons</div>
         </div>
-    </div>
-    `,
-            `
-    <div>
-      <!-- Card 5 -->
-      <div class="illustration">
+        <div class="illustration">
         <img src="assets/img/chapter 12/figure 12-7.png" alt="figure 12-7">
         <div class="caption">Figure 12-7. The Panagbenga Festival is celebrated every season, when the weather is February during the dry cool and dry.</div>
-      </div>
-      <div class="illustration">
-        <img src="assets/img/chapter 12/figure 12-8.png" alt="figure 12-8">
-        <div class="caption">Figure 12-8. Rice grows in rain-fed condition during wet season, while irrigation system is used during dry season.</div>
       </div>
     </div>
     `,
             `
     <div>
       <!-- Card 6 -->
+      <div class="illustration">
+        <img src="assets/img/chapter 12/figure 12-8.png" alt="figure 12-8">
+        <div class="caption">Figure 12-8. Rice grows in rain-fed condition during wet season, while irrigation system is used during dry season.</div>
+      </div>
       <table style="width:100%; border-collapse:collapse; border:1px solid #000; font-family:Arial, sans-serif;">
   <tr>
     <th style="border:1px solid #000; padding:8px; text-align:center; background:#b3d9ff;">Wet</th>
@@ -265,8 +260,9 @@ export default {
         }
 
         const finishButtonStyle = {
-            background: "linear-gradient(90deg,rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 0%, rgba(252, 176, 69, 1) 79%)",
+            background: "#fe3223",
             color: "#fff",
+            boxShadow: "0 8px 0 0 #db0e00"
         }
 
         // --- Bookmarks ---
