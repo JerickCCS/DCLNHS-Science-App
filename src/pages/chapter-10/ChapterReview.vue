@@ -99,160 +99,26 @@ export default {
       `
   <div>
     <!-- Card 1 -->
-    <div class="header">
-      <div>
-        <div class="title">CHAPTER REVIEW</div>
-      </div>
-    </div>
 
     <div class="info-card">
-      <div class="info-title">Key Concepts Summary</div>
+      <div class="info-title">CHAPTER REVIEW</div>
       <div class="info-content">
         <div class="info-text">
-  • <b>Earthquake</b>: Refers to the vibration of rocks when the energy stored in them is released.<br>
-  • <b>Focus or Hypocenter</b>: The point of origin of an earthquake.<br>
-  • <b>Epicenter</b>: The point directly above the focus on the Earth's surface.<br>
-  • <b>Faults</b>: Fractures in rocks along which measurable displacement occurs.
+ <p> <b>•</b> An earthquake refers to the vibration of rocks when the energy stored in them is released.
+<p>
+<p> • The focus or hypocenter is the point of origin of an earthquake. The point directly above the focus on the Earth’s surface is the epicenter.  </p>
+<p> • Earthquakes occur along faults—fractures in rocks along which measurable displacement occurs.</p>
+<p> • Faults may be classified according to occurrence, such as active and inactive, and movement, such as dip-slip, strike-slip, and oblique-slip.</p>
+<p> • The Philippines is a seismologically active area because of its numerous earthquake generators such as faults. </p>
+<p> • Earthquakes provide knowledge about the nature of the Earth’s internal structure.<p> 
+<p> • Intensity and magnitude are two ways to describe the strength of an earthquake. The intensity of an earthquake is based on the effect or the extent of damage of an earthquake on people, infrastructure, natural objects, and land surfaces. The magnitude of an earthquake refers to the energy released at its point of origin or focus.</p>
         </div>
       </div>
     </div>
-
-      <div class="illustration">
-      <img src="assets/img/chapter 10/technology in focus.png" alt="Placeholder">
-      <div class="caption">Smartphones can help detect earthquakes using built-in sensors</div>
-    </div>
    
   </div>
-  `
-      ,
-      `
-<div>
-    <!-- Card 2 -->
-    <div class="header">
-      <div>
-        <div class="title">CHAPTER REVIEW</div>
-      </div>
-    </div>
-
-    <div class="info-card">
-      <div class="info-title">Fault Classifications</div>
-      <div class="info-content">
-        <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
-  <table style="width:100%; border-collapse:collapse; font-size:14px;">
-    <thead>
-      <tr>
-        <th style="padding:8px; background:#8000ff; color:#fff; text-align:left; border:1px solid #8000ff;">
-          Classification Type
-        </th>
-        <th style="padding:8px; background:#8000ff; color:#fff; text-align:left; border:1px solid #8000ff;">
-          Categories
-        </th>
-        <th style="padding:8px; background:#8000ff; color:#fff; text-align:left; border:1px solid #8000ff;">
-          Description
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          By Occurrence
-        </td>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          Active and Inactive
-        </td>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          Active faults have moved in the past and are likely to move again. Inactive faults have not moved in a long time.
-        </td>
-      </tr>
-
-      <tr>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          By Movement
-        </td>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          Dip-slip, Strike-slip, and Oblique-slip
-        </td>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          Describes the direction of movement along the fault plane.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-      </div>
-    </div>
-   <div class="fun-fact-card">
-      <span class="highlight">REMEMBER:</span> The Philippines is a seismologically active area because of its numerous earthquake generators such as faults.
-
-    </div>
-  </div>
-  `
-      ,
-      `
-  <div>
-    <!-- Card 3 -->
-    <div class="header">
-      <div>
-        <div class="title">CHAPTER REVIEW</div>
-      </div>
-    </div>
-
-    <div class="info-card">
-      <div class="info-title">Measuring Earthquakes</div>
-      <div class="info-content">
-        <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
-  <table style="width:100%; border-collapse:collapse; font-size:14px;">
-    <thead>
-      <tr>
-        <th style="padding:8px; background:#8000ff; color:#fff; text-align:left; border:1px solid #8000ff;">
-          Measurement
-        </th>
-        <th style="padding:8px; background:#8000ff; color:#fff; text-align:left; border:1px solid #8000ff;">
-          Definition
-        </th>
-        <th style="padding:8px; background:#8000ff; color:#fff; text-align:left; border:1px solid #8000ff;">
-          Scale Used
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          Intensity
-        </td>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          Based on the effect or the extent of damage of an earthquake on people, infrastructure, natural objects, and land surfaces.
-        </td>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          PHIVOLCS Earthquake Intensity Scale (PEIS)
-        </td>
-      </tr>
-
-      <tr>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          Magnitude
-        </td>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          Refers to the energy released at its point of origin or focus.
-        </td>
-        <td style="padding:8px; border:1px solid #8000ff; vertical-align:top; word-break:break-word;">
-          Richter Scale, Moment Magnitude Scale
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-      </div>
-    </div>
-   <div class="fun-fact-card">
-      <span class="highlight">SCIENCE CONNECTION:</span> Earthquakes provide knowledge about the nature of the Earth's internal structure through the study of seismic waves.
-
-    </div>
-  </div>
+   
+  
   `
     ])
 

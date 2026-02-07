@@ -176,7 +176,7 @@
                       </div>
                     </div>
                     <div>
-                      <img src="assets/icons/arrow.png" class="lock-icon" />
+                      <q-icon name="chevron_right" size="24px" color="grey-7" />
                     </div>
                   </div>
                   <q-linear-progress :value="unit.progress / 100" size="10px" color="blue-6" class="q-mt-sm" rounded />
@@ -203,7 +203,7 @@
                     </div>
                   </div>
                   <div>
-                    <img src="assets/icons/arrow.png" style="width: 24px; height: 24px;" />
+                    <q-icon name="chevron_right" size="24px" color="grey-7" />
                   </div>
                 </div>
               </q-card-section>
@@ -250,35 +250,6 @@
               </q-card-section>
             </q-card>
 
-            <!-- Chapter Test Summary Card -->
-            <q-card class="chapter-test-summary-card q-mb-md" @click="goToChapterTestStats">
-              <q-card-section class="q-pa-md">
-                <div class="row items-center justify-between">
-                  <div class="row items-center">
-                    <q-avatar size="50px" class="q-mr-md" style="background-color: #4CAF50; border-radius: 10px;">
-                      <img src="assets/icons/check-wrong.png" style="width: 28px; height: 28px;" />
-                    </q-avatar>
-                    <div>
-                      <div class="text-h6 text-weight-bold card-title">Chapter Test Summary</div>
-                      <div class="text-caption card-subtitle">Performance analysis of chapter tests</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row justify-around items-center q-mt-md chapter-test-stats">
-                  <div class="row items-center">
-                    <div class="color-square" style="background-color: #4CAF50;"></div>
-                    <div class="text-h6 q-ml-sm stat-text">Correct: {{ student.chapterTest.correct }}</div>
-                  </div>
-
-                  <div class="row items-center">
-                    <div class="color-square" style="background-color: #F44336;"></div>
-                    <div class="text-h6 q-ml-sm stat-text">Wrong: {{ student.chapterTest.wrong }}</div>
-                  </div>
-                </div>
-              </q-card-section>
-            </q-card>
-
             <!-- Unit Progress Cards with Expandable Lessons -->
             <div v-for="unit in units" :key="unit.id" class="q-mb-md">
               <q-card class="unit-progress-card">
@@ -295,9 +266,9 @@
                       </div>
                     </div>
                     <div>
-                      <img src="assets/icons/arrow.png" :style="{
+                      <q-icon name="chevron_right" size="24px" color="grey-7" :style="{
                         transform: expandedUnit === unit.id ? 'rotate(90deg)' : 'rotate(0deg)',
-                        width: '20px'
+                        transition: 'transform 0.3s ease'
                       }" />
                     </div>
                   </div>
@@ -307,13 +278,13 @@
 
                   <!-- Expandable Lessons Section -->
                   <q-slide-transition>
-                    <div v-if="expandedUnit === unit.id" class="lessons-expansion">
+                    <div v-if="expandedUnit === unit.id && UNIT_LESSON_IDS[unit.id]" class="lessons-expansion">
                       <div class="text-subtitle2 text-weight-medium q-mt-md q-mb-sm lessons-header">Lessons</div>
                       <div class="lesson-list">
                         <div v-for="lessonId in UNIT_LESSON_IDS[unit.id]" :key="lessonId" class="lesson-row">
                           <div class="lesson-title">{{ getLessonTitle(lessonId) }}</div>
-                          <img v-if="currentUser.progress[lessonId]?.completed" src="/icons/check.png" alt="completed"
-                            class="lesson-icon" />
+                          <img v-if="currentUser.progress && currentUser.progress[lessonId]?.completed"
+                            src="/icons/check.png" alt="completed" class="lesson-icon" />
                           <img v-else src="/icons/incomplete.png" alt="incomplete" class="lesson-icon" />
                         </div>
                       </div>
@@ -375,17 +346,21 @@ import {
 import { Bar, Pie } from 'vue-chartjs'
 import { audioManager } from 'src/utils/audioManager'
 
-const settingsOpen = ref(false)
-const editProfileModal = ref(false)
-const bgMusicEnabled = ref(true)
-const sfxEnabled = ref(true)
-const expandedUnit = ref(null)
-const saving = ref(false)
+// Register chart.js components once
+ChartJS.register(Title, Tooltip, Legend, BarElement, ArcElement, CategoryScale, LinearScale)
 
 // Constants
-const TOTAL_LESSONS = 92 // Total number of lessons across all units
+const TOTAL_LESSONS = 92
 
-// Lesson titles mapping - this should match your lesson data structure
+// Unit lesson IDs mapping - make it a constant that's accessible in template
+const UNIT_LESSON_IDS = {
+  1: Array.from({ length: 27 }, (_, i) => i + 1),
+  2: Array.from({ length: 22 }, (_, i) => i + 28),
+  3: Array.from({ length: 21 }, (_, i) => i + 50),
+  4: Array.from({ length: 22 }, (_, i) => i + 71)
+}
+
+// Lesson titles mapping (moved outside to prevent recreation)
 const LESSON_TITLES = {
   1: "Lesson 1: Scientific Models",
   2: "Lesson 2: Measurements and Data Organization in Science",
@@ -481,7 +456,7 @@ const LESSON_TITLES = {
   92: "Chapter Test"
 }
 
-// Avatar options - using placeholder images
+// Avatar options
 const avatars = [
   '/assets/avatars/1.jpg',
   '/assets/avatars/2.jpg',
@@ -494,18 +469,38 @@ const avatars = [
   '/assets/avatars/9.jpg'
 ]
 
-// Edit form data
-const editForm = reactive({
-  name: '',
-  section: '',
-  avatar: ''
-})
+// Chart options (static, defined once)
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false
+    }
+  }
+}
 
-// register chart.js components
-ChartJS.register(Title, Tooltip, Legend, BarElement, ArcElement, CategoryScale, LinearScale)
+const pieOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'bottom'
+    }
+  }
+}
 
+// Refs
+const settingsOpen = ref(false)
+const editProfileModal = ref(false)
+const bgMusicEnabled = ref(true)
+const sfxEnabled = ref(true)
+const expandedUnit = ref(null)
+const saving = ref(false)
 const sidebarOpen = ref(false)
 const activeTab = ref('home')
+
+// Reactive state
 const student = reactive({
   name: '',
   section: '',
@@ -521,16 +516,43 @@ const progress = reactive({ overall: 0, completed: 0 })
 const units = ref([])
 const currentUser = reactive({})
 
+// Edit form data
+const editForm = reactive({
+  name: '',
+  section: '',
+  avatar: ''
+})
+
+// Chart data
+const chartData = ref({
+  labels: [],
+  datasets: [
+    {
+      label: 'Unit Progress (%)',
+      backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726', '#AB47BC'],
+      data: []
+    }
+  ]
+})
+
+const pieData = ref({
+  labels: ['Completed', 'Remaining'],
+  datasets: [
+    {
+      backgroundColor: ['#4CAF50', '#E0E0E0'],
+      data: [0, 0]
+    }
+  ]
+})
+
 const router = useRouter()
 
-// Helper function to get lesson title
+// Helper functions
 const getLessonTitle = (lessonId) => {
   return LESSON_TITLES[lessonId] || `Lesson ${lessonId}`
 }
 
-// Helper function to get progress bar color based on unit color
 const getProgressColor = (bgColor) => {
-  // Return a matching color for the progress bar
   const colorMap = {
     '#42A5F5': 'blue-6',
     '#66BB6A': 'green-6',
@@ -540,8 +562,44 @@ const getProgressColor = (bgColor) => {
   return colorMap[bgColor] || 'primary'
 }
 
+// Calculate unit progress efficiently
+const calculateUnitProgress = (unitId, userProgress) => {
+  const lessonIds = UNIT_LESSON_IDS[unitId]
+  const completed = lessonIds.filter(id => userProgress[id]?.completed).length
+  return Math.round((completed / lessonIds.length) * 100)
+}
+
+// Update student in storage (optimized)
+const updateStudentInStorage = (updatedStudent) => {
+  try {
+    const students = LocalStorage.getItem('students') || []
+    const studentIndex = students.findIndex(s => s.studentId === updatedStudent.studentId)
+
+    if (studentIndex !== -1) {
+      students[studentIndex] = {
+        ...students[studentIndex],
+        name: updatedStudent.name,
+        section: updatedStudent.section,
+        avatar: updatedStudent.avatar
+      }
+    } else {
+      students.push({
+        studentId: updatedStudent.studentId,
+        name: updatedStudent.name,
+        section: updatedStudent.section,
+        avatar: updatedStudent.avatar,
+        progress: updatedStudent.progress || {},
+        chapterTest: updatedStudent.chapterTest || { correct: 0, wrong: 0 }
+      })
+    }
+    LocalStorage.set('students', students)
+  } catch (error) {
+    console.error('Error updating student:', error)
+  }
+}
+
+// Profile functions
 const openEditProfile = () => {
-  // Set current values to edit form
   editForm.name = student.name
   editForm.section = student.section
   editForm.avatar = student.avatar || avatars[0]
@@ -555,11 +613,6 @@ const selectAvatar = (avatar) => {
 
 const cancelEdit = () => {
   editProfileModal.value = false
-  resetEditForm()
-}
-
-const resetEditForm = () => {
-  // Don't clear immediately - wait for modal to close
   setTimeout(() => {
     editForm.name = ''
     editForm.section = ''
@@ -568,91 +621,49 @@ const resetEditForm = () => {
 }
 
 const saveProfile = async () => {
-  saving.value = true
-
-  // Validate form
   if (!editForm.name.trim() || !editForm.section.trim()) {
-    console.error('Name and section are required')
-    saving.value = false
     return
   }
 
+  saving.value = true
+
   try {
-    // Update student data
-    student.name = editForm.name.trim()
-    student.section = editForm.section.trim()
-    student.avatar = editForm.avatar
-
-    // Update in LocalStorage
-    const user = LocalStorage.getItem('currentUser')
-    if (user) {
-      user.name = editForm.name.trim()
-      user.section = editForm.section.trim()
-      user.avatar = editForm.avatar
-      LocalStorage.set('currentUser', user)
-
-      // Also update students storage - THIS IS THE FIX!
-      updateStudentInStorage(user) // Changed from updateUserProgressInStorage
+    // Update all instances at once
+    const updates = {
+      name: editForm.name.trim(),
+      section: editForm.section.trim(),
+      avatar: editForm.avatar
     }
 
-    // Also update currentUser for consistency
-    currentUser.name = editForm.name.trim()
-    currentUser.section = editForm.section.trim()
-    currentUser.avatar = editForm.avatar
+    student.name = updates.name
+    student.section = updates.section
+    student.avatar = updates.avatar
 
-    console.log('Profile saved successfully:', {
-      name: student.name,
-      section: student.section,
-      avatar: student.avatar
-    })
+    currentUser.name = updates.name
+    currentUser.section = updates.section
+    currentUser.avatar = updates.avatar
+
+    const user = LocalStorage.getItem('currentUser')
+    if (user) {
+      Object.assign(user, updates)
+      LocalStorage.set('currentUser', user)
+      updateStudentInStorage(user)
+    }
 
   } catch (error) {
     console.error('Error saving profile:', error)
   } finally {
-    // Close modal after a short delay
     setTimeout(() => {
       editProfileModal.value = false
       saving.value = false
-      resetEditForm()
+      editForm.name = ''
+      editForm.section = ''
+      editForm.avatar = ''
     }, 300)
   }
 }
 
-// Function to update student in storage
-const updateStudentInStorage = (updatedStudent) => {
-  try {
-    // Get all students from storage
-    const students = LocalStorage.getItem('students') || []
-    const studentIndex = students.findIndex(s => s.studentId === updatedStudent.studentId)
-
-    if (studentIndex !== -1) {
-      // Update the student in the students array
-      students[studentIndex] = {
-        ...students[studentIndex],
-        name: updatedStudent.name,
-        section: updatedStudent.section,
-        avatar: updatedStudent.avatar
-      }
-      LocalStorage.set('students', students)
-      console.log('Updated student in students array:', students[studentIndex])
-    } else {
-      // If student doesn't exist in students array, add them
-      students.push({
-        studentId: updatedStudent.studentId,
-        name: updatedStudent.name,
-        section: updatedStudent.section,
-        avatar: updatedStudent.avatar,
-        progress: updatedStudent.progress || {},
-        chapterTest: updatedStudent.chapterTest || { correct: 0, wrong: 0 }
-      })
-      LocalStorage.set('students', students)
-      console.log('Added new student to students array')
-    }
-  } catch (error) {
-    console.error('Error updating student:', error)
-  }
-}
-
+// Navigation functions
 const goToBookmarks = () => router.push({ name: 'bookmark-page' })
 const logout = () => {
   LocalStorage.remove('currentUser')
@@ -660,101 +671,110 @@ const logout = () => {
 }
 const goToUnit = (unit) => router.push(unit.route)
 const goToQuizStats = () => router.push({ name: 'quiz-stats' })
-const goToChapterTestStats = () => router.push({ name: 'chapter-test-stats' })
 const toggleUnitDetails = (unit) => {
   expandedUnit.value = expandedUnit.value === unit.id ? null : unit.id
 }
 
-const UNIT_LESSON_IDS = {
-  1: Array.from({ length: 27 }, (_, i) => i + 1),
-  2: Array.from({ length: 22 }, (_, i) => i + 28),
-  3: Array.from({ length: 21 }, (_, i) => i + 50),
-  4: Array.from({ length: 22 }, (_, i) => i + 71)
-}
+// Initialize data
+const initializeData = (userData) => {
+  const userProgress = userData.progress || {}
 
-const chartData = ref({
-  labels: [],
-  datasets: [
+  // Calculate completed lessons once
+  const allLessonIds = Object.keys(LESSON_TITLES).map(Number)
+  const completedLessons = allLessonIds.filter(id => userProgress[id]?.completed).length
+
+  progress.completed = completedLessons
+  progress.overall = Math.round((completedLessons / TOTAL_LESSONS) * 100)
+
+  // Build units array with pre-calculated progress
+  units.value = [
     {
-      label: 'Unit Progress (%)',
-      backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726', '#AB47BC'],
-      data: []
+      id: 1,
+      name: 'UNIT 1',
+      description: 'Science of Materials',
+      icon: 'icons/scientist.gif',
+      bgColor: '#42A5F5',
+      locked: false,
+      progress: calculateUnitProgress(1, userProgress),
+      route: 'unit-1'
+    },
+    {
+      id: 2,
+      name: 'UNIT 2',
+      description: 'Life Science',
+      icon: 'icons/petri-dish.gif',
+      bgColor: '#66BB6A',
+      locked: false,
+      progress: calculateUnitProgress(2, userProgress),
+      route: 'unit-2'
+    },
+    {
+      id: 3,
+      name: 'UNIT 3',
+      description: 'Force, Motion, and Energy',
+      icon: 'icons/boot-with-lightning.gif',
+      bgColor: '#FFA726',
+      locked: false,
+      progress: calculateUnitProgress(3, userProgress),
+      route: 'unit-3'
+    },
+    {
+      id: 4,
+      name: 'UNIT 4',
+      description: 'Earth and Space Science',
+      icon: 'icons/global.gif',
+      bgColor: '#AB47BC',
+      locked: false,
+      progress: calculateUnitProgress(4, userProgress),
+      route: 'unit-4'
     }
   ]
-})
 
-const chartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      display: false
-    }
-  }
-}
-
-const pieData = ref({
-  labels: ['Completed', 'Remaining'],
-  datasets: [
-    {
-      backgroundColor: ['#4CAF50', '#E0E0E0'],
-      data: [0, 0]
-    }
-  ]
-})
-
-const pieOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      position: 'bottom'
-    }
-  }
+  // Update chart data
+  chartData.value.labels = units.value.map(u => u.name)
+  chartData.value.datasets[0].data = units.value.map(u => u.progress)
+  pieData.value.datasets[0].data = [completedLessons, TOTAL_LESSONS - completedLessons]
 }
 
 onMounted(() => {
-  const url = new URL(window.location.href);
+  const url = new URL(window.location.href)
 
-  // Force reload if not yet reloaded
+  // Force reload if not yet reloaded (keeping your necessary reload)
   if (!url.searchParams.has('_reloaded')) {
-    url.searchParams.set('_reloaded', '1');
-    window.location.replace(url.toString());
-    return;
+    url.searchParams.set('_reloaded', '1')
+    window.location.replace(url.toString())
+    return
   }
 
-  // Clean up the flag after reload so it can reload again next time
+  // Clean up the flag
   if (url.searchParams.has('_reloaded')) {
-    url.searchParams.delete('_reloaded');
-    window.history.replaceState({}, document.title, url.pathname + url.hash);
+    url.searchParams.delete('_reloaded')
+    window.history.replaceState({}, document.title, url.pathname + url.hash)
   }
 
-  const user = LocalStorage.getItem('currentUser');
+  // Get user data - single localStorage read
+  const user = LocalStorage.getItem('currentUser')
   if (!user) {
-    router.push({ name: 'login-page' });
-    return;
+    router.push({ name: 'login-page' })
+    return
   }
 
-  // Get the student from the students array to ensure we have the latest data
-  const students = LocalStorage.getItem('students') || [];
-  const studentFromStorage = students.find(s => s.studentId === user.studentId);
+  // Get student from storage - single read
+  const students = LocalStorage.getItem('students') || []
+  const studentFromStorage = students.find(s => s.studentId === user.studentId)
+  const finalStudent = studentFromStorage || user
 
-  // Use data from students array if available, otherwise from currentUser
-  const finalStudent = studentFromStorage || user;
-
-  // Update currentUser with the latest data from storage
+  // Update all state at once
   Object.assign(currentUser, finalStudent)
 
-  // Update student reactive object with data from students array
   student.name = finalStudent.name
   student.section = finalStudent.section
   student.avatar = finalStudent.avatar || ''
   student.id = finalStudent.studentId
   student.chapterTest = finalStudent.chapterTest || { correct: 0, wrong: 0 }
 
-  // Also ensure currentUser in localStorage has the latest data
+  // Sync currentUser in localStorage if needed
   if (studentFromStorage) {
-    // Sync currentUser with the data from students array
     LocalStorage.set('currentUser', {
       ...user,
       name: studentFromStorage.name,
@@ -763,77 +783,10 @@ onMounted(() => {
     })
   }
 
-  // Calculate progress based on total 92 lessons
-  const allLessons = Object.values(finalStudent.progress || {})
-  const completedLessons = allLessons.filter(l => l.completed).length
+  // Initialize all data
+  initializeData(finalStudent)
 
-  progress.completed = completedLessons
-  // Fix: Calculate overall progress based on total 92 lessons
-  progress.overall = TOTAL_LESSONS ? Math.round((completedLessons / TOTAL_LESSONS) * 100) : 0
-
-  units.value = [
-    {
-      id: 1,
-      name: 'UNIT 1',
-      description: 'Science of Materials',
-      icon: 'icons/scientist.gif',
-      bgColor: '#42A5F5', // blue
-      locked: false,
-      progress: Math.round(
-        UNIT_LESSON_IDS[1].filter(id => (finalStudent.progress || {})[id]?.completed).length /
-        UNIT_LESSON_IDS[1].length * 100
-      ),
-      route: 'unit-1'
-    },
-    {
-      id: 2,
-      name: 'UNIT 2',
-      description: 'Life Science',
-      icon: 'icons/petri-dish.gif',
-      bgColor: '#66BB6A', // green
-      locked: false,
-      progress: Math.round(
-        UNIT_LESSON_IDS[2].filter(id => (finalStudent.progress || {})[id]?.completed).length /
-        UNIT_LESSON_IDS[2].length * 100
-      ),
-      route: 'unit-2'
-    },
-    {
-      id: 3,
-      name: 'UNIT 3',
-      description: 'Force, Motion, and Energy',
-      icon: 'icons/boot-with-lightning.gif',
-      bgColor: '#FFA726', // orange
-      locked: false,
-      progress: Math.round(
-        UNIT_LESSON_IDS[3].filter(id => (finalStudent.progress || {})[id]?.completed).length /
-        UNIT_LESSON_IDS[3].length * 100
-      ),
-      route: 'unit-3'
-    },
-    {
-      id: 4,
-      name: 'UNIT 4',
-      description: 'Earth and Space Science',
-      icon: 'icons/global.gif',
-      bgColor: '#AB47BC', // purple
-      locked: false,
-      progress: Math.round(
-        UNIT_LESSON_IDS[4].filter(id => (finalStudent.progress || {})[id]?.completed).length /
-        UNIT_LESSON_IDS[4].length * 100
-      ),
-      route: 'unit-4'
-    }
-  ]
-
-  // Update bar chart
-  chartData.value.labels = units.value.map(u => u.name)
-  chartData.value.datasets[0].data = units.value.map(u => u.progress)
-
-  // Update pie chart - based on total 92 lessons
-  pieData.value.datasets[0].data = [completedLessons, TOTAL_LESSONS - completedLessons]
-
-  //Audio
+  // Audio settings
   const settings = audioManager.getSettings()
   bgMusicEnabled.value = settings.bgMusicEnabled
   sfxEnabled.value = settings.sfxEnabled
@@ -842,11 +795,11 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .q-page-container {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #e3f2ff;
 }
 
 .dashboard-page {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #e3f2ff;
   min-height: 100vh;
   position: relative;
 }
@@ -932,25 +885,19 @@ onMounted(() => {
 .dashboard-content {
   max-width: 600px;
   margin: 0 auto;
-
-  /* Reserve space for nav bar + footer */
   padding-bottom: calc(24px + env(safe-area-inset-bottom));
 }
 
-/* Section titles with white text for better contrast */
 .section-title {
-  color: white !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #2896eb !important;
 }
-
 
 /* ============================== */
 /* EDIT PROFILE MODAL STYLES */
 /* ============================== */
 
-/* Unified card design for modal */
 .edit-profile-modal.unified-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: white;
   border: none;
   border-bottom: 6px solid #42A5F5;
   border-radius: 16px;
@@ -965,7 +912,6 @@ onMounted(() => {
   }
 }
 
-/* Current avatar preview with border on image */
 .current-avatar-preview-container {
   position: relative;
   width: 120px;
@@ -985,7 +931,6 @@ onMounted(() => {
   }
 }
 
-/* Unified input styling */
 .unified-input {
   .q-field__control {
     border-radius: 8px;
@@ -1003,7 +948,6 @@ onMounted(() => {
   }
 }
 
-/* Avatar grid styling */
 .avatar-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1067,7 +1011,6 @@ onMounted(() => {
   z-index: 2;
 }
 
-/* Unified button styling */
 .unified-btn {
   border-radius: 8px;
   font-weight: 600;
@@ -1085,7 +1028,6 @@ onMounted(() => {
 /* UNIFIED CARD DESIGN SYSTEM */
 /* ============================== */
 
-/* Base card styling for all interactive cards */
 .quiz-statistics-card,
 .chart-card,
 .unit-progress-card,
@@ -1096,68 +1038,32 @@ onMounted(() => {
   backdrop-filter: blur(10px);
   border: none;
   border-radius: 16px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   overflow: hidden;
-
-  &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-  }
 }
 
-/* Individual card border colors - BOTTOM BORDER STYLING */
 .quiz-statistics-card {
-  border-bottom: 6px solid #2196F3;
-
-  &:hover {
-    border-bottom-width: 8px;
-  }
+  border-bottom: 6px solid #42A5F5;
 }
 
 .chart-card {
-  border-bottom: 6px solid #9C27B0;
-
-  &:hover {
-    border-bottom-width: 8px;
-  }
+  border-bottom: 6px solid #42A5F5;
 }
 
 .unit-progress-card {
   border-bottom: 6px solid #42A5F5;
-
-  &:hover {
-    border-bottom-width: 8px;
-  }
-}
-
-.chapter-test-summary-card {
-  border-bottom: 6px solid #4CAF50;
-
-  &:hover {
-    border-bottom-width: 8px;
-  }
 }
 
 .overall-progress-card {
   background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
   border-bottom: 6px solid #E65100;
-
-  &:hover {
-    border-bottom-width: 8px;
-  }
 }
 
 .unit-card {
-  border-bottom: 6px solid #9575CD;
-
-  &:hover {
-    border-bottom-width: 8px;
-  }
+  border-bottom: 6px solid #42A5F5;
 }
 
-/* Card title and subtitle colors */
 .card-title {
   color: #1a237e !important;
 }
@@ -1170,7 +1076,6 @@ onMounted(() => {
   color: #1a237e !important;
 }
 
-/* Chapter test summary - ensure horizontal alignment on all screens */
 .chapter-test-stats {
   flex-wrap: nowrap !important;
 
@@ -1180,7 +1085,6 @@ onMounted(() => {
   }
 }
 
-/* Plain progress stats styling */
 .plain-progress-stats {
   padding: 4px 0 0 0;
 
@@ -1222,7 +1126,6 @@ onMounted(() => {
   }
 }
 
-/* Force horizontal layout for all cards with icon-text-arrow structure */
 .quiz-statistics-card .row.items-center.justify-between,
 .unit-card .row.items-center.justify-between,
 .chapter-test-summary-card .row.items-center.justify-between,
@@ -1239,7 +1142,6 @@ onMounted(() => {
   min-width: 0;
 }
 
-/* Ensure consistent padding */
 .quiz-statistics-card .q-card-section,
 .unit-card .q-card-section,
 .chart-card .q-card-section,
@@ -1249,7 +1151,6 @@ onMounted(() => {
   padding: 16px;
 }
 
-/* Consistent avatar styling */
 .quiz-statistics-card .q-avatar,
 .unit-card .q-avatar,
 .chart-card .q-avatar,
@@ -1260,7 +1161,6 @@ onMounted(() => {
   flex-shrink: 0;
 }
 
-/* Consistent text styling */
 .quiz-statistics-card .text-h6,
 .unit-card .unit-title,
 .chart-card .text-h6,
@@ -1283,26 +1183,6 @@ onMounted(() => {
   line-height: 1.4;
 }
 
-/* Arrow icon consistency */
-.quiz-statistics-card img[src*="arrow-right.png"],
-.unit-card img[src*="arrow.png"],
-.chart-card img[src*="arrow-right.png"],
-.unit-progress-card img[src*="arrow-right.png"],
-.chapter-test-summary-card img[src*="arrow-right.png"] {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-  flex-shrink: 0;
-}
-
-.quiz-statistics-card:hover img[src*="arrow-right.png"],
-.unit-card:hover img[src*="arrow.png"],
-.chapter-test-summary-card:hover img[src*="arrow-right.png"] {
-  transform: translateX(4px);
-}
-
-/* Progress bars */
 .overall-progress-card .q-linear-progress,
 .unit-card .q-linear-progress,
 .unit-progress-card .q-linear-progress {
@@ -1311,7 +1191,6 @@ onMounted(() => {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Chapter test summary specific styling */
 .color-square {
   width: 20px;
   height: 20px;
@@ -1469,7 +1348,6 @@ onMounted(() => {
   color: #5f6368;
 }
 
-/* Avatar grid responsive adjustments */
 @media (max-width: 480px) {
   .avatar-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1512,7 +1390,6 @@ onMounted(() => {
     }
   }
 
-  /* Card adjustments for mobile */
   .quiz-statistics-card .q-avatar,
   .unit-card .q-avatar,
   .chart-card .q-avatar,
@@ -1542,7 +1419,6 @@ onMounted(() => {
     font-size: 12px;
   }
 
-  /* Chapter test stats on mobile */
   .chapter-test-stats {
     justify-content: space-between !important;
 
@@ -1561,7 +1437,6 @@ onMounted(() => {
     }
   }
 
-  /* Lesson list on mobile */
   .lesson-list {
     max-height: 160px;
     gap: 6px;
@@ -1577,7 +1452,6 @@ onMounted(() => {
     height: 16px;
   }
 
-  /* Adjust padding on mobile */
   .quiz-statistics-card .q-card-section,
   .unit-card .q-card-section,
   .chart-card .q-card-section,

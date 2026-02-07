@@ -101,37 +101,31 @@ export default {
     <!-- Card 1 -->
     <div class="header">
       <div>
-        <div class="title">Lesson 3: Earthquake Preparedness</div>
+        <div class="title">Earthquake Preparedness</div>
       </div>
     </div>
-
-      
       <div class="video-container">
           <video controls width="100%">
             <source src="assets/videos/chapter 10/lv_0_20260116220654.mp4" controls alt="video" type="video/mp4">
           </video>
-          <div class="caption">Be prepared for an earthquake</div>
-        </div>
-  </div>
-  `,
+    
 
-      `
-  <div>
-    <!-- Card 2 -->
-    <div class="header">
+           <div class="header">
       <div>
-        <div class="title">What to Do Before an Earthquake</div>
+        <div class="title" style="margin-top: 40px; margin-bottom: 10px;">What to Do Before an Earthquake</div>
       </div>
     </div>
-
-    <p>Preparation is key to earthquake safety. Here are important steps to take before an earthquake occurs:<p>
-
 <p>&bull; Familiarize yourself with the earthquake hazards in your community.</p>
 <p>&bull; Know where the exit routes, communication facilities, and evacuation centers are located in your community.</p>
 <p>&bull; Know where the fire extinguishers and first aid kits are kept in your school and at home. Learn how to use them.</p>
-
+<p>&bull; Ask your parents to strap or bolt heavy furniture to the wall.</p>
+<p>&bull; Help your parents check the stability of hanging objects, such as ceiling fans.</p>
 
   </div>
+        </div>
+  </div>
+ 
+   
   `,
 
       `
@@ -142,22 +136,17 @@ export default {
         <div class="title">What to Do Before an Earthquake</div>
       </div>
     </div>
-
-    <p>Preparation is key to earthquake safety. Here are important steps to take before an earthquake occurs:<p>
-
-<p>&bull; Ask your parents to strap or bolt heavy furniture to the wall.</p>
-<p>&bull; Help your parents check the stability of hanging objects, such as ceiling fans.</p>
 <p>&bull; Remind your family members to store and secure fragile items, harmful chemicals, and flammable materials in the lowermost shelves.</p>
 <p>&bull; Help your family put together an emergency supply kit with a first aid kit, easy-to-open canned goods, water, clothing, a blanket, battery-operated radio, flashlights, and extra batteries (figure 10-5).</p>
-<p>&bull; Participate in earthquake drills.</p>
-<p>&bull; Store important documents in a sealed plastic envelope or have a digital copy stored somewhere else.</p>
-<p>&bull; Have a list of emergency contact numbers in your mobile phone, or written down in case your device is lost, destroyed, or malfunctioning.</p>
 
 <div class="illustration">
-      <img src="assets/img/chapter 10/figure 10-5.png" alt="Placeholder">
+      <img src="assets/img/chapter 10/figure 10-5.png" alt="Placeholder" style="height: 180px;">
       <div class="caption">Figure 10-5. Sample contents of an emergency supply kit</div>
     </div>
 
+<p>&bull; Participate in earthquake drills.</p>
+<p>&bull; Store important documents in a sealed plastic envelope or have a digital copy stored somewhere else.</p>
+<p>&bull; Have a list of emergency contact numbers in your mobile phone, or written down in case your device is lost, destroyed, or malfunctioning.</p>
    
   </div>
   `,
@@ -235,12 +224,12 @@ export default {
       `
   <div>
     <!-- Card 7 -->
-<div class="info-card">
+<div class="info-card" style="margin-top: 10vh; height: 400px;">
       <div class="info-title">MINI LAB 10-5</div>
       <div class="info-content">
         <div class="info-text">
-          <p>1. Form a group of five members. Discuss creative ways of presenting preparedness during and after an earthquake. You should be able to demonstrate what should be done before, during, and after an earthquake in school, at home, or near coastal area settings.</p>
-          <p>2. Write an essay in Filipino about your role in disaster preparedness during earthquakes.</p>
+          <p style="font-size: 18px;">1. Form a group of five members. Discuss creative ways of presenting preparedness during and after an earthquake. You should be able to demonstrate what should be done before, during, and after an earthquake in school, at home, or near coastal area settings.</p>
+          <p style="font-size: 18px;">2. Write an essay in Filipino about your role in disaster preparedness during earthquakes.</p>
         </div>
       </div>
     </div>
@@ -256,7 +245,8 @@ export default {
 </div>
       </div>
 <p>The Philippines is prone to earthquakes, and many of its communities are located near bodies of water. These communities must be aware of tsunami warnings after strong offshore earthquakes.</p>
-<div class="caption" style="color: #8000ff; font-weight: bold;">Figure 10-3: Distribution of active faults in the Philippines</div>
+
+<div style="color: #8000ff; font-weight: bold; font-size: 20px;">Table 10-3: Recommended Course of Action for Tsunami</div>
 
 <table style="width:100%; border-collapse:collapse; font-size:14px;">
     <thead>
@@ -300,10 +290,8 @@ export default {
         <div class="title">Tsunami Alert Levels
 </div>
       </div>
-<div class="caption" style="color: #8000ff; font-weight: bold;">Figure 10-3: Distribution of active faults in the Philippines</div>
-
 <div style="overflow-x:auto;">
-  <table style="width:100%; border-collapse:collapse; min-width:760px; font-size:14px;">
+  <table style="width:100%; border-collapse:collapse; min-width:760px; font-size:16px;">
     <thead>
       <tr>
         <th style="padding:8px; background:#8000ff; color:#fff; text-align:left; border:1px solid #8000ff;">Level</th>
@@ -345,12 +333,6 @@ export default {
       `
   <div>
     <!-- Card 10 -->
-    <div class="header">
-      <div>
-        <div class="title">Table 10-2. Richter Magnitude Scale</div>
-      </div>
-    </div>
-
 <div class="info-card">
       <div class="info-title">MINI TEST 10-5</div>
       <div class="info-content">

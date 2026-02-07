@@ -20,7 +20,8 @@
 .night-sky {
     position: relative;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1c0082, #250dad, #4d55ca, #b57edc);
+    /* background: linear-gradient(135deg, #1c0082, #250dad, #4d55ca, #b57edc); */
+    background: white;
     overflow: hidden;
 }
 

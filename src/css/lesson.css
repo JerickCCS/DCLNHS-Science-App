@@ -27,8 +27,8 @@
 .q-header .q-btn {
     background: rgba(248, 248, 248, 0.986);
     border-radius: 10px;
-    transition: background 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2);
+    /* transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2); */
 }
 
 .q-header .q-btn:hover {
@@ -73,12 +73,12 @@
     right: 0;
     bottom: 70px;
     margin: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    border-bottom: #a7a7a7 5px solid;
+    /* background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px; */
+    /* border-bottom: #a7a7a7 5px solid; */
     overflow: hidden;
     z-index: 10;
-    box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.1); */
 
     /* animation: viewer-zoom 3s ease-in-out infinite;
     transform-origin: center; */
@@ -102,7 +102,7 @@
     -webkit-overflow-scrolling: touch;
     padding: 14px;
     box-sizing: border-box;
-    background: linear-gradient(180deg, #ffffff 0%, #f1f5ff 100%);
+    /* background: linear-gradient(180deg, #ffffff 0%, #f1f5ff 100%); */
 }
 
 /* ============================
@@ -312,8 +312,6 @@
     width: 100%;
     max-width: 600px;
     height: auto;
-    border-radius: 12px;
-    box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.15);
 }
 
 /* TOP ILLUSTRATION IMAGE (different from card bg) */
@@ -428,7 +426,6 @@
     max-width: 600px;
     height: auto;
     border-radius: 12px;
-    border: solid #0f0db3;
     border-width: 1px 1px 5px 1px;
     box-shadow: 0 8px 0 0 rgba(15, 13, 179, 0.4);
 }

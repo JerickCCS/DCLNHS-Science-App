@@ -107,11 +107,11 @@ export default {
 
     <div class="illustration">
       <img src="assets/img/chapter 10/earthquake.gif" alt="Placeholder">
+      </div>
       <p>Earthquakes are sudden, rapid shaking of the ground caused by the breaking and shifting of rock beneath the Earth's surface. They can happen anywhere, but occur most frequently along fault lines.</p>
       <div class="fun-fact-card">
         <span class="highlight">Fun Fact:</span> Our country is located in an earthquake-prone region. Did you know that earthquakes are recorded in the Philippines every day? Fortunately, most of them are too weak to be felt or noticed.
       </div>
-    </div>
   </div>
   `,
 
@@ -233,13 +233,6 @@ export default {
   <div>
     <!-- Card 8 -->
     <p>In a strike-slip fault, the blocks move side to side, sliding past one another (figure 10-2C). The strike is where the fault cuts across a horizontal surface. In a sinistral strike-slip fault, a fault block moves to the left with respect to the opposite block. In a dextral strike-slip fault, the movement is to the right.</p>
-    <div class="model-viewer-block">
-        <model-viewer src="models/strike_slip.glb" alt="Strike-slip fault" camera-controls auto-rotate interaction-prompt="auto" loading="eager"></model-viewer>
-        <a href="/html/strike_slip.html" class="eye-icon">
-          <img src="assets/icons/eye.png" alt="View 3D Model" />
-        </a>
-        <div class="caption">Strike-slip Fault Model</div>
-      </div>
     <div class="fun-fact-card">
       <span class="highlight">Science Tips:</span> Hanging wall and footwall are mining terms that have been adopted in geology. In mining, a hanging wall is the mass of rock overlying mineral deposits, while a footwall is the rock below the mass. These terms are used by geologists to refer to the block of rock above the fault plane (hanging wall) and the block below (footwall).
     </div>
@@ -319,20 +312,13 @@ export default {
     </div>
 
     <div class="illustration">
-      <img src="assets/img/chapter 10/Normal Fault-12.png" alt="Placeholder">
-    </div>
+      <img src="assets/img/chapter 10/Normal_Fault (1).gif" alt="Placeholder">
+      <div class="caption">Normal Fault Animation</div>
 
     <p>Normal faults are caused by rocks being stretched. They are formed as a block of rock falls after being fractured. Sudden movement along these faults causes earthquakes as the movement releases stored up energy. The earthquake focus is the place where the rocks break.</p>
   </div>
   `,
 
-      `
-      <div class="illustration">
-      <img src="assets/img/chapter 10/Normal_Fault (1).gif" alt="Placeholder">
-      <div class="caption">Normal Fault Animation</div>
-    </div>
-      </div>
- `,
       `
   <div>
     <!-- Card 13 -->

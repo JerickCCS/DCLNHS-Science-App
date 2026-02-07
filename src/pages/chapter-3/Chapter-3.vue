@@ -270,7 +270,7 @@ export default {
     top: 50% !important;
     transform: translateY(-50%) !important;
     z-index: 3 !important;
-    background: rgba(0, 0, 0, 0.082);
+    background: #007cec;
     border-radius: 10px;
     transition: background 0.2s ease, transform 0.2s ease;
 }

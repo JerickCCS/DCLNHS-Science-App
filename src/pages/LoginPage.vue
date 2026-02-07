@@ -1,18 +1,10 @@
 <template>
     <div class="login-page">
-        <!-- Background Elements -->
-        <div class="background-blobs">
-            <div class="blob blob-1"></div>
-            <div class="blob blob-2"></div>
-            <div class="blob blob-3"></div>
-        </div>
-
         <div class="login-card">
             <!-- Header with Logo -->
             <div class="login-header">
                 <div class="logo-container">
-                    <img src="/logo/logo.png" alt="App Logo" class="app-logo" />
-                    <div class="logo-glow"></div>
+                    <img src="/logo/welcome.png" alt="App Logo" class="app-logo" />
                 </div>
                 <div class="header-text">
                     <h1 class="title">Welcome Students!</h1>
@@ -22,101 +14,101 @@
 
             <!-- Profiles List -->
             <div v-if="students.length > 0" class="profiles-container">
-                <!-- Updated Profiles Header with modal design -->
-                <div class="profiles-header-modal">
+                <div class="profiles-header">
                     <div class="profiles-header-card">
                         <span class="profiles-title">Saved Profiles</span>
                         <span class="profiles-count">{{ students.length }}</span>
                     </div>
                 </div>
 
-                <div class="profiles-grid">
-                    <div v-for="student in students" :key="student.name + student.section" class="profile-card-modal"
-                        @click="loginWithProfile(student)">
-                        <div class="profile-avatar-modal">
-                            <img v-if="student.avatar" :src="student.avatar" class="profile-avatar-image"
-                                :alt="student.name" />
-                            <span v-else class="profile-avatar-text">{{ getInitials(student.name) }}</span>
-                        </div>
-                        <div class="profile-info-modal">
-                            <div class="profile-name-modal">{{ student.name }}</div>
-                            <div class="profile-section-modal">
-                                Section : {{ student.section }}
+                <div class="profiles-grid" ref="profilesGrid" @scroll="handleScroll" @touchstart="handleGridTouchStart">
+                    <div v-for="student in students" :key="student.studentId" class="profile-card"
+                        :class="{ 'profile-card-deleting': deletingStudent === student.studentId }"
+                        @click="handleProfileClick(student)" @mousedown="handleMouseDown(student.studentId)"
+                        @mouseup="handleMouseUp" @mouseleave="handleMouseUp"
+                        @touchstart="handleTouchStart(student.studentId, $event)" @touchend="handleTouchEnd"
+                        @touchcancel="handleTouchEnd">
+
+                        <div class="profile-content">
+                            <div class="profile-avatar">
+                                <img v-if="student.avatar" :src="student.avatar" class="profile-avatar-image"
+                                    :alt="student.name" />
+                                <span v-else class="profile-avatar-text">{{ getInitials(student.name) }}</span>
                             </div>
+                            <div class="profile-info">
+                                <div class="profile-name">{{ student.name }}</div>
+                                <div class="profile-section">Section : {{ student.section }}</div>
+                            </div>
+                            <q-icon name="chevron_right" color="black" size="24px" class="arrow-icon" />
                         </div>
-                        <div class="profile-action-modal">
-                            <div class="arrow-icon-modal">→</div>
+
+                        <!-- Delete Overlay -->
+                        <div v-if="deletingStudent === student.studentId" class="delete-overlay"
+                            @click.stop="confirmDelete(student)">
+                            <q-icon name="delete" color="white" size="32px" />
+                            <span class="delete-text">Delete Profile</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- No Profiles State with modal design -->
-            <div v-else class="empty-state-modal">
-                <div class="empty-icon-modal">👤</div>
-                <h3 class="empty-title-modal">No Profiles Yet</h3>
-                <p class="empty-description-modal">Create your first profile to get started</p>
+            <!-- Empty State -->
+            <div v-else class="empty-state">
+                <div class="empty-icon">👤</div>
+                <h3 class="empty-title">No Profiles Yet</h3>
+                <p class="empty-description">Create your first profile to get started</p>
             </div>
 
-            <!-- Fixed Add Profile Button at Bottom -->
-            <div class="fixed-actions-container">
-                <button class="add-profile-btn-modal" @click="showAddProfile = true">
-                    <span class="btn-icon-modal">+</span>
-                    <span class="btn-text-modal">Add New Profile</span>
+            <!-- Fixed Add Profile Button -->
+            <div class="fixed-actions">
+                <button class="add-profile-btn" @click="showAddProfile = true">
+                    <span class="btn-icon">+</span>
+                    <span class="btn-text">Add New Profile</span>
                 </button>
             </div>
         </div>
 
         <!-- Add Profile Modal -->
         <q-dialog v-model="showAddProfile" persistent>
-            <q-card class="modal-card q-pa-none">
-                <!-- Red Title Card (Properly Overlapping) -->
-                <div class="title-card-overlay row flex-center">
-                    <div class="title-card bg-negative text-white q-px-xl q-py-sm text-center">
-                        Create New Profile
-                    </div>
+            <q-card class="modal-card">
+                <div class="title-card-overlay">
+                    <div class="title-card">Create New Profile</div>
                 </div>
 
-                <!-- Modal Content -->
-                <q-card-section class="modal-content q-pt-xl q-pb-md q-px-lg">
-                    <!-- Instruction Text -->
+                <q-card-section class="modal-content">
                     <p class="text-center text-white q-mb-lg q-mt-none">
                         Add your details to create a new profile
                     </p>
 
-                    <!-- Form -->
                     <div class="q-gutter-y-lg">
-                        <!-- Name Input -->
                         <div>
                             <div class="input-label text-white q-mb-xs">Name</div>
                             <q-input v-model="newName" outlined dense placeholder="Enter your full name"
-                                bg-color="dark-blue-input" class="custom-input full-width">
+                                class="custom-input">
                                 <template v-slot:prepend>
                                     <q-icon name="person" color="white" />
                                 </template>
                             </q-input>
                         </div>
 
-                        <!-- Section Input -->
                         <div>
                             <div class="input-label text-white q-mb-xs">Section</div>
                             <q-input v-model="newSection" outlined dense placeholder="Enter your section"
-                                bg-color="dark-blue-input" class="custom-input full-width">
+                                class="custom-input">
                                 <template v-slot:prepend>
                                     <q-icon name="school" color="white" />
                                 </template>
                             </q-input>
                         </div>
 
-                        <!-- Avatar Selection -->
                         <div>
                             <div class="input-label text-white q-mb-xs">Choose Avatar</div>
-                            <div class="avatar-selection-grid">
-                                <div v-for="(avatar, index) in avatars" :key="index" class="avatar-selection-item"
-                                    :class="{ 'avatar-selection-selected': selectedAvatar === avatar }"
+                            <div class="avatar-grid">
+                                <div v-for="(avatar, index) in avatars" :key="index" class="avatar-item"
+                                    :class="{ 'avatar-selected': selectedAvatar === avatar }"
                                     @click="selectAvatar(avatar)">
-                                    <img :src="avatar" class="avatar-selection-image" />
-                                    <div v-if="selectedAvatar === avatar" class="avatar-selection-check">
+                                    <img :src="avatar" class="avatar-image" />
+                                    <div v-if="selectedAvatar === avatar" class="avatar-check">
                                         <q-icon name="check" color="white" size="20px" />
                                     </div>
                                 </div>
@@ -125,8 +117,7 @@
                     </div>
                 </q-card-section>
 
-                <!-- Modal Actions -->
-                <q-card-actions class="modal-actions q-px-lg q-pb-lg q-pt-none">
+                <q-card-actions class="modal-actions">
                     <div class="row full-width q-col-gutter-sm">
                         <div class="col-6">
                             <q-btn label="Cancel" flat class="cancel-btn full-width" @click="showAddProfile = false"
@@ -143,7 +134,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
 import { LocalStorage } from 'quasar'
@@ -157,8 +148,11 @@ const showAddProfile = ref(false)
 const newName = ref('')
 const newSection = ref('')
 const selectedAvatar = ref('')
+const deletingStudent = ref(null)
+const profilesGrid = ref(null)
+let longPressTimer = null
+const longPressDuration = 500 // 500ms for long press
 
-// Avatar options - matching the index page
 const avatars = [
     '/assets/avatars/1.jpg',
     '/assets/avatars/2.jpg',
@@ -173,20 +167,24 @@ const avatars = [
 
 onMounted(() => {
     loadStudents()
-    // Set default avatar
     selectedAvatar.value = avatars[0]
+    // Add global click listener to detect clicks outside
+    document.addEventListener('click', handleOutsideClick)
 })
 
-// Load students from localStorage
+onUnmounted(() => {
+    // Clean up event listener
+    document.removeEventListener('click', handleOutsideClick)
+})
+
 const loadStudents = () => {
     try {
         const storedStudents = LocalStorage.getItem('students') || []
-        // Ensure each student has an avatar property
         students.value = storedStudents.map(student => ({
             studentId: student.studentId,
             name: student.name,
             section: student.section,
-            avatar: student.avatar || avatars[0], // Fallback to first avatar
+            avatar: student.avatar || avatars[0],
             progress: student.progress || {},
             chapterTest: student.chapterTest || { correct: 0, wrong: 0 }
         }))
@@ -196,13 +194,9 @@ const loadStudents = () => {
     }
 }
 
-// Create a new student
 const createStudent = (name, section, avatar = '') => {
     try {
-        // Get existing students
         const studentsList = LocalStorage.getItem('students') || []
-
-        // Check if student already exists
         const existingStudent = studentsList.find(s =>
             s.name.toLowerCase() === name.toLowerCase() &&
             s.section.toLowerCase() === section.toLowerCase()
@@ -212,27 +206,18 @@ const createStudent = (name, section, avatar = '') => {
             return { error: 'Student already exists' }
         }
 
-        // Create new student with unique ID
-        const studentId = generateStudentId()
         const newStudent = {
-            studentId: studentId,
+            studentId: 'STU-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             name: name.trim(),
             section: section.trim(),
-            avatar: avatar || avatars[0], // Store the selected avatar
-            progress: {}, // Initialize empty progress
-            chapterTest: {
-                correct: 0,
-                wrong: 0
-            },
+            avatar: avatar || avatars[0],
+            progress: {},
+            chapterTest: { correct: 0, wrong: 0 },
             createdAt: new Date().toISOString()
         }
 
-        // Add to students array
         studentsList.push(newStudent)
-
-        // Save to localStorage
         LocalStorage.set('students', studentsList)
-
         return newStudent
     } catch (error) {
         console.error('Error creating student:', error)
@@ -240,28 +225,146 @@ const createStudent = (name, section, avatar = '') => {
     }
 }
 
-// Generate unique student ID
-const generateStudentId = () => {
-    return 'STU-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9)
+const deleteStudent = (studentId) => {
+    try {
+        const studentsList = LocalStorage.getItem('students') || []
+        const updatedList = studentsList.filter(s => s.studentId !== studentId)
+        LocalStorage.set('students', updatedList)
+        loadStudents()
+        return true
+    } catch (error) {
+        console.error('Error deleting student:', error)
+        return false
+    }
 }
 
-// Get initials for avatar fallback
 const getInitials = (name) => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase()
 }
 
-// Avatar selection
 const selectAvatar = (avatar) => {
     selectedAvatar.value = avatar
 }
 
-const loginWithProfile = (student) => {
-    // Ensure the student object has all required properties including avatar
-    const completeStudent = {
-        ...student,
-        avatar: student.avatar || avatars[0]
+// Cancel delete mode
+const cancelDeleteMode = () => {
+    deletingStudent.value = null
+}
+
+// Handle scroll - cancel delete mode when scrolling
+const handleScroll = () => {
+    if (deletingStudent.value) {
+        cancelDeleteMode()
     }
-    setCurrentUser(completeStudent)
+}
+
+// Handle touch on grid (outside cards)
+const handleGridTouchStart = (event) => {
+    // Check if the touch is on the grid itself (not on a card)
+    if (event.target.classList.contains('profiles-grid') && deletingStudent.value) {
+        cancelDeleteMode()
+    }
+}
+
+// Handle clicks outside the deleting card
+const handleOutsideClick = (event) => {
+    if (!deletingStudent.value) return
+
+    // Check if click is outside all profile cards
+    const clickedCard = event.target.closest('.profile-card')
+    const clickedDeleteOverlay = event.target.closest('.delete-overlay')
+
+    // If clicked outside cards or on a different card, cancel delete mode
+    if (!clickedCard || (clickedCard && !clickedDeleteOverlay &&
+        !clickedCard.querySelector('.delete-overlay'))) {
+        cancelDeleteMode()
+    }
+}
+
+// Handle mouse events for desktop
+const handleMouseDown = (studentId) => {
+    longPressTimer = setTimeout(() => {
+        deletingStudent.value = studentId
+    }, longPressDuration)
+}
+
+const handleMouseUp = () => {
+    if (longPressTimer) {
+        clearTimeout(longPressTimer)
+        longPressTimer = null
+    }
+}
+
+// Handle touch events for mobile
+const handleTouchStart = (studentId) => {
+    // Don't start long press if already in delete mode
+    if (deletingStudent.value && deletingStudent.value !== studentId) {
+        cancelDeleteMode()
+        return
+    }
+
+    longPressTimer = setTimeout(() => {
+        deletingStudent.value = studentId
+    }, longPressDuration)
+}
+
+const handleTouchEnd = () => {
+    if (longPressTimer) {
+        clearTimeout(longPressTimer)
+        longPressTimer = null
+    }
+}
+
+const handleProfileClick = (student) => {
+    // Only navigate if not in delete mode
+    if (!deletingStudent.value) {
+        loginWithProfile(student)
+    } else {
+        // Cancel delete mode
+        cancelDeleteMode()
+    }
+}
+
+const confirmDelete = (student) => {
+    $q.dialog({
+        title: 'Delete Profile',
+        message: `Are you sure you want to delete ${student.name}'s profile? This action cannot be undone.`,
+        persistent: true,
+        ok: {
+            label: 'Delete',
+            color: 'negative',
+            flat: false
+        },
+        cancel: {
+            label: 'Cancel',
+            color: 'primary',
+            flat: true
+        }
+    }).onOk(() => {
+        const success = deleteStudent(student.studentId)
+        if (success) {
+            $q.notify({
+                type: 'positive',
+                message: 'Profile deleted successfully',
+                position: 'top',
+                timeout: 2000
+            })
+        } else {
+            $q.notify({
+                type: 'negative',
+                message: 'Failed to delete profile',
+                position: 'top',
+                timeout: 2000
+            })
+        }
+        deletingStudent.value = null
+    }).onCancel(() => {
+        deletingStudent.value = null
+    })
+}
+
+const loginWithProfile = (student) => {
+    setCurrentUser({ ...student, avatar: student.avatar || avatars[0] })
     $router.push('/')
 }
 
@@ -276,11 +379,7 @@ const addProfile = () => {
         return
     }
 
-    // Ensure we have a valid avatar selected
-    const avatarToUse = selectedAvatar.value || avatars[0]
-
-    // Create student with avatar
-    const newStudent = createStudent(newName.value.trim(), newSection.value.trim(), avatarToUse)
+    const newStudent = createStudent(newName.value.trim(), newSection.value.trim(), selectedAvatar.value || avatars[0])
 
     if (newStudent.error) {
         $q.notify({
@@ -292,10 +391,7 @@ const addProfile = () => {
         return
     }
 
-    // Reload students list
     loadStudents()
-
-    // Set current user with the complete student data including avatar
     setCurrentUser(newStudent)
 
     $q.notify({
@@ -305,34 +401,26 @@ const addProfile = () => {
         timeout: 2000
     })
 
-    // Reset form
     newName.value = ''
     newSection.value = ''
     selectedAvatar.value = avatars[0]
     showAddProfile.value = false
-
-    // Navigate to dashboard
     $router.push('/')
 }
 </script>
 
 <style scoped>
-/* Global body fixes */
+/* Base Layout */
 :deep(body),
-:deep(html) {
+:deep(html),
+:deep(#q-app) {
     margin: 0;
     padding: 0;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    background: #8ce4d1;
+    /* background: #8ce4d1; */
     position: fixed;
-}
-
-:deep(#q-app) {
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
 }
 
 .login-page {
@@ -344,74 +432,50 @@ const addProfile = () => {
     position: fixed;
     top: 0;
     left: 0;
-    overflow: hidden;
     padding: 16px;
     box-sizing: border-box;
-    background: #8ce4d1;
+    /* background: #8ce4d1; */
 }
 
 .login-card {
     width: 100%;
     max-width: 480px;
     height: 100vh;
-    max-height: 100vh;
-    background: transparent;
-    overflow: hidden;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    position: relative;
-    /* Add padding-bottom to account for fixed button */
     padding-bottom: 90px;
+    box-sizing: border-box;
 }
 
-/* Fixed header section */
+/* Header */
 .login-header {
     text-align: center;
     flex-shrink: 0;
-    padding-top: 5vh;
-    padding-bottom: 2vh;
+    padding: 5vh 0 2vh;
 }
 
-/* Increased logo size */
 .logo-container {
-    position: relative;
-    width: min(220px, 45vw);
-    height: min(220px, 45vw);
-    margin: 0 auto;
+    margin: 0 auto 16px;
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
-/* Responsive logo - Made larger */
 .app-logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    z-index: 2;
-    position: relative;
+    max-width: min(280px, 60vw);
+    max-height: 280px;
     animation: slow-bounce 4s ease-in-out infinite;
-    max-width: 200px;
-    max-height: 200px;
 }
 
 @keyframes slow-bounce {
-    0% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
 
     50% {
         transform: translateY(-8px);
     }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-
-.header-text {
-    margin-top: -5px;
 }
 
 .title {
@@ -430,42 +494,46 @@ const addProfile = () => {
     color: #2d3748;
     font-weight: 600;
     margin-top: 2px;
-    line-height: 1.2;
 }
 
-/* Scrollable content area - FIXED OVERLAP */
-.profiles-container {
+/* Profiles Container */
+.profiles-container,
+.empty-state {
     flex: 1;
-    min-height: 0;
     overflow: hidden;
-    background: linear-gradient(145deg, #f5f5f5, #eef0f3) !important;
     border-radius: 16px;
     padding: 16px;
-    border: 2px solid #000000 !important;
-    box-shadow: 0 4px 0 #0d3660 !important;
+    border: 2px solid #000;
+    box-shadow: 0 4px 0 #0d3660;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 0;
-    /* Add padding at bottom for button */
-    padding-bottom: 80px;
 }
 
-/* MODAL-STYLE PROFILES HEADER */
-.profiles-header-modal {
-    position: relative;
-    margin-bottom: 8px;
+.profiles-container {
+    background: linear-gradient(145deg, #f5f5f5, #eef0f3);
+}
+
+.empty-state {
+    background: linear-gradient(145deg, #0d47a1, #1565c0);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 16px 100px;
+}
+
+/* Profiles Header */
+.profiles-header {
     flex-shrink: 0;
+    margin-bottom: 8px;
 }
 
 .profiles-header-card {
-    border: 2px solid #000000 !important;
-    border-radius: 12px !important;
-    background: #2138ba !important;
-    box-shadow: 0 4px 0 #354dd4 !important;
-    font-weight: bold !important;
-    text-align: center !important;
-    padding: 8px 16px !important;
+    border: 2px solid #000;
+    border-radius: 12px;
+    background: #2138ba;
+    box-shadow: 0 4px 0 #354dd4;
+    padding: 8px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -487,26 +555,20 @@ const addProfile = () => {
     border-radius: 12px;
     font-size: 0.85rem;
     font-weight: 700;
-    min-width: 24px;
-    text-align: center;
-    border: 1px solid #000000;
-    box-shadow: 0 2px 0 #000000;
+    border: 1px solid #000;
+    box-shadow: 0 2px 0 #000;
 }
 
-/* SCROLLABLE AREA */
+/* Profiles Grid */
 .profiles-grid {
     flex: 1;
     overflow-y: auto;
-    overflow-x: hidden;
-    min-height: 0;
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding-right: 4px;
-    padding-bottom: 0;
 }
 
-/* Custom scrollbar styling */
 .profiles-grid::-webkit-scrollbar {
     width: 4px;
 }
@@ -525,31 +587,95 @@ const addProfile = () => {
     background: rgba(0, 0, 0, 0.4);
 }
 
-/* MODAL-STYLE PROFILE CARDS */
-.profile-card-modal {
+/* Profile Card */
+.profile-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 2px solid #1f21a5;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 70px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.profile-content {
     display: flex;
     align-items: center;
     padding: 14px;
-    background: #ffffff !important;
-    border: 2px solid #1f21a5 !important;
-    border-radius: 12px !important;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-    min-height: 70px;
-    box-sizing: border-box;
+    width: 100%;
+    transition: filter 0.3s ease;
 }
 
-.profile-card-modal:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 0 #000000 !important;
-    background: #2088f8 !important;
+.profile-card:hover .profile-content {
+    background: #2088f8;
     color: white;
 }
 
-.profile-avatar-modal {
+.profile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 #000;
+}
+
+/* Delete Mode Styles */
+.profile-card-deleting {
+    pointer-events: auto;
+}
+
+.profile-card-deleting .profile-content {
+    filter: blur(3px);
+    opacity: 0.3;
+}
+
+.profile-card-deleting:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Delete Overlay */
+.delete-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: rgba(239, 68, 68, 0.95);
+    z-index: 10;
+    cursor: pointer;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.delete-text {
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.delete-overlay:hover {
+    background: rgba(220, 38, 38, 0.98);
+}
+
+.profile-avatar {
     width: 45px;
     height: 45px;
     border-radius: 10px;
@@ -557,18 +683,17 @@ const addProfile = () => {
     align-items: center;
     justify-content: center;
     margin-right: 12px;
-    flex-shrink: 0;
-    border: 2px solid #000000;
-    box-shadow: 0 2px 0 #000000;
+    border: 2px solid #000;
+    box-shadow: 0 2px 0 #000;
     overflow: hidden;
     background: linear-gradient(135deg, #4299e1, #3182ce);
+    flex-shrink: 0;
 }
 
 .profile-avatar-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
 }
 
 .profile-avatar-text {
@@ -577,14 +702,14 @@ const addProfile = () => {
     font-size: 1rem;
 }
 
-.profile-info-modal {
+.profile-info {
     flex: 1;
     min-width: 0;
 }
 
-.profile-name-modal {
+.profile-name {
     font-weight: 600;
-    color: rgb(0, 0, 0);
+    color: #000;
     margin-bottom: 4px;
     font-size: 0.95rem;
     white-space: nowrap;
@@ -592,97 +717,60 @@ const addProfile = () => {
     text-overflow: ellipsis;
 }
 
-.profile-section-modal {
-    color: #000000;
+.profile-section {
+    color: #000;
     font-size: 0.8rem;
-    white-space: nowrap;
 }
 
-.profile-action-modal {
-    display: flex;
-    align-items: center;
-    color: white;
-    font-weight: 500;
-    flex-shrink: 0;
-}
-
-.arrow-icon-modal {
-    font-size: 1.5rem;
-    font-weight: bold;
+.arrow-icon {
     transition: transform 0.3s ease;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.profile-card-modal:hover .arrow-icon-modal {
+.profile-card:hover .arrow-icon {
     transform: translateX(5px);
 }
 
-/* MODAL-STYLE EMPTY STATE */
-.empty-state-modal {
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
-    text-align: center;
-    padding: 40px 16px;
-    background: linear-gradient(145deg, #0d47a1, #1565c0) !important;
-    border-radius: 16px;
-    border: 2px solid #000000 !important;
-    box-shadow: 0 4px 0 #0d3660 !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0;
-    /* Add padding for button */
-    padding-bottom: 100px;
-}
-
-.empty-icon-modal {
+/* Empty State */
+.empty-icon {
     font-size: 2.5rem;
     margin-bottom: 16px;
     opacity: 0.8;
-    color: white;
 }
 
-.empty-title-modal {
+.empty-title {
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
     margin-bottom: 8px;
 }
 
-.empty-description-modal {
+.empty-description {
     color: #a0c8ff;
     font-size: 0.95rem;
     max-width: 80%;
-    line-height: 1.4;
 }
 
-/* FIXED BOTTOM BUTTON CONTAINER - Improved positioning */
-.fixed-actions-container {
+/* Fixed Add Button */
+.fixed-actions {
     position: fixed;
     bottom: 16px;
     left: 0;
     right: 0;
-    transform: none;
     width: 100%;
     max-width: 480px;
     margin: 0 auto;
     padding: 0 16px;
     box-sizing: border-box;
     z-index: 1000;
-    background: transparent;
 }
 
-/* MODAL-STYLE ADD PROFILE BUTTON */
-.add-profile-btn-modal {
+.add-profile-btn {
     width: 100%;
     padding: 14px;
-    background: #2138ba !important;
+    background: #2138ba;
     color: white;
-    border: 2px solid #000000 !important;
-    border-radius: 12px !important;
+    border: 2px solid #000;
+    border-radius: 12px;
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
@@ -691,38 +779,111 @@ const addProfile = () => {
     justify-content: center;
     gap: 8px;
     transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 0 #2138ba !important;
+    box-shadow: 0 4px 0 #2138ba;
     min-height: 52px;
 }
 
-.add-profile-btn-modal:hover {
+.add-profile-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 0 #21BA45 !important;
+    box-shadow: 0 6px 0 #21BA45;
 }
 
-.add-profile-btn-modal:active {
+.add-profile-btn:active {
     transform: translateY(2px);
-    box-shadow: 0 2px 0 #000000 !important;
+    box-shadow: 0 2px 0 #000;
 }
 
-.btn-icon-modal {
+.btn-icon {
     font-size: 1.2rem;
-    font-weight: 300;
 }
 
-/* Avatar Selection Grid */
-.avatar-selection-grid {
+/* Modal */
+:deep(.q-dialog__backdrop) {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-card {
+    border: 2px solid #000;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #0d47a1, #1565c0);
+    box-shadow: 0 4px 0 #0d3660;
+    position: relative;
+    overflow: visible;
+    max-width: 400px;
+    width: 90vw;
+}
+
+.title-card-overlay {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+}
+
+.title-card {
+    border: 2px solid #000;
+    border-radius: 12px;
+    background: #38da18;
+    box-shadow: 0 4px 0 #6cc20b;
+    font-weight: 700;
+    padding: 6px 24px;
+    font-size: 1rem;
+    color: white;
+}
+
+.modal-content {
+    padding: 2rem 1.5rem 0.5rem;
+}
+
+.modal-content p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-label {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+/* Form Inputs */
+:deep(.custom-input .q-field__control) {
+    border-radius: 8px;
+    border: 2px solid #000;
+    background: #0d3660;
+}
+
+:deep(.custom-input .q-field__control:before),
+:deep(.custom-input .q-field__control:after) {
+    display: none;
+}
+
+:deep(.custom-input .q-field__native) {
+    color: white;
+    font-size: 1rem;
+    padding-left: 4px;
+}
+
+:deep(.custom-input .q-field__native::placeholder) {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+:deep(.custom-input .q-field__prepend) {
+    padding: 0 8px;
+}
+
+/* Avatar Grid */
+.avatar-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin-top: 8px;
 }
 
-.avatar-selection-item {
+.avatar-item {
     position: relative;
-    width: 100%;
     height: 70px;
     border-radius: 8px;
     overflow: hidden;
@@ -731,212 +892,72 @@ const addProfile = () => {
     transition: all 0.2s ease;
 }
 
-.avatar-selection-item:hover {
+.avatar-item:hover {
     border-color: #42A5F5;
     transform: scale(1.05);
 }
 
-.avatar-selection-selected {
+.avatar-selected {
     border-color: #42A5F5;
     box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.3);
 }
 
-.avatar-selection-image {
+.avatar-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.avatar-selection-check {
+.avatar-check {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(66, 165, 245, 0.7);
+    inset: 0;
+    background: rgba(66, 165, 245, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* =========================================================================== */
-/* MODAL STYLES */
-/* =========================================================================== */
-
-/* Dialog Backdrop */
-:deep(.q-dialog__backdrop) {
-    background-color: rgba(0, 0, 0, 0.7) !important;
-}
-
-/* Modal Card - Main Container */
-.modal-card {
-    border: 2px solid #000000 !important;
-    border-radius: 16px !important;
-    background: linear-gradient(145deg, #0d47a1, #1565c0) !important;
-    box-shadow: 0 4px 0 #0d3660 !important;
-    position: relative !important;
-    overflow: visible !important;
-    max-width: 400px !important;
-    width: 90vw !important;
-}
-
-/* Title card overlay - Centered at top */
-.title-card-overlay {
-    position: absolute !important;
-    top: -20px !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 10 !important;
-    display: flex !important;
-    justify-content: center !important;
-    width: 100% !important;
-}
-
-/* REDUCED MODAL TITLE CARD SIZE */
-.title-card {
-    border: 2px solid #000000 !important;
-    border-radius: 12px !important;
-    background: #C10015 !important;
-    box-shadow: 0 4px 0 #C10015 !important;
-    font-weight: bold !important;
-    text-align: center !important;
-    white-space: nowrap !important;
-    padding: 6px 24px !important;
-    font-size: 1rem !important;
-}
-
-/* Modal content area */
-.modal-content {
-    padding-top: 2rem !important;
-    padding-bottom: 0.5rem !important;
-}
-
-.modal-content p {
-    font-size: 1rem !important;
-    margin-bottom: 1.5rem !important;
-    line-height: 1.4 !important;
-}
-
-/* Input labels */
-.input-label {
-    font-weight: bold !important;
-    margin-bottom: 0.25rem !important;
-    display: block !important;
-}
-
-/* Custom Dark Blue Color for Inputs */
-.bg-dark-blue-input {
-    background-color: #0d3660 !important;
-}
-
-/* Form Inputs - Dark Blue Background */
-:deep(.custom-input .q-field__control) {
-    border-radius: 8px !important;
-    border: 2px solid #000000 !important;
-    background-color: #0d3660 !important;
-}
-
-:deep(.custom-input .q-field__control:before),
-:deep(.custom-input .q-field__control:after) {
-    display: none !important;
-}
-
-:deep(.custom-input .q-field__native) {
-    color: white !important;
-    font-size: 1rem !important;
-}
-
-:deep(.custom-input .q-field__native::placeholder) {
-    color: rgba(255, 255, 255, 0.7) !important;
-}
-
-/* ADD SPACING BETWEEN ICON AND PLACEHOLDER TEXT */
-:deep(.custom-input .q-field__prepend) {
-    padding-right: 8px !important;
-    padding-left: 8px !important;
-}
-
-/* Ensure the input text has proper spacing */
-:deep(.custom-input .q-field__native) {
-    padding-left: 4px !important;
-}
-
-/* Remove the margin from the icon itself */
-:deep(.custom-input .q-icon) {
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-}
-
-/* Keep the control container without extra padding */
-:deep(.custom-input .q-field__control) {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-/* Modal buttons container */
+/* Modal Actions */
 .modal-actions {
-    padding: 0 1.5rem 1.5rem 1.5rem !important;
+    padding: 0 1.5rem 1.5rem;
 }
 
-/* Cancel button styling */
-.cancel-btn {
-    border: 2px solid #000000 !important;
-    border-radius: 8px !important;
-    background: white !important;
-    color: #000000 !important;
-    font-weight: bold !important;
-    box-shadow: 0 4px 0 #9e9e9e !important;
-    min-height: 48px !important;
-}
-
-.cancel-btn:hover {
-    transform: translateY(-2px) !important;
-}
-
-.cancel-btn:active {
-    transform: translateY(2px) !important;
-    box-shadow: 0 2px 0 #000000 !important;
-}
-
-/* Create button styling */
+.cancel-btn,
 .create-btn {
-    border: 2px solid #000000 !important;
-    border-radius: 8px !important;
-    background: #21BA45 !important;
-    color: white !important;
-    font-weight: bold !important;
-    box-shadow: 0 4px 0 #21BA45 !important;
-    min-height: 48px !important;
-    white-space: nowrap !important;
+    border: 2px solid #000;
+    border-radius: 8px;
+    font-weight: 700;
+    min-height: 48px;
 }
 
+.cancel-btn {
+    background: white;
+    color: #000;
+    box-shadow: 0 4px 0 #9e9e9e;
+}
+
+.create-btn {
+    background: #21BA45;
+    color: white;
+    box-shadow: 0 4px 0 #21BA45;
+}
+
+.cancel-btn:hover,
 .create-btn:hover {
-    transform: translateY(-2px) !important;
+    transform: translateY(-2px);
 }
 
+.cancel-btn:active,
 .create-btn:active {
-    transform: translateY(2px) !important;
-    box-shadow: 0 2px 0 #000000 !important;
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #000;
 }
 
-/* =========================================================================== */
-/* RESPONSIVE ADJUSTMENTS - Single layout for all screen sizes */
-/* =========================================================================== */
-
-/* For very small screens */
+/* Responsive */
 @media (max-width: 320px) {
-    .login-page {
-        padding: 12px;
-    }
-
-    .logo-container {
-        width: 160px;
-        height: 160px;
-    }
-
     .app-logo {
-        max-width: 150px;
-        max-height: 150px;
+        max-width: min(220px, 55vw);
+        max-height: 220px;
     }
 
     .title {
@@ -947,136 +968,60 @@ const addProfile = () => {
         font-size: 0.9rem;
     }
 
-    .profiles-container {
+    .profile-card .profile-content {
         padding: 12px;
-        gap: 8px;
-        padding-bottom: 10px;
     }
 
-    .empty-state-modal {
-        padding-bottom: 90px;
-    }
-
-    .profiles-header-card {
-        padding: 6px 12px;
-        min-height: 40px;
-    }
-
-    .profiles-title {
-        font-size: 0.85rem;
-    }
-
-    .profile-card-modal {
-        padding: 12px;
+    .profile-card {
         min-height: 65px;
     }
 
-    .profile-avatar-modal {
+    .profile-avatar {
         width: 40px;
         height: 40px;
         margin-right: 10px;
     }
 
-    .profile-name-modal {
-        font-size: 0.9rem;
-    }
-
-    .add-profile-btn-modal {
+    .add-profile-btn {
         min-height: 48px;
         font-size: 0.9rem;
-        padding: 12px;
     }
 
-    .avatar-selection-grid {
-        gap: 6px;
-    }
-
-    .avatar-selection-item {
+    .avatar-item {
         height: 60px;
     }
 
     .modal-card {
-        width: 95vw !important;
+        width: 95vw;
     }
 }
 
-/* For small screens */
 @media (max-width: 480px) {
-    .login-page {
-        padding: 16px;
-    }
-
-    .logo-container {
-        width: min(200px, 45vw);
-        height: min(200px, 45vw);
-    }
-
     .app-logo {
-        max-width: 180px;
-        max-height: 180px;
-    }
-
-    .profiles-container {
-        padding-bottom: 10px;
-    }
-
-    .empty-state-modal {
-        padding-bottom: 100px;
-    }
-
-    .fixed-actions-container {
-        bottom: 16px;
+        max-width: min(260px, 58vw);
+        max-height: 260px;
     }
 }
 
-/* For medium/large screens - same layout */
 @media (min-width: 481px) {
-    .login-page {
-        padding: 20px;
-    }
-
-    .login-card {
-        max-width: 420px;
-    }
-
-    .logo-container {
-        width: 220px;
-        height: 220px;
-    }
-
     .app-logo {
-        max-width: 200px;
-        max-height: 200px;
+        max-width: 280px;
+        max-height: 280px;
     }
 
-    .profiles-container {
-        padding-bottom: 10px;
-    }
-
-    .empty-state-modal {
-        padding-bottom: 110px;
-    }
-
-    .fixed-actions-container {
+    .fixed-actions {
         bottom: 20px;
     }
 }
 
-/* Height-based adjustments */
 @media (max-height: 700px) {
     .login-header {
-        padding-top: 3vh;
-        padding-bottom: 1vh;
-    }
-
-    .logo-container {
-        width: min(180px, 35vw);
-        height: min(180px, 35vw);
+        padding: 3vh 0 1vh;
     }
 
     .app-logo {
-        max-width: 160px;
-        max-height: 160px;
+        max-width: min(240px, 50vw);
+        max-height: 240px;
     }
 
     .title {
@@ -1087,46 +1032,28 @@ const addProfile = () => {
         font-size: 0.9rem;
     }
 
-    .profiles-container {
-        padding: 12px;
-        gap: 8px;
-        padding-bottom: 10px;
-    }
-
-    .empty-state-modal {
-        padding-bottom: 90px;
-    }
-
-    .profile-card-modal {
+    .profile-card {
         min-height: 60px;
+    }
+
+    .profile-card .profile-content {
         padding: 10px;
     }
 
-    .profile-avatar-modal {
+    .profile-avatar {
         width: 40px;
         height: 40px;
-    }
-
-    .add-profile-btn-modal {
-        min-height: 48px;
-        padding: 12px;
     }
 }
 
 @media (max-height: 600px) {
     .login-header {
-        padding-top: 2vh;
-        padding-bottom: 1vh;
-    }
-
-    .logo-container {
-        width: min(160px, 30vw);
-        height: min(160px, 30vw);
+        padding: 2vh 0 1vh;
     }
 
     .app-logo {
-        max-width: 140px;
-        max-height: 140px;
+        max-width: min(200px, 45vw);
+        max-height: 200px;
     }
 
     .title {
@@ -1137,86 +1064,59 @@ const addProfile = () => {
         font-size: 0.8rem;
     }
 
-    .profiles-container {
-        padding: 10px;
-        padding-bottom: 10px;
-    }
-
-    .empty-state-modal {
-        padding-bottom: 80px;
-    }
-
-    .profiles-header-card {
-        min-height: 36px;
-        padding: 4px 10px;
-    }
-
-    .profile-card-modal {
+    .profile-card {
         min-height: 55px;
+    }
+
+    .profile-card .profile-content {
         padding: 8px;
     }
 
-    .profile-avatar-modal {
+    .profile-avatar {
         width: 35px;
         height: 35px;
         margin-right: 8px;
     }
 
-    .add-profile-btn-modal {
+    .add-profile-btn {
         min-height: 44px;
         padding: 10px;
         font-size: 0.9rem;
     }
 }
 
-/* Fix for iOS Safari */
+/* iOS Fix */
 @supports (-webkit-touch-callout: none) {
-    .login-page {
-        height: -webkit-fill-available;
-    }
 
+    .login-page,
     :deep(#q-app) {
         height: -webkit-fill-available;
     }
 }
-
-/* Ensure modal is centered on all screens */
-:deep(.q-dialog__inner) {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    min-height: 100% !important;
-    padding: 16px !important;
-}
 </style>
 
-<!-- Global styles remain the same -->
 <style>
-.q-field--outlined .q-field__control {
-    color: white !important;
-}
-
+/* Global Overrides */
+.q-field--outlined .q-field__control,
 .q-field--outlined .q-field__native {
-    color: white !important;
+    color: white;
 }
 
 .q-dialog__backdrop {
-    background-color: rgba(0, 0, 0, 0.7) !important;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .q-btn__content {
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-}
-
-.q-field {
-    width: 100% !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .q-dialog__inner {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    padding: 16px;
 }
 </style>

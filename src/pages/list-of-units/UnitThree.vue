@@ -3,10 +3,8 @@
         <!-- Header inside page -->
         <div class="page-header bg-white">
             <q-toolbar class="center-toolbar">
-                <q-btn flat dense class="btn-left custom-back-btn" @click="goBack" aria-label="Go back">
-                    <img src="assets/icons/back-button.png" alt="Back" class="back-icon" />
-                </q-btn>
-                <div class="toolbar-title">Unit III</div>
+                <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="btn-left" />
+                <div class="toolbar-title text-primary">Unit III</div>
             </q-toolbar>
         </div>
 
@@ -19,6 +17,7 @@
 
             <!-- Description -->
             <div class="unit-description q-pb-xl text-body1">
+                <p class="text-bold text-h6 text-center">Force, Motion, and Energy</p>
                 <p>
                     Force, motion, and energy are fundamental concepts in physics that explain how objects
                     move and interact. Understanding these principles helps us describe the behavior of
@@ -125,7 +124,6 @@ function endDrag() {
 
 /* ---------- Data ---------- */
 const chapters = [
-
     // UNIT III – Force, Motion, and Energy
     {
         id: 7,
@@ -181,6 +179,7 @@ function goBack() {
 .center-toolbar {
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative;
     min-height: 56px;
 }
@@ -188,29 +187,29 @@ function goBack() {
 .toolbar-title {
     font-size: 26px;
     font-weight: bold;
-    background: linear-gradient(90deg, #42a5f5, #7e57c2, #ef5350);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
+/* Back Button Styling */
 .btn-left {
-    position: absolute;
-    left: 5px;
-    padding: 8px;
-    border-radius: 6px;
+    color: white;
+    position: absolute !important;
+    left: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 3 !important;
+    background: #007cec;
+    border-radius: 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.custom-back-btn {
-    min-width: 40px;
-    min-height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.btn-left:hover {
+    background: #0066cc;
+    transform: translateY(-1px);
 }
 
-.back-icon {
-    width: 28px;
-    height: 28px;
+/* Icon color for back button */
+.btn-left .q-icon {
+    color: white;
 }
 
 /* ---------- Page Content ---------- */
@@ -219,35 +218,19 @@ function goBack() {
 }
 
 /* ---------- Main Image ---------- */
-.main-img {
-    width: 100%;
-    max-width: 600px;
-    height: 300px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-    background-image: url("/icons/unit-3-cover.png");
-    background-size: cover;
-    background-position: center;
-    border-radius: 16px;
-    box-shadow: 0 8px 0 0 rgb(127, 133, 136);
+.main-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
 }
 
-/* Create a pseudo-element for the blurred background */
-.main-img::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url("/icons/unit-3-cover.png");
-    background-size: cover;
-    background-position: center;
-    filter: blur(20px);
-    -webkit-filter: blur(20px);
-    z-index: -1;
+.main-img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
     border-radius: 16px;
+    box-shadow: 0 8px 0 0 rgb(127, 133, 136);
 }
 
 /* ---------- Description ---------- */
