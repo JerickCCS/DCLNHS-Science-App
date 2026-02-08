@@ -6,7 +6,6 @@
                 <q-toolbar-title class="navbar-title">Activity 7: Focusing Specimens under the Compound
                     Microscope</q-toolbar-title>
                 <div class="row items-center q-gutter-sm">
-                    <div class="text-subtitle2">{{ currentPage + 1 }} / {{ pages.length }}</div>
                     <q-btn flat dense round :icon="isBookmarked ? 'bookmark' : 'bookmark_border'" color="yellow"
                         @click="toggleBookmark" />
                 </div>
@@ -28,10 +27,7 @@
                         <q-btn class="nav-button" :disable="currentPage === 0" @click="prevPage"
                             no-caps>Previous</q-btn>
 
-                        <!-- <div class="progress-section">
-                            <div class="page-count">{{ currentPage + 1 }} / {{ pages.length }}</div>
-                            <q-linear-progress :value="progress" size="10px" color="primary" />
-                        </div> -->
+                        <div class="text-subtitle2">{{ currentPage + 1 }} / {{ pages.length }}</div>
 
                         <q-btn class="nav-button" @click="nextPage"
                             :label="currentPage === pages.length - 1 ? 'Finish' : 'Next'"
