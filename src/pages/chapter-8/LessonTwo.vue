@@ -9,7 +9,7 @@
             @click="toggleBookmark" />
         </div>
       </q-toolbar>
-      <q-linear-progress :value="progress" size="4px" color="primary" class="header-progress" />
+      <q-linear-progress :value="progress" size="4px" color="white" class="header-progress" />
     </q-header>
 
     <q-page-container class="night-sky">
@@ -25,7 +25,7 @@
           <div class="buttons">
             <q-btn class="nav-button" :disable="currentPage === 0" @click="prevPage" no-caps>Previous</q-btn>
 
-            <div class="text-subtitle2">{{ currentPage + 1 }} / {{ pages.length }}</div>
+            <div class="text-subtitle2 text-white">{{ currentPage + 1 }} / {{ pages.length }}</div>
 
             <q-btn class="nav-button" @click="nextPage" :label="currentPage === pages.length - 1 ? 'Finish' : 'Next'"
               :style="currentPage === pages.length - 1 ? finishButtonStyle : null" no-caps />
@@ -435,7 +435,7 @@ export default {
     const finishButtonStyle = {
       background: "#fe3223",
       color: "#fff",
-      boxShadow: "0 8px 0 0 #db0e00"
+      boxShadow: "7px 7px 0px 0px rgba(0, 0, 0, 0.16)"
     }
 
     // --- Confetti ---

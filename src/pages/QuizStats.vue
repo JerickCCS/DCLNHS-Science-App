@@ -1,28 +1,28 @@
 <template>
     <q-layout view="hHh LpR fFf">
-        <q-header class="bg-white text-dark">
+        <q-header class="text-white header-no-border" :style="{ background: headerColor + ' !important' }">
             <q-toolbar class="relative-position">
                 <!-- Back button (left) -->
-                <q-btn flat dense round icon="arrow_back" @click="goBack" class="absolute-left q-ml-sm" />
+                <q-btn flat dense round icon="arrow_back" @click="goBack" class="absolute-left q-ml-sm text-white" />
 
                 <!-- Centered title -->
-                <div class="absolute-center text-h6 text-weight-bold">
+                <div class="absolute-center text-h6 text-weight-bold text-white">
                     Statistics
                 </div>
             </q-toolbar>
-            <q-linear-progress :value="progress" size="4px" color="primary" class="header-progress" />
+            <!-- <q-linear-progress :value="progress" size="4px" color="primary" class="header-progress" /> -->
         </q-header>
 
         <q-page-container>
-            <q-page class="q-pa-md stats-page">
+            <q-page class="q-pa-md stats-page" :style="{ background: pageColor }">
                 <!-- FILTER TABS -->
                 <div class="filter-bar q-mb-md">
-                    <q-btn-toggle v-model="activeTab" spread unelevated toggle-color="primary" :options="[
-                        { label: 'All', value: 'all' },
-                        { label: 'Chapter Tests', value: 'chapter_tests' },
-                        { label: 'Mini Tests', value: 'mini_test' },
-                        { label: 'Mini Labs', value: 'mini_lab' }
-                    ]" />
+                    <q-tabs v-model="activeTab" align="justify" indicator-color="transparent" class="custom-toggle">
+                        <q-tab name="all" label="All" :style="getTabStyle('all')" />
+                        <q-tab name="chapter_tests" label="Chapter Tests" :style="getTabStyle('chapter_tests')" />
+                        <q-tab name="mini_test" label="Mini Tests" :style="getTabStyle('mini_test')" />
+                        <q-tab name="mini_lab" label="Mini Labs" :style="getTabStyle('mini_lab')" />
+                    </q-tabs>
                 </div>
 
                 <!-- ALL TAB CONTENT -->
@@ -438,6 +438,55 @@ const quizzes = ref([])
 const chapterResults = ref([])
 const user = ref(null)
 
+// Color theme definitions
+const colors = {
+    all: {
+        header: '#ff2b82',
+        page: '#ff2b82',
+        activeToggle: '#ff2b82'
+    },
+    chapter_tests: {
+        header: '#ff2b2a',
+        page: '#ff2b2a',
+        activeToggle: '#ff2b2a'
+    },
+    mini_test: {
+        header: '#b027ff',
+        page: '#b027ff',
+        activeToggle: '#b027ff'
+    },
+    mini_lab: {
+        header: '#44D62C',
+        page: '#44D62C',
+        activeToggle: '#44D62C'
+    }
+}
+
+// Computed properties for dynamic colors
+const headerColor = computed(() => {
+    return colors[activeTab.value]?.header || colors.all.header
+})
+
+const pageColor = computed(() => {
+    return colors[activeTab.value]?.page || colors.all.page
+})
+
+
+// Function to get tab styles
+const getTabStyle = (tabName) => {
+    if (activeTab.value === tabName) {
+        return {
+            background: colors[tabName]?.activeToggle || colors.all.activeToggle,
+            color: 'white !important',
+            fontWeight: '700'
+        }
+    }
+    return {
+        background: 'transparent',
+        color: '#666'
+    }
+}
+
 const goBack = () => history.back()
 
 onMounted(() => {
@@ -621,8 +670,62 @@ const getUnitStatusClass = (s) => {
 </script>
 
 <style scoped>
+.q-header {
+    transition: background 0.3s ease !important;
+}
+
+.header-no-border {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.q-btn .q-icon {
+    color: white !important;
+}
+
 .stats-page {
-    background: #f4f6f8;
+    transition: background 0.3s ease !important;
+}
+
+/* ENHANCED FILTER BAR WITH DYNAMIC TOGGLE COLOR */
+.filter-bar {
+    background: white;
+    padding: 6px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.custom-toggle {
+    width: 100%;
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.custom-toggle :deep(.q-tab) {
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.2px;
+    text-transform: none;
+    padding: 10px 8px;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 44px;
+}
+
+.custom-toggle :deep(.q-tab--active) {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+}
+
+.custom-toggle :deep(.q-tab__label) {
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 /* CENTERED HORIZONTAL SUMMARY CARD */
@@ -635,7 +738,6 @@ const getUnitStatusClass = (s) => {
 .summary-card {
     background: white;
     border-radius: 16px;
-
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     border: 1px solid #e0e0e0;
     display: flex;
@@ -698,7 +800,6 @@ const getUnitStatusClass = (s) => {
     letter-spacing: 0.5px;
     text-transform: uppercase;
     margin-top: -2px;
-    /* Visual alignment with percentage */
 }
 
 .summary-stat-divider {
@@ -807,21 +908,13 @@ const getUnitStatusClass = (s) => {
     color: #2196f3;
 }
 
-/* FILTER */
-.filter-bar {
-    background: white;
-    padding: 8px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
 /* SECTION TITLES */
 .section-title {
     font-size: 18px;
     font-weight: 700;
-    color: #333;
+    color: white;
     padding-bottom: 8px;
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
     margin-bottom: 16px;
     letter-spacing: -0.2px;
 }
@@ -829,7 +922,7 @@ const getUnitStatusClass = (s) => {
 .section-subtitle {
     font-size: 16px;
     font-weight: 600;
-    color: #555;
+    color: white;
     margin-bottom: 12px;
     padding-left: 4px;
 }
@@ -1028,7 +1121,6 @@ const getUnitStatusClass = (s) => {
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .summary-card {
-
         min-height: 120px;
         max-width: 95%;
     }
@@ -1080,11 +1172,15 @@ const getUnitStatusClass = (s) => {
     .unit-performance-title {
         font-size: 14px;
     }
+
+    .custom-toggle :deep(.q-tab) {
+        font-size: 10px;
+        padding: 8px 6px;
+    }
 }
 
 @media (max-width: 480px) {
     .summary-card {
-
         min-height: 110px;
         max-width: 100%;
     }
@@ -1149,11 +1245,19 @@ const getUnitStatusClass = (s) => {
         padding: 12px;
         min-height: 100px;
     }
+
+    .custom-toggle :deep(.q-tab) {
+        font-size: 9px;
+        padding: 8px 4px;
+    }
+
+    .filter-bar {
+        padding: 5px;
+    }
 }
 
 @media (max-width: 360px) {
     .summary-card {
-
         min-height: 100px;
     }
 
@@ -1176,6 +1280,12 @@ const getUnitStatusClass = (s) => {
 
     .summary-stat-item {
         padding: 0 8px;
+    }
+
+    .custom-toggle :deep(.q-tab) {
+        font-size: 8px;
+        padding: 7px 3px;
+        letter-spacing: 0;
     }
 }
 </style>

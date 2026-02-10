@@ -159,9 +159,9 @@
               </q-card-section>
             </q-card>
 
-            <div class="text-h5 text-primary text-weight-bold q-mb-md section-title">Units</div>
+            <div class="text-h5 text-weight-bold q-mb-md section-title">Units</div>
             <div class="units-grid">
-              <q-card v-for="unit in units" :key="unit.id" class="unit-card" flat bordered @click="goToUnit(unit)">
+              <q-card v-for="unit in units" :key="unit.id" class="unit-card" bordered @click="goToUnit(unit)">
                 <q-card-section class="q-pa-md">
                   <div class="row items-center justify-between">
                     <div class="row items-center">
@@ -171,15 +171,15 @@
                       </q-avatar>
 
                       <div>
-                        <div class="unit-title text-weight-bold">{{ unit.name }}</div>
-                        <div class="unit-description">{{ unit.description }}</div>
+                        <div class="unit-title text-weight-bold text-white">{{ unit.name }}</div>
+                        <div class="unit-description text-white">{{ unit.description }}</div>
                       </div>
                     </div>
                     <div>
-                      <q-icon name="chevron_right" size="24px" color="grey-7" />
+                      <q-icon name="chevron_right" size="24px" color="white" />
                     </div>
                   </div>
-                  <q-linear-progress :value="unit.progress / 100" size="10px" color="blue-6" class="q-mt-sm" rounded />
+                  <q-linear-progress :value="unit.progress / 100" size="10px" color="white" class="q-mt-sm" rounded />
                 </q-card-section>
               </q-card>
             </div>
@@ -795,11 +795,11 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .q-page-container {
-  background: #e3f2ff;
+  background: #42a7ff;
 }
 
 .dashboard-page {
-  background: #e3f2ff;
+  background: #42a7ff;
   min-height: 100vh;
   position: relative;
 }
@@ -889,7 +889,7 @@ onMounted(() => {
 }
 
 .section-title {
-  color: #2896eb !important;
+  color: #ffffff !important;
 }
 
 /* ============================== */
@@ -899,16 +899,14 @@ onMounted(() => {
 .edit-profile-modal.unified-card {
   background: white;
   border: none;
-  border-bottom: 6px solid #42A5F5;
   border-radius: 16px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
   overflow: hidden;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    border-bottom-width: 8px;
+    box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
   }
 }
 
@@ -1028,40 +1026,86 @@ onMounted(() => {
 /* UNIFIED CARD DESIGN SYSTEM */
 /* ============================== */
 
-.quiz-statistics-card,
-.chart-card,
-.unit-progress-card,
-.chapter-test-summary-card,
-.overall-progress-card,
-.unit-card {
+.quiz-statistics-card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
   backdrop-filter: blur(10px);
   border: none;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
   cursor: pointer;
   overflow: hidden;
 }
 
-.quiz-statistics-card {
-  border-bottom: 6px solid #42A5F5;
-}
-
 .chart-card {
-  border-bottom: 6px solid #42A5F5;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  overflow: hidden;
 }
 
 .unit-progress-card {
-  border-bottom: 6px solid #42A5F5;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.chapter-test-summary-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  overflow: hidden;
 }
 
 .overall-progress-card {
-  background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
-  border-bottom: 6px solid #E65100;
+  background: #FF6D00;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  overflow: hidden;
 }
 
+/* Individual unit card colors FIRST */
+.unit-card:nth-child(1) {
+  background: #ff2b83;
+  /* Super bright yellow */
+}
+
+.unit-card:nth-child(2) {
+  background: #ff2b2b;
+  /* Super bright red */
+}
+
+.unit-card:nth-child(3) {
+  background: #97ec20;
+  /* Super bright green */
+}
+
+.unit-card:nth-child(4) {
+  background: #b028ff;
+  /* Super bright orange */
+}
+
+/* THEN the general unit-card styles (including box-shadow) */
 .unit-card {
-  border-bottom: 6px solid #42A5F5;
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 .card-title {
@@ -1169,7 +1213,7 @@ onMounted(() => {
 .overall-progress-card .text-h6 {
   font-weight: 700;
   color: #1a237e;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   font-size: 16px;
 }
 
@@ -1233,7 +1277,7 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  background: #e3f2fd;
   border-radius: 10px;
   padding: 12px 14px;
   font-size: 13px;
@@ -1243,7 +1287,7 @@ onMounted(() => {
   border: 1px solid rgba(66, 165, 245, 0.2);
 
   &:hover {
-    background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
+    background: #bbdefb;
     transform: translateX(4px);
   }
 }
@@ -1339,13 +1383,19 @@ onMounted(() => {
 }
 
 .unit-title {
-  font-size: 16px;
+  font-size: 24px;
   color: #1a237e;
+  margin-bottom: 2px;
+  line-height: 1.2;
+  font-weight: 700;
 }
 
 .unit-description {
-  font-size: 13px;
+  font-size: 16px;
   color: #5f6368;
+  line-height: 1.3;
+  margin-top: 0;
+  font-weight: 500;
 }
 
 @media (max-width: 480px) {
@@ -1408,7 +1458,7 @@ onMounted(() => {
   .unit-progress-card .text-h6,
   .chapter-test-summary-card .text-h6,
   .overall-progress-card .text-h6 {
-    font-size: 15px;
+    font-size: 18px;
   }
 
   .quiz-statistics-card .text-caption,
@@ -1417,6 +1467,14 @@ onMounted(() => {
   .unit-progress-card .text-caption,
   .chapter-test-summary-card .text-caption {
     font-size: 12px;
+  }
+
+  .unit-title {
+    font-size: 19px;
+  }
+
+  .unit-description {
+    font-size: 14px;
   }
 
   .chapter-test-stats {

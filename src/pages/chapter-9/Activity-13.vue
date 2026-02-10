@@ -28,7 +28,7 @@
                         <q-btn class="nav-button" :disable="currentPage === 0" @click="prevPage"
                             no-caps>Previous</q-btn>
 
-                        <div class="text-subtitle2">{{ currentPage + 1 }} / {{ pages.length }}</div>
+                        <div class="text-subtitle2 text-white">{{ currentPage + 1 }} / {{ pages.length }}</div>
 
                         <q-btn class="nav-button" @click="nextPage"
                             :label="currentPage === pages.length - 1 ? 'Finish' : 'Next'"

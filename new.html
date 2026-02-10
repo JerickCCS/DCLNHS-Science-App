@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earthquake Adventure: Lesson 1</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Segoe UI Emoji", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #a3d9ff 0%, #7ec8e3 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  overflow-x: hidden;
+}
+
+/* Animated background elements */
+.bg-element {
+  position: fixed;
+  border-radius: 50%;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+.bg-element:nth-child(1) {
+  width: 80px;
+  height: 80px;
+  background: #ff9966;
+  top: 10%;
+  left: 5%;
+  animation: float 15s infinite ease-in-out;
+}
+
+.bg-element:nth-child(2) {
+  width: 120px;
+  height: 120px;
+  background: #66ccff;
+  bottom: 15%;
+  right: 8%;
+  animation: float 18s infinite ease-in-out reverse;
+}
+
+.bg-element:nth-child(3) {
+  width: 60px;
+  height: 60px;
+  background: #ffcc66;
+  top: 60%;
+  left: 10%;
+  animation: float 12s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.app {
+  width: 100%;
+  max-width: 1000px;
+  background: #fffaf0;
+  border-radius: 28px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  border: 10px solid #ffcc66;
+  position: relative;
+  z-index: 1;
+}
+
+/* TOP BAR */
+.top-bar {
+  background: linear-gradient(to right, #ff9966, #ffcc66);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 6px solid #ff9933;
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.back-btn {
+  width: 44px;
+  height: 44px;
+  background: #ff9933;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 0 #cc6600;
+}
+
+.back-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #cc6600;
+}
+
+.top-title {
+  font-weight: 800;
+  font-size: 24px;
+  color: #5a3d13;
+  text-shadow: 1px 1px 0 #fff;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.bookmark {
+  width: 44px;
+  height: 44px;
+  background: #ff9933;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 0 #cc6600;
+}
+
+.bookmark:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #cc6600;
+}
+
+.bookmark.active {
+  background: #ff3333;
+}
+
+.page-count {
+  font-weight: bold;
+  color: #5a3d13;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 18px;
+}
+
+/* TITLE BANNER */
+.title-banner {
+  background: linear-gradient(45deg, #66ccff, #3399ff);
+  text-align: center;
+  padding: 25px 15px;
+  border-top: 6px solid #33aaff;
+  border-bottom: 6px solid #33aaff;
+  position: relative;
+  overflow: hidden;
+}
+
+.title-banner h2 {
+  font-size: 36px;
+  color: white;
+  text-shadow: 3px 3px 0 #0066cc;
+  letter-spacing: 1px;
+}
+
+.title-banner::before, .title-banner::after {
+  content: "🌍";
+  position: absolute;
+  font-size: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: wobble 2s infinite;
+}
+
+.title-banner::before {
+  left: 30px;
+}
+
+.title-banner::after {
+  right: 30px;
+}
+
+@keyframes wobble {
+  0%, 100% { transform: translateY(-50%) rotate(0deg); }
+  25% { transform: translateY(-50%) rotate(-10deg); }
+  75% { transform: translateY(-50%) rotate(10deg); }
+}
+
+/* SHAKING ANIMATION */
+.shake-animation {
+  animation: shake 0.5s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* IMAGE PANEL */
+.image-panel {
+  background: #2d2d2d;
+  position: relative;
+  overflow: hidden;
+  height: 320px;
+}
+
+.image-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.shake-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: #ff3333;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #cc0000;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.shake-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 4px 0 #cc0000;
+}
+
+.shake-btn:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 #cc0000;
+}
+
+/* INFO CARDS */
+.info-card {
+  display: flex;
+  gap: 22px;
+  padding: 25px;
+  background: #ffeb99;
+  border-top: 5px solid #ffcc00;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+}
+
+.info-card.light {
+  background: #fff5cc;
+  border-top: 5px solid #ffdb4d;
+}
+
+.card-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+
+.info-card:hover .card-icon img {
+  transform: scale(1.1);
+}
+
+.info-card p {
+  font-size: 19px;
+  line-height: 1.7;
+  color: #5a3d13;
+  padding-top: 8px;
+}
+
+.info-card strong {
+  font-weight: 800;
+  color: #cc6600;
+}
+
+/* FUN FACT LABEL STYLE */
+.fun-fact {
+  font-weight: 800;
+  color: #ff3366;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 4px 10px;
+  border-radius: 10px;
+  margin-right: 8px;
+}
+
+/* INTERACTIVE ELEMENTS */
+.interactive-box {
+  background: #99ffcc;
+  margin: 0 25px 25px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 4px dashed #33cc99;
+  text-align: center;
+}
+
+.interactive-box h3 {
+  color: #006633;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.emoji-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.emoji-btn {
+  font-size: 30px;
+  background: white;
+  border: 3px solid #ff9966;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emoji-btn:hover {
+  transform: scale(1.2);
+  background: #ffebcc;
+}
+
+.emoji-btn.selected {
+  background: #ffcc99;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ff9966;
+}
+
+/* BOTTOM NAV */
+.bottom-bar {
+  background: linear-gradient(to right, #ff9966, #ffcc66);
+  padding: 20px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 6px solid #ff9933;
+}
+
+.nav-btn {
+  background: #ff9933;
+  padding: 12px 22px;
+  border-radius: 18px;
+  font-weight: bold;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 6px 0 #cc6600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+}
+
+.nav-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 4px 0 #cc6600;
+}
+
+.nav-btn:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 #cc6600;
+}
+
+.nav-btn.prev {
+  justify-content: flex-start;
+}
+
+.nav-btn.next {
+  justify-content: flex-end;
+}
+
+.progress {
+  text-align: center;
+  width: 40%;
+}
+
+.progress span {
+  font-weight: bold;
+  color: #5a3d13;
+  font-size: 20px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.progress-bar {
+  margin: 0 auto;
+  height: 20px;
+  background: #ffcc99;
+  border-radius: 15px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 300px;
+  border: 3px solid #cc6600;
+}
+
+.progress-fill {
+  width: 5%;
+  height: 100%;
+  background: linear-gradient(to right, #ff3366, #ff9966);
+  transition: width 0.5s ease;
+  border-radius: 10px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .app {
+    border-width: 6px;
+    border-radius: 20px;
+  }
+  
+  .top-title {
+    font-size: 20px;
+  }
+  
+  .title-banner h2 {
+    font-size: 28px;
+  }
+  
+  .info-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .card-icon img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .bottom-bar {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .progress {
+    width: 100%;
+    order: 1;
+  }
+  
+  .nav-btn {
+    min-width: 120px;
+  }
+  
+  .nav-btn.prev {
+    order: 2;
+  }
+  
+  .nav-btn.next {
+    order: 3;
+  }
+}
+</style>
+</head>
+
+<body>
+<!-- Animated background elements -->
+<div class="bg-element"></div>
+<div class="bg-element"></div>
+<div class="bg-element"></div>
+
+<div class="app">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-left">
+      <div class="back-btn" onclick="goBack()">‹</div>
+      <div class="top-title">🌍 Earthquake Adventure: Lesson 1</div>
+    </div>
+    <div class="top-right">
+      <div class="page-count">Page 1 of 23</div>
+      <div class="bookmark" onclick="toggleBookmark()">
+        <i class="far fa-bookmark"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- TITLE -->
+  <div class="title-banner">
+    <h2>What Are Earthquakes?</h2>
+  </div>
+
+  <!-- MAIN ILLUSTRATION -->
+  <div class="image-panel">
+    <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Earthquake Illustration" class="shake-animation" id="earthquakeImage">
+    <button class="shake-btn" onclick="shakeImage()">
+      <i class="fas fa-bolt"></i> Make It Shake!
+    </button>
+  </div>
+
+  <!-- DEFINITION CARD -->
+  <div class="info-card" onclick="playSound('click')">
+    <div class="card-icon">
+      <!-- EARTH IMAGE ICON -->
+      <img src="https://cdn-icons-png.flaticon.com/512/2909/2909657.png" alt="Earth Icon">
+    </div>
+    <p>
+      <strong>Earthquakes</strong> are sudden, rapid shaking of the ground caused by the breaking 
+      and shifting of rock beneath the Earth's surface. They can happen anywhere, 
+      but occur most frequently along fault lines.
+    </p>
+  </div>
+
+  <!-- FUN FACT CARD -->
+  <div class="info-card light" onclick="playSound('pop')">
+    <div class="card-icon">
+      <!-- BULB IMAGE ICON -->
+      <img src="https://cdn-icons-png.flaticon.com/512/3767/3767084.png" alt="Bulb Icon">
+    </div>
+    <p>
+      <span class="fun-fact">Fun Fact!</span> Our country is located in an earthquake-prone region. 
+      Did you know that earthquakes are recorded in the Philippines every day? Fortunately,
+      most are too small to be felt.
+    </p>
+  </div>
+
+  <!-- INTERACTIVE ELEMENT -->
+  <div class="interactive-box">
+    <h3>How would you feel during an earthquake?</h3>
+    <p>Tap on an emoji that matches how you might feel:</p>
+    <div class="emoji-buttons">
+      <div class="emoji-btn" onclick="selectEmoji(this)">😟</div>
+      <div class="emoji-btn" onclick="selectEmoji(this)">😨</div>
+      <div class="emoji-btn" onclick="selectEmoji(this)">😲</div>
+      <div class="emoji-btn" onclick="selectEmoji(this)">🤔</div>
+      <div class="emoji-btn" onclick="selectEmoji(this)">😊</div>
+    </div>
+    <p id="emoji-feedback" style="margin-top: 15px; color: #006633; font-weight: bold;"></p>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-bar">
+    <div class="nav-btn prev" onclick="prevPage()">
+      <i class="fas fa-arrow-left"></i> Previous
+    </div>
+
+    <div class="progress">
+      <span>1 / 23</span>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div class="nav-btn next" onclick="nextPage()">
+      Next <i class="fas fa-arrow-right"></i>
+    </div>
+  </div> 
+
+</div>
+
+<script>
+// DOM Elements
+const earthquakeImage = document.getElementById('earthquakeImage');
+const progressFill = document.getElementById('progressFill');
+const bookmarkBtn = document.querySelector('.bookmark');
+const emojiFeedback = document.getElementById('emoji-feedback');
+
+// Sound effects (using Web Audio API)
+function playSound(type) {
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    if (type === 'shake') {
+      oscillator.frequency.setValueAtTime(150, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.5);
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.5);
+    } else if (type === 'click') {
+      oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+      gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.2);
+    } else if (type === 'pop') {
+      oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime); // E5
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.1);
+    }
+  } catch (e) {
+    console.log("Audio context not supported");
+  }
+}
+
+// Shake the earthquake image
+function shakeImage() {
+  playSound('shake');
+  
+  // Start shaking animation
+  earthquakeImage.style.animationPlayState = 'running';
+  
+  // Show shaking effect on the whole app
+  document.querySelector('.app').style.transform = 'translateX(5px)';
+  setTimeout(() => {
+    document.querySelector('.app').style.transform = 'translateX(-5px)';
+  }, 100);
+  setTimeout(() => {
+    document.querySelector('.app').style.transform = 'translateX(0)';
+  }, 200);
+  
+  // Stop shaking after 2 seconds
+  setTimeout(() => {
+    earthquakeImage.style.animationPlayState = 'paused';
+  }, 2000);
+  
+  // Show message
+  alert("Whoa! That's what an earthquake feels like! Remember to Drop, Cover, and Hold On during real earthquakes!");
+}
+
+// Toggle bookmark
+function toggleBookmark() {
+  bookmarkBtn.classList.toggle('active');
+  const icon = bookmarkBtn.querySelector('i');
+  if (bookmarkBtn.classList.contains('active')) {
+    icon.className = 'fas fa-bookmark';
+    alert("Page bookmarked! You can find it in your saved lessons.");
+  } else {
+    icon.className = 'far fa-bookmark';
+  }
+  playSound('click');
+}
+
+// Select emoji reaction
+function selectEmoji(emojiBtn) {
+  // Remove selected class from all emoji buttons
+  document.querySelectorAll('.emoji-btn').forEach(btn => {
+    btn.classList.remove('selected');
+  });
+  
+  // Add selected class to clicked emoji
+  emojiBtn.classList.add('selected');
+  
+  // Get the selected emoji
+  const selectedEmoji = emojiBtn.textContent;
+  
+  // Show feedback based on selected emoji
+  let feedback = "";
+  if (selectedEmoji === "😟") {
+    feedback = "It's normal to feel worried! Being prepared can help you feel safer.";
+  } else if (selectedEmoji === "😨") {
+    feedback = "Earthquakes can be scary, but knowing what to do helps!";
+  } else if (selectedEmoji === "😲") {
+    feedback = "Earthquakes are surprising! Always be prepared.";
+  } else if (selectedEmoji === "🤔") {
+    feedback = "Great question! Keep learning about earthquake safety.";
+  } else if (selectedEmoji === "😊") {
+    feedback = "That's a positive attitude! Learning keeps us safe.";
+  }
+  
+  emojiFeedback.textContent = feedback;
+  playSound('pop');
+}
+
+// Navigation functions
+function goBack() {
+  playSound('click');
+  alert("Going back to the main menu!");
+  // In a real app, this would navigate to the previous page
+}
+
+function prevPage() {
+  playSound('click');
+  alert("Going to the previous page!");
+  // In a real app, this would navigate to the previous page
+}
+
+function nextPage() {
+  playSound('click');
+  alert("Moving to the next lesson page!");
+  // In a real app, this would navigate to the next page
+}
+
+// Update progress bar based on page number
+function updateProgress(pageNum) {
+  const percentage = (pageNum / 23) * 100;
+  progressFill.style.width = `${percentage}%`;
+}
+
+// Initialize
+window.onload = function() {
+  updateProgress(1);
+  
+  // Add some interactive instructions
+  setTimeout(() => {
+    alert("Welcome to Earthquake Adventure! Try clicking the 'Make It Shake!' button to see what an earthquake feels like!");
+  }, 500);
+};
+</script>
+
+</body>
+</html>

@@ -1,10 +1,10 @@
 <template>
     <q-page class="chapters-page">
         <!-- Header inside page -->
-        <div class="page-header bg-white">
+        <div class="page-header">
             <q-toolbar class="center-toolbar">
                 <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="btn-left" />
-                <div class="toolbar-title text-primary">Unit I</div>
+                <div class="toolbar-title">Unit I</div>
             </q-toolbar>
         </div>
 
@@ -165,7 +165,7 @@ function goBack() {
 <style scoped>
 /* ---------- Global Background ---------- */
 .chapters-page {
-    background: #f8f9fa;
+    background: #42a7ff !important;
     min-height: 100vh;
 }
 
@@ -174,7 +174,8 @@ function goBack() {
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #42a7ff;
+    box-shadow: none;
 }
 
 .center-toolbar {
@@ -182,12 +183,13 @@ function goBack() {
     justify-content: center;
     align-items: center;
     position: relative;
-    min-height: 56px;
+    min-height: 50px;
 }
 
 .toolbar-title {
     font-size: 26px;
     font-weight: bold;
+    color: white;
 }
 
 /* Back Button Styling */
@@ -197,24 +199,24 @@ function goBack() {
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    background: #007cec;
+    background: transparent !important;
     border-radius: 10px;
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .btn-left:hover {
-    background: #0066cc;
-    transform: translateY(-51%);
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-50%) scale(1.05);
 }
 
 /* Icon color for back button */
 .btn-left .q-icon {
-    color: white;
+    color: white !important;
 }
 
 /* ---------- Page Content ---------- */
 .page-content {
-    background: #f8f9fa;
+    background: transparent;
 }
 
 /* ---------- Main Image ---------- */
@@ -230,17 +232,17 @@ function goBack() {
     max-width: 350px;
     height: auto;
     border-radius: 16px;
-    box-shadow: 0 8px 0 0 rgb(19, 127, 190);
+    box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
 }
 
 /* ---------- Description ---------- */
 .unit-description {
-    background: linear-gradient(135deg, #2ECC71, #A3E635);
-    color: white;
+    background: white;
+    color: #374151;
     border-radius: 16px;
     padding: 20px;
     margin-bottom: 90px;
-    box-shadow: 0 8px 0 0 #27AE60;
+    box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
     position: relative;
     text-align: justify;
 }
@@ -252,6 +254,10 @@ function goBack() {
 
 .unit-description p:last-child {
     margin-bottom: 0;
+}
+
+.unit-description .text-h6 {
+    color: #3b28cc;
 }
 
 /* ---------- Bottom Sheet ---------- */
@@ -273,7 +279,7 @@ function goBack() {
 
 /* ---------- Sheet Handle ---------- */
 .sheet-handle {
-    background-color: rgb(248, 249, 251);
+    background-color: #f8f9fb;
     padding: 8px 0;
     text-align: center;
     cursor: grab;

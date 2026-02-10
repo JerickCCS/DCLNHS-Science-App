@@ -1,17 +1,18 @@
 <template>
-    <q-page class="chapter-page">
+    <q-page class="chapter-page" :style="{ background: contentColor + ' !important' }">
         <!-- Top Navigation Tabs -->
-        <q-header class="bg-white no-shadow">
+        <q-header class="bg-white no-shadow" :style="{ background: contentColor + ' !important' }">
             <q-toolbar class="position-relative center-toolbar">
                 <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="btn-left" />
                 <div class="toolbar-title">Chapter 11</div>
             </q-toolbar>
         </q-header>
         <div class="top-navbar">
-            <q-tabs v-model="activeTab" align="justify" indicator-color="primary" active-color="primary"
-                class="text-grey-7" mobile-arrows outside-arrows>
-                <q-tab name="introduction" label="Introduction" class="tab-button" />
-                <q-tab name="lessons" label="Lessons" class="tab-button" />
+            <q-tabs v-model="activeTab" align="justify" indicator-color="transparent" active-color="primary"
+                class="text-grey-7 flat" mobile-arrows outside-arrows>
+                <q-tab name="introduction" label="Introduction" class="tab-button"
+                    :style="getTabStyle('introduction')" />
+                <q-tab name="lessons" label="Lessons" class="tab-button" :style="getTabStyle('lessons')" />
             </q-tabs>
         </div>
 
@@ -114,7 +115,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, watch } from "vue"
+import { ref, reactive, onMounted, watch, computed } from "vue"
 import { useRouter, useRoute } from "vue-router"
 import { getCurrentUser } from "src/utils/session" // session.js helper
 
@@ -129,6 +130,44 @@ export default {
         const router = useRouter()
         const route = useRoute()
         const activeTab = ref(route.query.tab || "introduction")
+
+        // Color theme definitions
+        const colors = {
+            introduction: {
+                header: '#42a7ff',
+                content: '#42a7ff',
+                activeTab: '#4534ff'
+            },
+            lessons: {
+                header: '#4534ff',
+                content: '#4534ff',
+                activeTab: '#42a7ff'
+            }
+        }
+
+        // Computed properties for dynamic colors
+        const contentColor = computed(() => {
+            return activeTab.value === 'introduction'
+                ? colors.introduction.content
+                : colors.lessons.content
+        })
+
+        const activeTabColor = computed(() => {
+            return activeTab.value === 'introduction'
+                ? colors.introduction.activeTab
+                : colors.lessons.activeTab
+        })
+
+        // Function to get tab styles
+        const getTabStyle = (tabName) => {
+            if (activeTab.value === tabName) {
+                return {
+                    background: activeTabColor.value,
+                    color: 'white !important'
+                }
+            }
+            return {}
+        }
 
         // Watch for tab changes and update the URL query
         watch(activeTab, (newTab) => {
@@ -177,7 +216,6 @@ export default {
         ])
 
 
-
         // Load progress from localStorage and apply sequential unlocking
         const loadProgress = () => {
             const userProgress = currentUser.progress || {}
@@ -211,7 +249,18 @@ export default {
             loadProgress()
         })
 
-        return { activeTab, unitData, stats, lessons, selectLesson, completeLesson, goBack }
+        return {
+            activeTab,
+            unitData,
+            stats,
+            lessons,
+            selectLesson,
+            completeLesson,
+            goBack,
+            contentColor,
+            activeTabColor,
+            getTabStyle
+        }
     }
 }
 </script>
@@ -224,6 +273,7 @@ export default {
     min-height: 100vh;
     padding-bottom: 20px;
     overflow: hidden;
+    transition: background 0.3s ease;
 }
 
 .toolbar-title {
@@ -231,11 +281,7 @@ export default {
     font-weight: bold;
     display: inline-block;
     text-align: center;
-    background: linear-gradient(90deg, #42a5f5, #7e57c2, #ef5350);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent !important;
+    color: white !important;
     z-index: 2;
     pointer-events: none;
 }
@@ -244,6 +290,7 @@ export default {
 .q-header {
     box-shadow: none !important;
     border-bottom: none !important;
+    transition: background 0.3s ease !important;
 }
 
 /* Center the toolbar content */
@@ -262,25 +309,25 @@ export default {
     top: 50% !important;
     transform: translateY(-50%) !important;
     z-index: 3 !important;
-    background: #007cec;
+    background: transparent !important;
     border-radius: 10px;
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .q-header .q-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-50%) scale(1.05) !important;
 }
 
 /* Reset Quasar default title color if used elsewhere */
 .q-header .q-toolbar-title {
-    color: transparent !important;
+    color: white !important;
 }
 
 /* Icon color reset */
 .q-icon {
-    -webkit-text-fill-color: initial;
-    color: white;
+    -webkit-text-fill-color: white !important;
+    color: white !important;
 }
 
 .top-navbar {
@@ -292,10 +339,10 @@ export default {
     width: 95%;
     z-index: 10;
 
-    background: #f5f3ff;
-    border: 2px solid #c4b5fd;
-    border-bottom: 4px solid #8b5cf6;
-    box-shadow: 0 3px 8px rgba(139, 92, 246, 0.15);
+    background: white;
+
+    border-bottom: 4px solid #3b28cc;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 
     border-radius: 12px;
     overflow: hidden;
@@ -308,13 +355,11 @@ export default {
         transition: all 0.3s ease;
 
         &:hover {
-            background: #ddd6fe;
-            color: #4c1d95;
+            background: #f3f4f6;
+            color: #1f2937;
         }
 
         &.q-tab--active {
-            background: #8b5cf6;
-            color: white !important;
             box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15);
         }
     }
@@ -337,7 +382,7 @@ export default {
 .chapter-label {
     font-size: 2rem;
     font-weight: 700;
-    color: #8b5cf6;
+    color: #fbbf24;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 8px;
@@ -346,10 +391,8 @@ export default {
 
 // New Introduction Header Styles with Wide Image
 .introduction-content {
-    background: transparent;
-    border-radius: 0;
-    box-shadow: none;
     padding: 16px;
+    background: transparent;
 }
 
 .introduction-header {
@@ -359,7 +402,7 @@ export default {
     margin: 1rem 0 1rem;
     /* Reduced from 2rem 0 1.5rem */
     padding-bottom: 1rem;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid rgb(255, 255, 255);
 
     .intro-text {
         flex: 1;
@@ -369,7 +412,7 @@ export default {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            color: #1976d2;
+            color: #ffffff;
             line-height: 1.3;
         }
 
@@ -377,7 +420,7 @@ export default {
             font-family: 'MyFont', sans-serif;
             font-size: 1rem;
             text-align: justify;
-            color: #555;
+            color: #f7f7f7;
             line-height: 1.6;
             font-weight: 600;
         }
@@ -392,8 +435,8 @@ export default {
         /* Ensures image fills the space properly */
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        border: 3px solid #1976d2;
-        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        border: 3px solid #ffffff;
+        filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.2));
         transition: all 0.3s ease;
 
         &:hover {
@@ -407,14 +450,13 @@ export default {
 .pre-learning-intro {
     margin: 1.5rem 0;
     padding: 20px;
-    background: #f8f9fa;
+    background: #ffffff;
     border-radius: 8px;
-    border-left: 4px solid #1976d2;
 
     p {
         font-size: 1rem;
         line-height: 1.6;
-        color: #555;
+        color: #374151;
         margin-bottom: 12px;
         text-align: justify;
 
@@ -428,11 +470,14 @@ export default {
 .objectives-section {
     margin-top: 1.5rem;
     /* Reduced from 2rem */
+    background-color: white;
+    padding: 12px;
+    border-radius: 8px;
 
     .objectives-title {
         font-size: 1.2rem;
         font-weight: 600;
-        color: #333;
+        color: #1f2937;
         margin-bottom: 1rem;
     }
 }
@@ -447,13 +492,13 @@ export default {
         margin-bottom: 12px;
         font-size: 1rem;
         line-height: 1.5;
-        color: #555;
+        color: #374151;
 
         &::before {
             content: '•';
             position: absolute;
             left: 8px;
-            color: #1976d2;
+            color: #3b28cc;
             font-weight: bold;
             font-size: 1.2rem;
         }
@@ -468,10 +513,8 @@ export default {
 }
 
 .lessons-content {
-    background: transparent;
-    border-radius: 0;
-    box-shadow: none;
     padding: 16px;
+    background: transparent;
 }
 
 .lessons-header {
@@ -480,13 +523,13 @@ export default {
     .lessons-title {
         font-size: 20px;
         font-weight: bold;
-        color: #1976d2;
+        color: #ffffff;
         margin: 0
     }
 
     .lessons-subtitle {
         font-size: 14px;
-        color: #666;
+        color: #ffffff;
         margin-bottom: 1em;
     }
 }
@@ -595,13 +638,13 @@ export default {
 
     &.current-card {
         border: none;
-        background: #3b82f6;
+        background: #2699f7;
         border-bottom: 4px solid #1f4d97;
         position: relative;
 
         .lesson-title,
         .lesson-description {
-            color: white;
+            color: rgb(255, 255, 255);
         }
 
         &::before {
@@ -685,10 +728,10 @@ export default {
     }
 
     &.current .circle-number {
-        background: #1976d2;
-        color: white;
-        border-color: #1976d2;
-        box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+        background: #ffffff;
+        color: rgb(45, 42, 255);
+        border-color: #c0baff;
+        box-shadow: 0 0 0 3px rgba(59, 40, 204, 0.2);
     }
 
     &.locked .circle-number {

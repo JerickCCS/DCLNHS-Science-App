@@ -434,7 +434,7 @@ const addProfile = () => {
     left: 0;
     padding: 16px;
     box-sizing: border-box;
-    /* background: #8ce4d1; */
+    background: #4534ff;
 }
 
 .login-card {
@@ -482,7 +482,7 @@ const addProfile = () => {
     font-size: clamp(1.8rem, 5vw, 2.2rem);
     font-weight: 700;
     margin-bottom: 2px;
-    background: linear-gradient(45deg, #2c5282, #4299e1);
+    background: linear-gradient(45deg, #ffffff, #e3f3ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -491,7 +491,7 @@ const addProfile = () => {
 
 .subtitle {
     font-size: clamp(1rem, 3vw, 1.2rem);
-    color: #2d3748;
+    color: #ffffff;
     font-weight: 600;
     margin-top: 2px;
 }
@@ -619,7 +619,6 @@ const addProfile = () => {
 }
 
 .profile-card:hover {
-    transform: translateY(-2px);
     box-shadow: 0 4px 0 #000;
 }
 
@@ -717,9 +716,17 @@ const addProfile = () => {
     text-overflow: ellipsis;
 }
 
+.profile-name:hover {
+    color: white;
+}
+
 .profile-section {
     color: #000;
     font-size: 0.8rem;
+}
+
+.profile-section:hover {
+    color: white;
 }
 
 .arrow-icon {
@@ -767,7 +774,7 @@ const addProfile = () => {
 .add-profile-btn {
     width: 100%;
     padding: 14px;
-    background: #2138ba;
+    background: #42a7ff;
     color: white;
     border: 2px solid #000;
     border-radius: 12px;
@@ -785,7 +792,7 @@ const addProfile = () => {
 
 .add-profile-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 0 #21BA45;
+    box-shadow: 0 6px 0 #192c97;
 }
 
 .add-profile-btn:active {

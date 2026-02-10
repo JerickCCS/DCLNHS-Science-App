@@ -1,16 +1,16 @@
 <template>
     <!-- Header moved outside bookmarks-page -->
-    <q-header class="bg-white text-dark">
+    <q-header class="text-white header-no-border" style="background: #42a7ff !important;">
         <q-toolbar class="relative-position">
             <!-- Back button (left) -->
-            <q-btn flat dense round icon="arrow_back" @click="goBack" class="absolute-left q-ml-sm" />
+            <q-btn flat dense round icon="arrow_back" @click="goBack" class="absolute-left q-ml-sm text-white" />
 
             <!-- Centered title -->
-            <div class="absolute-center text-h6 text-weight-bold">
+            <div class="absolute-center text-h6 text-weight-bold text-white">
                 Bookmarks
             </div>
         </q-toolbar>
-        <q-linear-progress :value="progress" size="4px" color="primary" class="header-progress" />
+        <!-- <q-linear-progress :value="progress" size="4px" color="primary" class="header-progress" /> -->
     </q-header>
 
     <q-page class="bookmarks-page">
@@ -96,12 +96,11 @@
 
                 <!-- Empty State -->
                 <div v-else class="empty-state text-center q-mt-xl">
-                    <q-icon name="bookmark_border" size="64px" color="grey-4" class="empty-icon" />
-                    <div class="text-h6 text-grey-6 q-mt-md">No bookmarks yet</div>
-                    <div class="text-body1 text-grey-5 q-mt-xs">
+                    <q-icon name="bookmark_border" size="64px" color="white" class="empty-icon" />
+                    <div class="text-h6 text-white q-mt-md">No bookmarks yet</div>
+                    <div class="text-body1 text-white q-mt-xs">
                         Save pages as you read to find them later
                     </div>
-                    <q-btn color="primary" label="Browse Lessons" class="q-mt-md" @click="goToLessons" outline />
                 </div>
             </div>
 
@@ -145,6 +144,7 @@ export default {
             index: -1
         })
         const longPressIndex = ref(-1)
+        const progress = ref(1)
         let longPressTimer = null
 
         // Card colors with corresponding border colors (matching Statistics page style)
@@ -322,6 +322,7 @@ export default {
             bookmarks,
             deleteDialog,
             longPressIndex,
+            progress,
             startLongPress,
             endLongPress,
             handleCardClick,
@@ -340,8 +341,21 @@ export default {
 </script>
 
 <style scoped>
+.header-no-border {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.q-btn .q-icon {
+    color: white !important;
+}
+
 .bookmarks-page {
-    background: #f4f6f8;
+    background: #42a7ff;
     min-height: 100vh;
 }
 

@@ -18,7 +18,7 @@
                     Question {{ currentQuestionIndex + 1 }}/{{ totalQuestions }}
                 </div>
             </q-toolbar>
-            <q-linear-progress :value="progress" size="4px" color="primary" class="header-progress" />
+            <q-linear-progress :value="progress" size="4px" color="white" class="header-progress" />
         </q-header>
 
         <!-- Main Content -->

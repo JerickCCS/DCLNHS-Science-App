@@ -15,31 +15,28 @@
 
 .q-header {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    /* border-bottom: 5px solid #9c9c9c; */
+    background-color: #4534ff !important;
+    border-bottom: 2px solid #0027d4;
     font-family: 'OtherFont', sans-serif;
     font-weight: 800;
     font-size: 1.1rem;
     letter-spacing: 0.3px;
-    color: #7c3aed;
+    color: #ffffff;
 
 }
 
 .q-header .q-btn {
-    background: rgba(248, 248, 248, 0.986);
-    border-radius: 10px;
+    /* background: rgba(248, 248, 248, 0.986);
+    border-radius: 10px; */
+    color: white;
     /* transition: background 0.2s ease, transform 0.2s ease;
     box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2); */
-}
-
-.q-header .q-btn:hover {
-    background: rgba(255, 255, 255, 0.986);
-    transform: translateY(-1px);
 }
 
 .navbar-title {
     font-weight: 800;
     font-size: 1.4rem;
-    color: #7c3aed;
+    color: #ffffff;
 
 
 }
@@ -75,10 +72,10 @@
     margin: 10px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 10px;
-    border-bottom: #a7a7a7 5px solid;
+    /* border-bottom: #a7a7a7 5px solid; */
     overflow: hidden;
     z-index: 10;
-    box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 7px 7px 0px 0px rgba(0,0,0,0.16);
 
     /* animation: viewer-zoom 3s ease-in-out infinite;
     transform-origin: center; */
@@ -114,7 +111,7 @@
     right: 20px;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 6px;
     background: #7c3aed;
     color: white;
     display: flex;
@@ -124,6 +121,29 @@
     cursor: pointer;
     z-index: 1000;
     box-shadow: 0 6px 0 0 #5b21b6;
+    transition: box-shadow 0.12s ease, transform 0.12s ease;
+}
+
+/* Press down */
+.speak-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 0 #5b21b6;
+    animation: bounceBack 0.25s ease-out;
+}
+
+@keyframes bounceBack {
+    0% {
+        transform: translateY(4px);
+        box-shadow: 0 2px 0 0 #5b21b6;
+    }
+    60% {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 0 0 #5b21b6;
+    }
+    100% {
+        transform: translateY(0);
+        box-shadow: 0 6px 0 0 #5b21b6;
+    }
 }
 
 .speak-btn img {
@@ -149,25 +169,25 @@
     justify-content: space-between;
     align-items: center;
     padding: 14px 20px;
-    background: #ffffff;
-    border-top: 3px solid #d8b4fe;
+    background: #4534ff;
+    border-top: 3px solid #f4ebff;
     z-index: 100;
 }
 
 .nav-button {
     width: 120px;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 6px;
     font-weight: bold;
-    background: rgb(37, 117, 252);
+    background: #FFD84D;
     color: #fff;
     transition: 0.2s;
-    box-shadow: 0 8px 0 0 rgba(59, 0, 147, 0.8);
+    box-shadow: 7px 7px 0px 0px rgba(0,0,0,0.16);
 }
 
 .nav-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 0 0 rgba(59, 0, 147, 0.8);
+    /* box-shadow: 0 10px 0 0 rgba(59, 0, 147, 0.8); */
 }
 
 .nav-button:disabled,
@@ -175,7 +195,7 @@
     background: #d1d5db !important;
     border-color: #9ca3af !important;
     color: #6b7280 !important;
-    box-shadow: 0 8px 0 0 #9ca3af !important;
+    /* box-shadow: 7px 7px 0px 0px #9ca3af !important; */
     cursor: not-allowed !important;
     transform: none !important;
 }
@@ -189,7 +209,6 @@
 .progress-section .page-count {
     font-weight: bold;
     color: #7c3aed;
-
     margin-bottom: 4px;
 }
 
@@ -271,9 +290,7 @@
 }
 
 :deep(.fun-fact-card) {
-    background: #d532fa;
-    background: linear-gradient(90deg, rgba(213, 50, 250, 1) 27%, rgba(73, 86, 235, 1) 100%);
-    border-left: 6px solid purple;
+    background: linear-gradient(90deg,rgba(255, 165, 0, 1) 0%,rgba(255, 140, 0, 1) 50%,rgba(255, 99, 71, 1) 100%);
     text-align: justify;
     margin-bottom: 20px;
     color: white;
@@ -281,7 +298,7 @@
     border-radius: 12px;
     font-size: 16px;
     line-height: 1.5;
-    box-shadow: 0 8px 0 0 rgba(123, 31, 162, 0.8);
+    box-shadow: 0 8px 0 0 rgba(199, 126, 17, 0.8);
 }
 
 :deep(.fun-fact-card .highlight) {
@@ -436,9 +453,10 @@
     width: 100%;
     max-width: 600px;
     height: auto;
-    border-radius: 12px;
+    border-radius: 6px;
     border-width: 1px 1px 5px 1px;
-    box-shadow: 0 8px 0 0 rgba(15, 13, 179, 0.4);
+    border: 1px solid black;
+    box-shadow: 7px 7px 0px 0px rgba(0,0,0,0.16);
 }
 
 :deep(.video-container .caption),
