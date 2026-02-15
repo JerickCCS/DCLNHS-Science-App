@@ -22,18 +22,16 @@
             <div v-if="activeTab === 'introduction'" class="introduction-content">
                 <!-- New Introduction Header -->
                 <div class="introduction-header">
-                    <div class="intro-text">
-                        <div class="chapter-label"></div>
-                        <h2 class="intro-title">{{ unitData.title }}</h2>
-                        <p class="intro-description">{{ unitData.description }}</p>
-                    </div>
                     <img src="assets/img/chapter 12/chapter 12.png" alt="Seasons Icon" class="intro-image-wide">
                 </div>
 
                 <!-- Text above PRE-LEARNING CHECK -->
                 <div class="pre-learning-intro">
-                    <p>Understanding how faults and plate boundaries that generate earthquakes can help people prepare
-                        for earthquake-related disasters.</p>
+                    <p>Why do we experience extreme hot weather from March to May? Why do we have frequent rainfall and
+                        thunderstorms, especially from June to August? The Philippines experiences two seasons—wet and
+                        dry seasons, while other countries have four seasons each year. Why do they have summer, spring,
+                        autumn, and winter, and we do not? This chapter will help you understand the seasons better. You
+                        will learn what causes the seasons, and why they vary in different parts of the world.</p>
                 </div>
 
                 <!-- Learning Objectives -->
@@ -188,9 +186,9 @@ export default {
             title: "Seasons",
             description: "Understand how Earth's tilt and revolution cause seasonal changes and how these affect the environment and daily life.",
             objectives: [
-                "Describe how Earth's tilt and revolution around the Sun create seasons",
-                "Explain why the intensity and duration of sunlight vary throughout the year",
-                "Identify the characteristics of the seasons in the Philippines and their effects on people and the environment"
+                "Define season.",
+                "Why do seasons occur?",
+                "How does the location of the Philippines affect its seasons?"
             ],
             totalLessons: 8,
             estimatedTime: 8,
@@ -393,6 +391,7 @@ export default {
 }
 
 .introduction-header {
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

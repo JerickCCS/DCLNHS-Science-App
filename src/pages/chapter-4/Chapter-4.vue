@@ -22,19 +22,26 @@
             <div v-if="activeTab === 'introduction'" class="introduction-content">
                 <!-- New Introduction Header -->
                 <div class="introduction-header">
-                    <div class="intro-text">
-                        <div class="chapter-label"></div>
-                        <h2 class="intro-title">{{ unitData.title }}</h2>
-                        <p class="intro-description">{{ unitData.description }}</p>
-                    </div>
                     <img src="assets/img/chapter 4/chapter-4.png" alt="Microscope Image" class="intro-image-wide">
                 </div>
 
                 <!-- Text above PRE-LEARNING CHECK -->
                 <div class="pre-learning-intro">
-                    <p>You will explore how curiosity leads scientists to ask questions, make observations, and design
-                        experiments. You will learn how models, tools, and careful analysis help explain and predict
-                        natural phenomena.</p>
+                    <p>Antonie van Leeuwenhoek was the first person to observe bacteria and protozoa using a single high
+                        quality lens microscope. In his lifetime, he ground more than 100 lenses which were often very
+                        small and placed them in brass plates. He was able to observe many microscopic things which laid
+                        the foundations for the study of microorganisms.
+                    </p>
+                    <p>
+                        Living organisms are composed of cells. It is known as the structural and functional unit of
+                        life. Understanding the cell is understanding the organism as a whole, making cells an important
+                        part in its life processes.
+                    </p>
+                    <p>
+                        Observing cells using the naked eye is very difficult because of its minute size. The smallest
+                        cell is 0.17 μm called the Thermofilum, a hyperthermophilic Archaea. Cells like this are
+                        observed using a powerful optical instrument made up of lenses—the microscope. The microscope is
+                        an instrument that can be used to observe small objects, even cells.</p>
                 </div>
 
                 <!-- Learning Objectives -->
@@ -189,10 +196,10 @@ export default {
             title: "The Microscope and the Microscopic Cell",
             description: "Study how microscopes are used to observe cells and understand the structure and function of microscopic life.",
             objectives: [
-                "Identify the main parts of a microscope and describe their functions",
-                "Explain how microscopes help in observing microscopic cells",
-                "Recognize basic cell structures seen under the microscope",
-                "Demonstrate proper use and care of a microscope"
+                "Answer the following items as specifically directed.",
+                "1. Make a quick sketch of a microscope from what you know, then label its parts.",
+                "2. Compute. How many times bigger is a 15-cm ostrich egg from a 0.3-μm Mycoplasma gallacticum cell? (Note: 1 cm = 10,000 μm)",
+                "3. What are the differences between an animal cell and a plant cell?"
             ],
             totalLessons: 8,
             estimatedTime: 8,
@@ -396,6 +403,7 @@ export default {
 }
 
 .introduction-header {
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

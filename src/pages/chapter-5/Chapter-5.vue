@@ -22,18 +22,20 @@
             <div v-if="activeTab === 'introduction'" class="introduction-content">
                 <!-- New Introduction Header -->
                 <div class="introduction-header">
-                    <div class="intro-text">
-                        <div class="chapter-label"></div>
-                        <h2 class="intro-title">{{ unitData.title }}</h2>
-                        <p class="intro-description">{{ unitData.description }}</p>
-                    </div>
                     <img src="/assets/img/chapter 5/chapter 5.png" alt="Cells" class="intro-image-wide">
                 </div>
 
                 <!-- Text above PRE-LEARNING CHECK -->
                 <div class="pre-learning-intro">
-                    <p>Understanding how cells divide and how fertilization occurs helps explain how new cells and
-                        organisms develop and grow.</p>
+                    <p>An important characteristic of living things is their ability to perpetuate their own kind
+                        through the process of reproduction. The ability of an organism to successfully reproduce allows
+                        it to exist generation after generation. The cell cycle and fertilization—parts of the
+                        reproductive processes of organisms—are interconnected and ensures the continuation of the
+                        species in every generation.</p>
+
+                    <p>Whether reproduction is sexual or asexual, the process of the cell cycle is important since it
+                        either produces the sex cells or gametes through meiosis, or multiplies cells of a parent cell
+                        to directly produce its offspring.</p>
                 </div>
 
                 <!-- Learning Objectives -->
@@ -188,9 +190,9 @@ export default {
             "title": "Cellular Reproduction and Fertilization",
             "description": "Understand how cells reproduce through mitosis and meiosis, and how fertilization occurs to form a new organism.",
             "objectives": [
-                "Describe the processes of mitosis and meiosis and their roles in growth and reproduction",
-                "Differentiate between asexual and sexual reproduction at the cellular level",
-                "Explain how fertilization occurs and how it restores the diploid chromosome number"
+                "List the organelles/molecules of the cells that are actively involved in the process of cellular reproduction.",
+                "Where do mitosis and meiosis happen in the body?",
+                "What is the main difference between sexual and asexual reproduction?"
             ],
             totalLessons: 8,
             estimatedTime: 8,
@@ -393,6 +395,7 @@ export default {
 }
 
 .introduction-header {
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

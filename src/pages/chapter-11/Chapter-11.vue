@@ -22,19 +22,23 @@
             <div v-if="activeTab === 'introduction'" class="introduction-content">
                 <!-- New Introduction Header -->
                 <div class="introduction-header">
-                    <div class="intro-text">
-                        <div class="chapter-label"></div>
-                        <h2 class="intro-title">{{ unitData.title }}</h2>
-                        <p class="intro-description">{{ unitData.description }}</p>
-                    </div>
                     <img src="assets/img/chapter 11/chapter 11.png" alt="Interactions in the Atmosphere Icon"
                         class="intro-image-wide">
                 </div>
 
                 <!-- Text above PRE-LEARNING CHECK -->
                 <div class="pre-learning-intro">
-                    <p>Understanding how faults and plate boundaries that generate earthquakes can help people prepare
-                        for earthquake-related disasters.</p>
+                    <p>Our country is constantly visited by tropical cyclones. In recent years, tropical cyclones such
+                        as Tropical Storm Ondoy and Super Typhoon Yolanda have claimed countless lives and have had
+                        long-lasting impact on the lives of many people. In order to mitigate the negative effects of
+                        tropical cyclones, it is important to understand tropical cyclones, as well as other atmospheric
+                        phenomena, and how they can affect our lives. This will help us be better prepared for them,
+                        thus minimizing loss of life and property.</p>
+
+                    <p>You have learned about the types of weather, the effects of weather changes on our daily lives,
+                        the different weather disturbances, and the weather patterns in the Philippines. In this
+                        chapter, you will understand what causes weather and weather-related phenomena in the
+                        Philippines.</p>
                 </div>
 
                 <!-- Learning Objectives -->
@@ -189,9 +193,9 @@ export default {
             title: "Interactions in the Atmosphere",
             description: "Explore how different components of the atmosphere interact, including the movement of air, heat transfer, and the formation of weather patterns.",
             objectives: [
-                "Describe how atmospheric components interact to influence weather and climate",
-                "Explain how heat transfer and air movement shape atmospheric processes",
-                "Identify the factors that contribute to wind formation and weather changes"
+                "How do you describe patterns of weather and climate throughout the year?",
+                "How do these patterns of weather and climate affect human activities?",
+                "What are the weather disturbances that occur in or near the Philippines?"
             ],
             totalLessons: 8,
             estimatedTime: 8,
@@ -396,6 +400,7 @@ export default {
 }
 
 .introduction-header {
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

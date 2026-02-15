@@ -213,7 +213,7 @@ export default {
                     "Figures I, II, and III"
                 ],
                 correctAnswer: "Figure II only",
-                image: null
+                image: "assets/img/chapter 12/items 11-15.png"
             },
             {
                 question: "Which shows summer in the Southern Hemisphere? (Based on figures showing where direct sunlight strikes Earth)",
@@ -224,7 +224,7 @@ export default {
                     "Figures I and II"
                 ],
                 correctAnswer: "Figure I only",
-                image: null
+                image: "assets/img/chapter 12/items 11-15.png"
             },
             {
                 question: "Which shows that daytime is longer than nighttime in the Northern Hemisphere? (Based on figures showing where direct sunlight strikes Earth)",
@@ -235,7 +235,7 @@ export default {
                     "Figures I, II, and III"
                 ],
                 correctAnswer: "Figure II only",
-                image: null
+                image: "assets/img/chapter 12/items 11-15.png"
             },
             {
                 question: "What season is experienced by the South Pole in figure I?",
@@ -246,7 +246,7 @@ export default {
                     "Summer"
                 ],
                 correctAnswer: "Summer",
-                image: null
+                image: "assets/img/chapter 12/items 11-15.png"
             },
             {
                 question: "What season is experienced by the North Pole in figure III?",
@@ -257,7 +257,7 @@ export default {
                     "Summer"
                 ],
                 correctAnswer: "Winter",
-                image: null
+                image: "assets/img/chapter 12/items 11-15.png"
             }
         ];
         const durationMinutes = 5;

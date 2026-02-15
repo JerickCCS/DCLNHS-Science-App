@@ -3,13 +3,13 @@
 	"appName": "Science 7 Interactive Module – DCLNHS",
 	"webDir": "src-capacitor/www",
 	"android": {
-		"fullscreen": false
+		"fullscreen": true
 	},
 	"plugins": {
 		"StatusBar": {
-			"overlaysWebView": false,
+			"overlaysWebView": true,
 			"style": "DARK",
-			"backgroundColor": "#00000000"
+			"backgroundColor": "#000000"
 		}
 	}
 }

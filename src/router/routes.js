@@ -6,9 +6,7 @@ const routes = [
       { path: '', component: () => import('pages/IndexPage.vue'), name: 'home' },
       { path: 'chapter-one', component: () => import('pages/chapter-1/Chapter-1.vue'), name: 'chapter-one' },
       { path: 'lesson-test', component: () => import('pages/LessonPage.vue'), name: 'lesson-test' },
-      { path: 'lesson-try', component: () => import('pages/LessonTry.vue'), name: 'lesson-try' },
       { path: 'login-page', component: () => import('pages/LoginPage.vue'), name: 'login-page' },
-      { path: 'test-page', component: () => import('pages/Unit-1.vue'), name: 'test-page' },
       { path: 'bookmark-page', component: () => import('pages/BookMark.vue'), name: 'bookmark-page' },
       { path: 'quiz-stats', component: () => import('pages/QuizStats.vue'), name: 'quiz-stats' },
       //Unit Chapters

@@ -141,13 +141,13 @@ export default {
             {
                 question: "Using the figures, choose which shows a reverse dip-slip fault.",
                 options: [
-                    "Figure A: Hanging wall moves up relative to footwall",
-                    "Figure B: Hanging wall moves down relative to footwall",
-                    "Figure C: Blocks move horizontally past each other",
-                    "Figure D: Combination of vertical and horizontal movement"
+                    "Figure A",
+                    "Figure B",
+                    "Figure C",
+                    "Figure D"
                 ],
-                correctAnswer: "Figure A: Hanging wall moves up relative to footwall",
-                image: null
+                correctAnswer: "Figure B",
+                image: "assets/img/chapter 10/chaptertest-figure.png"
             },
             {
                 question: "An intensity IV earthquake is considered________.",
@@ -190,7 +190,7 @@ export default {
                     "There are many active faults in the Philippines",
                     "The Philippines is located at the boundary of the Philippine Sea Plate and the Eurasian Plate"
                 ],
-                correctAnswer: "The Philippines is an archipelago",
+                correctAnswer: "The Philippines is in the Pacific Ring of Fire",
                 image: null
             },
             {

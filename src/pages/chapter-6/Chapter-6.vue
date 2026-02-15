@@ -22,18 +22,17 @@
             <div v-if="activeTab === 'introduction'" class="introduction-content">
                 <!-- New Introduction Header -->
                 <div class="introduction-header">
-                    <div class="intro-text">
-                        <div class="chapter-label"></div>
-                        <h2 class="intro-title">{{ unitData.title }}</h2>
-                        <p class="intro-description">{{ unitData.description }}</p>
-                    </div>
                     <img src="/assets/img/chapter 6/chapter 6.png" alt="Energy" class="intro-image-wide">
                 </div>
 
                 <!-- Text above PRE-LEARNING CHECK -->
                 <div class="pre-learning-intro">
-                    <p>Understanding how energy flows through an ecosystem helps explain how organisms obtain energy,
-                        interact with one another, and maintain balance in the environment.</p>
+                    <p>The biosphere is made up of the parts of the Earth where life exists. This sphere starts with a
+                        simple cell to the complex interconnections between organisms belonging in the same space.</p>
+                    <p>Life-supporting energy sourced from the sun and other inorganic molecules is captured and
+                        processed mainly by the producers in the biosphere. This makes other life-forms possible since
+                        the energy from the producers is passed on from organism to organism based on a determined
+                        hierarchy or trophic level.</p>
                 </div>
 
                 <!-- Learning Objectives -->
@@ -188,9 +187,8 @@ export default {
             title: "Energy Flow in the Ecosystem",
             description: "Understand how energy is transferred through an ecosystem, from the Sun to producers and then to consumers and decomposers, and how this flow supports life.",
             objectives: [
-                "Explain how energy enters ecosystems and is captured by producers through photosynthesis",
-                "Describe how energy is transferred from producers to consumers and decomposers through food chains and food webs",
-                "Analyze how energy is lost as heat at each trophic level and why energy flow is not cyclical"
+                "What are the different levels of biological organization?",
+                "How is energy transferred from one trophic level to the next?"
             ],
             totalLessons: 8,
             estimatedTime: 8,
@@ -393,6 +391,7 @@ export default {
 }
 
 .introduction-header {
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

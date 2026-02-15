@@ -22,18 +22,21 @@
             <div v-if="activeTab === 'introduction'" class="introduction-content">
                 <!-- New Introduction Header -->
                 <div class="introduction-header">
-                    <div class="intro-text">
-                        <div class="chapter-label"></div>
-                        <h2 class="intro-title">{{ unitData.title }}</h2>
-                        <p class="intro-description">{{ unitData.description }}</p>
-                    </div>
                     <img src="assets/img/chapter 7/chapter 7.png" alt="Force" class="intro-image-wide">
                 </div>
 
                 <!-- Text above PRE-LEARNING CHECK -->
                 <div class="pre-learning-intro">
-                    <p>Understanding how forces act on objects helps explain why things move, stop, change direction, or
-                        remain at rest in everyday situations.</p>
+                    <p>Have you experienced driving a bumper car? If not, you should try it to experience a fun
+                        adventure of driving your own little car. You will twist and turn around the track, bumping into
+                        other cars safely and in a thrilling way. It is a fascinating activity to experience physics in
+                        action. One of the concepts in physics that is applied in bumper cars is forces. The interaction
+                        of various forces in bumper cars affects their motion and how they behave.</p>
+
+                    <p>Understanding the concept of force and its interactions gives us the ability to predict how
+                        objects will behave in the real world. When we can identify whether forces are balanced or
+                        unbalanced, we are able to make logical predictions about whether a system will remain
+                        stationary or not.</p>
                 </div>
 
                 <!-- Learning Objectives -->
@@ -188,9 +191,9 @@ export default {
             title: "Forces in Action",
             description: "Understand how forces arise from interactions between objects and how these forces affect motion, direction, and speed in everyday situations.",
             objectives: [
-                "Explain what a force is and describe common types of forces such as push, pull, gravity, and friction",
-                "Analyze how multiple forces acting on an object combine to produce a net force",
-                "Predict how changes in force magnitude and direction affect an object’s motion"
+                "Give examples of forces you encounter in everyday life.",
+                "How do we measure the strength of a force?",
+                "What is the difference between balanced and unbalanced forces? Explain the impact of each on motion."
             ],
             totalLessons: 8,
             estimatedTime: 8,
@@ -392,6 +395,7 @@ export default {
 }
 
 .introduction-header {
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -22,11 +22,6 @@
             <div v-if="activeTab === 'introduction'" class="introduction-content">
                 <!-- New Introduction Header -->
                 <div class="introduction-header">
-                    <div class="intro-text">
-                        <div class="chapter-label"></div>
-                        <h2 class="intro-title">{{ unitData.title }}</h2>
-                        <p class="intro-description">{{ unitData.description }}</p>
-                    </div>
                     <img src="assets/img/chapter 3/chapter-3.png" alt="Earthquakes and Faults Icon"
                         class="intro-image-wide">
                 </div>
@@ -34,8 +29,15 @@
                 <!-- Text above PRE-LEARNING CHECK -->
                 <div class="pre-learning-intro">
                     <p>
-                        Sollutions are around us and within us. They have unique properties that define their uses and
-                        applications
+                        ‎Solutions are part of our daily lives. The air we breathe is a solution of oxygen, nitrogen,
+                        carbon dioxide, water vapor, and other gases. Nutrients are circulated in our body as solutions.
+                        Minerals in the soil are absorbed by plants in the form of solutions. Many solutions are also
+                        involved in the chemical reactions that occur in the environment. Can you describe other
+                        important applications of solutions?</p>
+                    <p>
+                        ‎
+                        ‎In this chapter, you will learn more about solutions, particularly their types, general
+                        properties, and everyday examples such as salts, acids, and bases.
                     </p>
                 </div>
 
@@ -191,10 +193,8 @@ export default {
             title: "Understanding Solubility and Concentration: Practical Applications Explored in Solutions",
             description: "Learn how solubility and concentration affect solutions and their practical uses.",
             objectives: [
-                "Explain the concept of solubility and how substances dissolve in a solvent",
-                "Understand different ways to express the concentration of solutions",
-                "Explore practical applications of solutions in daily life and industry",
-                "Relate solubility and concentration concepts to problem-solving in chemistry"
+                "What are the components of a solution?",
+                "How are solutions classified based on the proportion of their components?"
             ],
             totalLessons: 8,
             estimatedTime: 8,
@@ -403,6 +403,7 @@ export default {
 }
 
 .introduction-header {
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

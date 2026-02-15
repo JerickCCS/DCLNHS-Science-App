@@ -1,5 +1,15 @@
 {
   "appId": "com.dclnhs.science7",
-  "appName": "DCLNHS Science App",
-  "webDir": "www"
+  "appName": "Science 7 Interactive Module – DCLNHS",
+  "webDir": "www",
+  "android": {
+    "fullscreen": true
+  },
+  "plugins": {
+    "StatusBar": {
+      "overlaysWebView": true,
+      "style": "DARK",
+      "backgroundColor": "#000000"
+    }
+  }
 }

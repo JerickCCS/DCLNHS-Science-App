@@ -22,21 +22,24 @@
             <div v-if="activeTab === 'introduction'" class="introduction-content">
                 <!-- New Introduction Header -->
                 <div class="introduction-header">
-                    <div class="intro-text">
-                        <div class="chapter-label"></div>
-                        <h2 class="intro-title">{{ unitData.title }}</h2>
-                        <p class="intro-description">{{ unitData.description }}</p>
-                    </div>
                     <img src="assets/img/chapter 9/chapter 9.png" alt="Heat" class="intro-image-wide">
                 </div>
 
                 <!-- Text above PRE-LEARNING CHECK -->
                 <div class="pre-learning-intro">
-                    <p>
-                        Understanding heat transfer and energy use helps explain how heat moves between objects, how
-                        temperature
-                        changes occur, and why saving energy is important in everyday situations.
-                    </p>
+                    <p>Take a moment to observe your surroundings. Notice that most of what you see involves motion.
+                        Vehicles are traveling in various directions at different velocities. It is crucial for everyone
+                        to have a grasp of fundamental traffic regulations to prevent road accidents.</p>
+
+                    <p>Consider this scenario: when approaching a red traffic light, vehicles should gradually slow down
+                        to a stop within a safe stopping range. Equally important, pedestrians must understand that
+                        crossing the road designated for them is only advisable when the traffic signal is green. This
+                        understanding of motion and traffic rules is not only essential for safety, but it also enables
+                        us to smoothly live our daily lives.</p>
+
+                    <p>In this chapter, you will learn the fundamental concepts of motion and the use of graphs to
+                        describe velocity.</p>
+
                 </div>
 
                 <!-- Learning Objectives -->
@@ -191,10 +194,9 @@ export default {
             title: "Heat Transfer and Saving Energy",
             description: "Understand how heat is transferred between objects and how energy can be conserved and used efficiently in everyday life.",
             objectives: [
-                "Explain how heat is transferred through conduction, convection, and radiation",
-                "Describe how temperature differences cause heat to flow from warmer to cooler objects",
-                "Identify everyday examples of heat transfer at home and in the environment",
-                "Explain simple ways to save energy and improve energy efficiency in daily activities"
+                "How are scalar quantities and vector quantities distinguished from each other?",
+                "Are distance and displacement similar to or different from each other? How about speed and velocity? Justify your answers using everyday situations.",
+                "In which situation is motion considered uniform?"
             ],
             totalLessons: 8,
             estimatedTime: 8,
@@ -398,6 +400,7 @@ export default {
 }
 
 .introduction-header {
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

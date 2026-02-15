@@ -22,11 +22,6 @@
             <div v-if="activeTab === 'introduction'" class="introduction-content">
                 <!-- New Introduction Header -->
                 <div class="introduction-header">
-                    <div class="intro-text">
-                        <div class="chapter-label"></div>
-                        <h2 class="intro-title">{{ unitData.title }}</h2>
-                        <p class="intro-description">{{ unitData.description }}</p>
-                    </div>
                     <img src="assets/img/chapter 2/chapter-2.png" alt="Earthquakes and Faults Icon"
                         class="intro-image-wide">
                 </div>
@@ -34,10 +29,12 @@
                 <!-- Text above PRE-LEARNING CHECK -->
                 <div class="pre-learning-intro">
                     <p>
-                        You will explore how matter is made up of tiny particles that are constantly in motion.
-                        You will learn how the arrangement and movement of these particles determine the
-                        properties and behavior of solids, liquids, and gases. You will also see how changes
-                        in energy affect the state and motion of matter.
+                        Matter makes up everything on Earth. All forms of matter are composed of particles. These
+                        particles, however, are so small that they cannot be seen with the naked eye.
+                    </p>
+                    <p>This chapter focuses on the particle nature of matter, which is the basic principle that
+                        explains the true nature and structure of matter, including its three states. This principle
+                        also helps describe and predict the properties of matter.
                     </p>
                 </div>
 
@@ -193,10 +190,8 @@ export default {
             title: "The Particle Nature of Matter",
             description: "Understand that matter is made up of tiny particles whose motion and arrangement determine its state and properties.",
             objectives: [
-                "Recognize that all matter is composed of particles too small to be seen",
-                "Describe how particle motion and arrangement differ in solids, liquids, and gases",
-                "Explain how temperature and energy changes affect the movement of particles",
-                "Relate observable properties of matter to the behavior of its particles"
+                "What are the three states of matter?",
+                "How are the particles arranged in each state of matter?"
             ],
             totalLessons: 8,
             estimatedTime: 8,
@@ -399,6 +394,7 @@ export default {
 }
 
 .introduction-header {
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -1,131 +1,131 @@
 <template>
-    <!-- Header moved outside bookmarks-page -->
-    <q-header class="text-white header-no-border" style="background: #42a7ff !important;">
-        <q-toolbar class="relative-position">
-            <!-- Back button (left) -->
-            <q-btn flat dense round icon="arrow_back" @click="goBack" class="absolute-left q-ml-sm text-white" />
+    <q-layout view="lHh Lpr lFf">
+        <!-- Header -->
+        <q-header class="text-white header-no-border" style="background: #42a7ff !important;">
+            <q-toolbar class="relative-position">
+                <!-- Back button (left) -->
+                <q-btn flat dense round icon="arrow_back" @click="goBack" class="absolute-left q-ml-sm text-white" />
 
-            <!-- Centered title -->
-            <div class="absolute-center text-h6 text-weight-bold text-white">
-                Bookmarks
-            </div>
-        </q-toolbar>
-        <!-- <q-linear-progress :value="progress" size="4px" color="primary" class="header-progress" /> -->
-    </q-header>
-
-    <q-page class="bookmarks-page">
-        <q-page-container class="no-padding">
-            <!-- Bookmark Counter Card -->
-            <div class="counter-card q-mx-md q-mt-sm q-mb-md">
-                <div class="counter-content">
-                    <div class="row items-center justify-between">
-                        <div class="counter-label">Total Bookmarks</div>
-                        <div class="counter-value">{{ bookmarks.length }}</div>
-                    </div>
+                <!-- Centered title -->
+                <div class="absolute-center text-h6 text-weight-bold text-white">
+                    Bookmarks
                 </div>
-                <div class="counter-border"></div>
-            </div>
+            </q-toolbar>
+        </q-header>
 
-            <!-- Content -->
-            <div class="q-pa-md">
-                <!-- Bookmarks Grid -->
-                <div v-if="bookmarks.length > 0" class="bookmarks-grid">
-                    <div v-for="(bm, idx) in bookmarks" :key="idx" class="bookmark-card-container">
-                        <!-- Bookmark Card -->
-                        <q-card class="bookmark-card cursor-pointer" @click="handleCardClick(idx, bm)"
-                            @touchstart="startLongPress(idx)" @touchend="endLongPress" @touchcancel="endLongPress"
-                            @mousedown="startLongPress(idx)" @mouseup="endLongPress" @mouseleave="endLongPress"
-                            :class="{ 'long-pressed': longPressIndex === idx }" :style="{
-                                '--card-color': getCardColor(idx),
-                                '--border-color': getBorderColor(idx),
-                                '--icon-color': getIconColor(idx)
-                            }">
+        <q-page-container>
+            <q-page class="bookmarks-page">
+                <!-- Bookmark Counter Card -->
+                <div class="counter-card q-mx-md q-mt-sm q-mb-md">
+                    <div class="counter-content">
+                        <div class="row items-center justify-between">
+                            <div class="counter-label">Total Bookmarks</div>
+                            <div class="counter-value">{{ bookmarks.length }}</div>
+                        </div>
+                    </div>
+                    <div class="counter-border"></div>
+                </div>
 
-                            <!-- Content overlay (blurred on long press) -->
-                            <div class="card-content-overlay" :class="{ 'blurred': longPressIndex === idx }">
-                                <q-card-section class="card-content">
-                                    <!-- Card Header -->
-                                    <div class="row items-center justify-between q-mb-sm">
-                                        <div class="row items-center">
-                                            <!-- Bookmark Icon -->
-                                            <div class="bookmark-icon-wrapper">
-                                                <q-icon name="bookmark" size="sm" class="bookmark-icon" />
+                <!-- Content -->
+                <div class="q-pa-md">
+                    <!-- Bookmarks Grid -->
+                    <div v-if="bookmarks.length > 0" class="bookmarks-grid">
+                        <div v-for="(bm, idx) in bookmarks" :key="idx" class="bookmark-card-container">
+                            <!-- Bookmark Card -->
+                            <q-card class="bookmark-card cursor-pointer" @click="handleCardClick(idx, bm)"
+                                @touchstart="startLongPress(idx)" @touchend="endLongPress" @touchcancel="endLongPress"
+                                @mousedown="startLongPress(idx)" @mouseup="endLongPress" @mouseleave="endLongPress"
+                                :class="{ 'long-pressed': longPressIndex === idx }" :style="{
+                                    '--card-color': getCardColor(idx),
+                                    '--border-color': getBorderColor(idx),
+                                    '--icon-color': getIconColor(idx)
+                                }">
+
+                                <!-- Content overlay (blurred on long press) -->
+                                <div class="card-content-overlay" :class="{ 'blurred': longPressIndex === idx }">
+                                    <q-card-section class="card-content">
+                                        <!-- Card Header -->
+                                        <div class="row items-center justify-between q-mb-sm">
+                                            <div class="row items-center">
+                                                <!-- Bookmark Icon -->
+                                                <div class="bookmark-icon-wrapper">
+                                                    <q-icon name="bookmark" size="sm" class="bookmark-icon" />
+                                                </div>
+
+                                                <!-- Lesson Number -->
+                                                <div class="lesson-number text-caption text-weight-medium">
+                                                    Item {{ bm.lessonId }}
+                                                </div>
                                             </div>
 
-                                            <!-- Lesson Number -->
-                                            <div class="lesson-number text-caption text-weight-medium">
-                                                Item {{ bm.lessonId }}
-                                            </div>
+                                            <!-- Page Indicator -->
+                                            <q-badge color="primary" text-color="white" class="page-badge">
+                                                Page {{ bm.page + 1 }}
+                                            </q-badge>
                                         </div>
 
-                                        <!-- Page Indicator -->
-                                        <q-badge color="primary" text-color="white" class="page-badge">
-                                            Page {{ bm.page + 1 }}
-                                        </q-badge>
-                                    </div>
+                                        <!-- Lesson Title -->
+                                        <div class="text-h6 text-weight-bold q-mb-xs ellipsis-2-lines">
+                                            {{ getLessonTitle(bm.lessonId) }}
+                                        </div>
 
-                                    <!-- Lesson Title -->
-                                    <div class="text-h6 text-weight-bold q-mb-xs ellipsis-2-lines">
-                                        {{ getLessonTitle(bm.lessonId) }}
-                                    </div>
+                                        <!-- Last Accessed -->
+                                        <div class="row items-center text-caption timestamp q-mt-sm">
+                                            <q-icon name="schedule" size="14px" class="q-mr-xs" />
+                                            <span v-if="bm.timestamp">
+                                                Saved {{ formatTimestamp(bm.timestamp) }}
+                                            </span>
+                                            <span v-else>Recently saved</span>
+                                        </div>
+                                    </q-card-section>
 
-                                    <!-- Last Accessed -->
-                                    <div class="row items-center text-caption timestamp q-mt-sm">
-                                        <q-icon name="schedule" size="14px" class="q-mr-xs" />
-                                        <span v-if="bm.timestamp">
-                                            Saved {{ formatTimestamp(bm.timestamp) }}
-                                        </span>
-                                        <span v-else>Recently saved</span>
-                                    </div>
-                                </q-card-section>
-
-                                <!-- Bottom Border -->
-                                <div class="card-border"></div>
-                            </div>
-
-                            <!-- Delete icon overlay (unblurred) -->
-                            <div v-if="longPressIndex === idx" class="delete-overlay">
-                                <div class="delete-content">
-                                    <q-icon name="delete" size="48px" class="delete-icon-center text-negative" />
-                                    <div class="delete-label">Tap to delete</div>
+                                    <!-- Bottom Border -->
+                                    <div class="card-border"></div>
                                 </div>
-                            </div>
-                        </q-card>
+
+                                <!-- Delete icon overlay (unblurred) -->
+                                <div v-if="longPressIndex === idx" class="delete-overlay">
+                                    <div class="delete-content">
+                                        <q-icon name="delete" size="48px" class="delete-icon-center text-negative" />
+                                        <div class="delete-label">Tap to delete</div>
+                                    </div>
+                                </div>
+                            </q-card>
+                        </div>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div v-else class="empty-state text-center q-mt-xl">
+                        <q-icon name="bookmark_border" size="64px" color="white" class="empty-icon" />
+                        <div class="text-h6 text-white q-mt-md">No bookmarks yet</div>
+                        <div class="text-body1 text-white q-mt-xs">
+                            Save pages as you read to find them later
+                        </div>
                     </div>
                 </div>
 
-                <!-- Empty State -->
-                <div v-else class="empty-state text-center q-mt-xl">
-                    <q-icon name="bookmark_border" size="64px" color="white" class="empty-icon" />
-                    <div class="text-h6 text-white q-mt-md">No bookmarks yet</div>
-                    <div class="text-body1 text-white q-mt-xs">
-                        Save pages as you read to find them later
-                    </div>
-                </div>
-            </div>
+                <!-- Delete Confirmation Dialog -->
+                <q-dialog v-model="deleteDialog.show">
+                    <q-card>
+                        <q-card-section>
+                            <div class="text-h6">Delete Bookmark?</div>
+                        </q-card-section>
 
-            <!-- Delete Confirmation Dialog -->
-            <q-dialog v-model="deleteDialog.show">
-                <q-card>
-                    <q-card-section>
-                        <div class="text-h6">Delete Bookmark?</div>
-                    </q-card-section>
+                        <q-card-section class="q-pt-none">
+                            Are you sure you want to delete this bookmark?
+                        </q-card-section>
 
-                    <q-card-section class="q-pt-none">
-                        Are you sure you want to delete this bookmark?
-                    </q-card-section>
-
-                    <q-card-actions align="right">
-                        <q-btn flat label="Cancel" color="primary" v-close-popup />
-                        <q-btn flat label="Delete" color="negative" v-close-popup
-                            @click="deleteBookmark(deleteDialog.index)" />
-                    </q-card-actions>
-                </q-card>
-            </q-dialog>
+                        <q-card-actions align="right">
+                            <q-btn flat label="Cancel" color="primary" v-close-popup />
+                            <q-btn flat label="Delete" color="negative" v-close-popup
+                                @click="deleteBookmark(deleteDialog.index)" />
+                        </q-card-actions>
+                    </q-card>
+                </q-dialog>
+            </q-page>
         </q-page-container>
-    </q-page>
+    </q-layout>
 </template>
-
 <script>
 import { ref, onMounted, onUnmounted } from "vue"
 import { useRouter } from "vue-router"
@@ -341,6 +341,17 @@ export default {
 </script>
 
 <style scoped>
+:deep(.q-page-container) {
+    padding: 0 !important;
+}
+
+.bookmarks-page {
+    background: #42a7ff;
+    min-height: 100vh;
+    padding-top: 60px;
+}
+
+
 .header-no-border {
     border-bottom: none !important;
     box-shadow: none !important;

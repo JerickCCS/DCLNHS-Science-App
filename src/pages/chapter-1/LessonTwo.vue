@@ -146,13 +146,6 @@ Examples of English system units are inch, foot (plural: feet), and mile for len
 and gallon for volume. In the metric system, the commonly used units are meter for length
 and liter for volume.
         </p>
-        
-        <div class="video-container">
-          <video controls width="100%">
-            <source src="/videos/physical-models.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <div class="caption">Understanding Physical Models in Science</div>
         </div>
         
       `,

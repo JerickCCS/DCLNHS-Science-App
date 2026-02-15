@@ -1,7 +1,6 @@
 // src/composables/katexTTS.js
 import { ref } from "vue"
 import { Capacitor } from "@capacitor/core"
-import { TextToSpeech } from "@capacitor-community/text-to-speech"
 import { audioManager } from "src/utils/audioManager"
 
 /**
@@ -11,6 +10,15 @@ import { audioManager } from "src/utils/audioManager"
 export function useTTSLesson(rawPages) {
     const isPlaying = ref(false)
     const textToRead = ref("")
+
+    const getTextToSpeech = async () => {
+        if (Capacitor.getPlatform() === "web") {
+            return null
+        }
+        // Dynamic import prevents minification issues
+        const { TextToSpeech } = await import("@capacitor-community/text-to-speech")
+        return TextToSpeech
+    }
 
     // Extract clean text from raw HTML + KaTeX
     const getTextForSpeech = (pageIndex) => {
@@ -56,8 +64,11 @@ export function useTTSLesson(rawPages) {
         if (!text) return
         try {
             if (Capacitor.getPlatform() !== "web") {
-                await TextToSpeech.speak({ text, lang: "en-US", rate: 1.0, pitch: 1.0 })
-                isPlaying.value = false
+                const TTS = await getTextToSpeech()
+                if (TTS) {
+                    await TTS.speak({ text, lang: "en-US", rate: 1.0, pitch: 1.0 })
+                    isPlaying.value = false
+                }
             } else if ("speechSynthesis" in window) {
                 const synth = window.speechSynthesis
                 synth.cancel()
@@ -83,8 +94,14 @@ export function useTTSLesson(rawPages) {
     // Stop speaking
     const stopSpeaking = async () => {
         try {
-            if (Capacitor.getPlatform() !== "web") await TextToSpeech.stop()
-            else if ("speechSynthesis" in window) window.speechSynthesis.cancel()
+            if (Capacitor.getPlatform() !== "web") {
+                const TTS = await getTextToSpeech()
+                if (TTS) {
+                    await TTS.stop()
+                }
+            } else if ("speechSynthesis" in window) {
+                window.speechSynthesis.cancel()
+            }
         } catch (err) {
             console.warn("Error stopping TTS:", err)
         } finally {

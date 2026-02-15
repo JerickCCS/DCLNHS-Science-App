@@ -62,10 +62,51 @@ export default defineConfig((/* ctx */) => {
       ],
 
       // Optional: enable source maps for debugging (helpful in APK)
-      sourcemap: true,
+      sourcemap: false,
 
       // Optional: minify production builds (default: true)
-      minify: true
+      minify: true,
+
+      // ✅ ADDED: Preserve TTS-related code during minification
+      extendViteConf(config) {
+        config.build = config.build || {}
+        config.build.minify = 'terser'
+        config.build.terserOptions = {
+          mangle: {
+            reserved: [
+              // Web Speech API
+              'speechSynthesis',
+              'SpeechSynthesisUtterance',
+              'speak',
+              'cancel',
+              'pause',
+              'resume',
+              'getVoices',
+              'onvoiceschanged',
+              'onstart',
+              'onend',
+              'onerror',
+              'onpause',
+              'onresume',
+              'voice',
+              'pitch',
+              'rate',
+              'volume',
+              'text',
+              'lang',
+              // Capacitor TTS Plugin
+              'TextToSpeech',
+              'Capacitor',
+              'getPlatform',
+              'addListener',
+              'removeAllListeners'
+            ]
+          },
+          compress: {
+            drop_console: false
+          }
+        }
+      }
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver

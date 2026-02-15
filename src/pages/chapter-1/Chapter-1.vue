@@ -22,20 +22,24 @@
             <div v-if="activeTab === 'introduction'" class="introduction-content">
                 <!-- New Introduction Header -->
                 <div class="introduction-header">
-                    <div class="intro-text">
-                        <div class="chapter-label"></div>
-                        <h2 class="intro-title">{{ unitData.title }}</h2>
-                        <p class="intro-description">{{ unitData.description }}</p>
-                    </div>
                     <img src="assets/img/chapter 1/Chemistry.png" alt="Earthquakes and Faults Icon"
                         class="intro-image-wide">
                 </div>
 
                 <!-- Text above PRE-LEARNING CHECK -->
                 <div class="pre-learning-intro">
-                    <p>You will explore how curiosity leads scientists to ask questions, make observations, and design
-                        experiments. You will learn how models, tools, and careful analysis help explain and predict
-                        natural phenomena.</p>
+                    <p>All truths are easy to understand once they are discovered; the point is to discover them.” This
+                        quote from Galileo Galilei posits that science, as a body of knowledge, is established by
+                        discovering and verifying the validity of ideas. Since his time, experimentation has been used
+                        to validate ideas about the world and the universe.
+                    </p>
+                    <p>
+                        When scientists become curious about the things around them, they start to observe and think,
+                        then experiment, measure, analyze, and make conclusions based on their findings. In this
+                        chapter, you will be guided on how to do science the way scientists do. The lessons will equip
+                        you with knowledge about the common models and tools used in science and how to properly utilize
+                        them in performing investigations.
+                    </p>
                 </div>
 
                 <!-- Learning Objectives -->
@@ -190,9 +194,9 @@ export default {
             title: "Nature of Science",
             description: "Explore the fundamental principles of science and how scientific investigations are conducted.",
             objectives: [
-                "Identify common laboratory tools and their uses",
-                "Recognize the basic process skills in studying science",
-                "Understand the components of a scientific investigation"
+                "What are the common laboratory tools and their uses?",
+                "What are the basic process skills employed in studying science?",
+                "What are the components of a scientific investigation?"
             ],
             totalLessons: 8,
             estimatedTime: 8,
@@ -396,6 +400,7 @@ export default {
 }
 
 .introduction-header {
+    padding-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -136,9 +136,7 @@ export default {
     <!-- Card 3 -->
     <div class="model-viewer-block">
             <model-viewer src="models/tectonic_plates.glb" alt="earthquake" camera-controls autoplay auto-rotate interaction-prompt="auto" loading="eager"></model-viewer>
-            <a href="/html/caliper.html" class="eye-icon">
-              <img src="assets/icons/eye.png" alt="View 3D Model" />
-            </a>
+            
             <div class="caption">Example movement of tectonic plates</div>
           </div>
   </div>
