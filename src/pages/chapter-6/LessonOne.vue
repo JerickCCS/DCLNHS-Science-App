@@ -259,7 +259,7 @@ export default {
             `
     <div>
         <div class="info-card">
-  <div class="info-title">MINI TEST</div>
+  <div class="info-title">MINI TEST 6-1</div>
   <div class="info-content">
     <div class="info-text">
       <div class="mini-questions">
@@ -268,7 +268,7 @@ export default {
         <p><strong>3.</strong> What is the importance of learning about the biological levels of organization?</p>
       </div>
       <div class="start-btn-container">
-        <q-btn data-route="/mini-test" unelevated class="start-btn">
+        <q-btn data-route="/mini-test-6-1" unelevated class="start-btn">
           Answer
         </q-btn>
       </div>
@@ -343,7 +343,7 @@ export default {
         const finishButtonStyle = {
             background: "#fe3223",
             color: "#fff",
-            boxShadow: "0 8px 0 0 #db0e00"
+            boxShadow: "7px 7px 0px 0px rgba(0, 0, 0, 0.16)"
         }
 
         // --- Bookmarks ---

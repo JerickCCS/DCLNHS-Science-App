@@ -83,6 +83,9 @@ const routes = [
       //Chapter 5
       { path: 'chapter-5', component: () => import('pages/chapter-5/Chapter-5.vue'), name: 'chapter-5' },
       { path: 'mini-test-5-1', component: () => import('pages/chapter-5/MiniTest5-1.vue'), name: 'mini-test-5-1' },
+      { path: 'mini-lab-5-1', component: () => import('pages/chapter-5/MiniLab5-1.vue'), name: 'mini-lab-5-1' },
+      { path: 'mini-test-5-2', component: () => import('pages/chapter-5/MiniTest5-2.vue'), name: 'mini-test-5-2' },
+      { path: 'mini-test-5-3', component: () => import('pages/chapter-5/MiniTest5-3.vue'), name: 'mini-test-5-3' },
       { path: 'unit-2-chapter-5-lesson-1', component: () => import('pages/chapter-5/LessonOne.vue'), name: 'unit-2-chapter-5-lesson-1' },
       { path: 'unit-2-chapter-5-lesson-2', component: () => import('pages/chapter-5/LessonTwo.vue'), name: 'unit-2-chapter-5-lesson-2' },
       { path: 'chapter-5-technology', component: () => import('pages/chapter-5/TechnologyFocus.vue'), name: 'chapter-5-technology' },
@@ -93,6 +96,10 @@ const routes = [
 
       //Chapter 6
       { path: 'chapter-6', component: () => import('pages/chapter-6/Chapter-6.vue'), name: 'chapter-6' },
+      { path: 'mini-test-6-1', component: () => import('pages/chapter-6/MiniTest6-1.vue'), name: 'mini-test-6-1' },
+      { path: 'mini-lab-6-1', component: () => import('pages/chapter-6/MiniLab6-1.vue'), name: 'mini-lab-6-1' },
+      { path: 'mini-test-6-2', component: () => import('pages/chapter-6/MiniTest6-2.vue'), name: 'mini-test-6-2' },
+      { path: 'mini-test-6-3', component: () => import('pages/chapter-6/MiniTest6-3.vue'), name: 'mini-test-6-3' },
       { path: 'unit-2-chapter-6-lesson-1', component: () => import('pages/chapter-6/LessonOne.vue'), name: 'unit-2-chapter-6-lesson-1' },
       { path: 'unit-2-chapter-6-lesson-2', component: () => import('pages/chapter-6/LessonTwo.vue'), name: 'unit-2-chapter-6-lesson-2' },
       { path: 'chapter-6-technology', component: () => import('pages/chapter-6/TechnologyFocus.vue'), name: 'chapter-6-technology' },

@@ -260,7 +260,7 @@ export default {
         const finishButtonStyle = {
             background: "#fe3223",
             color: "#fff",
-            boxShadow: "0 8px 0 0 #db0e00"
+            boxShadow: "7px 7px 0px 0px rgba(0, 0, 0, 0.16)"
         }
 
         // --- Confetti ---

@@ -138,6 +138,27 @@ export default {
     </div>
     `,
             `
+            <div>
+      <div class="info-card">
+  <div class="info-title">MINI TEST 6-2</div>
+  <div class="info-content">
+    <div class="info-text">
+      <div class="mini-questions">
+        <p>1. Explain what is meant by this statement: Grass is just as important as mice in the diet of a carnivore.</p>
+        <p>2. What are the different trophic levels?</p>
+        <p>3. Draw one example of a food pyramid then describe the transfer of energy between organisms from one trophic level to another.</p>
+      </div>
+      <div class="start-btn-container">
+        <q-btn data-route="/mini-test-6-2" unelevated class="start-btn">
+          Answer
+        </q-btn>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+    `,
+            `
     <div>
       <!-- Card 6 -->
       <div class="header">
@@ -174,6 +195,26 @@ export default {
       </div>
       <p>In some aquatic ecosystems, the ecological pyramids are inverted-that is, there are more primary consumers (zooplankton) by mass than producers (phytoplankton). This can be attributed to the rapid growth of phytoplanktons, as well as the even higher rate of consumption by zooplanktons.</p>
     </div>
+    `,
+            `
+    <div>
+      <div class="info-card">
+  <div class="info-title">MINI TEST 6-3</div>
+  <div class="info-content">
+    <div class="info-text">
+      <div class="mini-questions">
+        <p><strong>1.</strong> What happens to the amount of energy received by an omnivorous consumer that occupies the second trophic level instead of the fourth trophic level it usually occupies? Explain.</p>
+        <p><strong>2.</strong> Explain how the types of ecological pyramids differ from one another.</p>
+      </div>
+      <div class="start-btn-container">
+        <q-btn data-route="/mini-test-6-3" unelevated class="start-btn">
+          Answer
+        </q-btn>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
     `
         ])
 
@@ -206,7 +247,7 @@ export default {
         const finishButtonStyle = {
             background: "#fe3223",
             color: "#fff",
-            boxShadow: "0 8px 0 0 #db0e00"
+            boxShadow: "7px 7px 0px 0px rgba(0, 0, 0, 0.16)"
         }
 
         // --- Bookmarks ---

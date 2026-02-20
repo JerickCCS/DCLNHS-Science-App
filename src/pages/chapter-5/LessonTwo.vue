@@ -3,7 +3,7 @@
     <q-header class="bg-white text-black">
       <q-toolbar>
         <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="q-mr-sm" />
-        <q-toolbar-title class="navbar-title">"Lesson 2: Perpetuation of Organisms</q-toolbar-title>
+        <q-toolbar-title class="navbar-title">Lesson 2: Perpetuation of Organisms</q-toolbar-title>
         <div class="row items-center q-gutter-sm">
           <q-btn flat dense round :icon="isBookmarked ? 'bookmark' : 'bookmark_border'" color="yellow"
             @click="toggleBookmark" />
@@ -96,7 +96,6 @@ export default {
       `
     <div>
       <!-- Card 1 -->
-      <p>Lesson 2</p>
       <div class="header">
         <div class="title">Perpetuation of Organisms</div>
       </div>
@@ -125,7 +124,7 @@ export default {
       <div class="header">
         <div class="title">Asexual Reproduction in Simple Life-Forms</div>
       </div>
-      <p><strong>Binary Fission</strong></p>
+      <p style="padding: 20px 0px 0px 0px; font-weight: bold;">Binary fission</p>
       <p>Binary fission is almost similar to mitosis, but occurs in a simpler way and at a faster rate in bacteria because they do not have a nucleus, numerous organelles, and a long and complicated genetic material. A bacterium replicates its circular DNA followed by cytokinesis to produce two similar daughter bacterial cells.</p>
       <p>Binary fission also happens in unicellular protists in three directions: longitudinal (Euglena), transverse (Paramecium), and irregular (Amoeba) as shown in figure 5-17.</p>
     </div>
@@ -335,7 +334,7 @@ export default {
     <div>
       <!-- Card 25 -->
       <div class="info-card">
-  <div class="info-title">MINI TEST</div>
+  <div class="info-title">MINI TEST 5-2</div>
   <div class="info-content">
     <div class="info-text">
       <div class="mini-questions">
@@ -343,7 +342,7 @@ export default {
         <p><strong>2.</strong> What is the difference between internal and external fertilization?</p>
       </div>
       <div class="start-btn-container">
-        <q-btn data-route="/mini-test" unelevated class="start-btn">
+        <q-btn data-route="/mini-test-5-2" unelevated class="start-btn">
           Answer
         </q-btn>
       </div>
@@ -383,7 +382,7 @@ export default {
     <div>
       <!-- Card 30 -->
       <div class="info-card">
-  <div class="info-title">MINI TEST</div>
+  <div class="info-title">MINI TEST 5-3</div>
   <div class="info-content">
     <div class="info-text">
       <div class="mini-questions">
@@ -391,7 +390,7 @@ export default {
         <p><strong>2.</strong> Explain how sexual reproduction is a basis of heredity.</p>
       </div>
       <div class="start-btn-container">
-        <q-btn data-route="/mini-test" unelevated class="start-btn">
+        <q-btn data-route="/mini-test-5-3" unelevated class="start-btn">
           Answer
         </q-btn>
       </div>
