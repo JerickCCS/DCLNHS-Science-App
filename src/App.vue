@@ -1,6 +1,10 @@
 <template>
   <div>
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" :key="$route.path" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -68,3 +72,25 @@ onBeforeUnmount(() => {
   App.removeAllListeners()
 })
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+  position: absolute;
+  width: 100%;
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+</style>

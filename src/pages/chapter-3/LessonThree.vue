@@ -109,7 +109,7 @@ export default {
     <div>
         <p>Let us consider water, a polar substance. Water can dissolve table sugar, also a polar substance, and table salt, an ionic substance. It cannot dissolve oil, which is made up of nonpolar lipids. Oil, however, can dissolve in benzene, which is a nonpolar solvent.</p>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 3-3. Water dissolves (A) sugar, but not (B) oil.">
+            <img src="assets/img/chapter 3/figure 3-3.png" alt="Figure 3-3. Water dissolves (A) sugar, but not (B) oil.">
             <div class="caption">Figure 3-3. Water dissolves (A) sugar, but not (B) oil.</div>
         </div>
     </div>
@@ -185,7 +185,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 3-4. Solubility curves of some solutes in water">
+            <img src="assets/img/chapter 3/figure 3-4.jpeg" alt="Figure 3-4. Solubility curves of some solutes in water">
             <div class="caption">Figure 3-4. Solubility curves of some solutes in water</div>
         </div>
     </div>
@@ -235,7 +235,7 @@ export default {
             `
     <div>
         <div class="illustration">
-        <img src="assets/img" alt="Figure 3-5. What causes the fizzing sensation when you open a bottle of carbonated drinks?">
+        <img src="assets/img/chapter 3/figure 3-5.jpeg" alt="Figure 3-5. What causes the fizzing sensation when you open a bottle of carbonated drinks?">
         <div class="caption">Figure 3-5. What causes the fizzing sensation when you open a bottle of carbonated drinks?</div>
       </div>
         <p>An evidence of this principle is the fizzing sensation observed when you open a bottle of carbonated drinks (figure 3-5). Carbon dioxide is dissolved in the drink using high pressure. As you open the bottle, the pressure inside it decreases. Thus, the solubility of carbon dioxide also decreases, and the gas bubbles out of the drink.</p>

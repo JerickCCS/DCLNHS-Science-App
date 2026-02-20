@@ -117,7 +117,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 3-8. Acetic acid is a major component of vinegar.">
+            <img src="assets/img/chapter 3/figure 3-8.png" alt="Figure 3-8. Acetic acid is a major component of vinegar.">
             <div class="caption">Figure 3-8. Acetic acid is a major component of vinegar.</div>
         </div>
         <p>Acids have the following general properties:</p>
@@ -147,7 +147,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 3-9. (A) Blue litmus paper turns red when exposed to acids, such as orange juice. (B) Red litmus paper turns blue when placed in bases, such as soap.">
+            <img src="assets/img/chapter 3/figure 3-9.png" alt="Figure 3-9. (A) Blue litmus paper turns red when exposed to acids, such as orange juice. (B) Red litmus paper turns blue when placed in bases, such as soap.">
             <div class="caption">Figure 3-9. (A) Blue litmus paper turns red when exposed to acids, such as orange juice. (B) Red litmus paper turns blue when placed in bases, such as soap.</div>
         </div>
     </div>
@@ -184,7 +184,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 3-10. Sodium chloride is used as a saline solution for cleaning wounds and used as a solvent for electrolysis.">
+            <img src="assets/img/chapter 3/figure 3-10.png" alt="Figure 3-10. Sodium chloride is used as a saline solution for cleaning wounds and used as a solvent for electrolysis.">
             <div class="caption">Figure 3-10. Sodium chloride is used as a saline solution for cleaning wounds and used as a solvent for electrolysis.</div>
         </div>
         <p>Aside from NaCl, here are some examples of salt solutions commonly found in both home and school environments.</p>

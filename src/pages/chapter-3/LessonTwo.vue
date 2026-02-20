@@ -122,7 +122,7 @@ export default {
       <!-- Card 4 -->
       <p>The additional solute will remain dissolved in the solution when the solution is allowed to cool slowly and undisturbed. However, a supersaturated solution is an unstable system; disturbing it, such as by stirring or shaking, will recrystallize the excess solute and return it to a saturated condition. Adding a small crystal of the solute, called seed crystal, can also recrystallize the excess solute from a supersaturated solution. Figure 3-2 illustrates saturated, unsaturated, and supersaturated solutions.</p>
       <div class="illustration">
-        <img src="assets/img" alt="Figure 3-2. Based on the amount of dissolved solute, solutions can be described as (A) saturated, (B) unsaturated, or (C) supersaturated.">
+        <img src="assets/img/chapter 3/figure 3-2.png" alt="Figure 3-2. Based on the amount of dissolved solute, solutions can be described as (A) saturated, (B) unsaturated, or (C) supersaturated.">
         <div class="caption">Figure 3-2. Based on the amount of dissolved solute, solutions can be described as (A) saturated, (B) unsaturated, or (C) supersaturated.</div>
       </div>
     </div>

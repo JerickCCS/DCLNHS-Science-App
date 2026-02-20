@@ -347,7 +347,7 @@ export default {
     <div>
       <!-- Card 22 -->
       <div class="info-card">
-  <div class="info-title">MINI TEST</div>
+  <div class="info-title">MINI TEST 5-1</div>
   <div class="info-content">
     <div class="info-text">
       <div class="mini-questions">
@@ -355,7 +355,7 @@ export default {
         <p><strong>2.</strong> How is the genetic information passed on from parents to offspring through the process of meiosis? What are the implications of the importance of meiosis in organisms?</p>
       </div>
       <div class="start-btn-container">
-        <q-btn data-route="/mini-test" unelevated class="start-btn">
+        <q-btn data-route="/mini-test-5-1" unelevated class="start-btn">
           Answer
         </q-btn>
       </div>

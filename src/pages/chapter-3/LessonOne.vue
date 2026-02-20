@@ -118,13 +118,18 @@ export default {
         <p>In solid solutions (alloys), solute atoms are dispersed throughout the atomic or molecular arrangement of the solid solvent. In brass, for example, atoms of zinc and other metals (solutes) are dissolved in copper solvent.</p>
         <p>Table 3-1 shows examples of various types of solution that can be formed by mixing solutes and solvents in different states.</p>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 3-1. Examples of solutions: (A) musical instrument made of brass (an alloy of copper and zinc), (B) rubbing alcohol (alcohol in water), and (C) vinegar (acetic acid in water)">
-            <div class="caption">Figure 3-1. Examples of solutions: (A) musical instrument made of brass (an alloy of copper and zinc), (B) rubbing alcohol (alcohol in water), and (C) vinegar (acetic acid in water)</div>
+            <img src="assets/img/chapter 3/table 3-1.png" alt="Table 3-1">
+            <div class="caption">Table 3-1</div>
         </div>
+
     </div>
     `,
             `
     <div>
+        <div class="illustration">
+            <img src="assets/img/chapter 3/figure 3-1.png" alt="Figure 3-1. Examples of solutions: (A) musical instrument made of brass (an alloy of copper and zinc), (B) rubbing alcohol (alcohol in water), and (C) vinegar (acetic acid in water)">
+            <div class="caption">Figure 3-1. Examples of solutions: (A) musical instrument made of brass (an alloy of copper and zinc), (B) rubbing alcohol (alcohol in water), and (C) vinegar (acetic acid in water)</div>
+        </div>
         <p>Liquids that can be mixed to form a solution are said to be miscible. Those that cannot be mixed are immiscible. For gases, the term mixing is used rather than dissolving.</p>
     </div>
     `,

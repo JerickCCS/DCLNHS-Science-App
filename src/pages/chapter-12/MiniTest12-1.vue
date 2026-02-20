@@ -502,6 +502,13 @@ const handleModalAction = () => {
 // Randomize keywords order on component mount
 onMounted(() => {
     keywords.value = [...initialKeywords].sort(() => Math.random() - 0.5)
+
+    // Fix: Quasar sets overflow on these elements at runtime via JS,
+    // which breaks position:sticky in CSS. We override them directly on the DOM.
+    const pageContainer = document.querySelector('.q-page-container')
+    const page = document.querySelector('.q-page')
+    if (pageContainer) pageContainer.style.overflow = 'visible'
+    if (page) page.style.overflow = 'visible'
 })
 </script>
 <style scoped>
@@ -580,11 +587,11 @@ onMounted(() => {
     padding-left: 0;
 }
 
-/* Fixed Keywords Container */
+/* Sticky Keywords Container */
 .fixed-section {
     position: sticky;
-    top: 80px;
-    z-index: 10;
+    top: 60px;
+    z-index: 100;
     background: white;
     border-radius: 12px;
     padding: 16px;
@@ -845,7 +852,6 @@ onMounted(() => {
 
     .fixed-section {
         padding: 12px;
-        top: 70px;
     }
 
     .keywords-grid {

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Model Viewer with Hotspots</title>
+  <script type="module" src="/libs/model-viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 100vh;
+      background-color: #22222200;
+    }
+
+    .hotspot {
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: 0.2s;
+    }
+
+    .hotspot:hover {
+      background: #ffcc00;
+      color: black;
+    }
+
+    #info-box {
+      position: absolute;
+      background: rgba(240, 240, 240, 0.95);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 12px;
+      width: 220px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+      pointer-events: auto;
+      z-index: 10;
+      color: black;
+    }
+
+    #info-box.hidden {
+      display: none;
+    }
+
+    #close-btn {
+      background: #ffcc00;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <model-viewer
+    id="model"
+    src="/models/microscope.glb"
+    alt="3D Model"
+    camera-controls
+    autoplay
+    ar
+    interaction-prompt="none"
+  >
+    <!-- Hotspots -->
+<button slot="hotspot-1" class="hotspot"
+  data-position="0.000058371374388276315m 0.15426108015490136m 0.011397982589584741m"
+  data-normal="0m 1m 0m"
+  data-name="Ocular lens or eyepiece">
+  1
+</button>
+
+<button slot="hotspot-3" class="hotspot"
+  data-position="0.01581334078729142m 0.10983887841868151m -0.003866209977490912m"
+  data-normal="1m 0m 0m"
+  data-name="Coarse adjustment knob">
+  2
+</button>
+
+<button slot="hotspot-4" class="hotspot"
+  data-position="0.017900851680571452m 0.0863862222039176m -0.01080916148157624m"
+  data-normal="0.9999999999970202m -0.000001161913346916278m 0.0000021470249941512163m"
+  data-name="Fine adjustment knob">
+  3
+</button>
+
+<button slot="hotspot-5" class="hotspot"
+  data-position="0.006460202561572072m 0.1343137732557265m 0.01109356974842013m"
+  data-normal="0.9972033600640119m 0m -0.07473592628077105m"
+  data-name="draw tube">
+  4
+</button>
+
+<button slot="hotspot-6" class="hotspot"
+  data-position="0.007599986025314426m 0.09526383962556334m 0.015401364812800966m"
+  data-normal="0.9070974028103544m 1.0793316488560285e-8m 0.42092077854949084m"
+  data-name="Body tube">
+  5
+</button>
+
+<button slot="hotspot-7" class="hotspot"
+  data-position="0.00620768014053053m 0.08195266130803841m 0.03262504241105385m"
+  data-normal="0.40802964538969877m 0.6000056281219214m 0.6881170356161628m"
+  data-name="revolving nosepiece">
+  6
+</button>
+
+<button slot="hotspot-8" class="hotspot"
+  data-position="0.014998165057194349m 0.06852696452886886m 0.03066309308132596m"
+  data-normal="0.8831722213798594m 0.418475500271284m 0.21186099937379577m"
+  data-name="objective lenses">
+  7
+</button>
+
+<button slot="hotspot-9" class="hotspot"
+  data-position="0.01447249816650896m 0.052310917007138184m -0.0029287926952577294m"
+  data-normal="0m 1m 0m"
+  data-name="stage clip">
+  8
+</button>
+
+<button slot="hotspot-10" class="hotspot"
+  data-position="0.013894571316585861m 0.0523109170071382m 0.031185769902698477m"
+  data-normal="0m 1m 0m"
+  data-name="stage">
+  9
+</button>
+
+<button slot="hotspot-11" class="hotspot"
+  data-position="0.004915535309835585m 0.06013083109864754m -0.0389894494564562m"
+  data-normal="1m 0m 0m"
+  data-name="arm">
+  10
+</button>
+
+<button slot="hotspot-12" class="hotspot"
+  data-position="0.010162098514471874m 0.03586888491751019m -0.0159307733451048m"
+  data-normal="0.9641717832798683m -0.19754248514828415m -0.17705857473830117m"
+  data-name="inclination joint">
+  11
+</button>
+
+<button slot="hotspot-13" class="hotspot"
+  data-position="0.00972050168244909m 0.014709137592407537m -0.026797762148926693m"
+  data-normal="1m 0m 0m"
+  data-name="pillar">
+  12
+</button>
+
+<button slot="hotspot-14" class="hotspot"
+  data-position="0.005429153271503787m 0.01965983343404929m 0.014815164864540833m"
+  data-normal="0.24321039662530486m 0.9076741250291137m -0.34201810730719323m"
+  data-name="mirror">
+  13
+</button>
+
+<button slot="hotspot-15" class="hotspot"
+  data-position="0.024755008435333927m 0.005590688732184528m -0.010768415939855294m"
+  data-normal="0.9768762434206225m 3.1770313275175897e-7m -0.21380553089270582m"
+  data-name="base">
+  14
+</button>
+
+<button slot="hotspot-16" class="hotspot"
+  data-position="-0.0010677569730184883m 0.047146885311339835m 0.034672165936897974m"
+  data-normal="0m -1m 0m"
+  data-name="condenser">
+  15
+</button>
+
+  </model-viewer>
+
+  <div id="info-box" class="hidden">
+    <h2 id="info-title"></h2>
+    <p id="info-content"></p>
+    <button id="close-btn">Close</button>
+  </div>
+
+  <script>
+    const modelViewer = document.getElementById('model');
+    const hotspots = document.querySelectorAll('.hotspot');
+    const infoBox = document.getElementById('info-box');
+    const infoTitle = document.getElementById('info-title');
+    const infoContent = document.getElementById('info-content');
+    const closeBtn = document.getElementById('close-btn');
+
+    const hotspotData = {
+  "Ocular lens or eyepiece": "Lens you look through to see the magnified image.",
+  "Coarse adjustment knob": "Moves the stage quickly for rough focusing.",
+  "Fine adjustment knob": "Sharpens the image for clear focus.",
+  "draw tube": "Holds the eyepiece in place.",
+  "Body tube": "Connects the eyepiece to the objective lenses.",
+  "revolving nosepiece": "Holds and rotates the objective lenses.",
+  "objective lenses": "Magnify the specimen at different powers.",
+  "stage clip": "Secures the slide on the stage.",
+  "stage": "Platform where the slide is placed.",
+  "arm": "Supports the upper parts; used to carry the microscope.",
+  "inclination joint": "Allows the microscope to tilt.",
+  "pillar": "Supports the body and connects to the base.",
+  "mirror": "Reflects light toward the specimen.",
+  "base": "Bottom support that stabilizes the microscope.",
+  "condenser": "Focuses light onto the specimen."
+};
+
+
+    hotspots.forEach(hs => {
+      hs.addEventListener('click', (event) => {
+        const name = hs.dataset.name;
+        infoTitle.textContent = name;
+        infoContent.textContent = hotspotData[name] || "No info available.";
+
+        // Get hotspot screen position
+        const rect = hs.getBoundingClientRect();
+        const offsetX = 10;
+        const offsetY = 10;
+
+        // Place info box near clicked hotspot
+        infoBox.style.left = `${rect.left + offsetX}px`;
+        infoBox.style.top = `${rect.top + offsetY}px`;
+
+        infoBox.classList.remove('hidden');
+      });
+    });
+
+    let activeHotspot = null
+
+hotspots.forEach(hs => {
+  hs.addEventListener('click', () => {
+    const name = hs.dataset.name
+    infoTitle.textContent = name
+    infoContent.textContent = hotspotData[name] || "No info available."
+    activeHotspot = hs
+    infoBox.classList.remove('hidden')
+    updateInfoBoxPosition()
+  })
+})
+
+closeBtn.addEventListener('click', () => {
+  infoBox.classList.add('hidden')
+  activeHotspot = null
+})
+
+// update info box position continuously
+function updateInfoBoxPosition() {
+  if (!activeHotspot) return
+  const rect = activeHotspot.getBoundingClientRect()
+  const offsetX = 10
+  const offsetY = 10
+  infoBox.style.left = `${rect.left + offsetX}px`
+  infoBox.style.top = `${rect.top + offsetY}px`
+}
+
+// track frame rendering
+modelViewer.addEventListener('camera-change', updateInfoBoxPosition)
+modelViewer.addEventListener('frame', updateInfoBoxPosition)
+
+
+    closeBtn.addEventListener('click', () => infoBox.classList.add('hidden'));
+  </script>
+</body>
+</html>

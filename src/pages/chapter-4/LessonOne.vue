@@ -133,21 +133,30 @@ export default {
       </div>
       <p>Similar to the organization of living organisms, the microscope has parts that are necessary for it to function well. The absence of or damage to one of the components may affect the way the microscope functions. It is therefore necessary to know the different parts that make up the microscope and how each of these functions. The parts of a compound light microscope found in figure 4-1 can be classified into mechanical, magnifying, and illuminating parts.</p>
       <p>The mechanical parts hold the different parts together and are used to adjust the magnifying and illuminating parts to focus on a specimen. The magnifying parts are involved in enlarging the image of a specimen. The illuminating parts are used to collect light and create a clear image. Table 4-1 summarizes the different parts and functions of a compound light microscope.</p>
-      <div class="illustration">
-        <img src="assets" alt="Figure 4.1. The compound microscope(monocular)">
-        <div class="caption">Figure 4.1. The compound microscope(monocular)</div>
-      </div>
+    </div>
+    `,
+            `
+    <div>
+      <!-- Card 5 -->
+      <div class="model-viewer-block">
+            <model-viewer src="models/microscope.glb" alt="microscope" camera-controls autoplay auto-rotate interaction-prompt="auto" loading="eager"></model-viewer>
+            <a href="/html/microscope.html" class="eye-icon">
+                      <img src="assets/icons/eye.png" alt="View 3D Model" />
+                    </a>
+          </div>
+          <div class="caption">Figure 4.1 The compound microscope(monocular)</div>
     </div>
     `,
             `
     <div>
       <!-- Card 5 -->
       <div class="illustration">
-        <img src="assets" alt="Table 4.1. Parts, Descriptions, and Functions of a Compound Light Microscope">
+        <img src="assets/img/chapter 4/table 4.1.png" alt="Table 4.1. Parts, Descriptions, and Functions of a Compound Light Microscope">
         <div class="caption">Table 4.1. Parts, Descriptions, and Functions of a Compound Light Microscope</div>
       </div>
     </div>
     `,
+
             `
     <div>
       <!-- Card 6 -->
@@ -191,7 +200,7 @@ export default {
       <p>3. The table must not be located where there is direct sunlight, high temperature and humidity, water supply, vibrations, and dust.</p>
       <p>In transporting and safekeeping the microscope, all plugs, cables, and camera must be detached from the microscope and moved separately. Then, carefully pick up the microscope by firmly holding the arm with one hand and placing the other hand below the base (figure 4-2) to prevent the microscope from dropping just in case the other hand accidentally loses its grip.</p>
       <div class="illustration">
-        <img src="assets" alt="Figure 4.2. Proper way of carrying the microscope">
+        <img src="assets/img/chapter 4/figure 4-2.png" alt="Figure 4.2. Proper way of carrying the microscope">
         <div class="caption">Figure 4.2. Proper way of carrying the microscope</div>
       </div>
     </div>

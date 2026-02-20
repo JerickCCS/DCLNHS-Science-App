@@ -33,45 +33,75 @@
       <q-page class="dashboard-page" no-padding>
 
         <!-- Sidebar -->
-        <q-drawer v-model="sidebarOpen" side="right" overlay bordered :width="220" class="sidebar-drawer">
+        <q-drawer v-model="sidebarOpen" side="right" overlay bordered :width="240" class="sidebar-drawer">
           <div class="q-pa-md">
-            <div class="sidebar-title text-h5 text-primary text-weight-bold text-center q-mb-md">
+            <!-- Logo Icon Above Menu -->
+            <div class="sidebar-logo-container text-center q-mb-md">
+              <img src="logo/logo.png" alt="logo" class="sidebar-logo" />
+            </div>
+
+            <div class="sidebar-title text-h5 text-primary text-weight-bold text-center q-mb-lg">
               Menu
             </div>
-            <q-list>
-              <q-item clickable v-ripple @click="openEditProfile">
-                <q-item-section avatar>
-                  <img src="assets/icons/edit.png" style="width: 20px; height: 20px;" />
+
+            <q-list class="sidebar-menu-list">
+              <!-- Edit Profile Button -->
+              <q-item clickable v-ripple @click="openEditProfile" class="sidebar-menu-btn">
+                <q-item-section avatar class="sidebar-icon-section">
+                  <div class="sidebar-btn-icon-wrapper">
+                    <img src="assets/icons/edit.png" alt="edit" />
+                  </div>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label class="text-weight-large text-h6 text-bold text-black">Edit Profile</q-item-label>
+                  <q-item-label class="sidebar-btn-label">Edit Profile</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-icon name="chevron_right" size="20px" class="chevron-icon" />
                 </q-item-section>
               </q-item>
 
-              <q-item clickable v-ripple @click="settingsOpen = true">
-                <q-item-section avatar>
-                  <img src="assets/icons/audio.png" style="width: 20px; height: 20px;" />
+              <!-- Audio Button -->
+              <q-item clickable v-ripple @click="settingsOpen = true" class="sidebar-menu-btn">
+                <q-item-section avatar class="sidebar-icon-section">
+                  <div class="sidebar-btn-icon-wrapper">
+                    <img src="assets/icons/audio.png" alt="audio" />
+                  </div>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label class="text-weight-large text-h6 text-bold text-black">Audio</q-item-label>
+                  <q-item-label class="sidebar-btn-label">Audio</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-icon name="chevron_right" size="20px" class="chevron-icon" />
                 </q-item-section>
               </q-item>
 
-              <q-item clickable v-ripple>
-                <q-item-section avatar>
-                  <img src="assets/icons/about.png" style="width: 20px; height: 20px;" />
+              <!-- About Button -->
+              <q-item clickable v-ripple class="sidebar-menu-btn">
+                <q-item-section avatar class="sidebar-icon-section">
+                  <div class="sidebar-btn-icon-wrapper">
+                    <img src="assets/icons/about.png" alt="about" />
+                  </div>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label class="text-weight-large text-h6 text-bold text-black">About</q-item-label>
+                  <q-item-label class="sidebar-btn-label">About</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-icon name="chevron_right" size="20px" class="chevron-icon" />
                 </q-item-section>
               </q-item>
 
-              <q-item clickable v-ripple @click="logout">
-                <q-item-section avatar>
-                  <img src="assets/icons/logout.png" style="width: 20px; height: 20px;" />
+              <!-- Logout Button -->
+              <q-item clickable v-ripple @click="logout" class="sidebar-menu-btn logout-btn">
+                <q-item-section avatar class="sidebar-icon-section">
+                  <div class="sidebar-btn-icon-wrapper logout-icon-wrapper">
+                    <img src="assets/icons/logout.png" alt="logout" />
+                  </div>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label class="text-weight-large text-h6 text-bold text-black">Logout</q-item-label>
+                  <q-item-label class="sidebar-btn-label">Logout</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-icon name="chevron_right" size="20px" class="chevron-icon" />
                 </q-item-section>
               </q-item>
             </q-list>
@@ -256,13 +286,9 @@
                 <q-card-section class="q-pa-md">
                   <div class="row items-center justify-between" @click="toggleUnitDetails(unit)">
                     <div class="row items-center">
-                      <q-avatar size="50px" class="q-mr-md"
-                        :style="{ backgroundColor: unit.bgColor, borderRadius: '10px' }">
-                        <img :src="unit.icon" style="width: 28px; height: 28px;" />
-                      </q-avatar>
                       <div>
                         <div class="text-h6 text-weight-bold card-title">{{ unit.name }}</div>
-                        <div class="text-caption card-subtitle">Progress: {{ unit.progress }}%</div>
+                        <div class="text-caption card-subtitle">{{ unit.description }} • {{ unit.progress }}%</div>
                       </div>
                     </div>
                     <div>
@@ -283,9 +309,9 @@
                       <div class="lesson-list">
                         <div v-for="lessonId in UNIT_LESSON_IDS[unit.id]" :key="lessonId" class="lesson-row">
                           <div class="lesson-title">{{ getLessonTitle(lessonId) }}</div>
-                          <img v-if="currentUser.progress && currentUser.progress[lessonId]?.completed"
-                            src="/icons/check.png" alt="completed" class="lesson-icon" />
-                          <img v-else src="/icons/incomplete.png" alt="incomplete" class="lesson-icon" />
+                          <div v-if="currentUser.progress && currentUser.progress[lessonId]?.completed"
+                            class="lesson-status-text completed">✅</div>
+                          <div v-else class="lesson-status-text incomplete">○</div>
                         </div>
                       </div>
                     </div>
@@ -866,19 +892,170 @@ onMounted(() => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* ============================== */
+/* ENHANCED SIDEBAR STYLES */
+/* ============================== */
+
 .sidebar-drawer {
-  .sidebar-title {
-    border-bottom: 2px solid #e3f2fd;
-    padding-bottom: 8px;
+  background: linear-gradient(180deg, #f5f7fa 0%, #ffffff 100%);
+
+  .sidebar-logo-container {
+    padding-top: 20px;
+
+    .sidebar-logo {
+      width: 80px;
+      height: 80px;
+
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+      animation: float 3s ease-in-out infinite;
+    }
   }
 
-  .sidebar-item {
-    border-radius: 8px;
-    margin-bottom: 4px;
+  .sidebar-title {
+    border-bottom: 3px solid #42A5F5;
+    padding-bottom: 12px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .sidebar-menu-list {
+    padding: 0;
+    margin-top: 8px;
+  }
+
+  .sidebar-menu-btn {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e3f2fd;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    padding: 14px 12px;
+    min-height: 60px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
 
     &:hover {
-      background: #e3f2fd;
+      background: linear-gradient(135deg, #42A5F5 0%, #1976D2 100%);
+      border-color: #1565C0;
+      transform: translateX(-5px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(66, 165, 245, 0.4);
+
+      &::before {
+        left: 100%;
+      }
+
+      .sidebar-btn-label {
+        color: white !important;
+      }
+
+      .sidebar-btn-icon-wrapper {
+        background: white;
+        border-color: white;
+        transform: scale(1.1) rotate(5deg);
+
+        img {
+          filter: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(1352%) hue-rotate(187deg) brightness(99%) contrast(119%);
+        }
+      }
+
+      .chevron-icon {
+        color: white !important;
+        transform: translateX(3px);
+      }
     }
+
+    &:active {
+      transform: translateX(-3px) scale(0.98);
+    }
+  }
+
+  .logout-btn {
+    margin-top: 12px;
+    border-color: #ffcdd2;
+    background: linear-gradient(135deg, #fff5f5 0%, #ffebee 100%);
+
+    &:hover {
+      background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+      border-color: #c62828;
+      box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+
+      .logout-icon-wrapper {
+        background: white;
+        border-color: white;
+        transform: scale(1.1) rotate(-5deg);
+
+        img {
+          filter: brightness(0) saturate(100%) invert(30%) sepia(95%) saturate(7471%) hue-rotate(353deg) brightness(96%) contrast(91%);
+        }
+      }
+    }
+  }
+
+  .sidebar-icon-section {
+    min-width: auto;
+    padding-right: 12px;
+  }
+
+  .sidebar-btn-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border: 2px solid #90caf9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+
+    img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      transition: filter 0.3s ease;
+    }
+  }
+
+  .logout-icon-wrapper {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    border-color: #ef9a9a;
+  }
+
+  .sidebar-btn-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a237e;
+    letter-spacing: 0.3px;
+    transition: color 0.3s ease;
+  }
+
+  .chevron-icon {
+    color: #90a4ae;
+    transition: all 0.3s ease;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
   }
 }
 
@@ -1078,22 +1255,18 @@ onMounted(() => {
 /* Individual unit card colors FIRST */
 .unit-card:nth-child(1) {
   background: #ff2b83;
-  /* Super bright yellow */
 }
 
 .unit-card:nth-child(2) {
   background: #ff2b2b;
-  /* Super bright red */
 }
 
 .unit-card:nth-child(3) {
   background: #97ec20;
-  /* Super bright green */
 }
 
 .unit-card:nth-child(4) {
   background: #b028ff;
-  /* Super bright orange */
 }
 
 /* THEN the general unit-card styles (including box-shadow) */
@@ -1285,11 +1458,6 @@ onMounted(() => {
   color: #1a237e;
   transition: all 0.2s ease;
   border: 1px solid rgba(66, 165, 245, 0.2);
-
-  &:hover {
-    background: #bbdefb;
-    transform: translateX(4px);
-  }
 }
 
 .lesson-title {
@@ -1300,12 +1468,19 @@ onMounted(() => {
   white-space: nowrap;
 }
 
-.lesson-icon {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+.lesson-status-text {
+  font-size: 18px;
+  font-weight: 700;
   flex-shrink: 0;
+  margin-left: 12px;
+
+  &.completed {
+    color: #4CAF50;
+  }
+
+  &.incomplete {
+    color: #9E9E9E;
+  }
 }
 
 /* ============================== */
@@ -1399,6 +1574,37 @@ onMounted(() => {
 }
 
 @media (max-width: 480px) {
+  .sidebar-drawer {
+    .sidebar-logo-container {
+      padding-top: 16px;
+
+      .sidebar-logo {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    .sidebar-menu-btn {
+      padding: 12px 10px;
+      min-height: 56px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar-btn-icon-wrapper {
+      width: 36px;
+      height: 36px;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .sidebar-btn-label {
+      font-size: 14px;
+    }
+  }
+
   .avatar-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
@@ -1416,9 +1622,7 @@ onMounted(() => {
       border-width: 4px;
     }
   }
-}
 
-@media (max-width: 480px) {
   .dashboard-page {
     padding-bottom: 0;
   }
@@ -1505,9 +1709,9 @@ onMounted(() => {
     font-size: 12px;
   }
 
-  .lesson-icon {
-    width: 16px;
-    height: 16px;
+  .lesson-status-text {
+    font-size: 16px;
+    margin-left: 8px;
   }
 
   .quiz-statistics-card .q-card-section,

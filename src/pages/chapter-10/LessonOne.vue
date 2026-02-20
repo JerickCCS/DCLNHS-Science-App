@@ -94,41 +94,34 @@ export default {
     // --- Lesson pages ---
     const pages = ref([
       `
-  <div>
-    <!-- Card 1 -->
-    <div class="header">
-      <div>
-        <div class="title">What Are Earthquakes?</div>
+     <div>
+      <!-- Card 1 -->
+      <div class="header">
+        <div>
+          <div class="title">Earthquakes along Faults</div>
+        </div>
       </div>
-    </div>
 
-    <div class="illustration">
-      <img src="assets/img/chapter 10/earthquake.gif" alt="Placeholder">
-      </div>
-      <p>Earthquakes are sudden, rapid shaking of the ground caused by the breaking and shifting of rock beneath the Earth's surface. They can happen anywhere, but occur most frequently along fault lines.</p>
-      <div class="fun-fact-card">
-        <span class="highlight">Fun Fact:</span> Our country is located in an earthquake-prone region. Did you know that earthquakes are recorded in the Philippines every day? Fortunately, most of them are too weak to be felt or noticed.
-      </div>
-  </div>
-  `,
+      <p>Our country is located in an earthquake-prone region. Did you know that earthquakes are recorded in the Philippines every day? Fortunately, most of them are too weak to be felt or noticed. What exactly are earthquakes? Why do these happen? How do these occur?</p>
 
-      `
-  <div>
-    <!-- Card 2 -->
-    <div class="header">
-      <div>
-        <div class="title">Why Do Earthquakes Happen?</div>
+      <div class="info-card">
+        <div class="info-title">Mini Lab 10-1</div>
+        <div class="info-content">
+          <div class="info-text">
+            <p>1. Lay the ruler along the table such that 3/4 of its length is over the edge.</p>
+            <p>2. Hold the ruler with one of your hand. With your other hand, bend the free end of the ruler and then release it.</p>
+            <p>3. Describe the movement of the ruler.</p>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="illustration">
-      <img src="assets/img/chapter 10/plate tectonics.png" alt="Placeholder">
+      <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 10/as the ruler.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">What happens when the ruler is bent?</div>
+        </div>
     </div>
-    <p>The Earth's crust is made up of tectonic plates that are constantly moving. When these plates get stuck at their edges due to friction, stress builds up. When the stress exceeds the friction, the plates suddenly slip, releasing energy as seismic waves.</p>
-    <div class="fun-fact-card">
-      <span class="highlight">Fun Fact:</span> Plate Fact: The Philippines sits at the boundary of two major tectonic plates - the Philippine Sea Plate and the Eurasian Plate.
-    </div>
-  </div>
   `,
 
       `
@@ -136,7 +129,9 @@ export default {
     <!-- Card 3 -->
     <div class="model-viewer-block">
             <model-viewer src="models/tectonic_plates.glb" alt="earthquake" camera-controls autoplay auto-rotate interaction-prompt="auto" loading="eager"></model-viewer>
-            
+            <a href="/html/tectonic-plates.html" class="eye-icon">
+                      <img src="assets/icons/eye.png" alt="View 3D Model" />
+                    </a>
             <div class="caption">Example movement of tectonic plates</div>
           </div>
   </div>

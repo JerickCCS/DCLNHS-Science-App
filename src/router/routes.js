@@ -69,6 +69,8 @@ const routes = [
 
       //Chapter 4
       { path: 'chapter-4', component: () => import('pages/chapter-4/Chapter-4.vue'), name: 'chapter-4' },
+      { path: 'mini-lab-4-1', component: () => import('pages/chapter-4/MiniLab4-1.vue'), name: 'mini-lab-4-1' },
+      { path: 'mini-test-4-2', component: () => import('pages/chapter-4/MiniTest4-2.vue'), name: 'mini-test-4-2' },
       { path: 'unit-2-chapter-4-lesson-1', component: () => import('pages/chapter-4/LessonOne.vue'), name: 'unit-2-chapter-4-lesson-1' },
       { path: 'unit-2-chapter-4-lesson-2', component: () => import('pages/chapter-4/LessonTwo.vue'), name: 'unit-2-chapter-4-lesson-2' },
       { path: 'unit-2-chapter-4-technology', component: () => import('pages/chapter-4/TechnologyFocus.vue'), name: 'chapter-4-technology' },
@@ -80,6 +82,7 @@ const routes = [
 
       //Chapter 5
       { path: 'chapter-5', component: () => import('pages/chapter-5/Chapter-5.vue'), name: 'chapter-5' },
+      { path: 'mini-test-5-1', component: () => import('pages/chapter-5/MiniTest5-1.vue'), name: 'mini-test-5-1' },
       { path: 'unit-2-chapter-5-lesson-1', component: () => import('pages/chapter-5/LessonOne.vue'), name: 'unit-2-chapter-5-lesson-1' },
       { path: 'unit-2-chapter-5-lesson-2', component: () => import('pages/chapter-5/LessonTwo.vue'), name: 'unit-2-chapter-5-lesson-2' },
       { path: 'chapter-5-technology', component: () => import('pages/chapter-5/TechnologyFocus.vue'), name: 'chapter-5-technology' },
@@ -121,6 +124,8 @@ const routes = [
 
       //Chapter 9
       { path: 'chapter-9', component: () => import('pages/chapter-9/Chapter-9.vue'), name: 'chapter-9' },
+      { path: 'unit-3-chapter-9-lesson-1', component: () => import('pages/chapter-9/LessonOne.vue'), name: 'unit-3-chapter-9-lesson-1' },
+      { path: 'unit-3-chapter-9-lesson-2', component: () => import('pages/chapter-9/LessonTwo.vue'), name: 'unit-3-chapter-9-lesson-2' },
 
       //Unit 4
       { path: 'chapter-10', component: () => import('pages/chapter-10/Chapter-10.vue'), name: 'chapter-10' },

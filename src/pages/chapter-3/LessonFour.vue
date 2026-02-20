@@ -115,7 +115,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 3-6. Varying degrees of concentration of a colored solution: from the most concentrated (left) to the most dilute (right)">
+            <img src="assets/img/chapter 3/figure 3-6.png" alt="Figure 3-6. Varying degrees of concentration of a colored solution: from the most concentrated (left) to the most dilute (right)">
             <div class="caption">Figure 3-6. Varying degrees of concentration of a colored solution: from the most concentrated (left) to the most dilute (right)</div>
         </div>
         <p>For colored solutes, such as dyes, the color of the solution usually indicates the degree of its concentration. Concentrated solutions have an intense or dark color, while dilute solutions are pale or light in color.</p>
@@ -129,8 +129,7 @@ export default {
         <p>Two common quantitative expressions of solution concentration are percent by mass and percent by volume.</p>
         <p>Percent by mass is expressed as the mass of solute in the solution divided by the total mass of the solution, then multiplied by 100.</p>
         <div class="illustration">
-            <img src="assets/img" alt="Formula Image">
-            <div class="caption">Formula Image</div>
+            <img src="assets/img/chapter 3/formula 1.png" alt="Formula Image">
         </div>
     </div>
     `,
@@ -138,8 +137,7 @@ export default {
     <div>
         <p>A 5% by mass of sodium chloride (NaCl) solution contains 5 parts of NaCl for every 95 parts of water (H₂O). Thus, a 100-gram sample of this solution contains 5 grams of NaCl and 95 grams of H₂O.</p>
         <div class="illustration">
-            <img src="assets/img" alt="Formula Image">
-            <div class="caption">Formula Image</div>
+            <img src="assets/img/chapter 3/formula 2.png" alt="Formula Image">
         </div>
     </div>
     `,
@@ -150,8 +148,7 @@ export default {
         </div>
         <p>The concentration of a solution can also be expressed in percent by volume. Percent by volume is equal to the volume of solute divided by the volume of solution multiplied by 100.</p>
         <div class="illustration">
-            <img src="assets/img" alt="Formula Image">
-            <div class="caption">Formula Image</div>
+            <img src="assets/img/chapter 3/formula 3.png" alt="Formula Image">
         </div>
     </div>
     `,
@@ -159,15 +156,14 @@ export default {
     <div>
         <p>The concentration of a solution of two liquids is frequently expressed in percent by volume. This is true for alcoholic beverages. A wine that is 20% alcohol has 20 milliliters of alcohol per 100 milliliters of wine.</p>
         <div class="illustration">
-            <img src="assets/img" alt="Formula Image">
-            <div class="caption">Formula Image</div>
+            <img src="assets/img/chapter 3/formula 4.jpeg" alt="Figure 3-8. Example of percent by volume">
         </div>
     </div>
     `,
             `
     <div>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 3-7. The alcohol content of alcoholic beverages is expressed in percent by volume or in terms of proof as shown on their label.">
+            <img src="assets/img/chapter 3/figure 3-7.png" alt="Figure 3-7. The alcohol content of alcoholic beverages is expressed in percent by volume or in terms of proof as shown on their label.">
             <div class="caption">Figure 3-7. The alcohol content of alcoholic beverages is expressed in percent by volume or in terms of proof as shown on their label.</div>
         </div>
         <p>Aside from percent by volume, the alcohol content in alcoholic beverages can also be expressed in terms of "proof." The proof is twice the percent by volume of alcohol. Thus, a liquor that is 100 proof is 50% alcohol by volume; a 90-proof liquor contains 45% alcohol.</p>

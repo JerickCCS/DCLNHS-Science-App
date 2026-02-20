@@ -1,177 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Model Viewer Hotspot Picker with Copyable Log</title>
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Hotspot Inspector</title>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@700;800&display=swap');
 
-    model-viewer {
-      width: 100%;
-      height: 100vh;
-      background-color: #f0f0f0;
-    }
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --accent: #00ff88;
+    --accent2: #ff6b35;
+    --accent3: #7eb8ff;
+    --text: #e0e0f0;
+    --muted: #555570;
+    --log-bg: #08080d;
+  }
 
-    .annotation {
-      position: relative;
-      background: white;
-      border: 1px solid #333;
-      border-radius: 6px;
-      padding: 4px 8px;
-      font-size: 13px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      z-index: 5;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .info {
-      display: none;
-      position: absolute;
-      top: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 13px;
-      width: 200px;
-      word-wrap: break-word;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      text-align: left;
-      z-index: 10;
-    }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 52px 1fr 220px;
+    overflow: hidden;
+  }
 
-    .annotation.active .info {
-      display: block;
-    }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 20px;
+    z-index: 20;
+  }
 
-    /* Log box */
-    #log-box {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      max-height: 200px;
-      background: #111;
-      color: #0f0;
-      font-family: monospace;
-      font-size: 13px;
-      overflow-y: auto;
-      padding: 8px;
-      box-sizing: border-box;
-      border-top: 2px solid #333;
-      white-space: pre-wrap;
-    }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .logo span { color: var(--muted); }
 
-    .log-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 2px 0;
-      gap: 6px;
-    }
+  .divider { width: 1px; height: 24px; background: var(--border); }
 
-    .copy-btn {
-      background: none;
-      border: 1px solid #555;
-      color: #0f0;
-      cursor: pointer;
-      font-size: 11px;
-      padding: 2px 4px;
-      border-radius: 3px;
-      transition: background 0.2s;
-    }
+  .mode-label { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
 
-    .copy-btn:hover {
-      background: #0f0;
-      color: #000;
-    }
-  </style>
+  .header-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+  .btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 5px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.04em;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.danger:hover { border-color: var(--accent2); color: var(--accent2); }
+  .btn.primary { border-color: var(--accent); color: var(--accent); }
+  .btn.primary:hover { background: var(--accent); color: #000; }
+
+  #file-input { display: none; }
+
+  #viewer-wrap { position: relative; overflow: hidden; }
+
+  model-viewer {
+    width: 100%;
+    height: 100%;
+    background-color: #0d0d18;
+    --poster-color: #0d0d18;
+  }
+
+  .drop-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: #0d0d18;
+    transition: opacity 0.3s;
+  }
+  .drop-overlay.hidden { opacity: 0; pointer-events: none; }
+  .drop-overlay .inner { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+  .drop-icon { font-size: 52px; opacity: 0.12; }
+  .drop-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; color: var(--muted); letter-spacing: 0.06em; }
+  .drop-sub { font-size: 11px; color: var(--muted); opacity: 0.5; }
+
+  /* Hotspot annotations */
+  .annotation {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 3px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0,255,136,0.2);
+    transition: all 0.15s;
+    white-space: nowrap;
+    z-index: 5;
+  }
+  .annotation:hover, .annotation.active {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0,255,136,0.4);
+  }
+
+  .info {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 11px;
+    width: 240px;
+    word-break: break-all;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    z-index: 20;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .annotation.active .info { display: block; }
+  .info-row { display: flex; flex-direction: column; gap: 2px; margin-bottom: 8px; }
+  .info-label { font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .info-val { color: var(--accent); font-size: 10px; }
+  .info-val.norm { color: var(--accent3); }
+  .info-copy {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 4px;
+    cursor: pointer;
+    margin-top: 2px;
+    transition: all 0.15s;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .info-copy:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Click ring */
+  .click-ring {
+    position: absolute;
+    width: 20px; height: 20px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: ring-out 0.5s ease-out forwards;
+  }
+  @keyframes ring-out {
+    from { transform: translate(-50%,-50%) scale(0.5); opacity:1; }
+    to   { transform: translate(-50%,-50%) scale(2.5); opacity:0; }
+  }
+
+  /* Log */
+  #log-wrap {
+    background: var(--log-bg);
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .log-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .log-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .log-count {
+    font-size: 10px;
+    color: var(--accent);
+    background: rgba(0,255,136,0.08);
+    border: 1px solid rgba(0,255,136,0.15);
+    padding: 1px 7px;
+  }
+
+  .log-actions { margin-left: auto; display: flex; gap: 6px; }
+
+  #log-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  #log-scroll::-webkit-scrollbar { width: 4px; }
+  #log-scroll::-webkit-scrollbar-thumb { background: var(--border); }
+
+  .log-line {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 2px 6px;
+    border: 1px solid transparent;
+    transition: border-color 0.12s;
+  }
+  .log-line:hover { border-color: var(--border); }
+
+  .log-num { color: var(--muted); font-size: 10px; min-width: 26px; flex-shrink: 0; }
+  .log-text { color: #c0ffd8; font-size: 11px; flex: 1; line-height: 1.5; word-break: break-all; }
+  .log-text.dim { color: var(--muted); }
+  .log-text.blue { color: var(--accent3); }
+  .log-text.orange { color: #ffd47a; }
+
+  .copy-btn {
+    background: transparent;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 1px 6px;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .copy-btn.done { border-color: var(--accent); color: #000; background: var(--accent); }
+</style>
 </head>
 <body>
 
-<model-viewer id="mv"
-              src="/models/bunsen_burner.glb"
-              alt="Bunsen Burner"
-              camera-controls
-              
-              ar>
-</model-viewer>
+<header>
+  <div class="logo">Hotspot <span>//</span> Picker</div>
+  <div class="divider"></div>
+  <div class="mode-label">Click model → position + normal</div>
+  <div class="header-right">
+    <button class="btn primary" onclick="document.getElementById('file-input').click()">Load GLB / GLTF</button>
+    <button class="btn danger" onclick="clearHotspots()">Clear Hotspots</button>
+    <button class="btn danger" onclick="clearLog()">Clear Log</button>
+    <input type="file" id="file-input" accept=".glb,.gltf" onchange="loadFile(event)">
+  </div>
+</header>
 
-<!-- Log output container -->
-<div id="log-box"></div>
+<div id="viewer-wrap">
+  <model-viewer id="mv" camera-controls shadow-intensity="1" ar></model-viewer>
+
+  <div class="drop-overlay" id="drop-overlay">
+    <div class="inner">
+      <div class="drop-icon">⬡</div>
+      <div class="drop-text">Drop a GLB / GLTF</div>
+      <div class="drop-sub">or use the button above</div>
+      <button class="btn primary" onclick="document.getElementById('file-input').click()">Browse File</button>
+    </div>
+  </div>
+</div>
+
+<div id="log-wrap">
+  <div class="log-header">
+    <span class="log-title">Log</span>
+    <span class="log-count" id="log-count">0</span>
+    <div class="log-actions">
+      <button class="btn" style="font-size:10px;padding:3px 8px" onclick="copyAllLog()">Copy All</button>
+      <button class="btn danger" style="font-size:10px;padding:3px 8px" onclick="clearLog()">Clear</button>
+    </div>
+  </div>
+  <div id="log-scroll"></div>
+</div>
 
 <script>
   const mv = document.getElementById('mv');
-  const logBox = document.getElementById('log-box');
+  const logScroll = document.getElementById('log-scroll');
+  const logCountEl = document.getElementById('log-count');
+  const overlay = document.getElementById('drop-overlay');
+  const viewerWrap = document.getElementById('viewer-wrap');
 
-  // Override console.log to also write to log box with copy button
-  (function () {
-    const originalLog = console.log;
-    console.log = function (...args) {
-      originalLog.apply(console, args);
-      const message = args.map(a => (typeof a === 'object' ? JSON.stringify(a) : a)).join(' ');
+  let lineNum = 0;
+  let allLines = [];
 
-      const line = document.createElement('div');
-      line.className = 'log-line';
+  // ── Console override ──────────────────────────────────────────────────
+  const _orig = console.log;
+  console.log = function (...args) {
+    _orig.apply(console, args);
+    const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
+    appendLog(msg);
+  };
 
-      const text = document.createElement('span');
-      text.textContent = message;
+  function appendLog(msg, cls = '') {
+    lineNum++;
+    allLines.push(msg);
+    logCountEl.textContent = lineNum;
 
-      const btn = document.createElement('button');
-      btn.className = 'copy-btn';
-      btn.textContent = 'Copy';
-      btn.onclick = () => {
-        navigator.clipboard.writeText(message);
-        btn.textContent = '✓';
-        setTimeout(() => (btn.textContent = 'Copy'), 1000);
-      };
+    const line = document.createElement('div');
+    line.className = 'log-line';
 
-      line.appendChild(text);
-      line.appendChild(btn);
-      logBox.appendChild(line);
-      logBox.scrollTop = logBox.scrollHeight;
+    const num = document.createElement('span');
+    num.className = 'log-num';
+    num.textContent = lineNum;
+
+    const text = document.createElement('span');
+    text.className = 'log-text ' + cls;
+    text.textContent = msg;
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy';
+    btn.onclick = () => {
+      copyText(msg);
+      btn.textContent = '✓';
+      btn.classList.add('done');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1200);
     };
-  })();
 
-  mv.addEventListener('click', (event) => {
-    const target = event.target.closest('.annotation');
+    line.appendChild(num);
+    line.appendChild(text);
+    line.appendChild(btn);
+    logScroll.appendChild(line);
+    logScroll.scrollTop = logScroll.scrollHeight;
+  }
 
-    if (target) {
+  function copyText(text) {
+    navigator.clipboard.writeText(text).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    });
+  }
+
+  function copyAllLog() { copyText(allLines.join('\n')); }
+
+  function clearLog() {
+    logScroll.innerHTML = '';
+    allLines = [];
+    lineNum = 0;
+    logCountEl.textContent = 0;
+  }
+
+  // ── Load model ────────────────────────────────────────────────────────
+  function loadFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    mv.src = URL.createObjectURL(file);
+    overlay.classList.add('hidden');
+    console.log(`Model loaded: ${file.name}`);
+  }
+
+  viewerWrap.addEventListener('dragover', e => e.preventDefault());
+  viewerWrap.addEventListener('drop', e => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile({ target: { files: [file] } });
+  });
+
+  // ── Click → hotspot ───────────────────────────────────────────────────
+  let hotspotNum = 0;
+
+  mv.addEventListener('click', e => {
+    // Toggle annotation
+    const annotation = e.target.closest('.annotation');
+    if (annotation) {
       document.querySelectorAll('.annotation').forEach(el => {
-        if (el !== target) el.classList.remove('active');
+        if (el !== annotation) el.classList.remove('active');
       });
-      target.classList.toggle('active');
+      annotation.classList.toggle('active');
       return;
     }
 
-    const hit = mv.positionAndNormalFromPoint(event.clientX, event.clientY);
-    if (hit) {
-      const button = document.createElement('button');
-      button.slot = `hotspot-${Date.now()}`;
-      button.className = "annotation";
-      button.textContent = "New Spot";
+    document.querySelectorAll('.annotation.active').forEach(el => el.classList.remove('active'));
 
-      const info = document.createElement('div');
-      info.className = "info";
-      info.textContent = "Custom info goes here. This card is 200px wide and wraps long text.";
-      button.appendChild(info);
+    const hit = mv.positionAndNormalFromPoint(e.clientX, e.clientY);
+    if (!hit) return;
 
-      button.dataset.position = hit.position.toString();
-      button.dataset.normal = hit.normal.toString();
-      mv.appendChild(button);
+    hotspotNum++;
+    const slotName = `hotspot-${Date.now()}`;
+    const posStr = hit.position.toString();
+    const normStr = hit.normal.toString();
+    const fullAttr = `data-position="${posStr}" data-normal="${normStr}"`;
 
-      console.log("Hotspot added!");
-      console.log("data-position=\"" + hit.position.toString() + "\"");
-      console.log("data-normal=\"" + hit.normal.toString() + "\"");
-    }
+    // Button
+    const btn = document.createElement('button');
+    btn.slot = slotName;
+    btn.className = 'annotation';
+    btn.dataset.position = posStr;
+    btn.dataset.normal = normStr;
+    btn.textContent = `#${hotspotNum}`;
+
+    // Popup
+    const info = document.createElement('div');
+    info.className = 'info';
+    info.innerHTML = `
+      <div class="info-row">
+        <span class="info-label">Position</span>
+        <span class="info-val">${posStr}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Normal</span>
+        <span class="info-val norm">${normStr}</span>
+      </div>
+      <button class="info-copy" id="ic-pos-${hotspotNum}">📋 Copy position</button>
+      <button class="info-copy" id="ic-norm-${hotspotNum}">📋 Copy normal</button>
+      <button class="info-copy" id="ic-both-${hotspotNum}">📋 Copy both attrs</button>
+    `;
+    btn.appendChild(info);
+    mv.appendChild(btn);
+
+    // Wire up popup buttons after DOM insert
+    requestAnimationFrame(() => {
+      document.getElementById(`ic-pos-${hotspotNum}`).onclick = () => copyText(`data-position="${posStr}"`);
+      document.getElementById(`ic-norm-${hotspotNum}`).onclick = () => copyText(`data-normal="${normStr}"`);
+      document.getElementById(`ic-both-${hotspotNum}`).onclick = () => copyText(fullAttr);
+    });
+
+    // Ripple
+    const rect = viewerWrap.getBoundingClientRect();
+    const ring = document.createElement('div');
+    ring.className = 'click-ring';
+    ring.style.left = (e.clientX - rect.left) + 'px';
+    ring.style.top  = (e.clientY - rect.top)  + 'px';
+    viewerWrap.appendChild(ring);
+    setTimeout(() => ring.remove(), 600);
+
+    // Log
+    console.log(`── Hotspot #${hotspotNum} ─────────────────────`);
+    console.log(`data-position="${posStr}"`);
+    console.log(`data-normal="${normStr}"`);
+    console.log(`${fullAttr}`);
   });
-</script>
 
+  function clearHotspots() {
+    document.querySelectorAll('[slot^="hotspot-"]').forEach(el => el.remove());
+    hotspotNum = 0;
+    console.log('All hotspots cleared.');
+  }
+</script>
 </body>
 </html>

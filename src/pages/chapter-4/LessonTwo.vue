@@ -111,7 +111,7 @@ export default {
       <!-- Card 2 -->
       <p>Scientists consider Robert Hooke and his early contemporaries to have paved the way for the development of modern biology. Hooke used an early microscope like the one shown in figure 4-3 to examine a thin slice of cork from a mature tree. He observed tiny, box-shaped structures which he called cellulae, meaning "small room" in Latin; hence the term. What Hooke actually observed were the cell walls of dead plant cells, which are components of the cork. The simplicity of his instrument limited his work, but scientists who came after him succeeded in unraveling the intricate design of a living cell.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-3">
+        <img src="assets/img/chapter 4/figure 4-3.png" alt="figure 4-3">
         <div class="caption">Figure 4-3. Cork cells under the early microscope</div>
       </div>
     </div>
@@ -145,7 +145,7 @@ export default {
     <div>
       <!-- Card 5 -->
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-4">
+        <img src="assets/img/chapter 4/figure 4-4.png" alt="figure 4-4">
         <div class="caption">Figure 4-4. Diagram of (a) a prokaryotic cell and (b) a eukaryotic cell</div>
       </div>
     </div>
@@ -164,7 +164,7 @@ export default {
     <div>
       <!-- Card 7 -->
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-5">
+        <img src="assets/img/chapter 4/figure 4-5.png" alt="figure 4-5">
         <div class="caption">Figure 4-5. Examples of unicellular and multicellular organisms</div>
       </div>
     </div>
@@ -460,16 +460,31 @@ export default {
         <img src="assets/img" alt="figure 4-16">
         <div class="caption">Figure 4-16. The cytoskeleton of the cell</div>
       </div>
-      <p>MINI LAB 4-1</p>
-      <p>Materials: a pack of gelatin (preferably white), a transparent small plastic bag, a transparent plastic container (tumbler), a piece of red grape, and raisins</p>
-      <p>Procedures:</p>
-      <p>1. Cook the gelatin as instructed</p>
+      <div class="info-card">
+  <div class="info-title">MINI LAB 4-1</div>
+  <div class="info-content">
+    <div class="info-text">
+      <p><strong>Materials:</strong> a pack of gelatin (preferably white), a transparent small plastic bag, a transparent plastic container (tumbler), a piece of red grape, and raisins</p>
+      
+      <p><strong>Procedures:</strong></p>
+      <p>1. Cook the gelatin as instructed.</p>
       <p>2. Place the small plastic bag into the plastic container so that the open end of the plastic bag extends over the edge of the plastic container.</p>
-      <p>3. Pour the gelatin into the plastic bag enough to fill it. Let it cool</p>
+      <p>3. Pour the gelatin into the plastic bag enough to fill it. Let it cool.</p>
       <p>4. Before the gelatin hardens, insert the grape in the middle, and scatter some raisin on top of the gelatin randomly.</p>
-      <p>Questions:</p>
+
+      <p><strong>Questions:</strong></p>
       <p>1. What part is represented by the: plastic container, plastic bag, gelatin, grape, and raisins?</p>
-      <p>2. Which cell part occupies most of the space pf the cell?</p>
+      <p>2. Which cell part occupies most of the space of the cell?</p>
+
+      <div class="start-btn-container">
+        <q-btn data-route="/mini-lab-4-1" unelevated class="start-btn">
+          Answer
+        </q-btn>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
     `,
       `
@@ -502,14 +517,14 @@ export default {
     <div>
       <!-- Card 40 -->
       <div class="info-card">
-  <div class="info-title">MINI TEST</div>
+  <div class="info-title">MINI TEST 4-2</div>
   <div class="info-content">
     <div class="info-text">
       <div class="mini-questions">
         <p><strong>1.</strong> The cell is composed of parts that work together to perform specific functions for the body. How does the concept of division of labor and spirit of cooperation work inside the cell? Explain your answer.</p>
       </div>
       <div class="start-btn-container">
-        <q-btn data-route="/mini-test" unelevated class="start-btn">
+        <q-btn data-route="/mini-test-4-2" unelevated class="start-btn">
           Answer
         </q-btn>
       </div>

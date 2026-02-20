@@ -95,7 +95,7 @@
                     </div>
 
                     <!-- Empty State -->
-                    <div v-else class="empty-state text-center q-mt-xl">
+                    <div v-else class="empty-state text-center">
                         <q-icon name="bookmark_border" size="64px" color="white" class="empty-icon" />
                         <div class="text-h6 text-white q-mt-md">No bookmarks yet</div>
                         <div class="text-body1 text-white q-mt-xs">
@@ -126,6 +126,7 @@
         </q-page-container>
     </q-layout>
 </template>
+
 <script>
 import { ref, onMounted, onUnmounted } from "vue"
 import { useRouter } from "vue-router"
@@ -341,16 +342,33 @@ export default {
 </script>
 
 <style scoped>
+/* Fix for white space at bottom */
 :deep(.q-page-container) {
     padding: 0 !important;
+    padding-bottom: 0 !important;
+    background: #42a7ff !important;
+}
+
+:deep(.q-page) {
+    min-height: 100vh;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    background: #42a7ff !important;
+}
+
+:deep(body) {
+    background: #42a7ff !important;
+    margin: 0;
+    padding: 0;
 }
 
 .bookmarks-page {
     background: #42a7ff;
     min-height: 100vh;
     padding-top: 60px;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    margin-bottom: 0;
 }
-
 
 .header-no-border {
     border-bottom: none !important;
@@ -363,11 +381,6 @@ export default {
 
 .q-btn .q-icon {
     color: white !important;
-}
-
-.bookmarks-page {
-    background: #42a7ff;
-    min-height: 100vh;
 }
 
 /* Remove padding from q-page-container */
@@ -421,6 +434,7 @@ export default {
     gap: 16px;
     max-width: 800px;
     margin: 0 auto;
+    padding-bottom: 32px;
 }
 
 @media (min-width: 768px) {
@@ -580,8 +594,14 @@ export default {
     }
 }
 
+/* Empty state - full screen centered */
 .empty-state {
-    padding: 80px 20px;
+    padding: 20px;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .empty-icon {

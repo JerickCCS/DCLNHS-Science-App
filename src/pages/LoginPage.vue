@@ -434,7 +434,7 @@ const addProfile = () => {
     left: 0;
     padding: 16px;
     box-sizing: border-box;
-    background: #4534ff;
+    background: linear-gradient(180deg, hsla(245, 100%, 60%, 1) 0%, hsla(274, 100%, 52%, 1) 100%);
 }
 
 .login-card {
@@ -515,11 +515,11 @@ const addProfile = () => {
 }
 
 .empty-state {
-    background: linear-gradient(145deg, #0d47a1, #1565c0);
+    background: linear-gradient(145deg, #ffffff, #ffffff);
     text-align: center;
     justify-content: center;
     align-items: center;
-    padding: 40px 16px 100px;
+    padding: 16px;
 }
 
 /* Profiles Header */
@@ -740,21 +740,25 @@ const addProfile = () => {
 /* Empty State */
 .empty-icon {
     font-size: 2.5rem;
-    margin-bottom: 16px;
+    margin: 0;
     opacity: 0.8;
+    line-height: 1;
 }
 
 .empty-title {
     font-size: 1.2rem;
     font-weight: 600;
-    color: white;
-    margin-bottom: 8px;
+    color: #3388ff;
+    margin: 0;
+    line-height: 1.2;
 }
 
 .empty-description {
-    color: #a0c8ff;
+    color: #3388ff;
     font-size: 0.95rem;
     max-width: 80%;
+    margin: 0;
+    line-height: 1.3;
 }
 
 /* Fixed Add Button */

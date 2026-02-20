@@ -485,11 +485,12 @@
 }
 
 :deep(.model-viewer-block .caption) {
-    margin-top: 8px;
+    margin-top: 12px;
     font-size: 4vw;
     font-weight: 600;
     line-height: 1.4;
-    color: #312e81;
+    color: #696969;
+    font-style: italic;
 }
 
 :deep(.eye-icon) {
