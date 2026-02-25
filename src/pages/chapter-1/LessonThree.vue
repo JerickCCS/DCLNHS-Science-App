@@ -138,9 +138,12 @@ Figure 1-9 shows the difference between a ruler and a meter rule.</p>
   `,
             `
     <div>
-      <p>A caliper is used for measuring small lengths, such as the diameter of a circular object or
-the thickness of a material, up to 0.01 millimeters (mm). It has jaws and a locking screw and
-can be used to measure both external and internal dimensions of an object.</p>
+      <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 1/caliper.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">What is a caliper?</div>
+        </div>
       <p>To use a caliper, carefully grip the object using the straight edges of the external or internal jaws and secure it with the locking screw. Figure 1-10 shows a typical caliper.</p>
       <div class="model-viewer-block">
         <model-viewer src="models/caliper.glb" alt="Figure 1-10. Parts of a typical caliper" camera-controls auto-rotate interaction-prompt="auto" loading="eager"></model-viewer>
@@ -184,15 +187,18 @@ measures from 0 to 200 grams in 10-g increments.</p>
   `,
             `
     <div>
-      <p>The double beam balance determines the difference in mass by placing the object to
-be weighed on one pan and adding calibrated weights on the other pan. The riders are then
-adjusted until equilibrium is reached, and the scale reading is determined by noting the
-position of the riders, indicating the mass of the sample.</p>
-      <p>Another mechanical weighing balance is the triple beam balance. It is made up of one
-pan and three beams that support riders. The first rider measures from 0 to 100 grams with
-10-g increments, the second rider measures from 0 to 500 grams in 100-g increments, and the
-third rider from zero to 10 grams in 1-g increments. This balance accurately determines the
-absolute mass of an object and can measure to the tenth of a gram.</p>
+      <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 1/double beam balance.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">The double beam balance</div>
+        </div>
+      <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 1/triple beam balance.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">The triple beam balance</div>
+        </div>
       <p>Before using the balance, the riders on the three beams must be moved to the leftmost
 positions so that the scale pointer exactly aligns with the zero line. The object is then placed
 on the pan, and the riders are adjusted until the scale pointer returns to zero. The hundreds
@@ -204,20 +210,18 @@ the object's mass, which is obtained by summing the numbers from the three beams
     <div>
       <p>The top-loading balance and the analytical balance are both electronic balances
 designed for high-precision measurements.</p>
-      <p>Top-loading balances are commonly used in educational settings, quality control
-laboratories, and general weighing stations. They are less precise than analytical balances,
-typically providing measurements to two or three decimal places since they cannot measure
-objects of extremely low masses. Top-loading balances are also typically more durable
-and less susceptible to environmental conditions, making them suitable for everyday
-weighing use.</p>
-      <p>An analytical balance, on the other hand, has higher sensitivity and offers better
-precision. It has an enclosed measuring pan to avoid dust and environmental elements, such
-as wind, to affect and disrupt measurements. Depending on the model, analytical balances
-have weighing capacities ranging from 0.001 g up to 200 g and readability of up to four
-decimal places (0.0001 g), making them appropriate for weighing small quantities with high
-accuracy. Thus, analytical balances are extensively utilized in scientific laboratories,
-particularly in analytical chemistry, where accurate measurements are essential for studies
-and experiments.</p>
+      <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 1/top-loading balances.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">The top-loading balance</div>
+        </div>
+      <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 1/analytical balance.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">The analytical balance</div>
+        </div>
       <p>The basic steps for weighing with analytical and top-loading balances are generally
 similar. The only difference is that, in an analytical balance, the balance door is closed to
 reduce the effect of wind and dust in the obtained measurement.</p>

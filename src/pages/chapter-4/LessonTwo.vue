@@ -96,12 +96,13 @@ export default {
       `
     <div>
       <!-- Card 1 -->
-      <p style="display: none;">Lesson 2 The Cell: The Basic Unit of Life</p>
+      <p></p>
       <div class="header">
-        <div class="title">Why are cells important?</div>
+        <div class="title">The Cell: The Basic Unit of Life</div>
       </div>
-      <p>A Closer Look at the Cell</p>
-      <p>Is life possible without the cell?</p>
+      <p style="font-weight: bold; padding-top: 10px; margin-bottom: 1px;">Why are cells important?</p>
+      <p style="font-weight: bold; padding-top: 10px; margin-bottom: 1px;">A Closer Look at the Cell</p>
+      <p style="font-weight: bold; padding-top: 10px; margin-bottom: 1px;">Is life possible without the cell?</p>
       <p>Cells are microscopic units that collectively carry out the processes that make an organism a living entity. Your body is composed of trillions of cells of around 200 different types. Your brain is made up of brain cells, your skeleton of bone cells, and your heart of cardiac muscle cells.</p>
       <p>The discovery of cells changed the way scientists study living organisms. Up to the early 1600s, people only knew of organisms that they could see with the unaided eye. They had no knowledge of the existence of microscopic life-forms.</p>
     </div>
@@ -164,7 +165,10 @@ export default {
     <div>
       <!-- Card 7 -->
       <div class="illustration">
-        <img src="assets/img/chapter 4/figure 4-5.png" alt="figure 4-5">
+        <img src="assets/img/chapter 4/figure 4-5 a.png" alt="figure 4-5">
+      </div>
+      <div class="illustration">
+        <img src="assets/img/chapter 4/figure 4-5 b.png" alt="figure 4-5">
         <div class="caption">Figure 4-5. Examples of unicellular and multicellular organisms</div>
       </div>
     </div>
@@ -184,7 +188,7 @@ export default {
       <!-- Card 9 -->
       <p>Bacteria are so small that around 3000 of them could fit in the period at the end of this sentence. Bacteria can be classified based on their shape (figure 4-6) rod (bacillus), spherical (coccus), spiral (spirillum), comma (vibrio, or coiled (spirochete).</p>
       <div class="illustration">
-        <img src="assets>img" alt="figure 4-6">
+        <img src="assets/img/chapter 4/figure 4-6.png" alt="figure 4-6">
         <div class="caption">Figure 4-6. (a) Bacillus, (b) coccus, (c) spirillum, (d) vibrio, and (e) spirochete are the different shapes of bacteria</div>
       </div>
       <p>Bacteria can live as a single cell or in colonies. A colony is a group of identical bacterial cells closely associated with one another, although they are independent of one another. They may join together in clusters or in chains.</p>
@@ -205,7 +209,7 @@ export default {
       <!-- Card 11 -->
       <p>Some phytoplankton are classified as protists. Phytoplankton (figure 4-7a) are unicellular photosynthetic organisms that float on the surface of freshwater and saltwater. These organisms are responsible for 50% to 85% of the oxygen in the atmosphere. Other examples of plantlike protists are dinoflagellates, Euglena (figure 4-7b), diatoms, and golden-brown algae. which are ecologically classified as primary producers in aquatic habitats.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-7">
+        <img src="assets/img/chapter 4/figure 4-7.png" alt="figure 4-7">
         <div class="caption">Figure 4-7. (a) Phytoplankton and (b) Euglena are plantlike protists</div>
       </div>
     </div>
@@ -215,14 +219,14 @@ export default {
       <!-- Card 12 -->
       <p>Dinoflagellates are also plantlike protists. They are named such due to the presence of two flagella in each cell. They are similar to Euglena, but are mostly found in marine environments. Under certain conditions, dinoflagellates can grow or bloom rapidly, turning water along coasts reddish brown. This phenomenon is commonly called red tide. A large dinoflagellate population produces large amounts of neurotoxins that harm marine organisms, as well as terrestrial organisms that feed on them.</p>
       <p><strong>Animallike Protists</strong></p>
-      <p>Animallike protists or protozoans are heterotrophic, which means they depend on other organisms for food. Protozoans include the sarcodines (Amoeba in figure 4-8a), ciliates (Paramecium in figure 4-856), and zooflagellates (Trypanosoma in figure 4-8c).</p>
+      <p>Animallike protists or protozoans are heterotrophic, which means they depend on other organisms for food. Protozoans include the sarcodines (Amoeba in figure 4-8a), ciliates (Paramecium in figure 4-8b), and zooflagellates (Trypanosoma in figure 4-8c).</p>
     </div>
     `,
       `
     <div>
       <!-- Card 13 -->
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-8">
+        <img src="assets/img/chapter 4/figure 4-8.png" alt="figure 4-8">
         <div class="caption">Figure 4-8. (a) Amoeba, (b) Paramecium, and (c) Trypanosoma are animallike protists.</div>
       </div>
       <p>An Amoeba is one of the simplest known protozoans. It consists of a nucleus and all other cellular parts present in a eukaryotic cell. It "crawls" using its pseudopodia, or false feet, into which its cytoplasm flows. This is referred to as amoeboid movement, powered by a protein called actin. It also eats tiny food particles present in its surroundings using its pseudopodia. The food particles are enclosed by food vacuole, and are intracellularly digested through the help of enzymes from the lysosomes. Excess water is ejected through the contractile vacuole, which pulsates alternately with the radiating canals.</p>
@@ -234,30 +238,54 @@ export default {
       <p><strong>Fungus-like Protists</strong></p>
       <p>Fungus-like protists, or slime molds, are saprophytic, which means that they derive food and energy by breaking down dead organic matter. They include the plasmodial slime molds and cellular slime molds, which both undergo asexual and sexual reproduction.</p>
       <p>A summary of the characteristics of the three groups of protists is given in table 4-2.</p>
-    </div>
-    `,
-      `
-    <div>
-      <!-- Card 15 -->
-      <div class="illustration">
-        <img src="assets/img" alt="table 4-2">
-        <div class="caption">Table 4-2. Comparison of the Three Groups of Protists</div>
-      </div>
+      <p style="font-weight: bold; padding-top: 10px; margin-bottom: 1px;">Table 4-2. Comparison of the Three Groups of Protists</p>
+      <div style="overflow-x: auto;">
+  <table border="1" style="width: 850px; min-width: 100%; border-collapse: collapse; table-layout: fixed; text-align: left; font-family: Arial, sans-serif; border: 2px solid #333;">
+      <thead>
+        <tr style="background: linear-gradient(to right, #8e2de2, #ff6a9f); color: white;">
+          <th style="padding: 12px; width: 200px;">Characteristic</th>
+          <th style="padding: 12px; width: 215px;">Plantlike</th>
+          <th style="padding: 12px; width: 215px;">Animallike</th>
+          <th style="padding: 12px; width: 220px;">Fungus-like</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: #fdf4ff;">
+          <td style="padding: 10px; font-weight: bold;">Number of cells</td>
+          <td style="padding: 10px;">Unicellular; few are multicellular</td>
+          <td style="padding: 10px;">Unicellular</td>
+          <td style="padding: 10px;">Unicellular</td>
+        </tr>
+        <tr style="background-color: #ffffff;">
+          <td style="padding: 10px; font-weight: bold;">Organ for locomotion</td>
+          <td style="padding: 10px;">Flagella; others have none</td>
+          <td style="padding: 10px;">Flagella, pseudopodia, cilia; others have none</td>
+          <td style="padding: 10px;">Pseudopodia</td>
+        </tr>
+        <tr style="background-color: #fdf4ff;">
+          <td style="padding: 10px; font-weight: bold;">Mode of nutrition</td>
+          <td style="padding: 10px;">Autotrophic (can feed on their own)</td>
+          <td style="padding: 10px;">Heterotrophic (dependent on others for food)</td>
+          <td style="padding: 10px;">Heterotrophic (saprophytic: feeds on dead matter)</td>
+        </tr>
+      </tbody>
+  </table>
+</div>
     </div>
     `,
       `
     <div>
       <!-- Card 16 -->
-      <p><strong>Fungi</strong></p>
+      <p style="font-size: 20px; font-weight: bold;">Fungi</p>
       <p>Kingdom Fungi includes a wide variety of species, such as yeasts, molds, and mushrooms. Generally, there are four major groups of fungi: Zygomycetes or zygote fungi (eg, bread mold), Ascomycetes or sac fungi (e.g., yeasts), Basidiomycetes or club fungi (e.g., oyster mushrooms), and Chytridiomycetes or chytrids (e.g., Allomyces).</p>
+      <p>Fungi are found in almost all types of environment. Fungi have eukaryotic cells with cell walls made of chitin, a structural polysaccharide also found in the exoskeletons of arthropods. They lack chlorophyll, and so they must procure their food from other sources, Most fungi are saprophytic. Some fungi may also obtain their nutrients through parasitism, as in the case of Septobasidium sp., a parasite of plants and insects. A few fungi are unicellular, while most are multicellular. Yeasts are examples of unicellular fungi that reproduce through budding Multicellular fungi, such as mushrooms (figure 4-9a), grow larger than yeasts Fungi and reproduce via spores.</p>
     </div>
     `,
       `
     <div>
       <!-- Card 17 -->
-      <p>Fungi are found in almost all types of environment. Fungi have eukaryotic cells with cell walls made of chitin, a structural polysaccharide also found in the exoskeletons of arthropods. They lack chlorophyll, and so they must procure their food from other sources, Most fungi are saprophytic. Some fungi may also obtain their nutrients through parasitism, as in the case of Septobasidium sp., a parasite of plants and insects. A few fungi are unicellular, while most are multicellular. Yeasts are examples of unicellular fungi that reproduce through budding Multicellular fungi, such as mushrooms (figure 4-9a), grow larger than yeasts Fungi and reproduce via spores.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-9">
+        <img src="assets/img/chapter 4/figure 4-9.png" alt="figure 4-9">
         <div class="caption">Figure 4-9. (a) Mushrooms and (b) molds belong to Kingdom Fungi</div>
       </div>
       <p>Some species of fungi are made up of threadlike filaments called hyphae (sing, hypha). Hyphae are elongated, tubular, and have branching filaments that form the mycelium. In food that is contaminated with fungi, it is the mycelium you see spreading across. The hyphae of the mycelium secrete enzymes that digest the food. Some fungi live alongside some autotrophic green algae or blue-green bacteria.</p>
@@ -268,10 +296,50 @@ export default {
       <!-- Card 18 -->
       <p>One of the most common types of fungi is the bread mold (figure 4-96). Its mycelium has several types of specialized hyphae. In moldy food, the horizontal hyphae grow across the surface of the food. A branching network of hyphae, called rhizoids, grows into the food. Bread molds can reproduce asexually by growing vertical hyphae. On top of these stalks, black spore cases called sporangium form. Inside each spore case are individual spores with one or more nuclei. They may be dispersed by several agents and can develop into a new mycelium.</p>
       <p>Table 4-3 summarizes the characteristics of bacteria, protists, and fungi.</p>
-      <div class="illustration">
-        <img src="assets/img" alt="table">
-        <div class="caption">Table 4-3. Characteristics of Bacteria, Protists, and Fungi</div>
-      </div>
+      <div style="overflow-x: auto;">
+  <table border="1" style="width: 900px; min-width: 100%; border-collapse: collapse; table-layout: fixed; text-align: left; font-family: Arial, sans-serif; border: 2px solid #2c3e50;">
+      <thead>
+        <tr style="background: linear-gradient(to right, #11998e, #38ef7d); color: white;">
+          <th style="padding: 12px; width: 220px;">Distinguishing feature</th>
+          <th style="padding: 12px; width: 220px;">Bacteria</th>
+          <th style="padding: 12px; width: 230px;">Protists</th>
+          <th style="padding: 12px; width: 230px;">Fungi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: #e8fdf5;">
+          <td style="padding: 10px; font-weight: bold;">Type of cell</td>
+          <td style="padding: 10px;">Prokaryotic</td>
+          <td style="padding: 10px;">Eukaryotic</td>
+          <td style="padding: 10px;">Eukaryotic</td>
+        </tr>
+        <tr style="background-color: #ffffff;">
+          <td style="padding: 10px; font-weight: bold;">Number of cells</td>
+          <td style="padding: 10px;">Unicellular</td>
+          <td style="padding: 10px;">Unicellular;<br>Multicellular; Colonial</td>
+          <td style="padding: 10px;">Multicellular; few are unicellular</td>
+        </tr>
+        <tr style="background-color: #e8fdf5;">
+          <td style="padding: 10px; font-weight: bold;">Component of cell wall</td>
+          <td style="padding: 10px;">Peptidoglycan</td>
+          <td style="padding: 10px;">Present in some members; varied composition</td>
+          <td style="padding: 10px;">Chitin</td>
+        </tr>
+        <tr style="background-color: #ffffff;">
+          <td style="padding: 10px; font-weight: bold;">Mode of nutrition</td>
+          <td style="padding: 10px;">Autotrophic;<br>Heterotrophic</td>
+          <td style="padding: 10px;">Autotrophic;<br>Heterotrophic</td>
+          <td style="padding: 10px;">Heterotrophic (saprophytic)</td>
+        </tr>
+        <tr style="background-color: #e8fdf5;">
+          <td style="padding: 10px; font-weight: bold;">Means of locomotion</td>
+          <td style="padding: 10px;">Flagella</td>
+          <td style="padding: 10px;">Flagella, cilia, and pseudopodia; others have none</td>
+          <td style="padding: 10px;">Absent</td>
+        </tr>
+      </tbody>
+  </table>
+</div>
     </div>
     `,
       `
@@ -280,7 +348,10 @@ export default {
       <div class="header">
         <div class="title">SCIENCE CAREER</div>
       </div>
-      <p>Cytotechnologists</p>
+      <div class="illustration">
+        <img src="assets/img/chapter 4/cytotech.png" alt="cytotechnologist">
+        <div class="caption">Cytotechnologist at work</div>
+      </div>
       <p>Cytotechnologists play a big role in the field of cytology, the study of cells. They work with cell samples coming from the patients.</p>
       <p>Their responsibilities include preparing microscopic specimens, analyzing them in the laboratory, and recording the findings. Laboratory specimens being studied may include a variety of samples, like blood, cells, tissues, and other body fluids. They are also expected to preserve the samples to make those viable and visible for future reference. Their duties may include labeling of specimens, and keeping an accurate record of the samples examined. Notes regarding the samples may be included, after which, they submit them to a pathologist for confirmation.</p>
       <p>A cytotechnologist works with different laboratory specimens, such as blood, cells, tissues, and other body fluids.</p>
@@ -295,17 +366,17 @@ export default {
       </div>
       <p>How does knowledge of each level of the biological organization help you understand how your body work</p>
       <p>There may be different types of eukaryotic cells, but they generally have three basic parts: cell membrane, nucleus, and cytoplasm</p>
-      <div class="header">
-        <div class="title">Cell Membrane: The Gateway to the Cell</div>
-      </div>
-      <p>The cell membrane, also known as plasma membrane. is the outermost boundary of the cell. It has several functions: separates a cell from other cells, (2) it plays an important role in how cells communicate with one another, and (3) it regulates the movement of materials into and out of the cell. The ability of the cell membrane to allow certain substances to move into and out of the cell is called semipermeability. The structure of the cell membrane and its parts are presented in figure 4-10</p>
     </div>
     `,
       `
     <div>
       <!-- Card 21 -->
+      <div class="header">
+        <div class="title">Cell Membrane: The Gateway to the Cell</div>
+      </div>
+      <p>The cell membrane, also known as plasma membrane. is the outermost boundary of the cell. It has several functions: separates a cell from other cells, (2) it plays an important role in how cells communicate with one another, and (3) it regulates the movement of materials into and out of the cell. The ability of the cell membrane to allow certain substances to move into and out of the cell is called semipermeability. The structure of the cell membrane and its parts are presented in figure 4-10</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-10">
+        <img src="assets/img/chapter 4/figure 4-10.png" alt="figure 4-10">
         <div class="caption">Figure 4-10. Structure of the cell membrane</div>
       </div>
     </div>
@@ -324,16 +395,17 @@ export default {
     <div>
       <!-- Card 23 -->
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-11">
+        <img src="assets/img/chapter 4/figure 4-11.png" alt="figure 4-11">
         <div class="caption">Figure 4-11. The parts of the nucleus</div>
       </div>
+      <p><strong>Chromosomes carriers of the genes</strong>- Chromosomes are made up of DNA and proteins called histones. The DNA serves as the genetic blueprint of an organism.</p>
+      <p><strong>Nucleolus center for ribosomal assembly</strong> - The nucleolus is found in the nucleoplasm, the semi fluid matrix enveloped by the nuclear membrane. They are the pre-assembly points for ribosomes and usually contain proteins and ribonucleic acid (RNA)</p>
     </div>
     `,
       `
     <div>
       <!-- Card 24 -->
-      <p><strong>Chromosomes carriers of the genes</strong>- Chromosomes are made up of DNA and proteins called histones. The DNA serves as the genetic blueprint of an organism.</p>
-      <p><strong>Nucleolus center for ribosomal assembly</strong> - The nucleolus is found in the nucleoplasm, the semi fluid matrix enveloped by the nuclear membrane. They are the pre-assembly points for ribosomes and usually contain proteins and ribonucleic acid (RNA)</p>
+      
     </div>
     `,
       `
@@ -342,7 +414,7 @@ export default {
       <div class="header">
         <div class="title">SCIENCE HISTORY</div>
       </div>
-      <p>The Discovery of the Nucleus</p>
+      <p style="font-weight: bold; font-size: 20px; text-align: center; padding-top: 10px; margin-bottom: 0;">The Discovery of the Nucleus</p>
       <p>The nucleus was the first organelle to be discovered. However, the exact date of its discovery and the identity of the person who discovered it are still unverified, in 1802. Austrian botanical artist Franz Bauer sketched orchid cells and labeled their nucleus. In 1825, Czech physiologist Jan Evangelista Purkinje discovered the nucleus of a chicken oocyte and called it "vesicula germanitiva." Then in the 1830, Scottish botanist Robert Brown observed the nucleus of various plant cells and coined the term "nucleus," but in his time the function of the nucleus was not yet known. Instead, scientists focused on studying its location in the cell and its appearance. Later, the nucleus was deliberately observed and became a key principle in the creation of the cell theory. Scientists thought the nucleus was the only cell organelle until they discovered other organelles such as the Golgi bodies, mitochondria, and endoplasmic reticulum. This provided more insight into the nature and structure of cells. Due to advancements in biotechnology, the study of the cell nucleus has been brought to the nanoscale range, opening new frontiers in cell research and biotechnology.</p>
     </div>
     `,
@@ -363,7 +435,7 @@ export default {
     <div>
       <!-- Card 27 -->
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-12">
+        <img src="assets/img/chapter 4/figure 4-12.png" alt="figure 4-12">
         <div class="caption">Figure 4-12. Ribosomes are attached to the rough endoplasmic reticulum.</div>
       </div>
       <p>The number of ribosomes depends on the activities of the cell. There are more ribosomes in cells that have a secretory function. For instance, the secretory cells found in the pancreas have numerous ribosomes because it secretes proteins in the form of enzymes and hormones.</p>
@@ -374,7 +446,7 @@ export default {
       <!-- Card 28 -->
       <p><strong>Golgi body: packaging of secretory materials</strong> - Golgi bodies are stacks of flattened, disk-like membranes (figure 4-13) that are associated with the ER in the cytoplasm. Proteins from the ribosomes are chemically modified, packed, and sealed off in small packets called vesicles. These vesicles move from the ER to the Golgi bodies and are grouped into batches, either for export or for use by the cell. Just like the ribosomes. their abundance is relative to the cell's activity. Some cells can have only one large stack, whereas others can have hundreds or even thousands of Golgi bodies.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-13">
+        <img src="assets/img/chapter 4/figure 4-13.png" alt="figure 4-13">
         <div class="caption">Figure 4-13. Disklike membranes form the Golgi body.</div>
       </div>
     </div>
@@ -391,7 +463,7 @@ export default {
       <!-- Card 30 -->
       <p><strong>Mitochondria: the energy generators</strong> - Mitochondria (sing. mitochondrion) are spherical or elongated structures (figure 4-14) found in the cytoplasm. Mitochondria harness energy from the food you eat and convert it into a usable form of energy called adenosine triphosphate (ATP). This energy is an important product of cellular respiration.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-14">
+        <img src="assets/img/chapter 4/figure 4-14.gif" alt="figure 4-14">
         <div class="caption">Figure 4-14. The powerhouse of the cell-the mitochondrion.</div>
       </div>
     </div>
@@ -419,7 +491,7 @@ export default {
     <div>
       <!-- Card 33 -->
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-15">
+        <img src="assets/img/chapter 4/figure 4-15.png" alt="figure 4-15">
         <div class="caption">Figure 4-15. Cross section of a chloroplast showing its parts. A chloroplast may be round, oval or in disk shape.</div>
       </div>
       <p>Other plastids that contain other pigments are called chromoplasts. Colorless plastids are called leucoplasts, which also function as storage for proteins, oils, or starch.</p>
@@ -457,7 +529,7 @@ export default {
     <div>
       <!-- Card 37 -->
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-16">
+        <img src="assets/img/chapter 4/figure 4-16.png" alt="figure 4-16">
         <div class="caption">Figure 4-16. The cytoskeleton of the cell</div>
       </div>
       <div class="info-card">
@@ -504,13 +576,98 @@ export default {
     <div>
       <!-- Card 39 -->
       <div class="illustration">
-        <img src="assets/img" alt="figure 4-17">
+        <img src="assets/img/chapter 4/figure 4-17.png" alt="figure 4-17">
         <div class="caption">Figure 4-17. (a) A plant cell and (b) an animal cell and their parts</div>
       </div>
-      <div class="illustration">
-        <img src="assets/img" alt="table 4-4">
-        <div class="caption">Table 4-4. Difference between a Plant and an Animal Cell</div>
-      </div>
+        <p style="text-align: center; padding-top: 10px; margin-bottom: 0;">Table 4-4. Difference between a Plant and an Animal Cell</p>
+        <div style="overflow-x: auto;">
+  <table border="1" style="width: 350px; min-width: 100%; border-collapse: collapse; table-layout: fixed; text-align: center; font-family: Arial, sans-serif; border: 2px solid #1f3c88;">
+      <thead>
+        <tr style="background: linear-gradient(to right, #1f3c88, #00c6ff); color: white;">
+          <th style="padding: 12px; width: 200px; text-align: left;">Parts/Organelles/Macromolecules</th>
+          <th style="padding: 12px; width: 50px;">Plant Cell</th>
+          <th style="padding: 12px; width: 50px;">Animal Cell</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: #eef5ff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Cell Wall</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">❌</td>
+        </tr>
+        <tr style="background-color: #ffffff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Cell Membrane</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #eef5ff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Nucleus</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #ffffff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Cytoplasm</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #eef5ff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Endoplasmic Reticulum</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #ffffff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Golgi body</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #eef5ff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Lysosome</td>
+          <td style="padding: 10px;">❌</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #ffffff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Peroxisome</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #eef5ff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Mitochondria</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #ffffff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Vacuoles</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #eef5ff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Plastid (Chloroplast)</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">❌</td>
+        </tr>
+        <tr style="background-color: #ffffff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Centriole</td>
+          <td style="padding: 10px;">❌</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #eef5ff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Cell junctions</td>
+          <td style="padding: 10px;">❌</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #ffffff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Ribosomes</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+        <tr style="background-color: #eef5ff;">
+          <td style="padding: 10px; text-align: left; font-weight: bold;">Cytoskeleton</td>
+          <td style="padding: 10px;">✅</td>
+          <td style="padding: 10px;">✅</td>
+        </tr>
+      </tbody>
+  </table>
+</div>
     </div>
     `,
       `

@@ -100,7 +100,7 @@ export default {
         <div class="header">
             <div class="title">Lesson 3 Factors That Affect Solubility</div>
         </div>
-        <p>What are the factors that affect solubility?</p>
+        <p >What are the factors that affect solubility?</p>
         <p>In a homogeneous mixture, the dissolved solute remains uniformly distributed throughout the solution. As such, the physical properties of the mixture, such as color and state, are uniform throughout its phase. These only happen when the solute is soluble in the solvent, which means it can completely dissolve in the solvent at the given temperature. How do we determine which solutes are soluble in a solvent?</p>
         <p>The ability of a solvent to dissolve a solute is governed by the principle "like dissolves like." The term "like" refers to the polar or ionic nature of a substance, which you will learn more about in higher chemistry courses. Polar and ionic solutes dissolve only in polar solvents, and not in nonpolar solvents. Similarly, nonpolar solutes dissolve only in nonpolar solvents.</p>
     </div>
@@ -235,7 +235,7 @@ export default {
             `
     <div>
         <div class="illustration">
-        <img src="assets/img/chapter 3/figure 3-5.jpeg" alt="Figure 3-5. What causes the fizzing sensation when you open a bottle of carbonated drinks?">
+        <img src="assets/img/chapter 3/figure 3-5.png" alt="Figure 3-5. What causes the fizzing sensation when you open a bottle of carbonated drinks?">
         <div class="caption">Figure 3-5. What causes the fizzing sensation when you open a bottle of carbonated drinks?</div>
       </div>
         <p>An evidence of this principle is the fizzing sensation observed when you open a bottle of carbonated drinks (figure 3-5). Carbon dioxide is dissolved in the drink using high pressure. As you open the bottle, the pressure inside it decreases. Thus, the solubility of carbon dioxide also decreases, and the gas bubbles out of the drink.</p>

@@ -103,14 +103,18 @@ export default {
       </div>
       <p>Living organisms come in two forms based on their size; they are either macroscopic or microscopic. Macroscopic life can be seen by the naked eye, while microscopic life-forms refer to small living organisms. Observing organisms or parts of an organism that are very small is difficult without the aid of microscopes.</p>
       <p>In the mid-1660s, Dutch scientist Antonie van Leeuwenhoek invented the first practical microscope. He used this to examine protozoans, bacteria, and other microscopic organisms. As technology advanced, various types of microscopes became available. They were developed to fit the current needs of scientists to build more knowledge in science.</p>
-      <p>The compound light microscope is the most common microscope used in science laboratories. It has two lenses: the objective lens and the ocular lens. A compound light microscope that has only one ocular lens is called a monocular microscope, while the one that has two ocular lenses is called a binocular microscope.</p>
+      
     </div>
     `,
             `
     <div>
       <!-- Card 2 -->
-      <p>The compound microscope has several objective lenses in varying magnification power-the scanner with 4x, the low power objective (LPO) with 10x, the high power objective (HPO) with 40x, and the oil immersion objective (OIO) with 100x. If you multiply the magnification of the ocular lens by the magnification of the objective lens, you will get the total magnification of the specimen under the microscope. For example, if you are using the LPO with 10x, multiply this with the magnification number of the ocular lens, which is 5x, and you get a total magnification of 50x.</p>
-      <p>Compound microscopes can be used to examine both living and nonliving specimens. However, they cannot provide enough magnifying power to examine extremely small parts of a specimen such as the mitochondria and the ribosomes.</p>
+      <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 4/compound light microscope.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">The compound light microscope</div>
+        </div>
     </div>
     `,
             `
@@ -143,17 +147,104 @@ export default {
             <a href="/html/microscope.html" class="eye-icon">
                       <img src="assets/icons/eye.png" alt="View 3D Model" />
                     </a>
+            <div class="caption">Figure 4.1 The compound microscope(monocular)</div>
           </div>
-          <div class="caption">Figure 4.1 The compound microscope(monocular)</div>
+          
     </div>
     `,
             `
     <div>
       <!-- Card 5 -->
-      <div class="illustration">
-        <img src="assets/img/chapter 4/table 4.1.png" alt="Table 4.1. Parts, Descriptions, and Functions of a Compound Light Microscope">
-        <div class="caption">Table 4.1. Parts, Descriptions, and Functions of a Compound Light Microscope</div>
-      </div>
+      <div style="overflow-x: auto;">
+  <table border="1" style="width: 900px; min-width: 100%; border-collapse: collapse; table-layout: fixed; text-align: left; font-family: Arial, sans-serif; border: 2px solid #333;">
+      <thead>
+          <tr style="background: linear-gradient(to right, #f7971e, #ffd200); color: white;">
+              <th style="padding: 12px; width: 200px;">Part</th>
+              <th style="padding: 12px; width: 800px;">Description and Function(s)</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr style="background-color: #fff8e1;">
+              <td colspan="2" style="padding: 10px; font-weight: bold; text-align: center;">Mechanical</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+              <td style="padding: 10px;">
+                  Draw tube
+              </td>
+              <td style="padding: 10px;">A small cylinder attached to the upper part of the body tube that holds the ocular lens.</td>
+          </tr>
+          <tr style="background-color: #fff8e1;">
+              <td style="padding: 10px;">
+                  Body tube
+              </td>
+              <td style="padding: 10px;">Connects the ocular lens to the revolving nosepiece.</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+              <td style="padding: 10px;">Coarse adjustment knob</td>
+              <td style="padding: 10px;">Moves the body tube or stage upward or downward in larger increments to bring the specimen into initial focus; used only with the scanner or low power objective.</td>
+          </tr>
+          <tr style="background-color: #fff8e1;">
+              <td style="padding: 10px;">Fine adjustment knob</td>
+              <td style="padding: 10px;">Moves the body tube or stage upward or downward in smaller increments to bring the specimen into sharp focus; preferably used with the high power or oil immersion objective.</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+              <td style="padding: 10px;">Arm</td>
+              <td style="padding: 10px;">Supports the body tube and is used to carry the microscope.</td>
+          </tr>
+          <tr style="background-color: #fff8e1;">
+              <td style="padding: 10px;">Revolving nosepiece</td>
+              <td style="padding: 10px;">A circular rotating part connected to the body tube that holds the objectives.</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+              <td style="padding: 10px;">Stage</td>
+              <td style="padding: 10px;">A platform where the specimen slide is placed; has a hole at the center for light to pass through.</td>
+          </tr>
+          <tr style="background-color: #fff8e1;">
+              <td style="padding: 10px;">Stage clips</td>
+              <td style="padding: 10px;">Secure the specimen slide on the stage.</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+              <td style="padding: 10px;">Inclination joint</td>
+              <td style="padding: 10px;">Attaches the arm to the pillar and allows tilting of the microscope.</td>
+          </tr>
+          <tr style="background-color: #fff8e1;">
+              <td style="padding: 10px;">Pillar</td>
+              <td style="padding: 10px;">Provides support above the base and where the arm is attached.</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+              <td style="padding: 10px;">Base</td>
+              <td style="padding: 10px;">Provides firm and steady support to the entire microscope.</td>
+          </tr>
+          <tr style="background-color: #ffe0b2;">
+              <td colspan="2" style="padding: 10px; font-weight: bold; text-align: center;">Magnifying</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+              <td style="padding: 10px;">Ocular lens or eyepiece</td>
+              <td style="padding: 10px;">A detachable cylinder on top of the draw tube used to view the specimen; usually magnifies up to 10x and may contain a pointer.</td>
+          </tr>
+          <tr style="background-color: #fff8e1;">
+              <td style="padding: 10px;">Objective lens</td>
+              <td style="padding: 10px;">Magnifies the specimen. Typically includes scanner (if present), low power (LPO), high power (HPO), and oil immersion (OIO) objectives. Used in that order when focusing.</td>
+          </tr>
+          <tr style="background-color: #ffe0b2;">
+              <td colspan="2" style="padding: 10px; font-weight: bold; text-align: center;">Illuminating</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+              <td style="padding: 10px;">Condenser</td>
+              <td style="padding: 10px;">Concentrates light onto the specimen; located above the iris diaphragm and may have adjustment knobs.</td>
+          </tr>
+          <tr style="background-color: #fff8e1;">
+              <td style="padding: 10px;">Iris diaphragm</td>
+              <td style="padding: 10px;">Regulates the amount of light passing through the specimen; controlled by a movable lever.</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+              <td style="padding: 10px;">Mirror</td>
+              <td style="padding: 10px;">Reflects light to the specimen slide and back to the eyes; located below the stage near the base.</td>
+          </tr>
+      </tbody>
+  </table>
+  <div class="caption">Table 4.1. Parts, Descriptions, and Functions of a Compound Light Microscope</div>
+</div>
     </div>
     `,
 
@@ -163,7 +254,12 @@ export default {
       <div class="header">
         <div class="title">Proper Use, Handling, and Storage of a Compound Microscope</div>
       </div>
-      <p>The compound light microscope being an optical instrument is generally made up of lenses. This is the main component that magnifies the image of very small specimens. The lenses are contained in metal tubes for protection against breakage and dust. The whole microscope is supported by metal structures like the base, arm, and pillar. The proper use, handling, and storage are important to ensure the quality of microscopic observations.</p>
+      <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 4/proper handling.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">Proper handling of a compound light microscope</div>
+        </div>
     </div>
     `,
             `

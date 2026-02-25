@@ -29,6 +29,10 @@ export function useTTSLesson(rawPages) {
         text = text.replace(/\\Delta/g, "delta")
         text = text.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, (_, n, d) => `${n} over ${d}`)
 
+        // Handle subscripts: _{Air} → Air, _N → N
+        text = text.replace(/_\{([^}]+)\}/g, " $1")
+        text = text.replace(/_([A-Za-z0-9])/g, " $1")
+
         // Remove leftover backslashes and curly braces
         text = text.replace(/[\\{}]/g, " ")
 
@@ -36,7 +40,7 @@ export function useTTSLesson(rawPages) {
         text = text
             .replace(/=/g, " equals ")
             .replace(/\+/g, " plus ")
-            .replace(/-/g, " minus ")
+            .replace(/(?<![A-Za-z0-9])-(?![A-Za-z0-9])/g, " minus ")
             .replace(/\//g, " per ")
             .replace(/\?/g, " question mark ")
 

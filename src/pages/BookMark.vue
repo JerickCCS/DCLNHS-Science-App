@@ -16,22 +16,26 @@
         <q-page-container>
             <q-page class="bookmarks-page">
                 <!-- Bookmark Counter Card -->
-                <div class="counter-card q-mx-md q-mt-sm q-mb-md">
-                    <div class="counter-content">
-                        <div class="row items-center justify-between">
-                            <div class="counter-label">Total Bookmarks</div>
-                            <div class="counter-value">{{ bookmarks.length }}</div>
+                <div class="counter-card-wrapper q-mx-md q-mt-sm q-mb-md">
+                    <!-- Icon lives OUTSIDE the card, in the wrapper, so nothing clips it at top or sides -->
+                    <img src="assets/icons/bookmark.png" class="counter-bookmark-icon" alt="bookmark" />
+
+                    <div class="counter-card">
+                        <!-- Invisible spacer on the left so text never overlaps the icon -->
+                        <div class="counter-content">
+                            <div class="row items-center justify-between">
+                                <div class="counter-label">Total Bookmarks</div>
+                                <div class="counter-value">{{ bookmarks.length }}</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="counter-border"></div>
                 </div>
 
                 <!-- Content -->
-                <div class="q-pa-md">
-                    <!-- Bookmarks Grid -->
-                    <div v-if="bookmarks.length > 0" class="bookmarks-grid">
+                <div class="q-px-md q-pb-md">
+                    <!-- Bookmarks List -->
+                    <div v-if="bookmarks.length > 0" class="bookmarks-list">
                         <div v-for="(bm, idx) in bookmarks" :key="idx" class="bookmark-card-container">
-                            <!-- Bookmark Card -->
                             <q-card class="bookmark-card cursor-pointer" @click="handleCardClick(idx, bm)"
                                 @touchstart="startLongPress(idx)" @touchend="endLongPress" @touchcancel="endLongPress"
                                 @mousedown="startLongPress(idx)" @mouseup="endLongPress" @mouseleave="endLongPress"
@@ -40,53 +44,42 @@
                                     '--border-color': getBorderColor(idx),
                                     '--icon-color': getIconColor(idx)
                                 }">
-
                                 <!-- Content overlay (blurred on long press) -->
                                 <div class="card-content-overlay" :class="{ 'blurred': longPressIndex === idx }">
-                                    <q-card-section class="card-content">
-                                        <!-- Card Header -->
-                                        <div class="row items-center justify-between q-mb-sm">
-                                            <div class="row items-center">
-                                                <!-- Bookmark Icon -->
-                                                <div class="bookmark-icon-wrapper">
-                                                    <q-icon name="bookmark" size="sm" class="bookmark-icon" />
-                                                </div>
+                                    <div class="card-inner row items-center no-wrap">
 
-                                                <!-- Lesson Number -->
-                                                <div class="lesson-number text-caption text-weight-medium">
-                                                    Item {{ bm.lessonId }}
-                                                </div>
+                                        <!-- Left: Bookmark Icon -->
+                                        <div class="bookmark-icon-wrapper q-mr-md flex-shrink-0">
+                                            <q-icon name="bookmark" size="20px" class="bookmark-icon" />
+                                        </div>
+
+                                        <!-- Center: Title + Timestamp -->
+                                        <div class="card-text col">
+                                            <div class="lesson-title text-weight-bold ellipsis-2-lines">
+                                                {{ getLessonTitle(bm.lessonId) }}
                                             </div>
-
-                                            <!-- Page Indicator -->
-                                            <q-badge color="primary" text-color="white" class="page-badge">
-                                                Page {{ bm.page + 1 }}
-                                            </q-badge>
+                                            <div class="row items-center timestamp q-mt-xs">
+                                                <q-icon name="schedule" size="12px" class="q-mr-xs" />
+                                                <span v-if="bm.timestamp">Saved {{ formatTimestamp(bm.timestamp)
+                                                }}</span>
+                                                <span v-else>Recently saved</span>
+                                            </div>
                                         </div>
 
-                                        <!-- Lesson Title -->
-                                        <div class="text-h6 text-weight-bold q-mb-xs ellipsis-2-lines">
-                                            {{ getLessonTitle(bm.lessonId) }}
+                                        <!-- Right: Page Badge -->
+                                        <div class="page-wrapper q-ml-md flex-shrink-0">
+                                            <div class="page-badge-custom">
+                                                <span class="page-text">Page {{ bm.page + 1 }}</span>
+                                            </div>
                                         </div>
 
-                                        <!-- Last Accessed -->
-                                        <div class="row items-center text-caption timestamp q-mt-sm">
-                                            <q-icon name="schedule" size="14px" class="q-mr-xs" />
-                                            <span v-if="bm.timestamp">
-                                                Saved {{ formatTimestamp(bm.timestamp) }}
-                                            </span>
-                                            <span v-else>Recently saved</span>
-                                        </div>
-                                    </q-card-section>
-
-                                    <!-- Bottom Border -->
-                                    <div class="card-border"></div>
+                                    </div>
                                 </div>
 
-                                <!-- Delete icon overlay (unblurred) -->
+                                <!-- Delete icon overlay -->
                                 <div v-if="longPressIndex === idx" class="delete-overlay">
                                     <div class="delete-content">
-                                        <q-icon name="delete" size="48px" class="delete-icon-center text-negative" />
+                                        <q-icon name="delete" size="36px" class="delete-icon-center text-negative" />
                                         <div class="delete-label">Tap to delete</div>
                                     </div>
                                 </div>
@@ -148,24 +141,19 @@ export default {
         const progress = ref(1)
         let longPressTimer = null
 
-        // Card colors with corresponding border colors (matching Statistics page style)
         const cardColors = [
-            { card: '#42a5f5', border: '#1e88e5', icon: '#ffffff' }, // blue
-            { card: '#66bb6a', border: '#43a047', icon: '#ffffff' }, // green
-            { card: '#ab47bc', border: '#8e24aa', icon: '#ffffff' }, // purple
-            { card: '#26a69a', border: '#1f8f85', icon: '#ffffff' }, // teal (mini_lab)
-            { card: '#ffa726', border: '#fb8c00', icon: '#ffffff' }, // orange (mini_test)
+            { card: '#2979ff', border: '#1565c0', icon: '#ef4444' },
+            { card: '#00c853', border: '#009624', icon: '#eab308' },
+            { card: '#d500f9', border: '#aa00ff', icon: '#0ea5e9' },
+            { card: '#4dd0e1', border: '#00acc1', icon: '#22c55e' },
+            { card: '#ff6d00', border: '#e65100', icon: '#a855f7' },
         ]
 
         const startLongPress = (idx) => {
-            // Clear any existing timer
-            if (longPressTimer) {
-                clearTimeout(longPressTimer)
-            }
-
+            if (longPressTimer) clearTimeout(longPressTimer)
             longPressTimer = setTimeout(() => {
                 longPressIndex.value = idx
-            }, 500) // 500ms for long press
+            }, 500)
         }
 
         const endLongPress = () => {
@@ -173,16 +161,12 @@ export default {
                 clearTimeout(longPressTimer)
                 longPressTimer = null
             }
-            // Don't reset longPressIndex here - let it stay until user interacts elsewhere
         }
 
         const handleCardClick = (idx, bm) => {
-            // If card is in long press mode, show delete dialog
             if (longPressIndex.value === idx) {
                 confirmDelete(idx)
-            }
-            // Otherwise, navigate to bookmark
-            else if (longPressIndex.value === -1) {
+            } else if (longPressIndex.value === -1) {
                 router.push({
                     name: bm.route,
                     query: { page: bm.page },
@@ -198,9 +182,7 @@ export default {
             }
         }
 
-        const handleScroll = () => {
-            resetLongPress()
-        }
+        const handleScroll = () => resetLongPress()
 
         const goBack = () => {
             if (window.history.length > 1) {
@@ -216,8 +198,6 @@ export default {
             const key = user.studentId ?? user.id ?? user.name
             const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
             const bookmarks = allBookmarks[key] || []
-
-            // Sort bookmarks by timestamp (newest first)
             return bookmarks.sort((a, b) => {
                 const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0
                 const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0
@@ -252,35 +232,12 @@ export default {
         }
 
         const confirmDelete = (idx) => {
-            deleteDialog.value = {
-                show: true,
-                index: idx
-            }
+            deleteDialog.value = { show: true, index: idx }
         }
 
-        const goToLessons = () => {
-            router.push('/lessons')
-        }
-
-        const getCardColor = (idx) => {
-            return cardColors[idx % cardColors.length].card
-        }
-
-        const getBorderColor = (idx) => {
-            return cardColors[idx % cardColors.length].border
-        }
-
-        const getIconColor = (idx) => {
-            // Return the original icon color (not white)
-            const colors = [
-                '#ef4444', // red
-                '#eab308', // yellow
-                '#0ea5e9', // sky
-                '#22c55e', // green
-                '#a855f7', // purple
-            ]
-            return colors[idx % colors.length]
-        }
+        const getCardColor = (idx) => cardColors[idx % cardColors.length].card
+        const getBorderColor = (idx) => cardColors[idx % cardColors.length].border
+        const getIconColor = (idx) => cardColors[idx % cardColors.length].icon
 
         const formatTimestamp = (timestamp) => {
             if (!timestamp) return 'recently'
@@ -291,27 +248,18 @@ export default {
             const diffHours = Math.floor(diffMs / 3600000)
             const diffDays = Math.floor(diffMs / 86400000)
 
-            if (diffMins < 60) {
-                return `${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`
-            } else if (diffHours < 24) {
-                return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`
-            } else {
-                return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`
-            }
+            if (diffMins < 60) return `${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`
+            else if (diffHours < 24) return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`
+            else return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`
         }
 
         onMounted(() => {
             bookmarks.value = loadBookmarks()
-            // Add timestamps to existing bookmarks if missing
             const now = new Date().toISOString()
             bookmarks.value.forEach(bm => {
-                if (!bm.timestamp) {
-                    bm.timestamp = now
-                }
+                if (!bm.timestamp) bm.timestamp = now
             })
             saveBookmarks(bookmarks.value)
-
-            // Add scroll listener to reset long press
             window.addEventListener('scroll', handleScroll)
         })
 
@@ -331,7 +279,6 @@ export default {
             deleteBookmark,
             confirmDelete,
             getLessonTitle,
-            goToLessons,
             getCardColor,
             getBorderColor,
             getIconColor,
@@ -342,32 +289,35 @@ export default {
 </script>
 
 <style scoped>
-/* Fix for white space at bottom */
+/* FIX 1: Match page-container background to gradient end color + ensure full height */
 :deep(.q-page-container) {
     padding: 0 !important;
     padding-bottom: 0 !important;
-    background: #42a7ff !important;
+    background: hsla(274, 100%, 52%, 1) !important;
+    min-height: 100vh !important;
 }
 
 :deep(.q-page) {
     min-height: 100vh;
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
-    background: #42a7ff !important;
+    background: linear-gradient(180deg, hsla(245, 85%, 62%, 1) 0%, hsla(274, 100%, 52%, 1) 100%) !important;
 }
 
-:deep(body) {
-    background: #42a7ff !important;
+/* FIX 2: Cover html root as well so overscroll/rubber-band has no white */
+:deep(body),
+:deep(html) {
+    background: hsla(274, 100%, 52%, 1) !important;
     margin: 0;
     padding: 0;
 }
 
+/* FIX 3: Use gradient + 100dvh so mobile browser chrome doesn't cause a gap */
 .bookmarks-page {
-    background: #42a7ff;
-    min-height: 100vh;
+    background: linear-gradient(180deg, hsla(245, 85%, 62%, 1) 0%, hsla(274, 100%, 52%, 1) 100%);
+    min-height: 100dvh;
     padding-top: 60px;
     padding-bottom: env(safe-area-inset-bottom, 0);
-    margin-bottom: 0;
 }
 
 .header-no-border {
@@ -379,95 +329,98 @@ export default {
     color: white !important;
 }
 
-.q-btn .q-icon {
-    color: white !important;
+/* Counter Card */
+.counter-card-wrapper {
+    position: relative;
+    padding-top: 24px;
+    /* bleed space above card */
 }
 
-/* Remove padding from q-page-container */
-.no-padding {
-    padding-top: 20px !important;
-}
-
-/* Counter Card Styles - Using Statistics page red style */
 .counter-card {
     color: white;
-    background: #ef5350;
-    /* Red background */
+    background: #ffc412;
     border-radius: 12px;
     overflow: hidden;
     position: relative;
-    border-bottom: 6px solid;
-    border-bottom-color: #d32f2f;
-    /* Darker red border */
+    border-bottom: 6px solid #c99a0e;
+}
+
+/* The icon is a sibling of .counter-card (not a child),
+   so .counter-card's overflow:hidden never touches it.
+   The wrapper has no overflow:hidden so the top bleed is completely free.
+   We use clip-path inset() to cut the icon's BOTTOM so it appears
+   flush with the card's bottom edge (excluding the 6px border). 
+   
+   The icon top is at wrapper top (y=0).
+   The card starts at y=24px (padding-top).
+   The card bottom (excluding border) is at wrapper bottom - 6px.
+   Icon height = 100% of wrapper.
+   Bottom clipping amount = 6px border = (6 / wrapperHeight).
+   We approximate with a fixed pixel inset since the card height is ~56px:
+   wrapper ≈ 80px total, so bottom inset = 6px of the image itself. */
+.counter-bookmark-icon {
+    position: absolute;
+    top: 12px;
+    left: 8px;
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: top;
+    z-index: 3;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
+    pointer-events: none;
+    /* Clip off the bottom portion that falls below the card's colored area.
+       The card border is 6px. Clip that from the bottom of the image. */
+    clip-path: inset(0 0 17px 0 round 0);
 }
 
 .counter-content {
-    padding: 20px;
+    padding: 14px 20px;
+    margin-left: 72px;
 }
 
 .counter-label {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     opacity: 0.9;
 }
 
 .counter-value {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
     line-height: 1;
 }
 
-.counter-border {
-    height: 6px;
-    background: #d32f2f;
-    /* Darker red border */
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-
-/* Bookmarks Grid */
-.bookmarks-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
+/* Bookmarks List */
+.bookmarks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     max-width: 800px;
     margin: 0 auto;
     padding-bottom: 32px;
-}
-
-@media (min-width: 768px) {
-    .bookmarks-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 .bookmark-card-container {
     position: relative;
 }
 
+/* Compact Card */
 .bookmark-card {
     border-radius: 12px;
     overflow: hidden;
     background-color: var(--card-color);
     border: none;
+    border-bottom: 5px solid var(--border-color);
     position: relative;
-    min-height: 160px;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 6px solid;
-    border-bottom-color: var(--border-color);
-    transition: transform 0.2s ease;
+    transition: transform 0.15s ease;
 }
 
 .bookmark-card:active:not(.long-pressed) {
     transform: scale(0.98);
 }
 
-/* Content overlay that gets blurred */
 .card-content-overlay {
-    flex: 1;
     transition: filter 0.3s ease;
 }
 
@@ -475,13 +428,78 @@ export default {
     filter: blur(4px);
 }
 
-.card-content {
-    flex: 1;
-    padding: 20px;
-    color: white;
+/* Inner layout */
+.card-inner {
+    padding: 14px 16px;
 }
 
-/* Delete overlay (not blurred) */
+/* Bookmark Icon */
+.bookmark-icon-wrapper {
+    background: white;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bookmark-icon {
+    color: var(--icon-color) !important;
+}
+
+/* Text */
+.card-text {
+    min-width: 0;
+}
+
+.lesson-title {
+    font-size: 14px;
+    color: white;
+    line-height: 1.3;
+}
+
+.ellipsis-2-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.timestamp {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-size: 11px;
+}
+
+.timestamp .q-icon {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Page Badge (right side) */
+.page-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.page-badge-custom {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    padding: 6px 10px;
+    white-space: nowrap;
+}
+
+.page-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.3px;
+}
+
+/* Delete overlay */
 .delete-overlay {
     position: absolute;
     top: 0;
@@ -493,21 +511,20 @@ export default {
     justify-content: center;
     z-index: 1;
     pointer-events: none;
-    /* Allow clicks to pass through to the card */
 }
 
 .delete-content {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     pointer-events: auto;
-    /* But allow clicks on the delete content */
 }
 
 .delete-icon-center {
     background: white;
     border-radius: 50%;
-    padding: 16px;
-    margin-bottom: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -515,86 +532,11 @@ export default {
     color: white;
     font-weight: 600;
     font-size: 14px;
-    text-align: center;
-    padding: 0 16px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     animation: fadeIn 0.3s ease;
 }
 
-/* White bookmark icon wrapper with colored icon */
-.bookmark-icon-wrapper {
-    background: white;
-    border-radius: 8px;
-    padding: 6px;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-}
-
-.bookmark-icon {
-    color: var(--icon-color) !important;
-}
-
-.lesson-number {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 600;
-}
-
-.page-badge {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-weight: 600;
-    backdrop-filter: blur(10px);
-}
-
-.ellipsis-2-lines {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* White timestamp text */
-.timestamp {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
-.timestamp .q-icon {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
-.card-border {
-    display: none;
-    /* Using border-bottom instead */
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes popIn {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* Empty state - full screen centered */
+/* Empty State */
 .empty-state {
     padding: 20px;
     min-height: calc(100vh - 200px);
@@ -618,6 +560,28 @@ export default {
 
     50% {
         transform: translateY(-10px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
     }
 }
 </style>

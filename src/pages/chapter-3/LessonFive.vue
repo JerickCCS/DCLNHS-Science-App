@@ -99,9 +99,9 @@ export default {
             `
     <div>
         <div class="header">
-            <div class="title">Lesson 5 Practical Examples of Solutions: Acids, Bases, and Salt Solutions</div>
+            <div class="title">Practical Examples of Solutions: Acids, Bases, and Salt Solutions</div>
         </div>
-        <p>What are practical examples of solutions in everyday life?</p>
+        <p style="font-weight: bold; font-weight: bold; padding-top: 10px; margin-bottom: 5px; font-size: 19px;">What are practical examples of solutions in everyday life?</p>
         <p>In your everyday activities, you often come across various types of solutions. For example, various household chemicals, like vinegar (a mixture of acetic acid and water) is used in cooking, while bleach (a solution of sodium hypochlorite) is used in disinfecting or cleaning. In Mini Lab 3-1, you get to prepare salt in a water mixture and observe that adding salt to water causes it to dissolve and form a solution. If sodium chloride is used in water, the resulting solution is a saline solution.</p>
     </div>
     `,

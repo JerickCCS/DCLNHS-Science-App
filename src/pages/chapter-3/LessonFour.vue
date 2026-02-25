@@ -98,9 +98,9 @@ export default {
             `
     <div>
         <div class="header">
-            <div class="title">Lesson 4 Expressing Concentration of Solutions</div>
+            <div class="title">Expressing Concentration of Solutions</div>
         </div>
-        <p>What does concentration of solutions mean?</p>
+        <p style="font-weight: bold; font-weight: bold; padding-top: 10px; margin-bottom: 5px; font-size: 19px;">What does concentration of solutions mean?</p>
         <p>A solution may be described in terms of the amount of solute it contains, which is referred to as the concentration of the solution. A solution may be described qualitatively as dilute or concentrated or quantitatively based on percent composition.</p>
     </div>
     `,

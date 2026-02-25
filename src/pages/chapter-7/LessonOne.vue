@@ -16,9 +16,9 @@
             <q-page>
                 <div class="stars"></div>
                 <div class="lesson-container">
-                    <div id="viewer">
-                        <transition name="fade-slide" mode="out-in">
-                            <div :key="currentPage" v-html="pages[currentPage]"></div>
+                    <div id="viewer" ref="viewerRef">
+                        <transition name="fade-slide" mode="out-in" @after-enter="onTransitionComplete">
+                            <div :key="currentPage" v-html="getPageContent(currentPage)"></div>
                         </transition>
                     </div>
 
@@ -33,10 +33,11 @@
                             :style="currentPage === pages.length - 1 ? finishButtonStyle : null" no-caps />
                     </div>
 
-                    <div class="speak-btn" @click="toggleAudio">
+                    <div class="speak-btn" @click="onToggleAudio">
                         <img :src="isPlaying ? '/icons/stop.png' : '/icons/speak.png'" alt="Speak Button"
                             class="cursor-pointer" style="width: 20px; height: 20px;" />
                     </div>
+
                 </div>
             </q-page>
         </q-page-container>
@@ -61,40 +62,42 @@
         </q-dialog>
     </q-layout>
 </template>
-
 <script>
-import { ref, computed, onMounted, onUnmounted, watch } from "vue"
+import { ref, computed, onMounted, nextTick, onUnmounted, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
-import { useTTS } from "src/composables/useTTS"
 import confetti from "canvas-confetti"
 import { getCurrentUser, setCurrentUser } from "src/utils/session"
 import { flatLessons } from "src/utils/lessons"
 import { LocalStorage } from "quasar"
-import '@google/model-viewer';
+import '@google/model-viewer'
 import { audioManager } from "src/utils/audioManager"
-import { onBeforeRouteLeave } from "vue-router"
+import renderMathInElement from 'katex/contrib/auto-render'
+import 'katex/dist/katex.min.css'
+import { useTTSLesson } from "src/composables/katexTTS"
 
 export default {
     name: "ScientificModelsLesson",
     setup() {
+        // router, state, lesson
         const route = useRoute()
         const router = useRouter()
         const currentPage = ref(0)
         const progress = ref(0)
         const showLessonComplete = ref(false)
-
-        // --- TTS composable ---
-        const { isPlaying, toggleAudio, stopSpeaking } = useTTS()
+        const viewerRef = ref(null)
+        const renderedPages = ref([])
 
         const currentUser = ref(getCurrentUser())
         let confettiInterval = null
+
         const lesson = flatLessons.find(l => l.route === route.path)
         const lessonId = lesson ? String(lesson.id) : "50"
 
+        // bookmarks
         const bookmarkedPages = ref([])
 
         // --- Lesson pages ---
-        const pages = ref([
+        const rawPages = [
             `
     <div>
       <!-- Card 1 -->
@@ -158,18 +161,19 @@ export default {
       </div>
       <p>In our previous discussions, you have encountered the terms friction, tension, normal force, and gravity. Forces can be mainly classified into two primary categories: contact forces and noncontact forces.</p>
       <p>Contact forces are exerted by direct physical contact between two objects. Here are some examples of contact forces:</p>
-      <p>• normal force (F) - This is the force exerted by a surface in contact with an object. For example, in figure 7-3a, the flower vase experiences a normal force exerted by the table it is resting on.</p>
-      <p>• applied force (F) - This is a force that is exerted directly on an object. For instance, in figure 7-3b, when you roll a bowling ball along a smooth alley, you apply force to it.</p>
-      <p>• friction force (F) - This force occurs when two surfaces are in contact and move past each other. As shown in figure 7-3c, the friction between the soles of your shoes and the ground allows you to move forward.</p>
-      <p>• tension force (Fr) - This is a pulling force exerted by a stretched rope, string, or cable on an attached object. For example, in figure 7-3d, a child is suspended by a rope, and the rope experiences tension, supporting the child's weight.</p>
+      <p>\\( \\vec{F}_N \\) <strong>Normal Force</strong> – This is the force exerted by a surface in contact with an object. For example, in figure 7-3a, the flower vase experiences a normal force exerted by the table it is resting on.</p>
+  <p>\\( \\vec{F}_A \\) <strong>Applied Force</strong> – This is a force that is exerted directly on an object. For instance, in figure 7-3b, when you roll a bowling ball along a smooth alley, you apply force to it.</p>
+  <p>\\( \\vec{F}_f \\) <strong>Friction Force</strong> – This force occurs when two surfaces are in contact and move past each other. As shown in figure 7-3c, the friction between the soles of your shoes and the ground allows you to move forward.</p>
+  <p>\\( \\vec{F}_T \\) <strong>Tension Force</strong> – This is a pulling force exerted by a stretched rope, string, or cable on an attached object. For example, in figure 7-3d, a child is suspended by a rope, and the rope experiences tension, supporting the child's weight.</p>
     </div>
     `,
             `
     <div>
       <!-- Card 7 -->
-      <p>• spring/restoring force (FS) - This force is present in springs, causing them to return to their original position after being stretched or compressed. As shown in figure 7-3e, when you compress a spring and let go, the restoring force brings it back to its equilibrium position.</p>
-      <p>• air resistance (Air) - This force opposes the motion of an object moving through the air. For example, in figure 7-3f, a falling parachute experiences increasing air resistance that eventually equals the force of gravity.</p>
-      <p>• buoyant force (F) - This is an upward force exerted by a fluid on a submerged object. In figure 7-3g, some objects, such as a boat, float in water because the buoyant force from the fluid is greater than their weight.</p>
+      <p>\\( \\vec{F}_S \\) <strong>Spring/Restoring Force</strong> – This force is present in springs, causing them to return to their original position after being stretched or compressed. As shown in figure 7-3e, when you compress a spring and let go, the restoring force brings it back to its equilibrium position.</p>
+  <p>\\( \\vec{F}_{Air} \\) <strong>Air Resistance</strong> – This force opposes the motion of an object moving through the air. For example, in figure 7-3f, a falling parachute experiences increasing air resistance that eventually equals the force of gravity.</p>
+  <p>\\( \\vec{F}_B \\) <strong>Buoyant Force</strong> – This is an upward force exerted by a fluid on a submerged object. In figure 7-3g, some objects, such as a boat, float in water because the buoyant force from the fluid is greater than their weight.</p>
+
       <div class="illustration">
         <img src="assets/img" alt="Figure 7-3. Contact forces">
         <div class="caption">Figure 7-3. Contact forces</div>
@@ -184,8 +188,9 @@ export default {
       </div>
       <p>Nuclear engineers work with strong nuclear forces responsible for the generation of energy from nuclear power plants. They design and develop nuclear equipment, ensure safety and compliance, conduct research, oversee maintenance and operations, manage radiation protection, and prepare for emergency responses.</p>
       <p>Another type of force does not involve direct contact. It acts at a distance and is called a non-contact force, also known as an action-at-a-distance or field force. There are several kinds of noncontact force:</p>
-      <p>• gravitational force (FG) - This force is exerted by a massive object on another massive object. For instance, the gravitational force between the Earth and the moon in figure 7-4a.</p>
-      <p>• electromagnetic force (F or FM) - This force can be either attractive or repulsive and acts between charged bodies. For example, in figure 7-4b, electrostatic force can be observed when a balloon is charged, attracting the hair. The magnetic force is evident when the magnet attracts the metal nails and screws, as shown in figure 7-4c.</p>
+      <p>\\( \\vec{F}_G \\) <strong>Gravitational Force</strong> – This force is exerted by a massive object on another massive object. For instance, the gravitational force between the Earth and the moon in figure 7-4a.</p>
+  <p>\\( \\vec{F}_E \\) or \\( \\vec{F}_M \\) <strong>Electromagnetic Force</strong> – This force can be either attractive or repulsive and acts between charged bodies. For example, in figure 7-4b, electrostatic force can be observed when a balloon is charged, attracting the hair. The magnetic force is evident when the magnet attracts the metal nails and screws, as shown in figure 7-4c.</p>
+
       <div class="illustration">
         <img src="assets/img" alt="Figure 7-4. Non-contact forces">
         <div class="caption">Figure 7-4. Non-contact forces</div>
@@ -261,9 +266,105 @@ export default {
 </div>
     </div>
     `
-        ])
+        ]
 
-        // --- Lesson completion ---
+        // --- KaTeX Rendering ---
+        const processPageWithKaTeX = (pageContent) => {
+            const tempDiv = document.createElement('div')
+            tempDiv.innerHTML = pageContent
+            renderMathInElement(tempDiv, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true }
+                ],
+                throwOnError: false,
+                errorCallback: (err, msg) => console.warn('KaTeX error:', err, msg)
+            })
+            return tempDiv.innerHTML
+        }
+
+        const processAllPages = () => {
+            renderedPages.value = rawPages.map(page => processPageWithKaTeX(page))
+        }
+
+        const getPageContent = (pageIndex) => {
+            if (renderedPages.value[pageIndex]) return renderedPages.value[pageIndex]
+            if (rawPages[pageIndex]) {
+                const processed = processPageWithKaTeX(rawPages[pageIndex])
+                renderedPages.value[pageIndex] = processed
+                return processed
+            }
+            return ''
+        }
+
+        // --- TTS Composable ---
+        const { isPlaying, textToRead, toggleAudio, stopSpeaking } = useTTSLesson(rawPages)
+        const onToggleAudio = async () => {
+            await toggleAudio(currentPage.value)  // <-- uses toggleAudio
+        }
+        // --- Bookmarks ---
+        const saveBookmarks = (bookmarksArr) => {
+            const user = getCurrentUser()
+            if (!user) return
+            const key = user.studentId ?? user.id ?? user.name
+            let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
+            allBookmarks[key] = bookmarksArr
+            localStorage.setItem("bookmarks", JSON.stringify(allBookmarks))
+        }
+
+        const loadBookmarks = () => {
+            const user = getCurrentUser()
+            if (!user) return []
+            const key = user.studentId ?? user.id ?? user.name
+            const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
+            return allBookmarks[key] || []
+        }
+
+        const toggleBookmark = () => {
+            const bookmark = { route: route.name || route.path, page: currentPage.value, lessonId }
+            let existing = loadBookmarks()
+            const index = existing.findIndex(b => b.route === bookmark.route && b.page === bookmark.page)
+            if (index !== -1) existing.splice(index, 1)
+            else existing.push(bookmark)
+            saveBookmarks(existing)
+            bookmarkedPages.value = loadBookmarks()
+        }
+
+        const isBookmarked = computed(() =>
+            bookmarkedPages.value.some(b => b.route === (route.name || route.path) && b.page === currentPage.value)
+        )
+
+        // --- Progress & Navigation ---
+        const updateProgress = () => {
+            progress.value = (currentPage.value + 1) / rawPages.length
+        }
+
+        const nextPage = () => {
+            if (isPlaying.value) stopSpeaking()
+            if (currentPage.value < renderedPages.value.length - 1) {
+                currentPage.value++
+                updateProgress()
+            } else {
+                markLessonComplete()
+                showLessonComplete.value = true
+            }
+        }
+
+        const prevPage = () => {
+            if (isPlaying.value) stopSpeaking()
+            if (currentPage.value > 0) {
+                currentPage.value--
+                updateProgress()
+            }
+        }
+
+        const goBack = () => {
+            if (window.history.length > 1) router.back()
+            else router.push("/chapters")
+        }
+
+        // --- Lesson Completion ---
         const isLessonComplete = computed(() =>
             currentUser.value?.progress?.[lessonId]?.completed || false
         )
@@ -286,6 +387,7 @@ export default {
                     : student
             )
             LocalStorage.set("students", students)
+
             currentUser.value = getCurrentUser()
         }
 
@@ -294,75 +396,6 @@ export default {
             color: "#fff",
             boxShadow: "7px 7px 0px 0px rgba(0, 0, 0, 0.16)"
         }
-
-        // --- Bookmarks ---
-        const saveBookmarks = (bookmarksArr) => {
-            const user = getCurrentUser()
-            if (!user) return
-            const key = user.studentId ?? user.id ?? user.name
-            let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
-            allBookmarks[key] = bookmarksArr
-            localStorage.setItem("bookmarks", JSON.stringify(allBookmarks))
-        }
-
-        const loadBookmarks = () => {
-            const user = getCurrentUser()
-            if (!user) return []
-            const key = user.studentId ?? user.id ?? user.name
-            let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
-            return allBookmarks[key] || []
-        }
-
-        const toggleBookmark = () => {
-            const bookmark = { route: route.name || route.path, page: currentPage.value, lessonId }
-            let existing = loadBookmarks()
-            const index = existing.findIndex(b => b.route === bookmark.route && b.page === bookmark.page)
-            if (index !== -1) existing.splice(index, 1)
-            else existing.push(bookmark)
-            saveBookmarks(existing)
-            bookmarkedPages.value = loadBookmarks()
-        }
-
-        const isBookmarked = computed(() =>
-            bookmarkedPages.value.some(
-                b => b.route === (route.name || route.path) && b.page === currentPage.value
-            )
-        )
-
-        // --- Progress & Navigation ---
-        const updateProgress = () => { progress.value = (currentPage.value + 1) / pages.value.length }
-
-        onBeforeRouteLeave(() => {
-            stopSpeaking()
-        })
-
-        const nextPage = () => {
-            if (isPlaying.value) stopSpeaking()
-            if (currentPage.value < pages.value.length - 1) {
-                currentPage.value++
-                updateProgress()
-            } else {
-                markLessonComplete()
-                showLessonComplete.value = true
-            }
-        }
-
-        const prevPage = () => {
-            if (isPlaying.value) stopSpeaking()
-            if (currentPage.value > 0) {
-                currentPage.value--
-                updateProgress()
-            }
-        }
-
-        const goBack = () => {
-            if (window.history.length > 1) router.back()
-            else router.push("/chapters")
-        }
-
-        watch(currentPage, (newPage) => {
-            router.replace({ path: route.path, query: { page: newPage } })
-        })
 
         // --- Confetti ---
         const startConfetti = () => {
@@ -378,23 +411,45 @@ export default {
             if (confettiInterval) { clearInterval(confettiInterval); confettiInterval = null }
         }
 
+        // --- KaTeX Re-render after page transition ---
+        const onTransitionComplete = () => {
+            nextTick(() => {
+                const viewerContent = viewerRef.value?.querySelector('div')
+                if (viewerContent) {
+                    renderMathInElement(viewerContent, {
+                        delimiters: [
+                            { left: '$$', right: '$$', display: true },
+                            { left: '\\(', right: '\\)', display: false },
+                            { left: '\\[', right: '\\]', display: true }
+                        ],
+                        throwOnError: false,
+                        errorCallback: (err, msg) => console.warn('KaTeX error:', err, msg)
+                    })
+                }
+            })
+        }
+
+        // --- URL Sync ---
+        watch(currentPage, (newPage) => {
+            router.replace({ path: route.path, query: { page: newPage } })
+        })
+
         // --- Lifecycle ---
         onMounted(() => {
             if (!route.query._reloaded) {
-                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } }).then(() => {
-                    window.location.reload()
-                })
+                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } })
+                    .then(() => window.location.reload())
                 return
             }
 
+            processAllPages()
             currentUser.value = getCurrentUser()
             bookmarkedPages.value = loadBookmarks()
             updateProgress()
 
             const pageFromQuery = parseInt(route.query.page, 10)
-            if (!isNaN(pageFromQuery) && pageFromQuery < pages.value.length) currentPage.value = pageFromQuery
+            if (!isNaN(pageFromQuery) && pageFromQuery < rawPages.length) currentPage.value = pageFromQuery
 
-            // Stars animation
             const starContainer = document.querySelector('.stars')
             if (starContainer) {
                 for (let i = 0; i < 100; i++) {
@@ -410,28 +465,30 @@ export default {
                 }
             }
 
-            // Click to navigate mini-tests
-            const viewer = document.querySelector('#viewer')
-            if (viewer) {
-                viewer.addEventListener('click', (e) => {
-                    const target = e.target.closest('[data-route]')
-                    if (target) router.push(target.dataset.route)
-                })
-            }
+            viewerRef.value?.addEventListener('click', (e) => {
+                const target = e.target.closest('[data-route]')
+                if (target) router.push(target.dataset.route)
+            })
         })
 
-        onUnmounted(() => { audioManager.restoreBg() })
+        onUnmounted(() => {
+            stopSpeaking()
+            speechSynthesis.cancel()
+            audioManager.restoreBg()
+        })
 
         return {
             currentPage,
             isPlaying,
-            pages,
+            textToRead,
+            pages: rawPages,
             showLessonComplete,
             bookmarkedPages,
             progress,
             isBookmarked,
             finishButtonStyle,
-            toggleAudio: () => toggleAudio(pages.value[currentPage.value]),
+            toggleAudio,
+            onToggleAudio,
             nextPage,
             prevPage,
             goBack,
@@ -440,12 +497,16 @@ export default {
             stopConfetti,
             currentUser,
             isLessonComplete,
-            markLessonComplete
+            markLessonComplete,
+            viewerRef,
+            onTransitionComplete,
+            getPageContent
         }
     }
 }
 </script>
 
-
 <style src="src/css/lessonBackground.css"></style>
+
+<!-- Scoped Styles -->
 <style src="src/css/lesson.css" scoped></style>

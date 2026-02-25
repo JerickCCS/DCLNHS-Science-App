@@ -116,38 +116,49 @@ export default {
     `,
       `
     <div>
-        <p>Table 2-l summarizes the properties of the three states of matter explained in terms of the basic principles of the particle nature of matter.</p>
+        <p>Table 2-1 summarizes the properties of the three states of matter explained in terms of the basic principles of the particle nature of matter.</p>
         <p><strong>Table 2-1 Properties of the Three States of Matter</strong></p>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>State</th>
-                    <th>Arrangement of Particles</th>
-                    <th>Movement of Particles</th>
-                    <th>Observed Properties</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>solid</td>
-                    <td>closely packed and orderly arranged</td>
-                    <td>vibrate in their fixed positions</td>
-                    <td>has definite shape and volume; high density; incompressible</td>
-                </tr>
-                <tr>
-                    <td>liquid</td>
-                    <td>closer together (than in gases); no regular or rigid arrangement</td>
-                    <td>slide past one another</td>
-                    <td>assumes the shape of its container and has a definite volume; has lower density than solids; generally incompressible</td>
-                </tr>
-                <tr>
-                    <td>gas</td>
-                    <td>far apart</td>
-                    <td>move very quickly and randomly</td>
-                    <td>no definite shape and volume; has the lowest density among the three states; highly compressible</td>
-                </tr>
-            </tbody>
-        </table>
+        <div style="overflow-x: auto;">
+  <table border="1" style="width: 900px; min-width: 100%; border-collapse: collapse; table-layout: fixed; text-align: left; font-family: Arial, sans-serif; border: 2px solid #333;">
+      <thead>
+          <tr style="background: linear-gradient(to right, #4facfe, #00f2fe); color: white;">
+              <th style="padding: 12px; width: 150px;">State</th>
+              <th style="padding: 12px; width: 240px;">Arrangement of Particles</th>
+              <th style="padding: 12px; width: 240px;">Movement of Particles</th>
+              <th style="padding: 12px; width: 300px;">Observed Properties</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr style="background-color: #f9f9f9;">
+              <td style="padding: 10px;">
+                  <img src="assets/img/chapter 2/solid.png" alt="Solid" style="width: 30px; vertical-align: middle; margin-right: 5px;">
+                  Solid
+              </td>
+              <td style="padding: 10px;">Closely packed and orderly arranged</td>
+              <td style="padding: 10px;">Vibrate in their fixed positions</td>
+              <td style="padding: 10px;">Has definite shape and volume; high density; incompressible</td>
+          </tr>
+          <tr style="background-color: #ffffff;">
+              <td style="padding: 10px;">
+                  <img src="assets/img/chapter 2/liquid.png" alt="Liquid" style="width: 30px; vertical-align: middle; margin-right: 5px;">
+                  Liquid
+              </td>
+              <td style="padding: 10px;">Closer together than in gases; no regular or rigid arrangement</td>
+              <td style="padding: 10px;">Slide past one another</td>
+              <td style="padding: 10px;">Assumes the shape of its container and has a definite volume; lower density than solids; generally incompressible</td>
+          </tr>
+          <tr style="background-color: #f9f9f9;">
+              <td style="padding: 10px;">
+                  <img src="assets/img/chapter 2/gas.png" alt="Gas" style="width: 30px; vertical-align: middle; margin-right: 5px;">
+                  Gas
+              </td>
+              <td style="padding: 10px;">Far apart</td>
+              <td style="padding: 10px;">Move very quickly and randomly</td>
+              <td style="padding: 10px;">No definite shape and volume; lowest density among the three states; highly compressible</td>
+          </tr>
+      </tbody>
+  </table>
+</div>
     </div>
     `,
       `

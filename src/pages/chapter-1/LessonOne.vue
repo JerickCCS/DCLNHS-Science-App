@@ -105,11 +105,11 @@ export default {
 <div class="header">
           <div class="title">What are scientific models?</div>
         </div>
-      </div>
-            
-            <p>
-                Scientific models are representations of concepts, systems, or ideas. They take many forms, such as three- or two-dimensional objects or diagrams, mathematical equations, and computer simulations. Models are made from established scientific knowledge and observed patterns that allow the prediction of patterns in different conditions or scenarios. Models generally help explain and understand processes, phenomena, and ideas that are not commonly observed or easily imagined. In many cases, models allow scientists to test ideas and predict outcomes that cannot be easily done in the real world. Models also allow them to test the validity of other existing models.
-            </p>
+       <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 1/scientific models.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">What are scientific models?</div>
         </div>
     </div>
     `,
@@ -118,33 +118,33 @@ export default {
         <p>
             Scientific models are commonly categorized into physical, conceptual, mathematical, and computer models. Physical models are tangible objects that help one understand a concept or process. It is a three-dimensional constructed copy of an original object that matches its characteristics, such as shape. In some cases, a physical model represents an abstract idea.
         </p>
+        <p>
+            Physical models can be life-size replicas or scale models, which are smaller than the original objects, but otherwise identical. Examples are the globe, which represents the Earth, and the model of the human skeletal system.
+        </p>
     </div>
     `,
             `
     <div>
-        <p>
-            Physical models can be life-size replicas or scale models, which are smaller than the original objects, but otherwise identical. Examples are the globe, which represents the Earth, and the model of the human skeletal system.
-        </p>
+        
 
 
         <div class="illustration">
-            <img src="assets/img/chapter 1/globe.png" alt="Globe model">
+            <img src="assets/img/chapter 1/globe.gif" alt="Globe model">
         </div>
         <div class="illustration">
-            <img src="assets/img/chapter 1/skeleton.png" alt="Skeleton model">
+            <img src="assets/img/chapter 1/skeleton.gif" alt="Skeleton model">
                 <div class="caption">Physical models of Earth (globe) and the human skeletal system</div>
         </div>
     </div>
     `,
             `
     <div>
-        <p>
-            Conceptual models are representations that make use of familiar objects or expressions to present a concept or an abstract and complicated idea. They are also considered mental models (Victoria State Government 2020). An example is the particle model of matter, which uses round particles to represent the composition of matter to explain their observable properties.
-        </p>
-    </div>
-    `,
-            `
-    <div>
+        <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 1/conceptual models.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">What are conceptual models?</div>
+        </div>
         <p>
             Some conceptual models present a system of ideas that show general relationships. An example is the taxonomic classification of organisms, which shows the hierarchical groupings of organisms. Other models are expressed through writing, speech, or action and are referred to as expressed models (Victoria State Government 2020). Examples are diagrams and flowcharts. Flowcharts are structured diagrams of complex processes or scenarios that show key concepts, variables, and their relationships using arrows and shapes. Some flowcharts show decision options and corresponding outcomes in a process.
         </p>
@@ -169,24 +169,22 @@ export default {
         <p>
             Mathematical models quantitatively represent relationships, patterns, and behavior using equations. These models are based on observations, theories, and measurements. They contain numbers, characters, letters, and symbols. An example is the equation for Newton's second law of motion (F=ma) which describes the relationship among mass, acceleration, and the applied force on an object.
         </p>
+        <p>
+            Computer models utilize computer softwares to study and simulate complex systems. These models are usually highly mathematical in nature and involve complex processing of numerous data. They are now widely used in all fields of science. In chemistry, the behavior of atoms and molecules are now taught using computer simulations.
+        </p>
     </div>
     `,
             `
     <div>
-        <p>
-            Computer models utilize computer softwares to study and simulate complex systems. These models are usually highly mathematical in nature and involve complex processing of numerous data. They are now widely used in all fields of science. In chemistry, the behavior of atoms and molecules are now taught using computer simulations.
-        </p>
-<div class="model-viewer-block">
+        <div class="model-viewer-block">
       <model-viewer src="/models/atom.glb"
               alt="DNA Structure"
               camera-controls
               auto-rotate
-              style="width:100%; height:50vh; background:#eef2ff; border-radius:10px;">
+                style="margin-top: 15vh;">
 </model-viewer>
-
-
+<div class="caption">Computer model of an atom</div>
     </div>
-
     </div>
     `,
             `

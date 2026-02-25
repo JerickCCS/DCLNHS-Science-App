@@ -3,7 +3,7 @@
         <q-header class="bg-white text-black">
             <q-toolbar>
                 <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="q-mr-sm" />
-                <q-toolbar-title class="navbar-title">Lesson 2: Net Force</q-toolbar-title>
+                <q-toolbar-title class="navbar-title">Lesson 1: Net Force</q-toolbar-title>
                 <div class="row items-center q-gutter-sm">
                     <q-btn flat dense round :icon="isBookmarked ? 'bookmark' : 'bookmark_border'" color="yellow"
                         @click="toggleBookmark" />
@@ -16,9 +16,9 @@
             <q-page>
                 <div class="stars"></div>
                 <div class="lesson-container">
-                    <div id="viewer">
-                        <transition name="fade-slide" mode="out-in">
-                            <div :key="currentPage" v-html="pages[currentPage]"></div>
+                    <div id="viewer" ref="viewerRef">
+                        <transition name="fade-slide" mode="out-in" @after-enter="onTransitionComplete">
+                            <div :key="currentPage" v-html="getPageContent(currentPage)"></div>
                         </transition>
                     </div>
 
@@ -33,10 +33,11 @@
                             :style="currentPage === pages.length - 1 ? finishButtonStyle : null" no-caps />
                     </div>
 
-                    <div class="speak-btn" @click="toggleAudio">
+                    <div class="speak-btn" @click="onToggleAudio">
                         <img :src="isPlaying ? '/icons/stop.png' : '/icons/speak.png'" alt="Speak Button"
                             class="cursor-pointer" style="width: 20px; height: 20px;" />
                     </div>
+
                 </div>
             </q-page>
         </q-page-container>
@@ -61,51 +62,50 @@
         </q-dialog>
     </q-layout>
 </template>
-
 <script>
-import { ref, computed, onMounted, onUnmounted, watch } from "vue"
+import { ref, computed, onMounted, nextTick, onUnmounted, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
-import { useTTS } from "src/composables/useTTS"
 import confetti from "canvas-confetti"
 import { getCurrentUser, setCurrentUser } from "src/utils/session"
 import { flatLessons } from "src/utils/lessons"
 import { LocalStorage } from "quasar"
-import '@google/model-viewer';
+import '@google/model-viewer'
 import { audioManager } from "src/utils/audioManager"
-import { onBeforeRouteLeave } from "vue-router"
+import renderMathInElement from 'katex/contrib/auto-render'
+import 'katex/dist/katex.min.css'
+import { useTTSLesson } from "src/composables/katexTTS"
 
 export default {
     name: "ScientificModelsLesson",
     setup() {
+        // router, state, lesson
         const route = useRoute()
         const router = useRouter()
         const currentPage = ref(0)
         const progress = ref(0)
         const showLessonComplete = ref(false)
-
-        // --- TTS composable ---
-        const { isPlaying, toggleAudio, stopSpeaking } = useTTS()
+        const viewerRef = ref(null)
+        const renderedPages = ref([])
 
         const currentUser = ref(getCurrentUser())
         let confettiInterval = null
+
         const lesson = flatLessons.find(l => l.route === route.path)
         const lessonId = lesson ? String(lesson.id) : "51"
 
+        // bookmarks
         const bookmarkedPages = ref([])
 
         // --- Lesson pages ---
-        const pages = ref([
+        const rawPages = [
             `
     <div>
       <!-- Card 1 -->
       <div class="header">
-        <div class="title">Lesson 2 Net Force</div>
+        <div class="title">Net Force</div>
       </div>
       <p>When two or more forces act on a body at different points, the consequent motion of the body is determined by the net force.</p>
-      <div class="illustration">
-        <img src="assets/img" alt="Net force illustration">
-        <div class="caption">Net force illustration</div>
-      </div>
+      <p>\\( \\vec{F}_{\\text{net}} = \\vec{F}_1 + \\vec{F}_2 + \\vec{F}_3 + \\dots + \\vec{F}_n \\)</p>
       <p>When two people push a crate at the same time in the same direction (figure 7-6), the forces add up to a net force. If each person exerts a force of 2 N, then the net force is 4 N. However, if they push with the same magnitude but in opposite directions (figure 7-7a on the next page), then the net force is zero.</p>
     </div>
     `,
@@ -120,7 +120,7 @@ export default {
         <img src="assets/img" alt="Figure 7-7. The net force of two forces in opposite directions is the difference between the magnitudes of these forces.">
         <div class="caption">Figure 7-7. The net force of two forces in opposite directions is the difference between the magnitudes of these forces.</div>
       </div>
-      <p>For opposing forces with different magnitudes (figure 7-7b), the direction of the net force is always the same as the direction of the force with greater magnitude. F net is the vector sum of all the forces acting on it.</p>
+      <p>For opposing forces with different magnitudes (figure 7-7b), the direction of the net force is always the same as the direction of the force with greater magnitude. \\( \\vec{F}_{\\text{net}} \\) is the vector sum of all the forces acting on it.</p>
     </div>
     `,
             `
@@ -130,7 +130,7 @@ export default {
         <div class="title">Free-Body Diagram</div>
       </div>
       <p>In many situations, multiple forces, such as the force of gravity, normal force, friction, and applied force, come into play. Let's look at this example:</p>
-      <p>Figure 7-8 illustrates various forces applied on a crate. Initially, an applied force (FA) pushes the crate to the right. However, counteracting this motion is the force of friction (F) between the floor and the crate, eventually bringing it to a halt. Additionally, there is an upward normal force (FN) and a downward force of gravity (FG) acting on the crate.</p>
+      <p>Figure 7-8 illustrates various forces applied on a crate. Initially, an applied force (\\( \\vec{F}_A \\)) pushes the crate to the right. However, counteracting this motion is the force of friction (\\( \\vec{F}_f \\)) between the floor and the crate, eventually bringing it to a halt. Additionally, there is an upward normal force (\\( \\vec{F}_N \\)) and a downward force of gravity (\\( \\vec{F}_G \\)) acting on the crate.</p>
       <div class="illustration">
         <img src="assets/img" alt="Figure 7-8. Pushing a crate and its free-body diagram">
         <div class="caption">Figure 7-8. Pushing a crate and its free-body diagram</div>
@@ -195,6 +195,13 @@ export default {
         <img src="assets/img" alt="Figure 7-9. A free-body diagram of the cart being pushed in figure 7-8.">
         <div class="caption">Figure 7-9. A free-body diagram of the cart being pushed in figure 7-8.</div>
       </div>
+      <p>\\( \\vec{F}_{\\text{net}_x} = \\vec{F}_{\\text{App}} + (-\\vec{F}_f) \\)</p>
+<p>\\( \\vec{F}_{\\text{net}_x} = 144 \\text{ N} + (-94 \\text{ N}) \\)</p>
+<p>\\( \\vec{F}_{\\text{net}_x} = 50 \\text{ N} \\)</p>
+
+<p>\\( \\vec{F}_{\\text{net}_y} = \\vec{F}_N + (-\\vec{F}_G) \\)</p>
+<p>\\( \\vec{F}_{\\text{net}_y} = 490 \\text{ N} + (-490 \\text{ N}) \\)</p>
+<p>\\( \\vec{F}_{\\text{net}_y} = 0 \\)</p>
     </div>
     `,
             `
@@ -244,9 +251,105 @@ export default {
 </div>
     </div>
     `
-        ])
+        ]
 
-        // --- Lesson completion ---
+        // --- KaTeX Rendering ---
+        const processPageWithKaTeX = (pageContent) => {
+            const tempDiv = document.createElement('div')
+            tempDiv.innerHTML = pageContent
+            renderMathInElement(tempDiv, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true }
+                ],
+                throwOnError: false,
+                errorCallback: (err, msg) => console.warn('KaTeX error:', err, msg)
+            })
+            return tempDiv.innerHTML
+        }
+
+        const processAllPages = () => {
+            renderedPages.value = rawPages.map(page => processPageWithKaTeX(page))
+        }
+
+        const getPageContent = (pageIndex) => {
+            if (renderedPages.value[pageIndex]) return renderedPages.value[pageIndex]
+            if (rawPages[pageIndex]) {
+                const processed = processPageWithKaTeX(rawPages[pageIndex])
+                renderedPages.value[pageIndex] = processed
+                return processed
+            }
+            return ''
+        }
+
+        // --- TTS Composable ---
+        const { isPlaying, textToRead, toggleAudio, stopSpeaking } = useTTSLesson(rawPages)
+        const onToggleAudio = async () => {
+            await toggleAudio(currentPage.value)  // <-- uses toggleAudio
+        }
+        // --- Bookmarks ---
+        const saveBookmarks = (bookmarksArr) => {
+            const user = getCurrentUser()
+            if (!user) return
+            const key = user.studentId ?? user.id ?? user.name
+            let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
+            allBookmarks[key] = bookmarksArr
+            localStorage.setItem("bookmarks", JSON.stringify(allBookmarks))
+        }
+
+        const loadBookmarks = () => {
+            const user = getCurrentUser()
+            if (!user) return []
+            const key = user.studentId ?? user.id ?? user.name
+            const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
+            return allBookmarks[key] || []
+        }
+
+        const toggleBookmark = () => {
+            const bookmark = { route: route.name || route.path, page: currentPage.value, lessonId }
+            let existing = loadBookmarks()
+            const index = existing.findIndex(b => b.route === bookmark.route && b.page === bookmark.page)
+            if (index !== -1) existing.splice(index, 1)
+            else existing.push(bookmark)
+            saveBookmarks(existing)
+            bookmarkedPages.value = loadBookmarks()
+        }
+
+        const isBookmarked = computed(() =>
+            bookmarkedPages.value.some(b => b.route === (route.name || route.path) && b.page === currentPage.value)
+        )
+
+        // --- Progress & Navigation ---
+        const updateProgress = () => {
+            progress.value = (currentPage.value + 1) / rawPages.length
+        }
+
+        const nextPage = () => {
+            if (isPlaying.value) stopSpeaking()
+            if (currentPage.value < renderedPages.value.length - 1) {
+                currentPage.value++
+                updateProgress()
+            } else {
+                markLessonComplete()
+                showLessonComplete.value = true
+            }
+        }
+
+        const prevPage = () => {
+            if (isPlaying.value) stopSpeaking()
+            if (currentPage.value > 0) {
+                currentPage.value--
+                updateProgress()
+            }
+        }
+
+        const goBack = () => {
+            if (window.history.length > 1) router.back()
+            else router.push("/chapters")
+        }
+
+        // --- Lesson Completion ---
         const isLessonComplete = computed(() =>
             currentUser.value?.progress?.[lessonId]?.completed || false
         )
@@ -269,6 +372,7 @@ export default {
                     : student
             )
             LocalStorage.set("students", students)
+
             currentUser.value = getCurrentUser()
         }
 
@@ -277,75 +381,6 @@ export default {
             color: "#fff",
             boxShadow: "7px 7px 0px 0px rgba(0, 0, 0, 0.16)"
         }
-
-        // --- Bookmarks ---
-        const saveBookmarks = (bookmarksArr) => {
-            const user = getCurrentUser()
-            if (!user) return
-            const key = user.studentId ?? user.id ?? user.name
-            let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
-            allBookmarks[key] = bookmarksArr
-            localStorage.setItem("bookmarks", JSON.stringify(allBookmarks))
-        }
-
-        const loadBookmarks = () => {
-            const user = getCurrentUser()
-            if (!user) return []
-            const key = user.studentId ?? user.id ?? user.name
-            let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
-            return allBookmarks[key] || []
-        }
-
-        const toggleBookmark = () => {
-            const bookmark = { route: route.name || route.path, page: currentPage.value, lessonId }
-            let existing = loadBookmarks()
-            const index = existing.findIndex(b => b.route === bookmark.route && b.page === bookmark.page)
-            if (index !== -1) existing.splice(index, 1)
-            else existing.push(bookmark)
-            saveBookmarks(existing)
-            bookmarkedPages.value = loadBookmarks()
-        }
-
-        const isBookmarked = computed(() =>
-            bookmarkedPages.value.some(
-                b => b.route === (route.name || route.path) && b.page === currentPage.value
-            )
-        )
-
-        // --- Progress & Navigation ---
-        const updateProgress = () => { progress.value = (currentPage.value + 1) / pages.value.length }
-
-        onBeforeRouteLeave(() => {
-            stopSpeaking()
-        })
-
-        const nextPage = () => {
-            if (isPlaying.value) stopSpeaking()
-            if (currentPage.value < pages.value.length - 1) {
-                currentPage.value++
-                updateProgress()
-            } else {
-                markLessonComplete()
-                showLessonComplete.value = true
-            }
-        }
-
-        const prevPage = () => {
-            if (isPlaying.value) stopSpeaking()
-            if (currentPage.value > 0) {
-                currentPage.value--
-                updateProgress()
-            }
-        }
-
-        const goBack = () => {
-            if (window.history.length > 1) router.back()
-            else router.push("/chapters")
-        }
-
-        watch(currentPage, (newPage) => {
-            router.replace({ path: route.path, query: { page: newPage } })
-        })
 
         // --- Confetti ---
         const startConfetti = () => {
@@ -361,23 +396,45 @@ export default {
             if (confettiInterval) { clearInterval(confettiInterval); confettiInterval = null }
         }
 
+        // --- KaTeX Re-render after page transition ---
+        const onTransitionComplete = () => {
+            nextTick(() => {
+                const viewerContent = viewerRef.value?.querySelector('div')
+                if (viewerContent) {
+                    renderMathInElement(viewerContent, {
+                        delimiters: [
+                            { left: '$$', right: '$$', display: true },
+                            { left: '\\(', right: '\\)', display: false },
+                            { left: '\\[', right: '\\]', display: true }
+                        ],
+                        throwOnError: false,
+                        errorCallback: (err, msg) => console.warn('KaTeX error:', err, msg)
+                    })
+                }
+            })
+        }
+
+        // --- URL Sync ---
+        watch(currentPage, (newPage) => {
+            router.replace({ path: route.path, query: { page: newPage } })
+        })
+
         // --- Lifecycle ---
         onMounted(() => {
             if (!route.query._reloaded) {
-                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } }).then(() => {
-                    window.location.reload()
-                })
+                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } })
+                    .then(() => window.location.reload())
                 return
             }
 
+            processAllPages()
             currentUser.value = getCurrentUser()
             bookmarkedPages.value = loadBookmarks()
             updateProgress()
 
             const pageFromQuery = parseInt(route.query.page, 10)
-            if (!isNaN(pageFromQuery) && pageFromQuery < pages.value.length) currentPage.value = pageFromQuery
+            if (!isNaN(pageFromQuery) && pageFromQuery < rawPages.length) currentPage.value = pageFromQuery
 
-            // Stars animation
             const starContainer = document.querySelector('.stars')
             if (starContainer) {
                 for (let i = 0; i < 100; i++) {
@@ -393,28 +450,30 @@ export default {
                 }
             }
 
-            // Click to navigate mini-tests
-            const viewer = document.querySelector('#viewer')
-            if (viewer) {
-                viewer.addEventListener('click', (e) => {
-                    const target = e.target.closest('[data-route]')
-                    if (target) router.push(target.dataset.route)
-                })
-            }
+            viewerRef.value?.addEventListener('click', (e) => {
+                const target = e.target.closest('[data-route]')
+                if (target) router.push(target.dataset.route)
+            })
         })
 
-        onUnmounted(() => { audioManager.restoreBg() })
+        onUnmounted(() => {
+            stopSpeaking()
+            speechSynthesis.cancel()
+            audioManager.restoreBg()
+        })
 
         return {
             currentPage,
             isPlaying,
-            pages,
+            textToRead,
+            pages: rawPages,
             showLessonComplete,
             bookmarkedPages,
             progress,
             isBookmarked,
             finishButtonStyle,
-            toggleAudio: () => toggleAudio(pages.value[currentPage.value]),
+            toggleAudio,
+            onToggleAudio,
             nextPage,
             prevPage,
             goBack,
@@ -423,12 +482,16 @@ export default {
             stopConfetti,
             currentUser,
             isLessonComplete,
-            markLessonComplete
+            markLessonComplete,
+            viewerRef,
+            onTransitionComplete,
+            getPageContent
         }
     }
 }
 </script>
 
-
 <style src="src/css/lessonBackground.css"></style>
+
+<!-- Scoped Styles -->
 <style src="src/css/lesson.css" scoped></style>

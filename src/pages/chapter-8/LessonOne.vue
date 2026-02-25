@@ -254,20 +254,23 @@ export default {
     <div>
       <!-- Card 14 -->
       <p>In a baseball game, the batter hit a homerun, and was able to circle the bases and reach the home plate within a duration of 30.0 seconds. If we track the path he took while running around the baseball field: (a) what is the total distance he covered? (b) what is his total displacement?</p>
-      <p><strong>Given:</strong> t = 30.0 s</p>
-      <p><strong>Find:</strong> (a) d<sub>T</sub> = ? (b) Δd = ?</p>
-      <p><strong>Solution:</strong></p>
-      <p>(a) Assuming he took the same distance indicated in the baseball field dimensions, the total distance can be solved by adding all the steps he took along the field's curves and turns.</p>
-      <p>d<sub>T</sub> = 4(27.4 m) = 109.6 m</p>
+      <p><strong>Given:</strong> \\( t = 30.0 \\text{ s} \\)</p>
+<p><strong>Find:</strong></p>
+<p>(a) \\( d_T = ? \\)</p>
+<p>(b) \\( \\Delta\\vec{d} = ? \\)</p>
+
+<p><strong>Solution:</strong></p>
+<p>(a) Assuming he took the same distance indicated in the baseball field dimensions, the total distance can be solved by adding all the steps he took along the field's curves and turns.</p>
+<p>\\( d_T = 4(27.4 \\text{ m}) = 109.6 \\text{ m} \\)</p>
     </div>
     `,
       `
     <div>
       <!-- Card 15 -->
       <p>(b) The displacement is zero since the initial position is the same as the final position.</p>
-      <p>Δd = d<sub>f</sub> - d<sub>i</sub> = 0</p>
-      <p><strong>Rationalization:</strong></p>
-      <p>If an object moves, the total distance cannot be zero. On the other hand, displacement can be zero when its initial position is the same as its final position.</p>
+<p>\\( \\Delta\\vec{d} = \\vec{d}_f - \\vec{d}_i = 0 \\)</p>
+
+<p><strong>Rationalization:</strong> If an object moves, the total distance cannot be zero. On the other hand, displacement can be zero when its initial position is the same as its final position.</p
     </div>
     `,
       `
@@ -292,10 +295,7 @@ export default {
     <div>
       <!-- Card 17 -->
       <div class="header">
-        <span class="lesson-pill">Lesson 1</span>
-        <div>
           <div class="title">Speed or Velocity</div>
-        </div>
       </div>
       <p>When moving along the road, you can move at the same speed, speed up, or slow down, depending on the situation. When you are late for an appointment, you usually speed up to cover a greater distance at a lesser time of travel.</p>
       <p>When you encounter a yellow or red traffic signal along the way, you need to slow down in order to stop within the stopping distance to avoid any traffic law violation. When you drive around a curved path, it is better to slow down instead of speeding up in order to avoid accidents. These are some situations showing varying speeds or velocities.</p>
@@ -304,11 +304,9 @@ export default {
       `
     <div>
       <!-- Card 18 -->
-      <p>Speed (v), a scalar quantity, is defined as the distance (d) traveled divided by time (t). In symbols, this is expressed as:</p>
-      <p>speed (v) = d/t</p>
-      <p>Velocity (v), a vector quantity, is the displacement (d or Δd) over time (t). The speed in a particular direction is also called velocity. In symbols, this is expressed as:</p>
-      <p>velocity (v) = Δd/Δt</p>
-      <p>v = (d<sub>f</sub> - d<sub>i</sub>) / (t<sub>f</sub> - t<sub>i</sub>)</p>
+      <p>Velocity (\\( \\vec{v} \\)), a vector quantity, is the displacement (\\( \\vec{d} \\) or \\( \\Delta\\vec{d} \\)) over time (\\( t \\)). The speed in a particular direction is also called velocity. In symbols, this is expressed as:</p>
+<p>\\( \\text{velocity} (\\vec{v}) = \\frac{\\Delta\\vec{d}}{\\Delta t} \\)</p>
+<p>\\( \\vec{v} = \\frac{\\vec{d}_f - \\vec{d}_i}{t_f - t_i} \\)</p>
     </div>
     `,
       `
@@ -335,10 +333,7 @@ export default {
     <div>
       <!-- Card 20 -->
       <div class="header">
-        <span class="lesson-pill">Lesson 1</span>
-        <div>
           <div class="title">Instantaneous and Average Speed/Velocity</div>
-        </div>
       </div>
       <p>Let us say a car travels northward via the expressway, and the speedometer shows that the instantaneous speed or the exact speed at that moment is 109 km/h. But if we consider both the speed and the direction where the car is going, the car is moving at 109 km/h toward north.</p>
       <p>So, if we only look at the speed, it is 109 km/h but considering the direction, the car is moving at 109 km/h north. When the instantaneous speed is coupled with the direction of travel, it transforms into the instantaneous velocity.</p>

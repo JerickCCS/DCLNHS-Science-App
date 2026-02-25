@@ -146,6 +146,10 @@ Examples of English system units are inch, foot (plural: feet), and mile for len
 and gallon for volume. In the metric system, the commonly used units are meter for length
 and liter for volume.
         </p>
+        <div class="illustration">
+          <img src="assets/img/chapter 1/system units.png" alt="SI Base Units">
+          <div class="caption">English and Metric Systems</div>
+        </div>
         </div>
         
       `,

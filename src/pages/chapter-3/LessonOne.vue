@@ -98,7 +98,7 @@ export default {
             `
     <div>
         <div class="header">
-            <div class="title">Lesson 1 The Nature of Solutions</div>
+            <div class="title">The Nature of Solutions</div>
         </div>
         <p>A solution is a homogeneous mixture of two or more substances. When table sugar or sucrose (C₁₂H₂₂O₁₁) is dissolved in water, the resulting solution is composed of mixed particles of sugar and water. Metallic solid solutions, called alloys, consist of different elements, which is a specific type of substance. For example, brass is an alloy composed mainly of copper and zinc.</p>
         <p>A solution has two components: solute and solvent. The solute is the substance being dissolved, while the solvent is the dissolving medium. The solute is usually the substance present in smaller amounts compared to the solvent. In a sugar solution, sugar is the solute and water is the solvent.</p>
@@ -109,7 +109,7 @@ export default {
         <div class="header">
             <div class="title">Types of Solution</div>
         </div>
-        <p>What are the properties of solutions?</p>
+        <p style="font-weight: bold; padding-top: 10px; margin-bottom: 5px;"><strong>What are the properties of solutions?</strong></p>
         <p>While the solute and the solvent can be in any of the three states of matter, the state of the solution is generally dictated by the state of the solvent. Mixing gases in any proportion produces a gas solution. Dissolving a gas, liquid, or solid in a liquid solvent produces a liquid solution. Liquid solutions that use water as the solvent are referred to as aqueous solutions.</p>
     </div>
     `,

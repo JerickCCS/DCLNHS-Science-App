@@ -99,9 +99,9 @@ export default {
     <div>
       <!-- Card 1 -->
       <div class="header">
-        <div class="title">Lesson 2 Solubility and Saturation</div>
+        <div class="title">Solubility and Saturation</div>
       </div>
-      <p>What are the properties of solutions?</p>
+      <p style="font-weight: bold; padding-top: 10px; margin-bottom: 5px; font-size: 19px;"><strong>What are the properties of solutions?</strong></p>
       <p>What happens when a few sugar crystals are dissolved in a glass of water? What property of solution is evident here? As more sugar crystals are added, however, the dissolution slows down until eventually, added crystals remain undissolved and settle at the bottom of the container. This means that the solution has reached its solubility.</p>
     </div>
     `,

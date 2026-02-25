@@ -112,7 +112,12 @@ export default {
             `
     <div>
       <!-- Card 2 -->
-      <p>Observing is a fundamental skill that requires the use of the five senses sight, hearing, touch, taste, and smell. It is a means of gathering qualitative and quantitative data. Measuring utilizes specific laboratory tools, such as a ruler or a graduated cylinder. Inferring is interpreting what is observed based on prior experience or information. Classifying is the skill of grouping objects or phenomena based on similar characteristics or attributes. Predicting is projecting outcomes based on reliable and consistent observations and inferences. Hence, predictions are not just random guesses; they can be tested and verified. They are obtained by analyzing trends or comparing historical and present conditions or events.</p>
+      <div class="video-container">
+          <video controls width="100%">
+            <source src="assets/videos/chapter 1/observing.mp4" controls alt="video" type="video/mp4">
+          </video>
+          <div class="caption">The observing skill</div>
+        </div>
       <p>Communicating means sharing the results of an investigation with the scientific community through journal publications or presentations in conferences. Communicating is essential in science because it makes the results of an investigation open for replication and verification. To communicate effectively, we need to employ methods or tools familiar to most people, such as informative statements, graphs, and charts.</p>
       <p>The basic process skills are the foundations of learning the more complex integrated process skills, which are highly useful in conducting experiments. The integrated skills are formulating models, defining operationally, formulating hypothesis, controlling variables, experimenting, and interpreting data. Formulating models refers to designing and creating appropriate scientific models to represent a concept or a process. Defining operationally means stating or describing how to measure a variable in an experiment. For example, Plant growth will be measured in centimeters per week.</p>
       <p>The other integrated process skills will be discussed in the next section.</p>
@@ -129,7 +134,7 @@ export default {
       <p><strong>How do scientists solve problems?</strong></p>
       <p>Scientists solve problems by making careful and thorough investigations. They follow the scientific method to minimize mistakes while solving a problem. The scientific method is a systematic process of acquiring knowledge and validating observations through experimentation.</p>
       <div class="illustration">
-        <img src="assets/img/chapter 1>figure 1-16.png" alt="figure 1-16">
+        <img src="assets/img/chapter 1/figure 1-16.png" alt="figure 1-16">
         <div class="caption">figure 1-16</div>
       </div>
       <p>The steps of the scientific method can be summarized as follows:</p>
@@ -158,6 +163,9 @@ export default {
       <p>A hypothesis may not always be the answer to the identified problem. It may be refuted based on the results of the experiment. Therefore, an experiment must be carefully designed to support or refute the hypothesis. When a hypothesis holds true for numerous similar experiments, it becomes a theory.</p>
       <p><strong>Experimenting, Observing, and Gathering Data</strong></p>
       <p>The value and success of a scientific investigation depend on careful planning before conducting any experiment. The factors or conditions in an experiment must be controlled to get reproducible results.</p>
+      <div class="illustration">
+          <img src="assets/img/chapter 1/value.gif" alt="value">
+        </div>
       <p>Experimentation is regarded as a cause-and-effect test between two variables. It aims to generate evidence to answer the problem to be solved. It involves identifying the experimental variables, making operational definitions of the terms and conditions to be used in the experiment, and outlining the experimental procedure.</p>
     </div>
     `,

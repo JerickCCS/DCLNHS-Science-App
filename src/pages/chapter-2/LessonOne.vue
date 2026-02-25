@@ -100,25 +100,38 @@ export default {
         <div class="header">
             <div class="title">The Particle of Matter</div>
         </div>
-        <div class="title">What does the "particle nature of matter" mean?</div>
+        <p style="font-weight: bold; padding-top: 10px; margin-bottom: 5px;">What does the "particle nature of matter" mean?</strong></p>
         <p>Democritus's idea of a fundamental particle established the foundation for the concept of the particle nature of matter-the idea that matter is made up of discrete and indivisible particles. Hence, matter is considered discontinuous. This idea implies that a piece of matter cannot be divided perpetually. This is contrary to Aristotle's idea that matter is continuous and can be divided indefinitely into smaller pieces. The particle model of matter is a fundamental scientific model, which helps us understand the nature of matter, and it includes the following essential principles:</p>
-        <p>1. Matter is made up of discrete particles.</p>
-        <p>2. There is empty space between the particles.</p>
-        <p>3. The particles are in constant motion.</p>
-        <p>4. Forces act between the particles.</p>
     </div>
     `,
             `
     <div>
+        <p><strong>1.</strong> Matter is made up of discrete particles.</p>
+        <p><strong>2.</strong>There is empty space between the particles.</p>
+        <p><strong>3.</strong> The particles are in constant motion.</p>
+        <p><strong>4.</strong> Forces act between the particles.</p>
         <p>This model is essential when studying the behavior of particles at the molecular and atomic levels.</p>
+        <div class="illustration">
+            <img src="assets/img/chapter 2/matter.png" alt="illustration">
+        </div>
+    </div>
+    `,
+            `
+    <div>
         <div class="title">Discrete Particles of Matter</div>
         <p>You can touch and see the bulk of matter, but you cannot distinguish the atoms that compose them. Recall that an atom is the basicbuildingunit of matter. Thus, the idea of discrete particles of matter is abstract. These particles-which can be discrete atoms or chemically combined atoms-are usually represented using scientific models such as conceptual diagrams, particle drawings, and even computer simulations. These representations will be discussed further in the succeeding lessons.</p>
+        <div class="illustration">
+            <img src="assets/img/chapter 2/discrete particles.png" alt="illustration">
+        </div>
     </div>
     `,
             `
     <div>
         <div class="title">Empty Space between Particles</div>
         <p>Aristotle's idea of the continuity of matter implies that all space is filled with matter and that there is no such thing as empty space. This idea is contradicted by the principle of the particle nature of matter, which states that empty space exists between particles of matter. Let us verify this idea by doing Mini Lab 2-1.</p>
+        <div class="illustration">
+            <img src="assets/img/chapter 2/empty space.png" alt="illustration">
+        </div>
     </div>
     `,
             `
