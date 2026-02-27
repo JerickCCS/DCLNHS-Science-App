@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header class="bg-white text-black">
-      <q-toolbar>
+      <q-toolbar class="toolbar-row">
         <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="q-mr-sm" />
         <q-toolbar-title class="navbar-title">Lesson 2: Uniform Motion</q-toolbar-title>
         <div class="row items-center q-gutter-sm">

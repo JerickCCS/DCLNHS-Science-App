@@ -1,8 +1,8 @@
 <template>
     <q-layout view="hHh lpR fFf">
         <q-header class="bg-white text-black">
-            <q-toolbar>
-                <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="q-mr-sm" />
+            <q-toolbar class="toolbar-row"> <q-btn flat dense round icon="arrow_back" aria-label="Go back"
+                    @click="goBack" class="q-mr-sm" />
                 <q-toolbar-title class="navbar-title">Activity 2: The Particle Nature of Matter</q-toolbar-title>
                 <div class="row items-center q-gutter-sm">
                     <q-btn flat dense round :icon="isBookmarked ? 'bookmark' : 'bookmark_border'" color="yellow"

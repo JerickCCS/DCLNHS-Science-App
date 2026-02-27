@@ -2,12 +2,11 @@
   <q-layout view="hHr LpR lFf">
     <!-- Header -->
     <q-header class="header-gradient">
-      <q-toolbar class="q-pa-md">
+      <q-toolbar class="q-pa-md toolbar-row">
         <div class="avatar-container relative-position" @click="sidebarOpen = true">
           <q-avatar size="60px" class="profile-avatar">
             <img class="profile-image" :src="student.avatar || 'assets/temp/pfp.png'" />
           </q-avatar>
-          <!-- Small icon overlay -->
           <div class="avatar-overlay-icon">
             <img src="assets/icons/profile.png" alt="icon" />
           </div>
@@ -20,7 +19,6 @@
 
         <q-space />
 
-        <!-- Bookmarks -->
         <div class="text-center q-mr-md">
           <q-btn flat round color="white" @click="goToBookmarks">
             <img src="assets/icons/bookmark.png" style="width: 28px; height: 28px;" />
@@ -29,309 +27,344 @@
         </div>
       </q-toolbar>
     </q-header>
+
     <q-page-container>
       <q-page class="dashboard-page" no-padding>
 
+        <!-- Loading overlay -->
+        <div v-if="isLoading" class="loading-overlay">
+          <q-spinner-dots color="white" size="48px" />
+          <div class="text-white q-mt-md text-body1">Loading...</div>
+        </div>
+
         <!-- Sidebar -->
-        <q-drawer v-model="sidebarOpen" side="right" overlay bordered :width="240" class="sidebar-drawer">
-          <div class="q-pa-md">
-            <!-- Logo Icon Above Menu -->
-            <div class="sidebar-logo-container text-center q-mb-md">
+        <q-drawer v-model="sidebarOpen" side="right" overlay bordered :width="260" class="sidebar-drawer">
+          <div class="sidebar-inner">
+            <div class="sidebar-header">
               <img src="logo/logo.png" alt="logo" class="sidebar-logo" />
+              <div class="sidebar-brand">Menu</div>
             </div>
 
-            <div class="sidebar-title text-h5 text-primary text-weight-bold text-center q-mb-lg">
-              Menu
+            <div class="sidebar-divider"></div>
+
+            <div class="sidebar-nav">
+              <button class="nav-item" @click="openEditProfile">
+                <div class="nav-icon-wrap">
+                  <img src="assets/icons/edit.png" alt="edit" />
+                </div>
+                <span class="nav-label">Edit Profile</span>
+                <q-icon name="chevron_right" size="18px" class="nav-arrow" />
+              </button>
+
+              <button class="nav-item" @click="settingsOpen = true; sidebarOpen = false">
+                <div class="nav-icon-wrap">
+                  <img src="assets/icons/audio.png" alt="audio" />
+                </div>
+                <span class="nav-label">Audio</span>
+                <q-icon name="chevron_right" size="18px" class="nav-arrow" />
+              </button>
+
+              <button class="nav-item" @click="aboutOpen = true; sidebarOpen = false">
+                <div class="nav-icon-wrap">
+                  <img src="assets/icons/about.png" alt="about" />
+                </div>
+                <span class="nav-label">About</span>
+                <q-icon name="chevron_right" size="18px" class="nav-arrow" />
+              </button>
+
+              <div class="nav-spacer"></div>
+
+              <button class="nav-item nav-logout" @click="logout">
+                <div class="nav-icon-wrap logout-icon-wrap">
+                  <img src="assets/icons/logout.png" alt="logout" />
+                </div>
+                <span class="nav-label">Logout</span>
+                <q-icon name="chevron_right" size="18px" class="nav-arrow" />
+              </button>
             </div>
-
-            <q-list class="sidebar-menu-list">
-              <!-- Edit Profile Button -->
-              <q-item clickable v-ripple @click="openEditProfile" class="sidebar-menu-btn">
-                <q-item-section avatar class="sidebar-icon-section">
-                  <div class="sidebar-btn-icon-wrapper">
-                    <img src="assets/icons/edit.png" alt="edit" />
-                  </div>
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="sidebar-btn-label">Edit Profile</q-item-label>
-                </q-item-section>
-                <q-item-section side>
-                  <q-icon name="chevron_right" size="20px" class="chevron-icon" />
-                </q-item-section>
-              </q-item>
-
-              <!-- Audio Button -->
-              <q-item clickable v-ripple @click="settingsOpen = true" class="sidebar-menu-btn">
-                <q-item-section avatar class="sidebar-icon-section">
-                  <div class="sidebar-btn-icon-wrapper">
-                    <img src="assets/icons/audio.png" alt="audio" />
-                  </div>
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="sidebar-btn-label">Audio</q-item-label>
-                </q-item-section>
-                <q-item-section side>
-                  <q-icon name="chevron_right" size="20px" class="chevron-icon" />
-                </q-item-section>
-              </q-item>
-
-              <!-- About Button -->
-              <q-item clickable v-ripple class="sidebar-menu-btn">
-                <q-item-section avatar class="sidebar-icon-section">
-                  <div class="sidebar-btn-icon-wrapper">
-                    <img src="assets/icons/about.png" alt="about" />
-                  </div>
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="sidebar-btn-label">About</q-item-label>
-                </q-item-section>
-                <q-item-section side>
-                  <q-icon name="chevron_right" size="20px" class="chevron-icon" />
-                </q-item-section>
-              </q-item>
-
-              <!-- Logout Button -->
-              <q-item clickable v-ripple @click="logout" class="sidebar-menu-btn logout-btn">
-                <q-item-section avatar class="sidebar-icon-section">
-                  <div class="sidebar-btn-icon-wrapper logout-icon-wrapper">
-                    <img src="assets/icons/logout.png" alt="logout" />
-                  </div>
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="sidebar-btn-label">Logout</q-item-label>
-                </q-item-section>
-                <q-item-section side>
-                  <q-icon name="chevron_right" size="20px" class="chevron-icon" />
-                </q-item-section>
-              </q-item>
-            </q-list>
           </div>
         </q-drawer>
 
         <!-- Edit Profile Modal -->
         <q-dialog v-model="editProfileModal" persistent>
-          <q-card class="edit-profile-modal unified-card" style="min-width: 90vw; max-width: 500px; max-height: 80vh;">
-            <q-card-section class="bg-primary text-white">
-              <div class="text-h6">Edit Profile</div>
-            </q-card-section>
-
-            <q-scroll-area style="height: calc(80vh - 150px);" class="modal-scroll-area">
-              <q-card-section class="q-pt-lg">
-                <!-- Current Avatar Preview -->
-                <div class="row justify-center q-mb-lg">
-                  <div class="current-avatar-preview-container">
-                    <img :src="editForm.avatar || student.avatar || 'assets/temp/pfp.png'"
-                      class="current-avatar-image" />
+          <div class="edit-modal-wrapper">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <div class="modal-header-bg"></div>
+              <div class="modal-header-content">
+                <div class="modal-avatar-ring" role="button" tabindex="0" aria-label="Change avatar"
+                  @click="scrollToAvatarPicker" @keydown.enter="scrollToAvatarPicker">
+                  <img :src="editForm.avatar || student.avatar || 'assets/temp/pfp.png'" class="modal-avatar-img" />
+                  <div class="modal-avatar-badge">
+                    <q-icon name="photo_camera" size="14px" color="white" />
                   </div>
                 </div>
+                <div class="modal-title">Edit Profile</div>
+                <div class="modal-subtitle">Customize your student profile</div>
+              </div>
+            </div>
 
-                <!-- Name and Section Fields -->
-                <div class="form-fields q-px-sm">
-                  <q-input v-model="editForm.name" label="Name" outlined class="q-mb-md unified-input"
-                    :rules="[val => !!val || 'Name is required']" dense />
+            <!-- Modal Body -->
+            <div class="modal-body">
+              <q-scroll-area ref="avatarScrollArea" style="height: calc(60vh - 80px);" class="modal-scroll">
+                <div class="modal-form-section">
+                  <!-- Name Field -->
+                  <div class="custom-field">
+                    <label class="field-label">
+                      <q-icon name="person" size="14px" class="field-label-icon" />
+                      Full Name
+                    </label>
+                    <div class="field-input-wrap">
+                      <input v-model="editForm.name" class="field-input" placeholder="Enter your name" type="text" />
+                    </div>
+                  </div>
 
-                  <q-input v-model="editForm.section" label="Section" outlined class="q-mb-lg unified-input"
-                    :rules="[val => !!val || 'Section is required']" dense />
+                  <!-- Section Field -->
+                  <div class="custom-field">
+                    <label class="field-label">
+                      <q-icon name="class" size="14px" class="field-label-icon" />
+                      Section
+                    </label>
+                    <div class="field-input-wrap">
+                      <input v-model="editForm.section" class="field-input" placeholder="Enter your section"
+                        type="text" />
+                    </div>
+                  </div>
 
-                  <!-- Avatar Selection -->
-                  <div class="text-subtitle1 text-weight-medium q-mb-md text-primary">Choose Avatar</div>
-                  <div class="avatar-grid">
-                    <div v-for="(avatar, index) in avatars" :key="index" class="avatar-item unified-card"
-                      :class="{ 'avatar-selected': editForm.avatar === avatar }" @click="selectAvatar(avatar)">
-                      <img :src="avatar" class="avatar-option-image"
-                        :class="{ 'avatar-option-selected': editForm.avatar === avatar }" />
-                      <div v-if="editForm.avatar === avatar" class="avatar-selected-overlay">
-                        <q-icon name="check" color="white" size="24px" />
+                  <!-- Avatar Picker -->
+                  <div class="avatar-section" ref="avatarPickerRef">
+                    <div class="avatar-section-header">
+                      <div class="avatar-section-line"></div>
+                      <span class="avatar-section-label">Choose Avatar</span>
+                      <div class="avatar-section-line"></div>
+                    </div>
+                    <div class="avatar-picker-grid">
+                      <div v-for="(avatar, index) in avatars" :key="index" class="avatar-pick-item"
+                        :class="{ 'is-selected': editForm.avatar === avatar }" role="radio"
+                        :aria-checked="editForm.avatar === avatar" :aria-label="`Avatar ${index + 1}`" tabindex="0"
+                        @click="selectAvatar(avatar)" @keydown.enter="selectAvatar(avatar)">
+                        <img :src="avatar" class="avatar-pick-img" />
+                        <div v-if="editForm.avatar === avatar" class="avatar-pick-check">
+                          <q-icon name="check" color="white" size="16px" />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </q-card-section>
-            </q-scroll-area>
+              </q-scroll-area>
+            </div>
 
-            <q-card-actions align="right" class="q-pa-md modal-actions">
-              <q-btn flat label="Cancel" color="grey" @click="cancelEdit" :disabled="saving" class="unified-btn" />
-              <q-btn label="Save" color="primary" @click="saveProfile" :loading="saving"
-                :disable="!editForm.name || !editForm.section" class="unified-btn" />
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+              <button class="modal-btn cancel-btn" @click="cancelEdit" :disabled="saving">
+                Cancel
+              </button>
+              <button class="modal-btn save-btn" @click="saveProfile"
+                :disabled="saving || !editForm.name.trim() || !editForm.section.trim()">
+                <span v-if="!saving">Save Changes</span>
+                <span v-else class="saving-dots">Saving<span class="dot">.</span><span class="dot">.</span><span
+                    class="dot">.</span></span>
+              </button>
+            </div>
+          </div>
+        </q-dialog>
+
+        <!-- About Dialog -->
+        <q-dialog v-model="aboutOpen">
+          <q-card style="min-width: 300px; border-radius: 16px;">
+            <q-card-section>
+              <div class="text-h6 text-primary text-weight-bold q-mb-sm">About</div>
+              <div class="text-body2 text-grey-8">
+                This app is an interactive science learning platform for Grade 7 students.
+              </div>
+            </q-card-section>
+            <q-card-actions align="right">
+              <q-btn flat label="Close" color="primary" v-close-popup />
             </q-card-actions>
           </q-card>
         </q-dialog>
 
-        <!-- Dashboard Content -->
+        <!-- Dashboard Content with Tab Transition -->
         <div class="q-pa-md dashboard-content q-pb-lg">
-          <!-- HOME TAB -->
-          <div v-if="activeTab === 'home'">
-            <q-card class="q-mb-lg overall-progress-card">
-              <q-card-section>
-                <div class="q-mb-xs">
-                  <div class="text-h6 text-white text-weight-bold q-mb-sm">Overall Progress</div>
-                  <q-linear-progress :value="progress.overall / 100" size="12px" color="white" class="q-mb-sm"
-                    rounded />
-
-                  <!-- Even simpler single line -->
-                  <div class="row justify-between items-center plain-progress-stats q-pt-xs">
-                    <div class="column items-center">
-                      <div class="text-h6 text-white text-weight-bold">{{ progress.overall }}%</div>
-                      <div class="text-caption text-white" style="opacity: 0.9;">Progress</div>
-                    </div>
-
-                    <div class="column items-center">
-                      <div class="text-h6 text-white text-weight-bold">{{ progress.completed }}</div>
-                      <div class="text-caption text-white" style="opacity: 0.9;">Lessons Completed</div>
-                    </div>
-
-                    <div class="column items-center">
-                      <div class="text-h6 text-white text-weight-bold">{{ TOTAL_LESSONS }}</div>
-                      <div class="text-caption text-white" style="opacity: 0.9;">Total Lessons</div>
+          <transition :name="tabTransition" mode="out-in">
+            <!-- HOME TAB -->
+            <div v-if="activeTab === 'home'" key="home">
+              <q-card class="q-mb-lg overall-progress-card">
+                <q-card-section>
+                  <div class="q-mb-xs">
+                    <div class="text-h6 text-white text-weight-bold q-mb-sm">Overall Progress</div>
+                    <q-linear-progress :value="progress.overall / 100" size="12px" color="white" class="q-mb-sm"
+                      rounded />
+                    <div class="row justify-between items-center plain-progress-stats q-pt-xs">
+                      <div class="column items-center">
+                        <div class="text-h6 text-white text-weight-bold">{{ progress.overall }}%</div>
+                        <div class="text-caption text-white" style="opacity: 0.9;">Progress</div>
+                      </div>
+                      <div class="column items-center">
+                        <div class="text-h6 text-white text-weight-bold">{{ progress.completed }}</div>
+                        <div class="text-caption text-white" style="opacity: 0.9;">Lessons Completed</div>
+                      </div>
+                      <div class="column items-center">
+                        <div class="text-h6 text-white text-weight-bold">{{ TOTAL_LESSONS }}</div>
+                        <div class="text-caption text-white" style="opacity: 0.9;">Total Lessons</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </q-card-section>
-            </q-card>
+                </q-card-section>
+              </q-card>
 
-            <div class="text-h5 text-weight-bold q-mb-md section-title">Units</div>
-            <div class="units-grid">
-              <q-card v-for="unit in units" :key="unit.id" class="unit-card" bordered @click="goToUnit(unit)">
+              <div class="text-h5 text-weight-bold q-mb-md section-title">Units</div>
+              <div class="units-grid">
+                <q-card v-for="unit in units" :key="unit.id" class="unit-card" bordered role="button" tabindex="0"
+                  :aria-label="`Go to ${unit.name}: ${unit.description}`" @click="goToUnit(unit)"
+                  @keydown.enter="goToUnit(unit)">
+                  <q-card-section class="q-pa-md">
+                    <div class="row items-center justify-between">
+                      <div class="row items-center">
+                        <q-avatar size="60px" class="q-mr-xs"
+                          :style="{ backgroundColor: unit.bgColor, borderRadius: '6px' }">
+                          <img :src="unit.icon" style="width: 38px; height: 38px;" />
+                        </q-avatar>
+                        <div>
+                          <div class="unit-title text-weight-bold text-white">{{ unit.name }}</div>
+                          <div class="unit-description text-white">{{ unit.description }}</div>
+                        </div>
+                      </div>
+                      <div>
+                        <q-icon name="chevron_right" size="24px" color="white" />
+                      </div>
+                    </div>
+                    <q-linear-progress :value="unit.progress / 100" size="10px" color="white" class="q-mt-sm" rounded />
+                  </q-card-section>
+                </q-card>
+              </div>
+            </div>
+
+            <!-- STATISTICS TAB -->
+            <div v-else-if="activeTab === 'stats'" key="stats" class="stats-page">
+              <div class="text-h5 text-primary text-weight-bold q-mb-md section-title">Progress Statistics</div>
+
+              <q-card class="quiz-statistics-card q-mb-md" @click="goToQuizStats">
                 <q-card-section class="q-pa-md">
                   <div class="row items-center justify-between">
                     <div class="row items-center">
-                      <q-avatar size="60px" class="q-mr-xs"
-                        :style="{ backgroundColor: unit.bgColor, borderRadius: '6px' }">
-                        <img :src="unit.icon" style="width: 38px; height: 38px;" />
+                      <q-avatar size="50px" class="q-mr-md" style="background-color: #2196F3; border-radius: 10px;">
+                        <img src="icons/brain.png" style="width: 28px; height: 28px;" />
                       </q-avatar>
-
                       <div>
-                        <div class="unit-title text-weight-bold text-white">{{ unit.name }}</div>
-                        <div class="unit-description text-white">{{ unit.description }}</div>
+                        <div class="text-h6 text-weight-bold card-title">Quiz Statistics</div>
+                        <div class="text-caption card-subtitle">View detailed quiz performance and analytics</div>
                       </div>
                     </div>
                     <div>
-                      <q-icon name="chevron_right" size="24px" color="white" />
+                      <q-icon name="chevron_right" size="24px" color="grey-7" />
                     </div>
                   </div>
-                  <q-linear-progress :value="unit.progress / 100" size="10px" color="white" class="q-mt-sm" rounded />
                 </q-card-section>
               </q-card>
-            </div>
-          </div>
 
-          <!-- STATISTICS TAB -->
-          <div v-if="activeTab === 'stats'" class="stats-page">
-            <div class="text-h5 text-primary text-weight-bold q-mb-md section-title">Progress Statistics</div>
-
-            <!-- Quiz Statistics Card -->
-            <q-card class="quiz-statistics-card q-mb-md" @click="goToQuizStats">
-              <q-card-section class="q-pa-md">
-                <div class="row items-center justify-between">
-                  <div class="row items-center">
-                    <q-avatar size="50px" class="q-mr-md" style="background-color: #2196F3; border-radius: 10px;">
-                      <img src="icons/brain.png" style="width: 28px; height: 28px;" />
-                    </q-avatar>
-                    <div>
-                      <div class="text-h6 text-weight-bold card-title">Quiz Statistics</div>
-                      <div class="text-caption card-subtitle">View detailed quiz performance and analytics</div>
-                    </div>
-                  </div>
-                  <div>
-                    <q-icon name="chevron_right" size="24px" color="grey-7" />
-                  </div>
-                </div>
-              </q-card-section>
-            </q-card>
-
-            <!-- Bar Chart: Unit progress -->
-            <q-card class="chart-card q-mb-md">
-              <q-card-section class="q-pa-md">
-                <div class="row items-center justify-between q-mb-md">
-                  <div class="row items-center">
-                    <q-avatar size="50px" class="q-mr-md" style="background-color: #9C27B0; border-radius: 10px;">
-                      <img src="icons/progress.png" style="width: 28px; height: 28px;" />
-                    </q-avatar>
-                    <div>
-                      <div class="text-h6 text-weight-bold card-title">Unit Progress Overview</div>
-                      <div class="text-caption card-subtitle">Visual representation of your progress across all units
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="height:250px">
-                  <Bar :data="chartData" :options="chartOptions" />
-                </div>
-              </q-card-section>
-            </q-card>
-
-            <!-- Pie Chart Card -->
-            <q-card class="chart-card q-mb-md">
-              <q-card-section class="q-pa-md">
-                <div class="row items-center justify-between q-mb-md">
-                  <div class="row items-center">
-                    <q-avatar size="50px" class="q-mr-md" style="background-color: #FF9800; border-radius: 10px;">
-                      <img src="assets/icons/pie-graph.png" style="width: 28px; height: 28px;" />
-                    </q-avatar>
-                    <div>
-                      <div class="text-h6 text-weight-bold card-title">Completion Distribution</div>
-                      <div class="text-caption card-subtitle">Overall lesson completion breakdown</div>
-                    </div>
-                  </div>
-                </div>
-                <div style="height:250px">
-                  <Pie :data="pieData" :options="pieOptions" />
-                </div>
-              </q-card-section>
-            </q-card>
-
-            <!-- Unit Progress Cards with Expandable Lessons -->
-            <div v-for="unit in units" :key="unit.id" class="q-mb-md">
-              <q-card class="unit-progress-card">
+              <!-- Unit Progress Chart — with empty state -->
+              <q-card class="chart-card q-mb-md">
                 <q-card-section class="q-pa-md">
-                  <div class="row items-center justify-between" @click="toggleUnitDetails(unit)">
+                  <div class="row items-center justify-between q-mb-md">
                     <div class="row items-center">
+                      <q-avatar size="50px" class="q-mr-md" style="background-color: #9C27B0; border-radius: 10px;">
+                        <img src="icons/progress.png" style="width: 28px; height: 28px;" />
+                      </q-avatar>
                       <div>
-                        <div class="text-h6 text-weight-bold card-title">{{ unit.name }}</div>
-                        <div class="text-caption card-subtitle">{{ unit.description }} • {{ unit.progress }}%</div>
-                      </div>
-                    </div>
-                    <div>
-                      <q-icon name="chevron_right" size="24px" color="grey-7" :style="{
-                        transform: expandedUnit === unit.id ? 'rotate(90deg)' : 'rotate(0deg)',
-                        transition: 'transform 0.3s ease'
-                      }" />
-                    </div>
-                  </div>
-
-                  <q-linear-progress :value="unit.progress / 100" :color="getProgressColor(unit.bgColor)" size="12px"
-                    rounded class="q-mt-md" />
-
-                  <!-- Expandable Lessons Section -->
-                  <q-slide-transition>
-                    <div v-if="expandedUnit === unit.id && UNIT_LESSON_IDS[unit.id]" class="lessons-expansion">
-                      <div class="text-subtitle2 text-weight-medium q-mt-md q-mb-sm lessons-header">Lessons</div>
-                      <div class="lesson-list">
-                        <div v-for="lessonId in UNIT_LESSON_IDS[unit.id]" :key="lessonId" class="lesson-row">
-                          <div class="lesson-title">{{ getLessonTitle(lessonId) }}</div>
-                          <div v-if="currentUser.progress && currentUser.progress[lessonId]?.completed"
-                            class="lesson-status-text completed">✅</div>
-                          <div v-else class="lesson-status-text incomplete">○</div>
+                        <div class="text-h6 text-weight-bold card-title">Unit Progress Overview</div>
+                        <div class="text-caption card-subtitle">Visual representation of your progress across all units
                         </div>
                       </div>
                     </div>
-                  </q-slide-transition>
+                  </div>
+                  <div v-if="progress.completed > 0" style="height:250px">
+                    <Bar :data="computedChartData" :options="chartOptions" />
+                  </div>
+                  <div v-else class="empty-chart-state">
+                    <q-icon name="bar_chart" size="48px" color="grey-4" />
+                    <div class="text-grey-5 q-mt-sm text-body2">Complete some lessons to see your progress here!</div>
+                  </div>
                 </q-card-section>
               </q-card>
+
+              <!-- Completion Pie Chart — with empty state -->
+              <q-card class="chart-card q-mb-md">
+                <q-card-section class="q-pa-md">
+                  <div class="row items-center justify-between q-mb-md">
+                    <div class="row items-center">
+                      <q-avatar size="50px" class="q-mr-md" style="background-color: #FF9800; border-radius: 10px;">
+                        <img src="assets/icons/pie-graph.png" style="width: 28px; height: 28px;" />
+                      </q-avatar>
+                      <div>
+                        <div class="text-h6 text-weight-bold card-title">Completion Distribution</div>
+                        <div class="text-caption card-subtitle">Overall lesson completion breakdown</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="progress.completed > 0" style="height:250px">
+                    <Pie :data="computedPieData" :options="pieOptions" />
+                  </div>
+                  <div v-else class="empty-chart-state">
+                    <q-icon name="pie_chart" size="48px" color="grey-4" />
+                    <div class="text-grey-5 q-mt-sm text-body2">No lessons completed yet — start learning!</div>
+                  </div>
+                </q-card-section>
+              </q-card>
+
+              <div v-for="unit in units" :key="unit.id" class="q-mb-md">
+                <q-card class="unit-progress-card">
+                  <q-card-section class="q-pa-md">
+                    <div class="row items-center justify-between" role="button" tabindex="0"
+                      :aria-expanded="expandedUnit === unit.id" :aria-label="`Toggle details for ${unit.name}`"
+                      @click="toggleUnitDetails(unit)" @keydown.enter="toggleUnitDetails(unit)">
+                      <div class="row items-center">
+                        <div>
+                          <div class="text-h6 text-weight-bold card-title">{{ unit.name }}</div>
+                          <div class="text-caption card-subtitle">{{ unit.description }} • {{ unit.progress }}%</div>
+                        </div>
+                      </div>
+                      <div>
+                        <q-icon name="chevron_right" size="24px" color="grey-7" :style="{
+                          transform: expandedUnit === unit.id ? 'rotate(90deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.3s ease'
+                        }" />
+                      </div>
+                    </div>
+
+                    <q-linear-progress :value="unit.progress / 100" :color="getProgressColor(unit.bgColor)" size="12px"
+                      rounded class="q-mt-md" />
+
+                    <q-slide-transition>
+                      <div v-if="expandedUnit === unit.id && UNIT_LESSON_IDS[unit.id]" class="lessons-expansion">
+                        <div class="text-subtitle2 text-weight-medium q-mt-md q-mb-sm lessons-header">Lessons</div>
+                        <div class="lesson-list">
+                          <div v-for="lessonId in UNIT_LESSON_IDS[unit.id]" :key="lessonId" class="lesson-row">
+                            <div class="lesson-title">{{ getLessonTitle(lessonId) }}</div>
+                            <div v-if="currentUser.progress && currentUser.progress[lessonId]?.completed"
+                              class="lesson-status-text completed" aria-label="Completed">✅</div>
+                            <div v-else class="lesson-status-text incomplete" aria-label="Not completed">○</div>
+                          </div>
+                        </div>
+                      </div>
+                    </q-slide-transition>
+                  </q-card-section>
+                </q-card>
+              </div>
             </div>
-          </div>
+          </transition>
         </div>
 
         <!-- Floating Footer Tabs -->
         <div class="floating-footer">
           <q-tabs v-model="activeTab" align="justify" indicator-color="transparent" active-color="yellow-5"
-            class="text-white footer-tabs">
-            <q-tab name="home">
+            class="text-white footer-tabs" @update:model-value="onTabChange">
+            <q-tab name="home" aria-label="Home">
               <template v-slot:default>
                 <img src="assets/icons/home.png" style="width: 24px; height: 24px;" />
               </template>
             </q-tab>
-            <q-tab name="stats">
+            <q-tab name="stats" aria-label="Statistics">
               <template v-slot:default>
                 <img src="assets/icons/chart-histogram.png" style="width: 24px; height: 24px;" />
               </template>
@@ -339,26 +372,29 @@
           </q-tabs>
         </div>
 
+        <!-- Audio Settings Dialog -->
         <q-dialog v-model="settingsOpen">
-          <q-card style="min-width:300px;">
+          <q-card style="min-width:300px; border-radius: 16px;">
             <q-card-section>
               <div class="text-h6 text-primary">Audio Settings</div>
-
               <q-toggle v-model="bgMusicEnabled" label="Background Music" @update:model-value="audioManager.toggleBg" />
-
               <q-toggle v-model="sfxEnabled" label="Touch Sounds" @update:model-value="audioManager.toggleSfx" />
             </q-card-section>
+            <q-card-actions align="right">
+              <q-btn flat label="Close" color="primary" v-close-popup />
+            </q-card-actions>
           </q-card>
         </q-dialog>
+
       </q-page>
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { LocalStorage } from 'quasar'
+import { LocalStorage, useQuasar } from 'quasar'
 import {
   Chart as ChartJS,
   Title,
@@ -372,13 +408,10 @@ import {
 import { Bar, Pie } from 'vue-chartjs'
 import { audioManager } from 'src/utils/audioManager'
 
-// Register chart.js components once
-ChartJS.register(Title, Tooltip, Legend, BarElement, ArcElement, CategoryScale, LinearScale)
+// ─── Constants (ideally move to src/constants/lessons.js) ───────────────────
 
-// Constants
 const TOTAL_LESSONS = 92
 
-// Unit lesson IDs mapping - make it a constant that's accessible in template
 const UNIT_LESSON_IDS = {
   1: Array.from({ length: 27 }, (_, i) => i + 1),
   2: Array.from({ length: 22 }, (_, i) => i + 28),
@@ -386,7 +419,6 @@ const UNIT_LESSON_IDS = {
   4: Array.from({ length: 22 }, (_, i) => i + 71)
 }
 
-// Lesson titles mapping (moved outside to prevent recreation)
 const LESSON_TITLES = {
   1: "Lesson 1: Scientific Models",
   2: "Lesson 2: Measurements and Data Organization in Science",
@@ -482,7 +514,6 @@ const LESSON_TITLES = {
   92: "Chapter Test"
 }
 
-// Avatar options
 const avatars = [
   '/assets/avatars/1.jpg',
   '/assets/avatars/2.jpg',
@@ -495,88 +526,74 @@ const avatars = [
   '/assets/avatars/9.jpg'
 ]
 
-// Chart options (static, defined once)
+// ─── Chart.js setup ──────────────────────────────────────────────────────────
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, ArcElement, CategoryScale, LinearScale)
+
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      display: false
-    }
-  }
+  plugins: { legend: { display: false } }
 }
 
 const pieOptions = {
   responsive: true,
   maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      position: 'bottom'
-    }
-  }
+  plugins: { legend: { position: 'bottom' } }
 }
 
-// Refs
+// ─── State ───────────────────────────────────────────────────────────────────
+
+const $q = useQuasar()
+const router = useRouter()
+
+// FIX: track previous tab separately so onTabChange always reads the correct old value
+const previousTab = ref('home')
+const activeTab = ref('home')
+const tabTransition = ref('tab-slide-left')
+const tabOrder = ['home', 'stats']
+
+const isLoading = ref(true)
 const settingsOpen = ref(false)
+const aboutOpen = ref(false)
 const editProfileModal = ref(false)
 const bgMusicEnabled = ref(true)
 const sfxEnabled = ref(true)
 const expandedUnit = ref(null)
 const saving = ref(false)
 const sidebarOpen = ref(false)
-const activeTab = ref('home')
 
-// Reactive state
-const student = reactive({
-  name: '',
-  section: '',
-  avatar: '',
-  id: null,
-  chapterTest: {
-    correct: 0,
-    wrong: 0
-  }
-})
+const avatarScrollArea = ref(null)
+const avatarPickerRef = ref(null)
 
+const student = reactive({ name: '', section: '', avatar: '', id: null, chapterTest: { correct: 0, wrong: 0 } })
 const progress = reactive({ overall: 0, completed: 0 })
 const units = ref([])
 const currentUser = reactive({})
+const editForm = reactive({ name: '', section: '', avatar: '' })
 
-// Edit form data
-const editForm = reactive({
-  name: '',
-  section: '',
-  avatar: ''
-})
+// ─── Computed chart data (FIX: use computed so Vue reactivity is reliable) ───
 
-// Chart data
-const chartData = ref({
-  labels: [],
-  datasets: [
-    {
-      label: 'Unit Progress (%)',
-      backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726', '#AB47BC'],
-      data: []
-    }
-  ]
-})
+const computedChartData = computed(() => ({
+  labels: units.value.map(u => u.name),
+  datasets: [{
+    label: 'Unit Progress (%)',
+    backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726', '#AB47BC'],
+    data: units.value.map(u => u.progress)
+  }]
+}))
 
-const pieData = ref({
+const computedPieData = computed(() => ({
   labels: ['Completed', 'Remaining'],
-  datasets: [
-    {
-      backgroundColor: ['#4CAF50', '#E0E0E0'],
-      data: [0, 0]
-    }
-  ]
-})
+  datasets: [{
+    backgroundColor: ['#4CAF50', '#E0E0E0'],
+    data: [progress.completed, TOTAL_LESSONS - progress.completed]
+  }]
+}))
 
-const router = useRouter()
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
-// Helper functions
-const getLessonTitle = (lessonId) => {
-  return LESSON_TITLES[lessonId] || `Lesson ${lessonId}`
-}
+const getLessonTitle = (lessonId) => LESSON_TITLES[lessonId] || `Lesson ${lessonId}`
 
 const getProgressColor = (bgColor) => {
   const colorMap = {
@@ -588,19 +605,16 @@ const getProgressColor = (bgColor) => {
   return colorMap[bgColor] || 'primary'
 }
 
-// Calculate unit progress efficiently
 const calculateUnitProgress = (unitId, userProgress) => {
   const lessonIds = UNIT_LESSON_IDS[unitId]
   const completed = lessonIds.filter(id => userProgress[id]?.completed).length
   return Math.round((completed / lessonIds.length) * 100)
 }
 
-// Update student in storage (optimized)
 const updateStudentInStorage = (updatedStudent) => {
   try {
     const students = LocalStorage.getItem('students') || []
     const studentIndex = students.findIndex(s => s.studentId === updatedStudent.studentId)
-
     if (studentIndex !== -1) {
       students[studentIndex] = {
         ...students[studentIndex],
@@ -620,11 +634,28 @@ const updateStudentInStorage = (updatedStudent) => {
     }
     LocalStorage.set('students', students)
   } catch (error) {
-    console.error('Error updating student:', error)
+    console.error('Error updating student in storage:', error)
   }
 }
 
-// Profile functions
+// ─── Tab transition (FIX: use previousTab so direction is always correct) ────
+
+const onTabChange = (newTab) => {
+  const oldIndex = tabOrder.indexOf(previousTab.value)
+  const newIndex = tabOrder.indexOf(newTab)
+  tabTransition.value = newIndex > oldIndex ? 'tab-slide-left' : 'tab-slide-right'
+  previousTab.value = newTab
+}
+
+// ─── Edit Profile ─────────────────────────────────────────────────────────────
+
+const scrollToAvatarPicker = () => {
+  // Scroll the modal scroll area down so user can see the avatar picker
+  if (avatarScrollArea.value) {
+    avatarScrollArea.value.setScrollPosition('vertical', 9999, 300)
+  }
+}
+
 const openEditProfile = () => {
   editForm.name = student.name
   editForm.section = student.section
@@ -647,24 +678,17 @@ const cancelEdit = () => {
 }
 
 const saveProfile = async () => {
-  if (!editForm.name.trim() || !editForm.section.trim()) {
-    return
-  }
-
+  if (!editForm.name.trim() || !editForm.section.trim()) return
   saving.value = true
-
   try {
-    // Update all instances at once
     const updates = {
       name: editForm.name.trim(),
       section: editForm.section.trim(),
       avatar: editForm.avatar
     }
-
     student.name = updates.name
     student.section = updates.section
     student.avatar = updates.avatar
-
     currentUser.name = updates.name
     currentUser.section = updates.section
     currentUser.avatar = updates.avatar
@@ -676,8 +700,21 @@ const saveProfile = async () => {
       updateStudentInStorage(user)
     }
 
+    $q.notify({
+      type: 'positive',
+      message: 'Profile saved successfully!',
+      position: 'top',
+      timeout: 2000
+    })
   } catch (error) {
     console.error('Error saving profile:', error)
+    // FIX: notify user on failure instead of silently failing
+    $q.notify({
+      type: 'negative',
+      message: 'Failed to save profile. Please try again.',
+      position: 'top',
+      timeout: 3000
+    })
   } finally {
     setTimeout(() => {
       editProfileModal.value = false
@@ -689,30 +726,34 @@ const saveProfile = async () => {
   }
 }
 
-// Navigation functions
+// ─── Navigation ───────────────────────────────────────────────────────────────
+
 const goToBookmarks = () => router.push({ name: 'bookmark-page' })
+
 const logout = () => {
   LocalStorage.remove('currentUser')
   router.push({ name: 'login-page' })
 }
-const goToUnit = (unit) => router.push(unit.route)
+
+// FIX: use named routes consistently instead of plain strings
+const goToUnit = (unit) => router.push({ name: unit.route })
+
 const goToQuizStats = () => router.push({ name: 'quiz-stats' })
+
 const toggleUnitDetails = (unit) => {
   expandedUnit.value = expandedUnit.value === unit.id ? null : unit.id
 }
 
-// Initialize data
+// ─── Data initialisation ──────────────────────────────────────────────────────
+
 const initializeData = (userData) => {
   const userProgress = userData.progress || {}
-
-  // Calculate completed lessons once
   const allLessonIds = Object.keys(LESSON_TITLES).map(Number)
   const completedLessons = allLessonIds.filter(id => userProgress[id]?.completed).length
 
   progress.completed = completedLessons
   progress.overall = Math.round((completedLessons / TOTAL_LESSONS) * 100)
 
-  // Build units array with pre-calculated progress
   units.value = [
     {
       id: 1,
@@ -755,51 +796,39 @@ const initializeData = (userData) => {
       route: 'unit-4'
     }
   ]
-
-  // Update chart data
-  chartData.value.labels = units.value.map(u => u.name)
-  chartData.value.datasets[0].data = units.value.map(u => u.progress)
-  pieData.value.datasets[0].data = [completedLessons, TOTAL_LESSONS - completedLessons]
 }
 
-onMounted(() => {
-  const url = new URL(window.location.href)
+// ─── Mounted ──────────────────────────────────────────────────────────────────
 
-  // Force reload if not yet reloaded (keeping your necessary reload)
+onMounted(() => {
+  /* const url = new URL(window.location.href)
   if (!url.searchParams.has('_reloaded')) {
     url.searchParams.set('_reloaded', '1')
     window.location.replace(url.toString())
     return
   }
-
-  // Clean up the flag
   if (url.searchParams.has('_reloaded')) {
     url.searchParams.delete('_reloaded')
     window.history.replaceState({}, document.title, url.pathname + url.hash)
-  }
+  } */
 
-  // Get user data - single localStorage read
   const user = LocalStorage.getItem('currentUser')
   if (!user) {
     router.push({ name: 'login-page' })
     return
   }
 
-  // Get student from storage - single read
   const students = LocalStorage.getItem('students') || []
   const studentFromStorage = students.find(s => s.studentId === user.studentId)
   const finalStudent = studentFromStorage || user
 
-  // Update all state at once
   Object.assign(currentUser, finalStudent)
-
   student.name = finalStudent.name
   student.section = finalStudent.section
   student.avatar = finalStudent.avatar || ''
   student.id = finalStudent.studentId
   student.chapterTest = finalStudent.chapterTest || { correct: 0, wrong: 0 }
 
-  // Sync currentUser in localStorage if needed
   if (studentFromStorage) {
     LocalStorage.set('currentUser', {
       ...user,
@@ -809,23 +838,65 @@ onMounted(() => {
     })
   }
 
-  // Initialize all data
   initializeData(finalStudent)
 
-  // Audio settings
   const settings = audioManager.getSettings()
   bgMusicEnabled.value = settings.bgMusicEnabled
   sfxEnabled.value = settings.sfxEnabled
+
+  isLoading.value = false
 })
 </script>
 
 <style lang="scss" scoped>
+.toolbar-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+/* ============================== */
+/* TAB TRANSITIONS                */
+/* ============================== */
+
+.tab-slide-left-enter-active,
+.tab-slide-left-leave-active,
+.tab-slide-right-enter-active,
+.tab-slide-right-leave-active {
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-slide-left-enter-from {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.tab-slide-left-leave-to {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.tab-slide-right-enter-from {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.tab-slide-right-leave-to {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+/* ============================== */
+/* PAGE BASE                      */
+/* ============================== */
+
 .q-page-container {
   background: #42a7ff;
 }
 
 .dashboard-page {
-  background: #42a7ff;
+  background: linear-gradient(135deg, #5DA9FF 0%, #C084FC 100%);
   min-height: 100vh;
   position: relative;
 }
@@ -842,16 +913,33 @@ onMounted(() => {
   padding-bottom: 80px;
 }
 
+/* ============================== */
+/* LOADING OVERLAY                */
+/* ============================== */
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(135deg, #5DA9FF 0%, #C084FC 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================== */
+/* AVATAR CONTAINER               */
+/* ============================== */
+
 .avatar-container {
   position: relative;
   display: inline-block;
   cursor: pointer;
 
-  .profile-avatar {
-    .profile-image {
-      border: 5px solid white;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
+  .profile-avatar .profile-image {
+    border: 5px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
   .avatar-overlay-icon {
@@ -874,190 +962,431 @@ onMounted(() => {
       height: 18px;
       object-fit: contain;
     }
-
-    &:hover {
-      transform: scale(1.1);
-      transition: transform 0.2s ease;
-    }
   }
 }
 
-.edit-icon {
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 20px;
-  height: 20px;
-  border: 2px solid white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 /* ============================== */
-/* ENHANCED SIDEBAR STYLES */
+/* SIDEBAR                        */
 /* ============================== */
 
 .sidebar-drawer {
-  background: linear-gradient(180deg, #f5f7fa 0%, #ffffff 100%);
+  background: #f8faff;
+}
 
-  .sidebar-logo-container {
-    padding-top: 20px;
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+}
 
-    .sidebar-logo {
-      width: 80px;
-      height: 80px;
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px 20px;
+  background: linear-gradient(160deg, #008BFF 0%, #0c1374 100%);
+}
 
-      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
-      animation: float 3s ease-in-out infinite;
-    }
-  }
+.sidebar-logo {
+  width: 72px;
+  height: 72px;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+  margin-bottom: 12px;
+}
 
-  .sidebar-title {
-    border-bottom: 3px solid #42A5F5;
-    padding-bottom: 12px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-  }
-
-  .sidebar-menu-list {
-    padding: 0;
-    margin-top: 8px;
-  }
-
-  .sidebar-menu-btn {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border: 2px solid #e3f2fd;
-    border-radius: 14px;
-    margin-bottom: 12px;
-    padding: 14px 12px;
-    min-height: 60px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transition: left 0.5s;
-    }
-
-    &:hover {
-      background: linear-gradient(135deg, #42A5F5 0%, #1976D2 100%);
-      border-color: #1565C0;
-      transform: translateX(-5px) scale(1.02);
-      box-shadow: 0 6px 20px rgba(66, 165, 245, 0.4);
-
-      &::before {
-        left: 100%;
-      }
-
-      .sidebar-btn-label {
-        color: white !important;
-      }
-
-      .sidebar-btn-icon-wrapper {
-        background: white;
-        border-color: white;
-        transform: scale(1.1) rotate(5deg);
-
-        img {
-          filter: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(1352%) hue-rotate(187deg) brightness(99%) contrast(119%);
-        }
-      }
-
-      .chevron-icon {
-        color: white !important;
-        transform: translateX(3px);
-      }
-    }
-
-    &:active {
-      transform: translateX(-3px) scale(0.98);
-    }
-  }
-
-  .logout-btn {
-    margin-top: 12px;
-    border-color: #ffcdd2;
-    background: linear-gradient(135deg, #fff5f5 0%, #ffebee 100%);
-
-    &:hover {
-      background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
-      border-color: #c62828;
-      box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
-
-      .logout-icon-wrapper {
-        background: white;
-        border-color: white;
-        transform: scale(1.1) rotate(-5deg);
-
-        img {
-          filter: brightness(0) saturate(100%) invert(30%) sepia(95%) saturate(7471%) hue-rotate(353deg) brightness(96%) contrast(91%);
-        }
-      }
-    }
-  }
-
-  .sidebar-icon-section {
-    min-width: auto;
-    padding-right: 12px;
-  }
-
-  .sidebar-btn-icon-wrapper {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-    border: 2px solid #90caf9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-
-    img {
-      width: 22px;
-      height: 22px;
-      object-fit: contain;
-      transition: filter 0.3s ease;
-    }
-  }
-
-  .logout-icon-wrapper {
-    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-    border-color: #ef9a9a;
-  }
-
-  .sidebar-btn-label {
-    font-size: 15px;
-    font-weight: 600;
-    color: #1a237e;
-    letter-spacing: 0.3px;
-    transition: color 0.3s ease;
-  }
-
-  .chevron-icon {
-    color: #90a4ae;
-    transition: all 0.3s ease;
-  }
+.sidebar-brand {
+  font-size: 22px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 @keyframes float {
 
   0%,
   100% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
   }
 }
+
+.sidebar-divider {
+  height: 3px;
+  background: linear-gradient(90deg, #008BFF, #7c3aed, #008BFF);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 14px;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 14px;
+  border-radius: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 6px;
+  -webkit-tap-highlight-color: rgba(0, 139, 255, 0.12);
+
+  &:active {
+    background: rgba(0, 139, 255, 0.1);
+    transform: scale(0.98);
+  }
+}
+
+.nav-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #e8f0fe;
+  border: 2px solid #c5d8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
+}
+
+.logout-icon-wrap {
+  background: #ffeaed;
+  border-color: #ffcdd2;
+}
+
+.nav-label {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a237e;
+}
+
+.nav-arrow {
+  color: #b0bec5;
+}
+
+.nav-logout .nav-label {
+  color: #e53935;
+}
+
+.nav-logout .nav-arrow {
+  color: #e57373;
+}
+
+.nav-spacer {
+  flex: 1;
+  min-height: 20px;
+}
+
+/* ============================== */
+/* EDIT PROFILE MODAL             */
+/* ============================== */
+
+.edit-modal-wrapper {
+  width: 92vw;
+  max-width: 480px;
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  position: relative;
+  padding-bottom: 28px;
+  overflow: hidden;
+}
+
+.modal-header-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #008BFF 0%, #0c1374 100%);
+  border-radius: 0 0 50% 50% / 0 0 30px 30px;
+}
+
+.modal-header-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 20px 0;
+}
+
+.modal-avatar-ring {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  margin-bottom: 14px;
+
+  &:focus-visible {
+    outline: 3px solid #FF6D00;
+    outline-offset: 3px;
+    border-radius: 50%;
+  }
+}
+
+.modal-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.modal-avatar-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 28px;
+  height: 28px;
+  background: #FF6D00;
+  border-radius: 50%;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.3px;
+  margin-bottom: 2px;
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 4px;
+}
+
+.modal-body {
+  flex: 1;
+  overflow: hidden;
+}
+
+.modal-form-section {
+  padding: 24px 20px 16px;
+}
+
+.custom-field {
+  margin-bottom: 18px;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #7986cb;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.field-label-icon {
+  color: #7986cb;
+}
+
+.field-input-wrap {
+  background: #f3f6ff;
+  border: 2px solid #dce3ff;
+  border-radius: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus-within {
+    border-color: #008BFF;
+    box-shadow: 0 0 0 3px rgba(0, 139, 255, 0.12);
+    background: #fff;
+  }
+}
+
+.field-input {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a237e;
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: #b0bec5;
+    font-weight: 400;
+  }
+}
+
+.avatar-section {
+  margin-top: 4px;
+}
+
+.avatar-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.avatar-section-line {
+  flex: 1;
+  height: 1px;
+  background: #e8eaf6;
+}
+
+.avatar-section-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #7986cb;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.avatar-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.avatar-pick-item {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: border-color 0.18s ease, transform 0.15s ease;
+  background: #f0f4ff;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &.is-selected {
+    border-color: #008BFF;
+    box-shadow: 0 0 0 3px rgba(0, 139, 255, 0.2);
+  }
+
+  &:focus-visible {
+    outline: 3px solid #008BFF;
+    outline-offset: 2px;
+  }
+}
+
+.avatar-pick-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatar-pick-check {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 139, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px 20px;
+  border-top: 1px solid #f0f4ff;
+  background: #fff;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 13px 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.cancel-btn {
+  background: #f0f4ff;
+  color: #5c6bc0;
+  flex: 0.65;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #008BFF 0%, #0c1374 100%);
+  color: white;
+  box-shadow: 0 4px 14px rgba(0, 139, 255, 0.35);
+}
+
+.saving-dots .dot {
+  animation: blink 1.2s infinite;
+  opacity: 0;
+
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============================== */
+/* DASHBOARD CONTENT              */
+/* ============================== */
 
 .dashboard-content {
   max-width: 600px;
@@ -1069,265 +1398,17 @@ onMounted(() => {
   color: #ffffff !important;
 }
 
-/* ============================== */
-/* EDIT PROFILE MODAL STYLES */
-/* ============================== */
-
-.edit-profile-modal.unified-card {
-  background: white;
-  border: none;
-  border-radius: 16px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
-  overflow: hidden;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
-  }
-}
-
-.current-avatar-preview-container {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-  .current-avatar-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border: 6px solid #42A5F5;
-    border-radius: 12px;
-    box-sizing: border-box;
-  }
-}
-
-.unified-input {
-  .q-field__control {
-    border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.95);
-    transition: all 0.2s ease;
-
-    &:hover {
-      border-color: #42A5F5;
-    }
-  }
-
-  &.q-field--outlined .q-field__control:before {
-    border: none;
-  }
-}
-
-.avatar-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.avatar-item.unified-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  position: relative;
-  overflow: hidden;
-  height: 90px;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 1);
-    transform: scale(1.05);
-    border-color: #42A5F5;
-  }
-}
-
-.avatar-option-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-}
-
-.avatar-option-selected {
-  border: 3px solid #42A5F5;
-}
-
-.avatar-selected {
-  background-color: rgba(66, 165, 245, 0.2);
-  border: 2px solid #42A5F5;
-
-  .avatar-option-image {
-    border: 3px solid #42A5F5;
-  }
-}
-
-.avatar-selected-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(66, 165, 245, 0.7);
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-}
-
-.unified-btn {
-  border-radius: 8px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-}
-
-/* ============================== */
-/* UNIFIED CARD DESIGN SYSTEM */
-/* ============================== */
-
-.quiz-statistics-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-  backdrop-filter: blur(10px);
-  border: none;
-  border-radius: 16px;
-  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.chart-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-  backdrop-filter: blur(10px);
-  border: none;
-  border-radius: 16px;
-  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.unit-progress-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-  backdrop-filter: blur(10px);
-  border: none;
-  border-radius: 16px;
-  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.chapter-test-summary-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-  backdrop-filter: blur(10px);
-  border: none;
-  border-radius: 16px;
-  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-  overflow: hidden;
-}
-
 .overall-progress-card {
   background: #FF6D00;
   border: none;
   border-radius: 16px;
   box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
   overflow: hidden;
-}
-
-/* Individual unit card colors FIRST */
-.unit-card:nth-child(1) {
-  background: #ff2b83;
-}
-
-.unit-card:nth-child(2) {
-  background: #ff2b2b;
-}
-
-.unit-card:nth-child(3) {
-  background: #97ec20;
-}
-
-.unit-card:nth-child(4) {
-  background: #b028ff;
-}
-
-/* THEN the general unit-card styles (including box-shadow) */
-.unit-card {
-  backdrop-filter: blur(10px);
-  border: none;
-  border-radius: 16px;
-  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-}
-
-.card-title {
-  color: #1a237e !important;
-}
-
-.card-subtitle {
-  color: #5f6368 !important;
-}
-
-.stat-text {
-  color: #1a237e !important;
-}
-
-.chapter-test-stats {
-  flex-wrap: nowrap !important;
-
-  .row.items-center {
-    flex-wrap: nowrap !important;
-    white-space: nowrap;
-  }
 }
 
 .plain-progress-stats {
   padding: 4px 0 0 0;
 
-  .text-center {
-    flex: 1;
-    padding: 0 4px;
-
-    .stat-number {
-      font-size: 20px;
-      font-weight: 700;
-      color: white;
-      line-height: 1;
-      margin-bottom: 0;
-    }
-
-    .stat-label {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 11px;
-      line-height: 1.2;
-      margin-top: 0;
-      padding-top: 0;
-    }
-  }
-}
-
-.plain-progress-stats {
   .column {
     gap: 2px;
   }
@@ -1343,9 +1424,101 @@ onMounted(() => {
   }
 }
 
+.units-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding-bottom: 80px;
+}
+
+.unit-card {
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  &:nth-child(1) {
+    background: #ff2b83;
+  }
+
+  &:nth-child(2) {
+    background: #ff2b2b;
+  }
+
+  &:nth-child(3) {
+    background: #97ec20;
+  }
+
+  &:nth-child(4) {
+    background: #b028ff;
+  }
+
+  &:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 2px;
+  }
+}
+
+.unit-title {
+  font-size: 24px;
+  color: #1a237e;
+  margin-bottom: 2px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.unit-description {
+  font-size: 16px;
+  color: #5f6368;
+  line-height: 1.3;
+  margin-top: 0;
+  font-weight: 500;
+}
+
+/* ============================== */
+/* EMPTY CHART STATE              */
+/* ============================== */
+
+.empty-chart-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  text-align: center;
+  padding: 16px;
+}
+
+/* ============================== */
+/* STATS CARDS                    */
+/* ============================== */
+
+.quiz-statistics-card,
+.chart-card,
+.unit-progress-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card-title {
+  color: #1a237e !important;
+}
+
+.card-subtitle {
+  color: #5f6368 !important;
+}
+
 .quiz-statistics-card .row.items-center.justify-between,
 .unit-card .row.items-center.justify-between,
-.chapter-test-summary-card .row.items-center.justify-between,
 .unit-progress-card .row.items-center.justify-between {
   flex-wrap: nowrap !important;
 }
@@ -1353,8 +1526,7 @@ onMounted(() => {
 .quiz-statistics-card .row.items-center,
 .unit-card .row.items-center,
 .chart-card .row.items-center,
-.unit-progress-card .row.items-center,
-.chapter-test-summary-card .row.items-center {
+.unit-progress-card .row.items-center {
   flex-wrap: nowrap !important;
   min-width: 0;
 }
@@ -1363,7 +1535,6 @@ onMounted(() => {
 .unit-card .q-card-section,
 .chart-card .q-card-section,
 .unit-progress-card .q-card-section,
-.chapter-test-summary-card .q-card-section,
 .overall-progress-card .q-card-section {
   padding: 16px;
 }
@@ -1371,8 +1542,7 @@ onMounted(() => {
 .quiz-statistics-card .q-avatar,
 .unit-card .q-avatar,
 .chart-card .q-avatar,
-.unit-progress-card .q-avatar,
-.chapter-test-summary-card .q-avatar {
+.unit-progress-card .q-avatar {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
@@ -1382,7 +1552,6 @@ onMounted(() => {
 .unit-card .unit-title,
 .chart-card .text-h6,
 .unit-progress-card .text-h6,
-.chapter-test-summary-card .text-h6,
 .overall-progress-card .text-h6 {
   font-weight: 700;
   color: #1a237e;
@@ -1393,8 +1562,7 @@ onMounted(() => {
 .quiz-statistics-card .text-caption,
 .unit-card .unit-description,
 .chart-card .text-caption,
-.unit-progress-card .text-caption,
-.chapter-test-summary-card .text-caption {
+.unit-progress-card .text-caption {
   color: #5f6368;
   font-size: 13px;
   line-height: 1.4;
@@ -1408,22 +1576,8 @@ onMounted(() => {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.color-square {
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  flex-shrink: 0;
-}
-
-.chapter-test-summary-card .text-h6 {
-  font-size: 16px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
 /* ============================== */
-/* EXPANDABLE LESSONS STYLING */
+/* EXPANDABLE LESSONS             */
 /* ============================== */
 
 .lessons-expansion {
@@ -1456,7 +1610,6 @@ onMounted(() => {
   font-size: 13px;
   font-weight: 500;
   color: #1a237e;
-  transition: all 0.2s ease;
   border: 1px solid rgba(66, 165, 245, 0.2);
 }
 
@@ -1484,7 +1637,7 @@ onMounted(() => {
 }
 
 /* ============================== */
-/* FLOATING FOOTER */
+/* FLOATING FOOTER                */
 /* ============================== */
 
 .floating-footer {
@@ -1519,13 +1672,8 @@ onMounted(() => {
 .footer-tabs .q-tab {
   border-radius: 14px;
   margin: 4px;
-  transition: all 0.3s ease;
   min-height: 48px;
   flex: 1;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
 
   &.q-tab--active {
     background: rgba(255, 255, 255, 0.2);
@@ -1547,88 +1695,60 @@ onMounted(() => {
 }
 
 /* ============================== */
-/* RESPONSIVE ADJUSTMENTS */
+/* RESPONSIVE                     */
 /* ============================== */
 
-.units-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  padding-bottom: 80px;
-}
-
-.unit-title {
-  font-size: 24px;
-  color: #1a237e;
-  margin-bottom: 2px;
-  line-height: 1.2;
-  font-weight: 700;
-}
-
-.unit-description {
-  font-size: 16px;
-  color: #5f6368;
-  line-height: 1.3;
-  margin-top: 0;
-  font-weight: 500;
-}
-
 @media (max-width: 480px) {
-  .sidebar-drawer {
-    .sidebar-logo-container {
-      padding-top: 16px;
+  .sidebar-logo {
+    width: 60px;
+    height: 60px;
+  }
 
-      .sidebar-logo {
-        width: 100px;
-        height: 100px;
-      }
-    }
+  .sidebar-brand {
+    font-size: 18px;
+  }
 
-    .sidebar-menu-btn {
-      padding: 12px 10px;
-      min-height: 56px;
-      margin-bottom: 10px;
-    }
+  .nav-item {
+    padding: 13px 12px;
+  }
 
-    .sidebar-btn-icon-wrapper {
-      width: 36px;
-      height: 36px;
+  .nav-icon-wrap {
+    width: 38px;
+    height: 38px;
 
-      img {
-        width: 20px;
-        height: 20px;
-      }
-    }
-
-    .sidebar-btn-label {
-      font-size: 14px;
+    img {
+      width: 20px;
+      height: 20px;
     }
   }
 
-  .avatar-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .nav-label {
+    font-size: 15px;
+  }
+
+  .edit-modal-wrapper {
+    width: 96vw;
+  }
+
+  .modal-avatar-ring {
+    width: 88px;
+    height: 88px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+  }
+
+  .avatar-picker-grid {
     gap: 8px;
   }
 
-  .avatar-item.unified-card {
-    height: 80px;
+  .modal-form-section {
+    padding: 20px 16px 12px;
   }
 
-  .current-avatar-preview-container {
-    width: 100px;
-    height: 100px;
-
-    .current-avatar-image {
-      border-width: 4px;
-    }
-  }
-
-  .dashboard-page {
-    padding-bottom: 0;
-  }
-
-  .dashboard-content {
-    padding-bottom: 5px;
+  .modal-footer {
+    padding: 12px 16px 16px;
   }
 
   .footer-tabs {
@@ -1647,30 +1767,12 @@ onMounted(() => {
   .quiz-statistics-card .q-avatar,
   .unit-card .q-avatar,
   .chart-card .q-avatar,
-  .unit-progress-card .q-avatar,
-  .chapter-test-summary-card .q-avatar {
+  .unit-progress-card .q-avatar {
     width: 44px !important;
     height: 44px !important;
     min-width: 44px;
     min-height: 44px;
     margin-right: 12px !important;
-  }
-
-  .quiz-statistics-card .text-h6,
-  .unit-card .unit-title,
-  .chart-card .text-h6,
-  .unit-progress-card .text-h6,
-  .chapter-test-summary-card .text-h6,
-  .overall-progress-card .text-h6 {
-    font-size: 18px;
-  }
-
-  .quiz-statistics-card .text-caption,
-  .unit-card .unit-description,
-  .chart-card .text-caption,
-  .unit-progress-card .text-caption,
-  .chapter-test-summary-card .text-caption {
-    font-size: 12px;
   }
 
   .unit-title {
@@ -1679,24 +1781,6 @@ onMounted(() => {
 
   .unit-description {
     font-size: 14px;
-  }
-
-  .chapter-test-stats {
-    justify-content: space-between !important;
-
-    .row.items-center {
-      flex: 1;
-      justify-content: center;
-    }
-
-    .text-h6 {
-      font-size: 14px;
-    }
-
-    .color-square {
-      width: 16px;
-      height: 16px;
-    }
   }
 
   .lesson-list {
@@ -1718,7 +1802,6 @@ onMounted(() => {
   .unit-card .q-card-section,
   .chart-card .q-card-section,
   .unit-progress-card .q-card-section,
-  .chapter-test-summary-card .q-card-section,
   .overall-progress-card .q-card-section {
     padding: 14px;
   }

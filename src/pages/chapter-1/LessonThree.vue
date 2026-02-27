@@ -1,66 +1,64 @@
 <template>
-    <q-layout view="hHh lpR fFf">
-        <q-header class="bg-white text-black">
-            <q-toolbar>
-                <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="q-mr-sm" />
-                <q-toolbar-title class="navbar-title">Lesson 3: Common Laboratory Tools, Equipment, and
-                    Wares</q-toolbar-title>
-                <div class="row items-center q-gutter-sm">
-                    <q-btn flat dense round :icon="isBookmarked ? 'bookmark' : 'bookmark_border'" color="yellow"
-                        @click="toggleBookmark" />
-                </div>
-            </q-toolbar>
-            <q-linear-progress :value="progress" size="4px" color="white" class="header-progress" />
-        </q-header>
+  <q-layout view="hHh lpR fFf">
+    <q-header class="bg-white text-black">
+      <q-toolbar class="toolbar-row"> <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack"
+          class="q-mr-sm" />
+        <q-toolbar-title class="navbar-title">Lesson 3: Common Laboratory Tools, Equipment, and
+          Wares</q-toolbar-title>
+        <div class="row items-center q-gutter-sm">
+          <q-btn flat dense round :icon="isBookmarked ? 'bookmark' : 'bookmark_border'" color="yellow"
+            @click="toggleBookmark" />
+        </div>
+      </q-toolbar>
+      <q-linear-progress :value="progress" size="4px" color="white" class="header-progress" />
+    </q-header>
 
-        <q-page-container class="night-sky">
-            <q-page>
-                <div class="stars"></div>
-                <div class="lesson-container">
-                    <div id="viewer">
-                        <transition name="fade-slide" mode="out-in">
-                            <div :key="currentPage" v-html="pages[currentPage]"></div>
-                        </transition>
-                    </div>
+    <q-page-container class="night-sky">
+      <q-page>
+        <div class="stars"></div>
+        <div class="lesson-container">
+          <div id="viewer">
+            <transition name="fade-slide" mode="out-in">
+              <div :key="currentPage" v-html="pages[currentPage]"></div>
+            </transition>
+          </div>
 
-                    <div class="buttons">
-                        <q-btn class="nav-button" :disable="currentPage === 0" @click="prevPage"
-                            no-caps>Previous</q-btn>
+          <div class="buttons">
+            <q-btn class="nav-button" :disable="currentPage === 0" @click="prevPage" no-caps>Previous</q-btn>
 
-                        <div class="text-subtitle2 text-white">{{ currentPage + 1 }} / {{ pages.length }}</div>
+            <div class="text-subtitle2 text-white">{{ currentPage + 1 }} / {{ pages.length }}</div>
 
-                        <q-btn class="nav-button" @click="nextPage"
-                            :label="currentPage === pages.length - 1 ? 'Finish' : 'Next'"
-                            :style="currentPage === pages.length - 1 ? finishButtonStyle : null" no-caps />
-                    </div>
+            <q-btn class="nav-button" @click="nextPage" :label="currentPage === pages.length - 1 ? 'Finish' : 'Next'"
+              :style="currentPage === pages.length - 1 ? finishButtonStyle : null" no-caps />
+          </div>
 
-                    <div class="speak-btn" @click="toggleAudio">
-                        <img :src="isPlaying ? '/icons/stop.png' : '/icons/speak.png'" alt="Speak Button"
-                            class="cursor-pointer" style="width: 20px; height: 20px;" />
-                    </div>
-                </div>
-            </q-page>
-        </q-page-container>
+          <div class="speak-btn" @click="toggleAudio">
+            <img :src="isPlaying ? '/icons/stop.png' : '/icons/speak.png'" alt="Speak Button" class="cursor-pointer"
+              style="width: 20px; height: 20px;" />
+          </div>
+        </div>
+      </q-page>
+    </q-page-container>
 
-        <audio id="lesson-complete-audio" src="assets/audio/completed.mp3" preload="auto"></audio>
+    <audio id="lesson-complete-audio" src="assets/audio/completed.mp3" preload="auto"></audio>
 
-        <q-dialog v-model="showLessonComplete" @show="startConfetti" @hide="stopConfetti" persistent>
-            <q-card class="lesson-complete-card q-pa-md text-center relative-position">
-                <q-card-section>
-                    <div class="stars-row flex justify-center items-center q-gutter-md">
-                        <img src="assets/icons/five-stars.gif" class="star-icon big-star" />
-                    </div>
-                </q-card-section>
-                <q-card-section>
-                    <div class="text-h6 text-bold">🎉 Congratulations!</div>
-                    <div class="text-subtitle2 q-mt-sm">You have completed this lesson.</div>
-                </q-card-section>
-                <q-card-actions align="center">
-                    <q-btn label="OK" color="primary" unelevated rounded class="lesson-ok-btn" v-close-popup />
-                </q-card-actions>
-            </q-card>
-        </q-dialog>
-    </q-layout>
+    <q-dialog v-model="showLessonComplete" @show="startConfetti" @hide="stopConfetti" persistent>
+      <q-card class="lesson-complete-card q-pa-md text-center relative-position">
+        <q-card-section>
+          <div class="stars-row flex justify-center items-center q-gutter-md">
+            <img src="assets/icons/five-stars.gif" class="star-icon big-star" />
+          </div>
+        </q-card-section>
+        <q-card-section>
+          <div class="text-h6 text-bold">🎉 Congratulations!</div>
+          <div class="text-subtitle2 q-mt-sm">You have completed this lesson.</div>
+        </q-card-section>
+        <q-card-actions align="center">
+          <q-btn label="OK" color="primary" unelevated rounded class="lesson-ok-btn" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+  </q-layout>
 </template>
 
 <script>
@@ -76,27 +74,27 @@ import { audioManager } from "src/utils/audioManager"
 import { onBeforeRouteLeave } from "vue-router"
 
 export default {
-    name: "ScientificModelsLesson",
-    setup() {
-        const route = useRoute()
-        const router = useRouter()
-        const currentPage = ref(0)
-        const progress = ref(0)
-        const showLessonComplete = ref(false)
+  name: "ScientificModelsLesson",
+  setup() {
+    const route = useRoute()
+    const router = useRouter()
+    const currentPage = ref(0)
+    const progress = ref(0)
+    const showLessonComplete = ref(false)
 
-        // --- TTS composable ---
-        const { isPlaying, toggleAudio, stopSpeaking } = useTTS()
+    // --- TTS composable ---
+    const { isPlaying, toggleAudio, stopSpeaking } = useTTS()
 
-        const currentUser = ref(getCurrentUser())
-        let confettiInterval = null
-        const lesson = flatLessons.find(l => l.route === route.path)
-        const lessonId = lesson ? String(lesson.id) : "3"
+    const currentUser = ref(getCurrentUser())
+    let confettiInterval = null
+    const lesson = flatLessons.find(l => l.route === route.path)
+    const lessonId = lesson ? String(lesson.id) : "3"
 
-        const bookmarkedPages = ref([])
+    const bookmarkedPages = ref([])
 
-        // --- Lesson pages ---
-        const pages = ref([
-            `
+    // --- Lesson pages ---
+    const pages = ref([
+      `
     <div>
         <div class="illustration">
           <img src="assets/img/chapter 1/laboratory-tools.png" alt="Laboratory Tools">
@@ -115,7 +113,7 @@ your investigation.</p>
 length, mass, volume, and temperature.</p>
     </div>
   `,
-            `
+      `
     <div>
         <div class="header">
           <div class="title">Tools for Measuring Length</div>
@@ -136,7 +134,7 @@ Figure 1-9 shows the difference between a ruler and a meter rule.</p>
       </div>
     </div>
   `,
-            `
+      `
     <div>
       <div class="video-container">
           <video controls width="100%">
@@ -154,7 +152,7 @@ Figure 1-9 shows the difference between a ruler and a meter rule.</p>
       </div>
     </div>
   `,
-            `
+      `
     <div>
         <div class="header">
           <div class="title">Equipment for Measuring Mass</div>
@@ -185,7 +183,7 @@ riders. The first rider measures from 0 to 10 grams in l-g increments, while the
 measures from 0 to 200 grams in 10-g increments.</p>
     </div>
   `,
-            `
+      `
     <div>
       <div class="video-container">
           <video controls width="100%">
@@ -206,7 +204,7 @@ rider is adjusted first, followed by the tens and ones. The position of the ride
 the object's mass, which is obtained by summing the numbers from the three beams.</p>
     </div>
   `,
-            `
+      `
     <div>
       <p>The top-loading balance and the analytical balance are both electronic balances
 designed for high-precision measurements.</p>
@@ -227,7 +225,7 @@ similar. The only difference is that, in an analytical balance, the balance door
 reduce the effect of wind and dust in the obtained measurement.</p>
     </div>
   `,
-            `
+      `
     <div>
       <p>The following are the steps in using the two balances.</p>
       <p>1. Make sure the balance pan is empty, then press the "tare" or "zero" button.</p>
@@ -238,7 +236,7 @@ close the balance door.</p>
       <p>3. Record the displayed weight once the balance stabilizes.</p>
     </div>
   `,
-            `
+      `
     <div>
         <div class="header">
           <div class="title">Wares for Measuring Volume</div>
@@ -258,7 +256,7 @@ volume of liquid to the nearest 0.01 ml or 0.l mL, depending on the capacity of 
 Burettes differ from pipettes because burettes can provide varied sample volumes.</p>
     </div>
   `,
-            `
+      `
     <div>
 <div class="illustration">
   <img src="assets/img/chapter 1/graduated cylinder.png" alt="Graduated Cylinder">
@@ -284,7 +282,7 @@ Burettes differ from pipettes because burettes can provide varied sample volumes
 
     </div>
   `,
-            `
+      `
     <div>
       <p>In measuring the liquid volume using graduated cylinders, pipettes, and burettes, the
 liquid level should be correctly read. Liquids tend to form a curvature called meniscus at the
@@ -297,7 +295,7 @@ might occasionally help to clearly observe the meniscus.</p>
       </div>
     </div>
   `,
-            `
+      `
     <div>
         <div class="header">
           <div class="title">Other Laboratory Tools and Equipment</div>
@@ -322,7 +320,7 @@ drainage period. Touch the tip of the pipette to the side of the container.</p>
 The pipette has been calibrated for this amount to remain.</p>
     </div>
   `,
-            `
+      `
     <div>
       <p>Another laboratory equipment is the Bunsen burner,
 which is used for heating and is fueled by liquified
@@ -340,7 +338,7 @@ orange-yellow flame.</p>
       </div>
     </div>
   `,
-            `
+      `
     <div>
       <div class="info-card">
   <div class="info-title">MINI LAB 1-1</div>
@@ -363,188 +361,188 @@ orange-yellow flame.</p>
     </div>
   `
 
-        ])
+    ])
 
-        // --- Lesson completion ---
-        const isLessonComplete = computed(() =>
-            currentUser.value?.progress?.[lessonId]?.completed || false
-        )
+    // --- Lesson completion ---
+    const isLessonComplete = computed(() =>
+      currentUser.value?.progress?.[lessonId]?.completed || false
+    )
 
-        const markLessonComplete = () => {
-            if (!currentUser.value) return
-            if (!currentUser.value.progress) currentUser.value.progress = {}
+    const markLessonComplete = () => {
+      if (!currentUser.value) return
+      if (!currentUser.value.progress) currentUser.value.progress = {}
 
-            currentUser.value.progress[lessonId] = {
-                ...currentUser.value.progress[lessonId],
-                completed: true
-            }
+      currentUser.value.progress[lessonId] = {
+        ...currentUser.value.progress[lessonId],
+        completed: true
+      }
 
-            setCurrentUser(currentUser.value)
+      setCurrentUser(currentUser.value)
 
-            let students = LocalStorage.getItem("students") || []
-            students = students.map(student =>
-                student.id === currentUser.value.id
-                    ? { ...student, progress: currentUser.value.progress }
-                    : student
-            )
-            LocalStorage.set("students", students)
-            currentUser.value = getCurrentUser()
-        }
-
-        const finishButtonStyle = {
-            background: "#fe3223",
-            color: "#fff",
-            boxShadow: "7px 7px 0px 0px rgba(0, 0, 0, 0.16)"
-        }
-
-        // --- Bookmarks ---
-        const saveBookmarks = (bookmarksArr) => {
-            const user = getCurrentUser()
-            if (!user) return
-            const key = user.studentId ?? user.id ?? user.name
-            let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
-            allBookmarks[key] = bookmarksArr
-            localStorage.setItem("bookmarks", JSON.stringify(allBookmarks))
-        }
-
-        const loadBookmarks = () => {
-            const user = getCurrentUser()
-            if (!user) return []
-            const key = user.studentId ?? user.id ?? user.name
-            let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
-            return allBookmarks[key] || []
-        }
-
-        const toggleBookmark = () => {
-            const bookmark = { route: route.name || route.path, page: currentPage.value, lessonId }
-            let existing = loadBookmarks()
-            const index = existing.findIndex(b => b.route === bookmark.route && b.page === bookmark.page)
-            if (index !== -1) existing.splice(index, 1)
-            else existing.push(bookmark)
-            saveBookmarks(existing)
-            bookmarkedPages.value = loadBookmarks()
-        }
-
-        const isBookmarked = computed(() =>
-            bookmarkedPages.value.some(
-                b => b.route === (route.name || route.path) && b.page === currentPage.value
-            )
-        )
-
-        // --- Progress & Navigation ---
-        const updateProgress = () => { progress.value = (currentPage.value + 1) / pages.value.length }
-
-        onBeforeRouteLeave(() => {
-            stopSpeaking()
-        })
-
-        const nextPage = () => {
-            if (isPlaying.value) stopSpeaking()
-            if (currentPage.value < pages.value.length - 1) {
-                currentPage.value++
-                updateProgress()
-            } else {
-                markLessonComplete()
-                showLessonComplete.value = true
-            }
-        }
-
-        const prevPage = () => {
-            if (isPlaying.value) stopSpeaking()
-            if (currentPage.value > 0) {
-                currentPage.value--
-                updateProgress()
-            }
-        }
-
-        const goBack = () => {
-            if (window.history.length > 1) router.back()
-            else router.push("/chapters")
-        }
-
-        watch(currentPage, (newPage) => {
-            router.replace({ path: route.path, query: { page: newPage } })
-        })
-
-        // --- Confetti ---
-        const startConfetti = () => {
-            stopConfetti()
-            const audio = document.getElementById("lesson-complete-audio")
-            if (audio) { audio.currentTime = 0; audio.play().catch(() => { }) }
-            confettiInterval = setInterval(() => {
-                confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } })
-            }, 500)
-        }
-
-        const stopConfetti = () => {
-            if (confettiInterval) { clearInterval(confettiInterval); confettiInterval = null }
-        }
-
-        // --- Lifecycle ---
-        onMounted(() => {
-            if (!route.query._reloaded) {
-                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } }).then(() => {
-                    window.location.reload()
-                })
-                return
-            }
-
-            currentUser.value = getCurrentUser()
-            bookmarkedPages.value = loadBookmarks()
-            updateProgress()
-
-            const pageFromQuery = parseInt(route.query.page, 10)
-            if (!isNaN(pageFromQuery) && pageFromQuery < pages.value.length) currentPage.value = pageFromQuery
-
-            // Stars animation
-            const starContainer = document.querySelector('.stars')
-            if (starContainer) {
-                for (let i = 0; i < 100; i++) {
-                    const star = document.createElement('div')
-                    star.classList.add('star')
-                    star.style.top = Math.random() * 100 + '%'
-                    star.style.left = Math.random() * 100 + '%'
-                    star.style.width = (Math.random() * 2 + 1) + 'px'
-                    star.style.height = star.style.width
-                    star.style.animationDuration = (2 + Math.random() * 3) + 's'
-                    star.style.animationDelay = (Math.random() * 3) + 's'
-                    starContainer.appendChild(star)
-                }
-            }
-
-            // Click to navigate mini-tests
-            const viewer = document.querySelector('#viewer')
-            if (viewer) {
-                viewer.addEventListener('click', (e) => {
-                    const target = e.target.closest('[data-route]')
-                    if (target) router.push(target.dataset.route)
-                })
-            }
-        })
-
-        onUnmounted(() => { audioManager.restoreBg() })
-
-        return {
-            currentPage,
-            isPlaying,
-            pages,
-            showLessonComplete,
-            bookmarkedPages,
-            progress,
-            isBookmarked,
-            finishButtonStyle,
-            toggleAudio: () => toggleAudio(pages.value[currentPage.value]),
-            nextPage,
-            prevPage,
-            goBack,
-            toggleBookmark,
-            startConfetti,
-            stopConfetti,
-            currentUser,
-            isLessonComplete,
-            markLessonComplete
-        }
+      let students = LocalStorage.getItem("students") || []
+      students = students.map(student =>
+        student.id === currentUser.value.id
+          ? { ...student, progress: currentUser.value.progress }
+          : student
+      )
+      LocalStorage.set("students", students)
+      currentUser.value = getCurrentUser()
     }
+
+    const finishButtonStyle = {
+      background: "#fe3223",
+      color: "#fff",
+      boxShadow: "7px 7px 0px 0px rgba(0, 0, 0, 0.16)"
+    }
+
+    // --- Bookmarks ---
+    const saveBookmarks = (bookmarksArr) => {
+      const user = getCurrentUser()
+      if (!user) return
+      const key = user.studentId ?? user.id ?? user.name
+      let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
+      allBookmarks[key] = bookmarksArr
+      localStorage.setItem("bookmarks", JSON.stringify(allBookmarks))
+    }
+
+    const loadBookmarks = () => {
+      const user = getCurrentUser()
+      if (!user) return []
+      const key = user.studentId ?? user.id ?? user.name
+      let allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}")
+      return allBookmarks[key] || []
+    }
+
+    const toggleBookmark = () => {
+      const bookmark = { route: route.name || route.path, page: currentPage.value, lessonId }
+      let existing = loadBookmarks()
+      const index = existing.findIndex(b => b.route === bookmark.route && b.page === bookmark.page)
+      if (index !== -1) existing.splice(index, 1)
+      else existing.push(bookmark)
+      saveBookmarks(existing)
+      bookmarkedPages.value = loadBookmarks()
+    }
+
+    const isBookmarked = computed(() =>
+      bookmarkedPages.value.some(
+        b => b.route === (route.name || route.path) && b.page === currentPage.value
+      )
+    )
+
+    // --- Progress & Navigation ---
+    const updateProgress = () => { progress.value = (currentPage.value + 1) / pages.value.length }
+
+    onBeforeRouteLeave(() => {
+      stopSpeaking()
+    })
+
+    const nextPage = () => {
+      if (isPlaying.value) stopSpeaking()
+      if (currentPage.value < pages.value.length - 1) {
+        currentPage.value++
+        updateProgress()
+      } else {
+        markLessonComplete()
+        showLessonComplete.value = true
+      }
+    }
+
+    const prevPage = () => {
+      if (isPlaying.value) stopSpeaking()
+      if (currentPage.value > 0) {
+        currentPage.value--
+        updateProgress()
+      }
+    }
+
+    const goBack = () => {
+      if (window.history.length > 1) router.back()
+      else router.push("/chapters")
+    }
+
+    watch(currentPage, (newPage) => {
+      router.replace({ path: route.path, query: { page: newPage } })
+    })
+
+    // --- Confetti ---
+    const startConfetti = () => {
+      stopConfetti()
+      const audio = document.getElementById("lesson-complete-audio")
+      if (audio) { audio.currentTime = 0; audio.play().catch(() => { }) }
+      confettiInterval = setInterval(() => {
+        confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } })
+      }, 500)
+    }
+
+    const stopConfetti = () => {
+      if (confettiInterval) { clearInterval(confettiInterval); confettiInterval = null }
+    }
+
+    // --- Lifecycle ---
+    onMounted(() => {
+      if (!route.query._reloaded) {
+        router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } }).then(() => {
+          window.location.reload()
+        })
+        return
+      }
+
+      currentUser.value = getCurrentUser()
+      bookmarkedPages.value = loadBookmarks()
+      updateProgress()
+
+      const pageFromQuery = parseInt(route.query.page, 10)
+      if (!isNaN(pageFromQuery) && pageFromQuery < pages.value.length) currentPage.value = pageFromQuery
+
+      // Stars animation
+      const starContainer = document.querySelector('.stars')
+      if (starContainer) {
+        for (let i = 0; i < 100; i++) {
+          const star = document.createElement('div')
+          star.classList.add('star')
+          star.style.top = Math.random() * 100 + '%'
+          star.style.left = Math.random() * 100 + '%'
+          star.style.width = (Math.random() * 2 + 1) + 'px'
+          star.style.height = star.style.width
+          star.style.animationDuration = (2 + Math.random() * 3) + 's'
+          star.style.animationDelay = (Math.random() * 3) + 's'
+          starContainer.appendChild(star)
+        }
+      }
+
+      // Click to navigate mini-tests
+      const viewer = document.querySelector('#viewer')
+      if (viewer) {
+        viewer.addEventListener('click', (e) => {
+          const target = e.target.closest('[data-route]')
+          if (target) router.push(target.dataset.route)
+        })
+      }
+    })
+
+    onUnmounted(() => { audioManager.restoreBg() })
+
+    return {
+      currentPage,
+      isPlaying,
+      pages,
+      showLessonComplete,
+      bookmarkedPages,
+      progress,
+      isBookmarked,
+      finishButtonStyle,
+      toggleAudio: () => toggleAudio(pages.value[currentPage.value]),
+      nextPage,
+      prevPage,
+      goBack,
+      toggleBookmark,
+      startConfetti,
+      stopConfetti,
+      currentUser,
+      isLessonComplete,
+      markLessonComplete
+    }
+  }
 }
 </script>
 

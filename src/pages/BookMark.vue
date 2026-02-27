@@ -61,7 +61,7 @@
                                             <div class="row items-center timestamp q-mt-xs">
                                                 <q-icon name="schedule" size="12px" class="q-mr-xs" />
                                                 <span v-if="bm.timestamp">Saved {{ formatTimestamp(bm.timestamp)
-                                                }}</span>
+                                                    }}</span>
                                                 <span v-else>Recently saved</span>
                                             </div>
                                         </div>
@@ -301,7 +301,7 @@ export default {
     min-height: 100vh;
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
-    background: linear-gradient(180deg, hsla(245, 85%, 62%, 1) 0%, hsla(274, 100%, 52%, 1) 100%) !important;
+    background: #8e97fe !important;
 }
 
 /* FIX 2: Cover html root as well so overscroll/rubber-band has no white */
@@ -321,7 +321,7 @@ export default {
 }
 
 .header-no-border {
-    border-bottom: none !important;
+    border-bottom: 5px solid #0e59c9 !important;
     box-shadow: none !important;
 }
 
