@@ -2,7 +2,7 @@
   <q-layout view="hHr LpR lFf">
     <!-- Header -->
     <q-header class="header-gradient">
-      <q-toolbar class="q-pa-md toolbar-row">
+      <div class="my-toolbar q-pa-md">
         <div class="avatar-container relative-position" @click="sidebarOpen = true">
           <q-avatar size="60px" class="profile-avatar">
             <img class="profile-image" :src="student.avatar || 'assets/temp/pfp.png'" />
@@ -17,15 +17,15 @@
           <div class="text-body2 text-white" style="opacity: 0.9;">{{ student.section }}</div>
         </div>
 
-        <q-space />
+        <div class="toolbar-spacer"></div>
 
-        <div class="text-center q-mr-md">
-          <q-btn flat round color="white" @click="goToBookmarks">
+        <div class="bookmark-wrap">
+          <button class="bookmark-btn" @click="goToBookmarks">
             <img src="assets/icons/bookmark.png" style="width: 28px; height: 28px;" />
-          </q-btn>
+          </button>
           <div class="text-white text-caption" style="margin-top: -4px;">Bookmarks</div>
         </div>
-      </q-toolbar>
+      </div>
     </q-header>
 
     <q-page-container>
@@ -849,11 +849,39 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.toolbar-row {
+.bookmark-wrap {
+  flex-shrink: 0;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.bookmark-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.my-toolbar {
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
+}
+
+.toolbar-spacer {
+  flex: 1;
 }
 
 /* ============================== */

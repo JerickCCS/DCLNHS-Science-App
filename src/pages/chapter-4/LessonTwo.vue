@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header class="bg-white text-black">
-      <q-toolbar class="toolbar-row">
+      <q-toolbar>
         <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="q-mr-sm" />
         <q-toolbar-title class="navbar-title">Lesson 2: The Cell: The Basic Unit of Life</q-toolbar-title>
         <div class="row items-center q-gutter-sm">
@@ -809,12 +809,7 @@ export default {
 
     // --- Lifecycle ---
     onMounted(() => {
-      if (!route.query._reloaded) {
-        router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } }).then(() => {
-          window.location.reload()
-        })
-        return
-      }
+      /* Reload Fix */
 
       currentUser.value = getCurrentUser()
       bookmarkedPages.value = loadBookmarks()
