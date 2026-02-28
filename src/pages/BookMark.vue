@@ -1,7 +1,7 @@
 <template>
     <q-layout view="lHh Lpr lFf">
         <!-- Header -->
-        <q-header class="text-white header-no-border" style="background: #42a7ff !important;">
+        <q-header class="text-white header-no-border" style="background: #008BFF !important;">
             <q-toolbar class="relative-position">
                 <!-- Back button (left) -->
                 <q-btn flat dense round icon="arrow_back" @click="goBack" class="absolute-left q-ml-sm text-white" />
@@ -15,13 +15,24 @@
 
         <q-page-container>
             <q-page class="bookmarks-page">
+
+                <!-- ── Floating bubbles ── -->
+                <div class="bubbles" aria-hidden="true">
+                    <div class="bubble b1"></div>
+                    <div class="bubble b2"></div>
+                    <div class="bubble b3"></div>
+                    <div class="bubble b4"></div>
+                    <div class="bubble b5"></div>
+                    <div class="bubble b6"></div>
+                    <div class="bubble b7"></div>
+                    <div class="bubble b8"></div>
+                </div>
+
                 <!-- Bookmark Counter Card -->
                 <div class="counter-card-wrapper q-mx-md q-mt-sm q-mb-md">
-                    <!-- Icon lives OUTSIDE the card, in the wrapper, so nothing clips it at top or sides -->
                     <img src="assets/icons/bookmark.png" class="counter-bookmark-icon" alt="bookmark" />
 
                     <div class="counter-card">
-                        <!-- Invisible spacer on the left so text never overlaps the icon -->
                         <div class="counter-content">
                             <div class="row items-center justify-between">
                                 <div class="counter-label">Total Bookmarks</div>
@@ -32,7 +43,7 @@
                 </div>
 
                 <!-- Content -->
-                <div class="q-px-md q-pb-md">
+                <div class="q-px-md q-pb-md content-layer">
                     <!-- Bookmarks List -->
                     <div v-if="bookmarks.length > 0" class="bookmarks-list">
                         <div v-for="(bm, idx) in bookmarks" :key="idx" class="bookmark-card-container">
@@ -61,7 +72,7 @@
                                             <div class="row items-center timestamp q-mt-xs">
                                                 <q-icon name="schedule" size="12px" class="q-mr-xs" />
                                                 <span v-if="bm.timestamp">Saved {{ formatTimestamp(bm.timestamp)
-                                                    }}</span>
+                                                }}</span>
                                                 <span v-else>Recently saved</span>
                                             </div>
                                         </div>
@@ -289,11 +300,11 @@ export default {
 </script>
 
 <style scoped>
-/* FIX 1: Match page-container background to gradient end color + ensure full height */
+/* ── Root backgrounds ── */
 :deep(.q-page-container) {
     padding: 0 !important;
     padding-bottom: 0 !important;
-    background: hsla(274, 100%, 52%, 1) !important;
+    background: #42a7ff !important;
     min-height: 100vh !important;
 }
 
@@ -301,39 +312,161 @@ export default {
     min-height: 100vh;
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
-    background: #8e97fe !important;
+    background: transparent !important;
 }
 
-/* FIX 2: Cover html root as well so overscroll/rubber-band has no white */
 :deep(body),
 :deep(html) {
-    background: hsla(274, 100%, 52%, 1) !important;
+    background: #0c1374 !important;
     margin: 0;
     padding: 0;
 }
 
-/* FIX 3: Use gradient + 100dvh so mobile browser chrome doesn't cause a gap */
+/* ── Page — same gradient as IndexPage ── */
 .bookmarks-page {
-    background: linear-gradient(180deg, hsla(245, 85%, 62%, 1) 0%, hsla(274, 100%, 52%, 1) 100%);
+    background: linear-gradient(135deg, #5DA9FF 0%, #C084FC 100%);
     min-height: 100dvh;
     padding-top: 60px;
     padding-bottom: env(safe-area-inset-bottom, 0);
+    position: relative;
+    overflow: hidden;
 }
 
+/* ── Header — matches IndexPage header exactly ── */
 .header-no-border {
-    border-bottom: 5px solid #0e59c9 !important;
-    box-shadow: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 }
 
 .text-white {
     color: white !important;
 }
 
-/* Counter Card */
+/* ============================== */
+/* FLOATING BUBBLES               */
+/* ============================== */
+
+.bubbles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    animation: bubble-float linear infinite;
+}
+
+.b1 {
+    width: 180px;
+    height: 180px;
+    left: 8%;
+    bottom: -200px;
+    animation-duration: 18s;
+    animation-delay: 0s;
+}
+
+.b2 {
+    width: 90px;
+    height: 90px;
+    left: 22%;
+    bottom: -120px;
+    animation-duration: 14s;
+    animation-delay: 2s;
+}
+
+.b3 {
+    width: 130px;
+    height: 130px;
+    left: 45%;
+    bottom: -160px;
+    animation-duration: 20s;
+    animation-delay: 5s;
+}
+
+.b4 {
+    width: 60px;
+    height: 60px;
+    left: 60%;
+    bottom: -90px;
+    animation-duration: 12s;
+    animation-delay: 1s;
+}
+
+.b5 {
+    width: 200px;
+    height: 200px;
+    left: 75%;
+    bottom: -230px;
+    animation-duration: 22s;
+    animation-delay: 7s;
+}
+
+.b6 {
+    width: 50px;
+    height: 50px;
+    left: 88%;
+    bottom: -80px;
+    animation-duration: 10s;
+    animation-delay: 3s;
+}
+
+.b7 {
+    width: 110px;
+    height: 110px;
+    left: 35%;
+    bottom: -140px;
+    animation-duration: 16s;
+    animation-delay: 9s;
+}
+
+.b8 {
+    width: 75px;
+    height: 75px;
+    left: 5%;
+    bottom: -100px;
+    animation-duration: 13s;
+    animation-delay: 4s;
+}
+
+@keyframes bubble-float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateY(-110vh) scale(1.1);
+        opacity: 0;
+    }
+}
+
+/* Content must sit above the bubble layer */
+.content-layer {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================== */
+/* COUNTER CARD                   */
+/* ============================== */
+
 .counter-card-wrapper {
     position: relative;
     padding-top: 24px;
-    /* bleed space above card */
+    z-index: 1;
 }
 
 .counter-card {
@@ -345,19 +478,6 @@ export default {
     border-bottom: 6px solid #c99a0e;
 }
 
-/* The icon is a sibling of .counter-card (not a child),
-   so .counter-card's overflow:hidden never touches it.
-   The wrapper has no overflow:hidden so the top bleed is completely free.
-   We use clip-path inset() to cut the icon's BOTTOM so it appears
-   flush with the card's bottom edge (excluding the 6px border). 
-   
-   The icon top is at wrapper top (y=0).
-   The card starts at y=24px (padding-top).
-   The card bottom (excluding border) is at wrapper bottom - 6px.
-   Icon height = 100% of wrapper.
-   Bottom clipping amount = 6px border = (6 / wrapperHeight).
-   We approximate with a fixed pixel inset since the card height is ~56px:
-   wrapper ≈ 80px total, so bottom inset = 6px of the image itself. */
 .counter-bookmark-icon {
     position: absolute;
     top: 12px;
@@ -369,8 +489,6 @@ export default {
     z-index: 3;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
     pointer-events: none;
-    /* Clip off the bottom portion that falls below the card's colored area.
-       The card border is 6px. Clip that from the bottom of the image. */
     clip-path: inset(0 0 17px 0 round 0);
 }
 
@@ -391,7 +509,10 @@ export default {
     line-height: 1;
 }
 
-/* Bookmarks List */
+/* ============================== */
+/* BOOKMARKS LIST                 */
+/* ============================== */
+
 .bookmarks-list {
     display: flex;
     flex-direction: column;
@@ -405,7 +526,6 @@ export default {
     position: relative;
 }
 
-/* Compact Card */
 .bookmark-card {
     border-radius: 12px;
     overflow: hidden;
@@ -428,12 +548,10 @@ export default {
     filter: blur(4px);
 }
 
-/* Inner layout */
 .card-inner {
     padding: 14px 16px;
 }
 
-/* Bookmark Icon */
 .bookmark-icon-wrapper {
     background: white;
     border-radius: 8px;
@@ -449,7 +567,6 @@ export default {
     color: var(--icon-color) !important;
 }
 
-/* Text */
 .card-text {
     min-width: 0;
 }
@@ -476,7 +593,6 @@ export default {
     color: rgba(255, 255, 255, 0.85) !important;
 }
 
-/* Page Badge (right side) */
 .page-wrapper {
     display: flex;
     align-items: center;
@@ -499,7 +615,10 @@ export default {
     letter-spacing: 0.3px;
 }
 
-/* Delete overlay */
+/* ============================== */
+/* DELETE OVERLAY                 */
+/* ============================== */
+
 .delete-overlay {
     position: absolute;
     top: 0;
@@ -536,7 +655,10 @@ export default {
     animation: fadeIn 0.3s ease;
 }
 
-/* Empty State */
+/* ============================== */
+/* EMPTY STATE                    */
+/* ============================== */
+
 .empty-state {
     padding: 20px;
     min-height: calc(100vh - 200px);
@@ -550,6 +672,10 @@ export default {
     opacity: 0.5;
     animation: float 3s ease-in-out infinite;
 }
+
+/* ============================== */
+/* KEYFRAMES                      */
+/* ============================== */
 
 @keyframes float {
 

@@ -1,6 +1,7 @@
 <template>
     <q-page class="chapters-page">
-        <!-- Header inside page -->
+
+        <!-- ── Header ── -->
         <div class="page-header">
             <q-toolbar class="center-toolbar">
                 <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack" class="btn-left" />
@@ -8,61 +9,120 @@
             </q-toolbar>
         </div>
 
-        <!-- Main Content -->
-        <div class="page-content q-pa-md">
-            <!-- Main Image -->
-            <div class="main-image q-mb-md">
-                <img src="assets/temp/Science of Materials.png" alt="Unit I" class="main-img" />
+        <!-- ── Hero Section ── -->
+        <div class="hero-section">
+
+            <!-- Floating decorative blobs -->
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+
+            <!-- Unit image -->
+            <div class="hero-image-wrap">
+                <img src="assets/temp/Science of Materials.png" alt="Unit I" class="hero-img" />
+                <div class="hero-img-glow"></div>
             </div>
 
-            <!-- Description -->
-            <div class="unit-description q-pb-xl text-body1">
-                <p class="text-bold text-h6 text-center">Science of Materials</p>
-                <p>
-                    Materials are the foundation of modern technology, from the metals in buildings
-                    to the polymers in everyday objects. Understanding their properties allows us
-                    to design stronger, lighter, and more durable products.
-                </p>
-                <p>
-                    Unit I explores the science behind different materials. Chapter 10 examines
-                    the mechanical properties of solids, such as strength and elasticity. Chapter 11
-                    focuses on chemical properties and how materials respond to heat, corrosion,
-                    and other environmental factors.
-                </p>
+            <!-- Unit badge + title -->
+            <div class="hero-meta">
+                <span class="unit-badge">Unit I</span>
+                <h1 class="unit-title">Science of<br>Materials</h1>
+                <div class="unit-stats-row">
+                    <div class="unit-stat">
+                        <span class="stat-value">3</span>
+                        <span class="stat-key">Chapters</span>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="unit-stat">
+                        <span class="stat-value">16</span>
+                        <span class="stat-key">Lessons</span>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="unit-stat">
+                        <span class="stat-value">8h</span>
+                        <span class="stat-key">Est. time</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Bottom Sheet -->
+        <!-- ── Description Card ── -->
+        <div class="desc-card">
+            <div class="desc-title-row">
+                <p class="desc-title">Science of Materials</p>
+                <button class="tts-btn" :class="{ 'tts-active': isSpeaking }" @click="toggleSpeak"
+                    :aria-label="isSpeaking ? 'Stop reading' : 'Read aloud'">
+                    <q-icon :name="isSpeaking ? 'stop' : 'volume_up'" size="18px" />
+                    <span class="tts-ripple" v-if="isSpeaking"></span>
+                </button>
+            </div>
+
+            <p class="desc-text">
+                Everything around you—the plants and trees, the air you breathe, the people around you, and everything
+                in the sky—are all matter, which vary in many ways. In order to understand them, you need to know what
+                science is and how scientists work an think.
+            </p>
+            <p class="desc-text">
+                Unit 1 consists of three chapters. Chapter 1 discusses the nature of science, how to use scientific
+                models and common laboratory tools, equipment, wares, and how to conduct scientific investigations.
+                Chapter 2 focuses on the nature of the particles that make up the three main states of matter. Chapter 3
+                describes the nature and general properties of solution to help you understand and appreciate their
+                practical applications.
+            </p>
+
+            <div class="desc-chips">
+                <div class="desc-chip chip-blue">
+                    <q-icon name="science" size="14px" />
+                    <span>Nature of Science</span>
+                </div>
+                <div class="desc-chip chip-teal">
+                    <q-icon name="blur_on" size="14px" />
+                    <span>Particle Matter</span>
+                </div>
+                <div class="desc-chip chip-yellow">
+                    <q-icon name="opacity" size="14px" />
+                    <span>Solubility</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Bottom Sheet ── -->
         <div class="bottom-sheet" :style="{ transform: `translateY(${translateY}px)` }">
+
             <!-- Handle -->
             <div class="sheet-handle" @pointerdown="startDrag">
                 <div class="handle-bar"></div>
-                <div class="handle-text">Chapters</div>
+                <div class="handle-label">
+                    <span class="handle-title">Chapters</span>
+                    <span class="handle-count">{{ chapters.length }} available</span>
+                </div>
             </div>
 
-            <!-- Content -->
-            <div class="sheet-content q-pa-md">
-                <div v-for="chapter in chapters" :key="chapter.id" class="q-mb-md">
-                    <router-link :to="chapter.route" class="no-link">
-                        <q-card class="q-pa-md row items-center chapter-card" :style="{
-                            backgroundColor: chapter.color,
-                            '--shadow-color': chapter.shadow
-                        }" clickable>
-                            <div class="chapter-icon-container">
-                                <img :src="chapter.icon" class="chapter-icon" />
-                            </div>
-                            <div class="col">
-                                <div class="text-subtitle1 text-bold text-white">
-                                    {{ chapter.label }}
-                                </div>
-                                <div class="text-body2 text-white">
-                                    {{ chapter.title }}
-                                </div>
-                            </div>
-                            <q-icon name="chevron_right" size="28px" color="white" />
-                        </q-card>
-                    </router-link>
-                </div>
+            <!-- Chapter list -->
+            <div class="sheet-content">
+                <router-link v-for="chapter in chapters" :key="chapter.id" :to="chapter.route" class="chapter-link">
+                    <div class="chapter-card" :style="{ '--card-bg': chapter.color, '--card-shadow': chapter.shadow }">
+
+                        <!-- Left accent stripe -->
+                        <div class="card-stripe"></div>
+
+                        <!-- Icon -->
+                        <div class="card-icon-wrap">
+                            <img :src="chapter.icon" class="card-icon" :alt="chapter.title" />
+                        </div>
+
+                        <!-- Text -->
+                        <div class="card-body">
+                            <span class="card-label">{{ chapter.label }}</span>
+                            <p class="card-title">{{ chapter.title }}</p>
+                        </div>
+
+                        <!-- Arrow -->
+                        <div class="card-arrow">
+                            <q-icon name="chevron_right" size="22px" />
+                        </div>
+                    </div>
+                </router-link>
             </div>
         </div>
 
@@ -70,16 +130,58 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { TextToSpeech } from '@capacitor-community/text-to-speech'
+import { audioManager } from 'src/utils/audioManager'
 
-/* ---------- Bottom Sheet Physics ---------- */
+/* ── TTS ── */
+const isSpeaking = ref(false)
+
+const descContent = `Science of Materials
+Everything around you—the plants and trees, the air you breathe, the people around you, and everything in the sky—are all matter, which vary in many ways. In order to understand them, you need to know what science is and how scientists work an think.
+Unit 1 consists of three chapters. Chapter 1 discusses the nature of science, how to use scientific models and common laboratory tools, equipment, wares, and how to conduct scientific investigations. Chapter 2 focuses on the nature of the particles that make up the three main states of matter. Chapter 3 describes the nature and general properties of solution to help you understand and appreciate their practical applications.`
+
+async function toggleSpeak() {
+    if (isSpeaking.value) {
+        await TextToSpeech.stop()
+        audioManager.restoreBg()
+        isSpeaking.value = false
+        return
+    }
+
+    isSpeaking.value = true
+    audioManager.duckBg()
+
+    try {
+        await TextToSpeech.speak({
+            text: descContent,
+            lang: 'en-US',
+            rate: 1.0,
+            pitch: 1.0,
+            volume: 1.0,
+            category: 'ambient'
+        })
+    } finally {
+        audioManager.restoreBg()
+        isSpeaking.value = false
+    }
+}
+
+onUnmounted(async () => {
+    if (isSpeaking.value) {
+        await TextToSpeech.stop()
+        audioManager.restoreBg()
+    }
+})
+
+/* ── Bottom Sheet Physics ── */
 const translateY = ref(0)
 let startY = 0
 let startTranslate = 0
 let dragging = false
 let rafId = null
 
-const COLLAPSED = () => window.innerHeight * 0.6
+const COLLAPSED = () => window.innerHeight * 0.62
 const EXPANDED = 0
 
 onMounted(() => {
@@ -90,7 +192,6 @@ function startDrag(e) {
     dragging = true
     startY = e.clientY
     startTranslate = translateY.value
-
     e.target.setPointerCapture(e.pointerId)
     window.addEventListener('pointermove', onDrag)
     window.addEventListener('pointerup', endDrag)
@@ -98,41 +199,30 @@ function startDrag(e) {
 
 function onDrag(e) {
     if (!dragging || rafId) return
-
     rafId = requestAnimationFrame(() => {
         const delta = e.clientY - startY
         const next = startTranslate + delta
-
-        translateY.value = Math.min(
-            COLLAPSED(),
-            Math.max(EXPANDED, next)
-        )
-
+        translateY.value = Math.min(COLLAPSED(), Math.max(EXPANDED, next))
         rafId = null
     })
 }
 
 function endDrag() {
     dragging = false
-
-    translateY.value =
-        translateY.value < window.innerHeight * 0.3
-            ? EXPANDED
-            : COLLAPSED()
-
+    translateY.value = translateY.value < window.innerHeight * 0.3 ? EXPANDED : COLLAPSED()
     window.removeEventListener('pointermove', onDrag)
     window.removeEventListener('pointerup', endDrag)
 }
 
-/* ---------- Data ---------- */
+/* ── Data ── */
 const chapters = [
     {
         id: 1,
         label: 'Chapter 1',
         title: 'Nature of Science',
         route: 'chapter-1',
-        color: '#FF6B6B', // Coral Red
-        shadow: '#E53935', // Darker Red
+        color: '#FF6B6B',
+        shadow: '#C0392B',
         icon: 'assets/icons/science.png'
     },
     {
@@ -140,8 +230,8 @@ const chapters = [
         label: 'Chapter 2',
         title: 'Particle Nature of Matter',
         route: 'chapter-2',
-        color: '#4ECDC4', // Turquoise
-        shadow: '#26A69A', // Darker Teal
+        color: '#4ECDC4',
+        shadow: '#1A9E96',
         icon: 'assets/icons/particle.png'
     },
     {
@@ -149,33 +239,40 @@ const chapters = [
         label: 'Chapter 3',
         title: 'Solubility & Concentration',
         route: 'chapter-3',
-        color: '#FFD166', // Yellow
-        shadow: '#FFB300', // Darker Yellow
+        color: '#FFD166',
+        shadow: '#E6A800',
         icon: 'assets/icons/solution.png'
     }
 ]
 
 function goBack() {
-    window.history.length > 1
-        ? window.history.back()
-        : window.location.assign('/')
+    window.history.length > 1 ? window.history.back() : window.location.assign('/')
 }
 </script>
 
 <style scoped>
-/* ---------- Global Background ---------- */
-.chapters-page {
-    background: #42a7ff !important;
-    min-height: 100vh;
+/* ── Variables ── */
+:root {
+    --primary: #42a7ff;
+    --primary-dark: #1a7fd4;
+    --white: #ffffff;
+    --radius: 16px;
 }
 
-/* ---------- Header (Now inside page) ---------- */
+/* ── Base ── */
+.chapters-page {
+    font-family: "MyFont", sans-serif;
+    background: #42a7ff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ── Header ── */
 .page-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: #42a7ff;
-    box-shadow: none;
+    background: transparent;
 }
 
 .center-toolbar {
@@ -183,107 +280,323 @@ function goBack() {
     justify-content: center;
     align-items: center;
     position: relative;
-    min-height: 50px;
+    min-height: 52px;
+    padding: 0 16px;
 }
 
 .toolbar-title {
-    font-size: 26px;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 800;
     color: white;
+    letter-spacing: 0.3px;
 }
 
-/* Back Button Styling */
 .btn-left {
-    color: white;
+    color: white !important;
     position: absolute;
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    background: transparent !important;
+    background: rgba(255, 255, 255, 0.15) !important;
     border-radius: 10px;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease;
 }
 
 .btn-left:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-    transform: translateY(-50%) scale(1.05);
+    background: rgba(255, 255, 255, 0.25) !important;
 }
 
-/* Icon color for back button */
-.btn-left .q-icon {
-    color: white !important;
-}
-
-/* ---------- Page Content ---------- */
-.page-content {
-    background: transparent;
-}
-
-/* ---------- Main Image ---------- */
-.main-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-}
-
-.main-img {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    border-radius: 16px;
-    box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
-}
-
-/* ---------- Description ---------- */
-.unit-description {
-    background: white;
-    color: #374151;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 90px;
-    box-shadow: 7px 7px 0px 0px rgba(0, 0, 0, 0.16);
+/* ── Hero Section ── */
+.hero-section {
     position: relative;
+    padding: 8px 20px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    overflow: hidden;
+}
+
+/* Decorative blobs */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+}
+
+.blob-1 {
+    width: 200px;
+    height: 200px;
+    top: -80px;
+    right: -60px;
+}
+
+.blob-2 {
+    width: 120px;
+    height: 120px;
+    top: 60px;
+    left: -40px;
+}
+
+.blob-3 {
+    width: 80px;
+    height: 80px;
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Hero image */
+.hero-image-wrap {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow:
+        8px 8px 0px rgba(0, 0, 0, 0.18),
+        0 0 0 4px rgba(255, 255, 255, 0.2);
+    display: block;
+}
+
+.hero-img-glow {
+    position: absolute;
+    inset: 10px;
+    border-radius: 20px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent 70%);
+    pointer-events: none;
+}
+
+/* Hero meta */
+.hero-meta {
+    text-align: center;
+    z-index: 2;
+}
+
+.unit-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin-bottom: 10px;
+}
+
+.unit-title {
+    font-size: 32px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 16px 0;
+    line-height: 1.15;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Stats row */
+.unit-stats-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50px;
+    padding: 10px 20px;
+}
+
+.unit-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.stat-key {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+.stat-sep {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Description Card ── */
+.desc-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 20px 20px 0 0;
+    padding: 24px 20px 100px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.desc-card-accent {
+    display: none;
+}
+
+/* Title row with inline TTS button */
+.desc-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #eef2f7;
+}
+
+.desc-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+}
+
+/* TTS speaker button */
+.tts-btn {
+    position: relative;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #e0f2ff;
+    color: #1a7fd4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+    overflow: hidden;
+}
+
+.tts-btn:hover {
+    background: #c4e5ff;
+    transform: scale(1.05);
+}
+
+.tts-btn:active {
+    transform: scale(0.95);
+}
+
+.tts-btn.tts-active {
+    background: #42a7ff;
+    color: #ffffff;
+}
+
+/* Ripple pulse when speaking */
+.tts-ripple {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid #42a7ff;
+    animation: tts-pulse 1.4s ease-out infinite;
+    pointer-events: none;
+}
+
+@keyframes tts-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.desc-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #4b5563;
+    margin: 0 0 12px 0;
     text-align: justify;
 }
 
-.unit-description p {
-    margin-bottom: 12px;
-    line-height: 1.6;
+.desc-text:last-of-type {
+    margin-bottom: 18px;
 }
 
-.unit-description p:last-child {
-    margin-bottom: 0;
+/* Topic chips */
+.desc-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
 }
 
-.unit-description .text-h6 {
-    color: #3b28cc;
+.desc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.2px;
 }
 
-/* ---------- Bottom Sheet ---------- */
+.chip-blue {
+    background: #e0f2ff;
+    color: #1a7fd4;
+}
+
+.chip-teal {
+    background: #d0f5f3;
+    color: #1a9e96;
+}
+
+.chip-yellow {
+    background: #fff4cc;
+    color: #b57800;
+}
+
+/* ── Bottom Sheet ── */
 .bottom-sheet {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 70vh;
-    background: white;
-    border-radius: 12px 12px 0 0;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+    height: 72vh;
+    background: #f8faff;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.14);
     display: flex;
     flex-direction: column;
     will-change: transform;
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 50;
 }
 
-/* ---------- Sheet Handle ---------- */
+/* Handle */
 .sheet-handle {
-    background-color: #f8f9fb;
-    padding: 8px 0;
-    text-align: center;
+    background: #ffffff;
+    border-radius: 20px 20px 0 0;
+    padding: 12px 20px 10px;
     cursor: grab;
     touch-action: none;
+    border-bottom: 1px solid #eef2f7;
 }
 
 .sheet-handle:active {
@@ -293,67 +606,148 @@ function goBack() {
 .handle-bar {
     width: 40px;
     height: 4px;
-    background: #ccc;
+    background: #d1d5db;
     border-radius: 2px;
-    margin: 0 auto 4px;
+    margin: 0 auto 10px;
 }
 
-.handle-text {
-    color: #666;
-    font-size: 14px;
-    font-weight: 500;
+.handle-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
 }
 
+.handle-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.handle-count {
+    font-size: 12px;
+    font-weight: 600;
+    color: #9ca3af;
+}
+
+/* Sheet content */
 .sheet-content {
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding: 16px;
-    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-/* ---------- Chapter Cards ---------- */
+/* ── Chapter Cards ── */
+.chapter-link {
+    text-decoration: none;
+    display: block;
+}
+
 .chapter-card {
-    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 14px 14px 14px 0;
+    box-shadow: 0 6px 0 0 var(--card-shadow);
     position: relative;
-    border: none;
-    box-shadow: 0 8px 0 0 var(--shadow-color) !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    min-height: 90px;
-}
-
-.chapter-card .q-card__section {
-    padding: 0;
+    overflow: hidden;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
 }
 
 .chapter-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 0 0 var(--shadow-color) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 0 var(--card-shadow);
 }
 
 .chapter-card:active {
     transform: translateY(4px);
-    box-shadow: 0 4px 0 0 var(--shadow-color) !important;
+    box-shadow: 0 2px 0 0 var(--card-shadow);
 }
 
-/* ---------- Fixed Chapter Icon ---------- */
-.chapter-icon-container {
-    position: relative;
-    margin-right: 16px;
+/* Left accent stripe */
+.card-stripe {
+    width: 6px;
+    align-self: stretch;
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 0 4px 4px 0;
+    flex-shrink: 0;
 }
 
-.chapter-icon {
-    width: 48px;
-    height: 48px;
-    padding: 8px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    position: relative;
-    z-index: 2;
+/* Icon */
+.card-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.28);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.no-link {
-    text-decoration: none;
+.card-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+/* Text */
+.card-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-label {
     display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 3px;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Arrow */
+.card-arrow {
+    color: rgba(255, 255, 255, 0.75);
+    flex-shrink: 0;
+    padding-right: 4px;
+}
+
+/* ── Responsive ── */
+@media (min-width: 600px) {
+    .hero-img {
+        width: 280px;
+        height: 280px;
+    }
+
+    .unit-title {
+        font-size: 40px;
+    }
+
+    .sheet-content {
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .desc-card {
+        padding: 32px 32px 120px;
+    }
 }
 </style>

@@ -1,14 +1,17 @@
 <template>
     <q-layout view="hHh lpR fFf">
         <q-header class="bg-white text-black">
-            <q-toolbar> <q-btn flat dense round icon="arrow_back" aria-label="Go back" @click="goBack"
-                    class="q-mr-sm" />
-                <q-toolbar-title class="navbar-title">Chapter Review</q-toolbar-title>
-                <div class="row items-center q-gutter-sm">
-                    <q-btn flat dense round :icon="isBookmarked ? 'bookmark' : 'bookmark_border'" color="yellow"
-                        @click="toggleBookmark" />
-                </div>
-            </q-toolbar>
+            <div class="lesson-toolbar">
+                <button class="toolbar-btn" @click="goBack">
+                    <q-icon name="arrow_back" size="24px" />
+                </button>
+                <div class="lesson-toolbar-title">Chapter Review</div>
+                <button class="bookmark-btn" @click="toggleBookmark">
+                    <span class="material-icons"
+                        :style="{ color: isBookmarked ? '#FFD600' : 'white', fontSize: '24px' }">{{ isBookmarked ?
+                            'bookmark' : 'bookmark_border' }}</span>
+                </button>
+            </div>
             <q-linear-progress :value="progress" size="4px" color="white" class="header-progress" />
         </q-header>
 
