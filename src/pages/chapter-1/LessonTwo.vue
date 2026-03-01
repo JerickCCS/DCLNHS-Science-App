@@ -45,20 +45,31 @@
     <audio id="lesson-complete-audio" src="assets/audio/completed.mp3" preload="auto"></audio>
 
     <q-dialog v-model="showLessonComplete" @show="startConfetti" @hide="stopConfetti" persistent>
-      <q-card class="lesson-complete-card q-pa-md text-center relative-position">
-        <q-card-section>
-          <div class="stars-row flex justify-center items-center q-gutter-md">
-            <img src="assets/icons/five-stars.gif" class="star-icon big-star" />
-          </div>
-        </q-card-section>
-        <q-card-section>
-          <div class="text-h6 text-bold">🎉 Congratulations!</div>
-          <div class="text-subtitle2 q-mt-sm">You have completed this lesson.</div>
-        </q-card-section>
-        <q-card-actions align="center">
-          <q-btn label="OK" color="primary" unelevated rounded class="lesson-ok-btn" v-close-popup />
-        </q-card-actions>
-      </q-card>
+      <div class="lc-wrapper">
+        <!-- Radial burst background blobs -->
+        <div class="lc-blob lc-blob1"></div>
+        <div class="lc-blob lc-blob2"></div>
+        <div class="lc-blob lc-blob3"></div>
+
+        <!-- Star GIF -->
+        <div class="lc-star-wrap">
+          <img src="assets/icons/five-stars.gif" class="lc-star-img" />
+        </div>
+
+        <!-- Text -->
+        <div class="lc-title">🎉 Congratulations!</div>
+        <div class="lc-subtitle">You've completed this lesson.<br />Keep up the amazing work!</div>
+
+        <!-- Divider dots -->
+        <div class="lc-dots">
+          <span></span><span></span><span></span>
+        </div>
+
+        <!-- OK button -->
+        <button class="lc-ok-btn" @click="stopConfetti(); showLessonComplete = false; $router.back()">
+          Awesome!
+        </button>
+      </div>
     </q-dialog>
   </q-layout>
 </template>
