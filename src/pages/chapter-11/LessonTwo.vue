@@ -408,7 +408,11 @@ ITCZ. This is why sailors refer to the ITCZ as the doldrums or the calms."</p>
             }
         })
 
-        onUnmounted(() => { audioManager.restoreBg() })
+        onUnmounted(() => {
+            stopSpeaking()
+            stopConfetti()
+            audioManager.restoreBg()
+        })
 
         return {
             currentPage,

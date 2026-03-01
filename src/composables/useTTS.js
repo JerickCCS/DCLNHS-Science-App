@@ -12,7 +12,6 @@ export function useTTS() {
 
         try {
             if (Capacitor.getPlatform() !== "web") {
-                // Use Capacitor TTS plugin on mobile
                 console.log("Calling TTS.speak...")
                 await TextToSpeech.speak({
                     text,
@@ -21,8 +20,11 @@ export function useTTS() {
                     pitch: 1.0
                 })
                 console.log("TTS.speak completed")
+                if (isPlaying.value) {
+                    isPlaying.value = false
+                    audioManager.restoreBg()
+                }
             } else if ("speechSynthesis" in window) {
-                // Use Web Speech API on web
                 const synth = window.speechSynthesis
                 synth.cancel()
 

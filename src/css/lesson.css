@@ -249,48 +249,186 @@
 /* ============================
    Lesson Complete Modal
    ============================ */
-.lesson-complete-card {
-    border: 2px solid #ccc;
-    border-radius: 12px;
-    background: rgb(255, 255, 255);
-    box-shadow: 0px 6px 0px rgb(30, 28, 168);
+.lc-wrapper {
+  position: relative;
+  width: 88vw;
+  max-width: 360px;
+  background: #ffffff;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18), 0 8px 0 #1E88E5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 28px 32px;
+  text-align: center;
+  animation: lc-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-.lesson-ok-btn {
-    border-radius: 8px;
-    border-bottom: 6px solid #4a3fcf;
-    min-width: 120px;
-    font-weight: bold;
-    padding: 10px 20px;
-    margin-top: 16px;
-    cursor: pointer;
-    background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
-    color: #fff;
-    transition: 0.2s;
+@keyframes lc-pop {
+  from { opacity: 0; transform: scale(0.82) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.lesson-ok-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 0 0 #5b21b6;
+/* Background blobs */
+.lc-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.small-star {
-    width: 30px;
-    height: 30px;
+.lc-blob1 {
+  width: 220px;
+  height: 220px;
+  top: -80px;
+  right: -60px;
+  background: radial-gradient(circle, rgba(66, 165, 245, 0.18) 0%, transparent 70%);
 }
 
-.big-star {
-    width: 250px;
-    height: 250px;
+.lc-blob2 {
+  width: 160px;
+  height: 160px;
+  bottom: -50px;
+  left: -40px;
+  background: radial-gradient(circle, rgba(30, 136, 229, 0.14) 0%, transparent 70%);
 }
 
-:deep(.subtitle) {
-    font-size: 5.0vw;
-    font-weight: bold;
-    color: #475569;
-    margin-top: 4px;
-    line-height: 1.4;
-    text-align: center;
+.lc-blob3 {
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: -30px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+}
+
+/* Star */
+.lc-star-wrap {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 8px;
+  animation: lc-float 3s ease-in-out infinite;
+}
+
+@keyframes lc-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.lc-star-img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(66, 165, 245, 0.35));
+}
+
+/* Title */
+.lc-title {
+  position: relative;
+  z-index: 1;
+  font-size: 24px;
+  font-weight: 900;
+  color: #1a237e;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  animation: lc-fadein 0.5s 0.15s both;
+}
+
+/* Subtitle */
+.lc-subtitle {
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  font-weight: 500;
+  color: #546e7a;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  animation: lc-fadein 0.5s 0.25s both;
+}
+
+@keyframes lc-fadein {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Decorative dots */
+.lc-dots {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+  animation: lc-fadein 0.5s 0.3s both;
+}
+
+.lc-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #42A5F5;
+  opacity: 0.4;
+}
+
+.lc-dots span:nth-child(2) {
+  opacity: 0.7;
+  width: 10px;
+  height: 10px;
+}
+
+.lc-dots span:nth-child(3) {
+  opacity: 0.4;
+}
+
+/* OK / Awesome button */
+.lc-ok-btn {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 16px;
+  border: none;
+  border-bottom: 4px solid #1565C0;
+  background: linear-gradient(135deg, #42A5F5 0%, #1E88E5 100%);
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(66, 165, 245, 0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  animation: lc-fadein 0.5s 0.35s both;
+}
+
+.lc-ok-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 10px rgba(66, 165, 245, 0.35);
+  border-bottom-width: 2px;
+}
+
+.lc-ok-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(66, 165, 245, 0.5);
+}
+
+@media (max-width: 400px) {
+  .lc-wrapper {
+    width: 94vw;
+    padding: 28px 20px 24px;
+  }
+
+  .lc-star-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .lc-title {
+    font-size: 20px;
+  }
+
+  .lc-subtitle {
+    font-size: 14px;
+  }
 }
 
 /* ============================

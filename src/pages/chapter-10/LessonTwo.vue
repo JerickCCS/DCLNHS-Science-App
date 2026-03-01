@@ -702,7 +702,11 @@ Light earthquakes are felt by most people in the affected area and generally cau
       }
     })
 
-    onUnmounted(() => { audioManager.restoreBg() })
+    onUnmounted(() => {
+      stopSpeaking()
+      stopConfetti()
+      audioManager.restoreBg()
+    })
 
     return {
       currentPage,

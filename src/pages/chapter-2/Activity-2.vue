@@ -400,7 +400,11 @@ different physical states?</p>
             }
         })
 
-        onUnmounted(() => { audioManager.restoreBg() })
+        onUnmounted(() => {
+            stopSpeaking()
+            stopConfetti()
+            audioManager.restoreBg()
+        })
 
         return {
             currentPage,

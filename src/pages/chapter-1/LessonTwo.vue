@@ -583,7 +583,11 @@ will learn more about this in your higher science courses.</p>
       }
     })
 
-    onUnmounted(() => { audioManager.restoreBg() })
+    onUnmounted(() => {
+      stopSpeaking()
+      stopConfetti()
+      audioManager.restoreBg()
+    })
 
     return {
       currentPage,

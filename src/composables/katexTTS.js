@@ -20,14 +20,16 @@ export function useTTSLesson(rawPages) {
         tempDiv.innerHTML = rawPages[pageIndex]
         let text = tempDiv.innerText?.trim() || ""
 
-        // Remove LaTeX delimiters
-        text = text.replace(/\\\(|\\\)|\$\$|\\\\/g, " ")
+        // Remove LaTeX delimiters — add pause around math blocks
+        text = text.replace(/\\\((.+?)\\\)/gs, " ... $1 ... ")
+        text = text.replace(/\$\$(.+?)\$\$/gs, " ... $1 ... ")
+        text = text.replace(/\\\(|\\\)|\$\$|\\\\/g, " ... ")
 
         // Handle \text{}, \vec{}, \Delta, fractions
         text = text.replace(/\\text\{([^}]+)\}/g, "$1")
         text = text.replace(/\\vec\{([^}]+)\}/g, "$1 vector")
-        text = text.replace(/\\Delta/g, "delta")
-        text = text.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, (_, n, d) => `${n} over ${d}`)
+        text = text.replace(/\\Delta/g, " delta ")
+        text = text.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, (_, n, d) => ` ... ${n} over ${d} ... `)
 
         // Handle subscripts: _{Air} → Air, _N → N
         text = text.replace(/_\{([^}]+)\}/g, " $1")
@@ -36,19 +38,22 @@ export function useTTSLesson(rawPages) {
         // Remove leftover backslashes and curly braces
         text = text.replace(/[\\{}]/g, " ")
 
-        // Replace math symbols for speech
+        // Replace math symbols for speech — with pauses around them
         text = text
-            .replace(/=/g, " equals ")
-            .replace(/\+/g, " plus ")
-            .replace(/(?<![A-Za-z0-9])-(?![A-Za-z0-9])/g, " minus ")
+            .replace(/=/g, " ... equals ... ")
+            .replace(/\+/g, " ... plus ... ")
+            .replace(/(?<![A-Za-z0-9])-(?![A-Za-z0-9])/g, " ... minus ... ")
             .replace(/\//g, " per ")
-            .replace(/\?/g, " question mark ")
+            .replace(/\?/g, " ... ")
 
         // Units
         text = text
             .replace(/\bm\s*\/\s*s\b/g, " meters per second")
             .replace(/\bm\b/g, " meters")
             .replace(/\bs\b/g, " seconds")
+
+        // Collapse multiple ellipses/spaces but keep single pause markers
+        text = text.replace(/(\s*\.\.\.\s*){2,}/g, " ... ")
 
         // Final cleanup
         return text.replace(/\s+/g, " ").trim()
@@ -67,7 +72,10 @@ export function useTTSLesson(rawPages) {
                     pitch: 1.0,
                 })
                 console.log("TTS.speak completed")
-                isPlaying.value = false
+                if (isPlaying.value) {
+                    isPlaying.value = false
+                    audioManager.restoreBg()
+                }
             } else if ("speechSynthesis" in window) {
                 const synth = window.speechSynthesis
                 synth.cancel()

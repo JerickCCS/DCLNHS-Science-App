@@ -291,7 +291,11 @@ responsive. Present it creatively to the class.</p>
             }
         })
 
-        onUnmounted(() => { audioManager.restoreBg() })
+        onUnmounted(() => {
+            stopSpeaking()
+            stopConfetti()
+            audioManager.restoreBg()
+        })
 
         return {
             currentPage,

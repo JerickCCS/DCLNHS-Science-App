@@ -476,7 +476,11 @@ export default {
             }
         })
 
-        onUnmounted(() => { audioManager.restoreBg() })
+        onUnmounted(() => {
+            stopSpeaking()
+            stopConfetti()
+            audioManager.restoreBg()
+        })
 
         return {
             currentPage,

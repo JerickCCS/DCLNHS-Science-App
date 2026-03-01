@@ -267,7 +267,11 @@ device capable of detecting and warning people that an earthquake is coming.</p>
             }
         })
 
-        onUnmounted(() => { audioManager.restoreBg() })
+        onUnmounted(() => {
+            stopSpeaking()
+            stopConfetti()
+            audioManager.restoreBg()
+        })
 
         return {
             currentPage,

@@ -579,8 +579,8 @@ export default {
 
 .ellipsis-2-lines {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
 }
 

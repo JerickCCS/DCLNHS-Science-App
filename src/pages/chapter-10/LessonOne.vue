@@ -203,6 +203,11 @@ export default {
           </video>
           <div class="caption">Active and inactive faults.</div>
         </div>
+
+        <div class="illustration">
+      <img src="assets/img/chapter 10/active-inactive.png" alt="Placeholder">
+      <div class="caption">Active vs. Inactive Faults</div>
+    </div>
   </div>
   `,
 
@@ -623,7 +628,11 @@ export default {
       }
     })
 
-    onUnmounted(() => { audioManager.restoreBg() })
+    onUnmounted(() => {
+      stopSpeaking()
+      stopConfetti()
+      audioManager.restoreBg()
+    })
 
     return {
       currentPage,

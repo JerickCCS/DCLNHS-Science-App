@@ -517,11 +517,10 @@ export default {
             }
         })
 
-
-        onUnmounted(() => { stopSpeaking() })
-
         onUnmounted(() => {
+            stopSpeaking()
             speechSynthesis.cancel()
+            stopConfetti()
             audioManager.restoreBg()
         })
 

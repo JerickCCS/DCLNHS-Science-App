@@ -34,7 +34,7 @@
                     </div>
                     <div class="stat-sep"></div>
                     <div class="unit-stat">
-                        <span class="stat-value">16</span>
+                        <span class="stat-value">27</span>
                         <span class="stat-key">Lessons</span>
                     </div>
                     <div class="stat-sep"></div>
@@ -60,7 +60,7 @@
             <p class="desc-text">
                 Everything around you—the plants and trees, the air you breathe, the people around you, and everything
                 in the sky—are all matter, which vary in many ways. In order to understand them, you need to know what
-                science is and how scientists work an think.
+                science is and how scientists work and think.
             </p>
             <p class="desc-text">
                 Unit 1 consists of three chapters. Chapter 1 discusses the nature of science, how to use scientific
