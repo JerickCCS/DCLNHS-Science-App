@@ -47,22 +47,31 @@
         </q-page-container>
         <audio id="lesson-complete-audio" src="assets/audio/completed.mp3" preload="auto"></audio>
         <q-dialog v-model="showLessonComplete" @show="startConfetti" @hide="stopConfetti" persistent>
-            <q-card class="lesson-complete-card q-pa-md text-center relative-position">
-                <q-card-section>
-                    <div class="stars-row flex justify-center items-center q-gutter-md">
+            <div class="lc-wrapper">
+                <!-- Radial burst background blobs -->
+                <div class="lc-blob lc-blob1"></div>
+                <div class="lc-blob lc-blob2"></div>
+                <div class="lc-blob lc-blob3"></div>
 
-                        <img src="assets/icons/five-stars.gif" class="star-icon big-star" />
+                <!-- Star GIF -->
+                <div class="lc-star-wrap">
+                    <img src="assets/icons/five-stars.gif" class="lc-star-img" />
+                </div>
 
-                    </div>
-                </q-card-section>
-                <q-card-section>
-                    <div class="text-h6 text-bold">🎉 Congratulations!</div>
-                    <div class="text-subtitle2 q-mt-sm">You have completed this lesson.</div>
-                </q-card-section>
-                <q-card-actions align="center">
-                    <q-btn label="OK" color="primary" unelevated rounded class="lesson-ok-btn" v-close-popup />
-                </q-card-actions>
-            </q-card>
+                <!-- Text -->
+                <div class="lc-title">🎉 Congratulations!</div>
+                <div class="lc-subtitle">You've completed this lesson.<br />Keep up the amazing work!</div>
+
+                <!-- Divider dots -->
+                <div class="lc-dots">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <!-- OK button -->
+                <button class="lc-ok-btn" @click="stopConfetti(); showLessonComplete = false; $router.back()">
+                    Awesome!
+                </button>
+            </div>
         </q-dialog>
     </q-layout>
 </template>
@@ -478,6 +487,13 @@ export default {
                 audio.currentTime = 0;
                 audio.play().catch(() => { });
             }
+
+            // fire once immediately and fix z-index
+            confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } });
+            setTimeout(() => {
+                const canvas = document.querySelector('canvas[style*="position: fixed"]');
+                if (canvas) canvas.style.zIndex = '99999';
+            }, 50);
 
             // confetti animation
             confettiInterval = setInterval(() => {

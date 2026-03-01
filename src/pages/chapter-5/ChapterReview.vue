@@ -237,6 +237,15 @@ export default {
             stopConfetti()
             const audio = document.getElementById("lesson-complete-audio")
             if (audio) { audio.currentTime = 0; audio.play().catch(() => { }) }
+
+            confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } })
+
+            // Fix z-index after first render
+            setTimeout(() => {
+                const canvas = document.querySelector('canvas[style*="position: fixed"]')
+                if (canvas) canvas.style.zIndex = '99999'
+            }, 50)
+
             confettiInterval = setInterval(() => {
                 confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } })
             }, 500)
