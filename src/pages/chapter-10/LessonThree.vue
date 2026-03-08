@@ -240,7 +240,7 @@ export default {
       <div class="info-content">
         <div class="info-text">
           <p>1. Form a group of five members. Discuss creative ways of presenting preparedness during and after an earthquake. You should be able to demonstrate what should be done before, during, and after an earthquake in school, at home, or near coastal area settings.</p>
-          <p style="font-size: 18px;">2. Write an essay in Filipino about your role in disaster preparedness during earthquakes.</p>
+          <p>2. Write an essay in Filipino about your role in disaster preparedness during earthquakes.</p>
         </div>
       </div>
     </div>

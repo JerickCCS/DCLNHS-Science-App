@@ -91,12 +91,9 @@
 
               <div class="nav-spacer"></div>
 
-              <button class="nav-item nav-logout" @click="logout">
-                <div class="nav-icon-wrap logout-icon-wrap">
-                  <img src="assets/icons/logout.png" alt="logout" />
-                </div>
-                <span class="nav-label">Logout</span>
-                <q-icon name="chevron_right" size="18px" class="nav-arrow" />
+              <button class="nav-logout-btn" @click="logout">
+                <img src="assets/icons/logout.png" alt="logout" style="width: 18px; height: 18px;" />
+                <span>Logout</span>
               </button>
             </div>
           </div>
@@ -111,7 +108,6 @@
                 <div class="modal-avatar-ring" role="button" tabindex="0" aria-label="Change avatar"
                   @click="scrollToAvatarPicker" @keydown.enter="scrollToAvatarPicker">
                   <img :src="editForm.avatar || student.avatar || 'assets/temp/pfp.png'" class="modal-avatar-img" />
-
                 </div>
                 <div class="modal-title">Edit Profile</div>
                 <div class="modal-subtitle">Customize your student profile</div>
@@ -231,7 +227,7 @@
                     <div class="row items-center justify-between">
                       <div class="row items-center">
                         <q-avatar size="60px" class="q-mr-xs"
-                          :style="{ backgroundColor: unit.bgColor, borderRadius: '6px' }">
+                          :style="{ backgroundColor: unit.bgColor, borderRadius: '5px' }">
                           <img :src="unit.icon" style="width: 38px; height: 38px;" />
                         </q-avatar>
                         <div>
@@ -1150,14 +1146,13 @@ onMounted(() => {
 /* ============================== */
 
 .sidebar-drawer {
-  background: #f8faff;
+  background: #42a7ff;
 }
 
 .sidebar-inner {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 0;
 }
 
 .sidebar-header {
@@ -1165,8 +1160,9 @@ onMounted(() => {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 18px 18px;
-  background: linear-gradient(135deg, #008BFF 0%, #0c1374 100%);
+  padding: 24px 18px 20px;
+  background: #008BFF;
+  border-bottom: 4px solid #0c1374;
 }
 
 .sidebar-greeting {
@@ -1198,7 +1194,7 @@ onMounted(() => {
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1207,13 +1203,13 @@ onMounted(() => {
   transition: background 0.18s ease;
 
   &:active {
-    background: rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.35);
   }
 }
 
 .sidebar-divider {
   height: 3px;
-  background: linear-gradient(90deg, #008BFF, #7c3aed, #008BFF);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .sidebar-nav {
@@ -1227,28 +1223,30 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 15px 14px;
+  padding: 14px 14px;
   border-radius: 14px;
-  background: none;
+  background: rgba(255, 255, 255, 0.9);
   border: none;
   cursor: pointer;
   width: 100%;
   text-align: left;
-  margin-bottom: 6px;
-  -webkit-tap-highlight-color: rgba(0, 139, 255, 0.12);
+  margin-bottom: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+  transition: background 0.18s ease, transform 0.15s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
   &:active {
-    background: rgba(0, 139, 255, 0.1);
+    background: rgba(255, 255, 255, 0.75);
     transform: scale(0.98);
   }
 }
 
 .nav-icon-wrap {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
   background: #e8f0fe;
-  border: 2px solid #c5d8ff;
+  border: 1.5px solid #c5d8ff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1261,11 +1259,6 @@ onMounted(() => {
   }
 }
 
-.logout-icon-wrap {
-  background: #ffeaed;
-  border-color: #ffcdd2;
-}
-
 .nav-label {
   flex: 1;
   font-size: 16px;
@@ -1274,20 +1267,44 @@ onMounted(() => {
 }
 
 .nav-arrow {
-  color: #b0bec5;
-}
-
-.nav-logout .nav-label {
-  color: #e53935;
-}
-
-.nav-logout .nav-arrow {
-  color: #e57373;
+  color: #b0bec5 !important;
 }
 
 .nav-spacer {
   flex: 1;
   min-height: 20px;
+}
+
+/* Logout as a distinct full-width button */
+.nav-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: white;
+  border: 2.5px solid rgba(229, 57, 53, 0.25);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 800;
+  color: #e53935;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: background 0.18s ease, transform 0.15s ease;
+
+  img {
+    width: 18px;
+    height: 18px;
+    /* tint the icon red to match the label */
+    filter: invert(27%) sepia(90%) saturate(800%) hue-rotate(330deg) brightness(95%);
+  }
+
+  &:active {
+    transform: scale(0.97);
+    background: #fff0f0;
+  }
 }
 
 /* ============================== */
@@ -1882,8 +1899,6 @@ onMounted(() => {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
 }
 
-/* No top accent bar */
-
 .audio-modal-body {
   padding: 24px 22px 20px;
 }
@@ -1895,7 +1910,6 @@ onMounted(() => {
   margin-bottom: 20px;
 }
 
-/* Sky blue icon wrap — not dark navy */
 .audio-modal-icon-wrap {
   width: 52px;
   height: 52px;

@@ -132,6 +132,7 @@ const routes = [
       { path: 'chapter-9', component: () => import('pages/chapter-9/Chapter-9.vue'), name: 'chapter-9' },
       { path: 'unit-3-chapter-9-lesson-1', component: () => import('pages/chapter-9/LessonOne.vue'), name: 'unit-3-chapter-9-lesson-1' },
       { path: 'unit-3-chapter-9-lesson-2', component: () => import('pages/chapter-9/LessonTwo.vue'), name: 'unit-3-chapter-9-lesson-2' },
+      { path: 'unit-3-chapter-9-lesson-3', component: () => import('pages/chapter-9/LessonThree.vue'), name: 'unit-3-chapter-9-lesson-3' },
 
       //Unit 4
       { path: 'chapter-10', component: () => import('pages/chapter-10/Chapter-10.vue'), name: 'chapter-10' },

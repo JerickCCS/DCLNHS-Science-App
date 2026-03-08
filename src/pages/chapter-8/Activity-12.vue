@@ -378,11 +378,7 @@ export default {
 
         // --- Lifecycle ---
         onMounted(() => {
-            if (!route.query._reloaded) {
-                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } })
-                    .then(() => window.location.reload())
-                return
-            }
+            /* Reload Fix */
 
             processAllPages()
             currentUser.value = getCurrentUser()

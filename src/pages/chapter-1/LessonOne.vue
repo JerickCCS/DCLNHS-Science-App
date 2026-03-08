@@ -414,7 +414,6 @@ export default {
     }
 }
 </script>
-<style scoped>
-@import 'src/css/lessonBackground.css';
-@import 'src/css/lesson.css';
-</style>
+
+<style src="src/css/lessonBackground.css"></style>
+<style src="src/css/lesson.css" scoped></style>

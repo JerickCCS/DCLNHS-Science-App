@@ -115,7 +115,7 @@ export default {
     <div class="illustration">
       <img src="assets/img/chapter 10/technology banner.png" alt="Placeholder">
     </div>
-<p>DNA Molecular Markers for Plant Breeding</p>
+<p><strong>DNA Molecular Markers for Plant Breeding</strong></p>
       <p>DNA molecular markers have important applications in plant breeding. A DNA marker is a gene or DNA sequence with a known chromosome location that controls a particular gene or trait. Genetic markers are closely related to the target genes, and they act as signs or indicators of those genes.</p>
       <p>Genetic markers are grouped into two broad categories: classical markers and DNA or molecular markers. Morphological, cytological, and biochemical markers are types of classical marker, while restriction fragment length polymorphism (RFLP), amplified fragment length polymorphism (AFLP), simple sequence repeats (SSRs), single-nucleotide polymorphism (SNP), and diversity arrays technology (DArT) markers are examples of DNA markers.</p>
     </div>

@@ -123,7 +123,7 @@ export default {
         <div class="title">The Cell Cycle</div>
       </div>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-1">
+        <img src="assets/img/chapter 5/figure 5-1.png" alt="figure 5-1">
         <div class="caption">Figure 5-1. A sample 16-hour cell cycle of a typical body cell.</div>
       </div>
       <p>Once a cell is fully grown, it either stops growing or divides and produces more cells through cellular reproduction. In multicellular organisms, cellular reproduction gives the body the ability to grow and repair worn-out tissues. In unicellular organisms, on the other hand, cellular reproduction enables the production of identical copies of an individual organism.</p>
@@ -200,7 +200,7 @@ export default {
       <p>In the cytoplasm, the spindle fibers begin to form. They are made of microtubules arranged between the two centrioles.</p>
       <p>The centrioles move away from each other, propelled by the lengthening bundles of microtubules between them.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-3">
+        <img src="assets/img/chapter 5/figure 5-3.png" alt="figure 5-3">
         <div class="caption">Figure 5-3. Prophase</div>
       </div>
     </div>
@@ -213,7 +213,7 @@ export default {
       <p>The chromosomes gather at the metaphase plate, an imaginary plane that is equidistant from the two centrioles. The centromeres align with one another at the metaphase plate.</p>
       <p>Each sister chromatid faces the opposite poles of the cell. The kinetochore of identical chromatids is attached to the spindle fibers radiating from the opposite ends of the parent cell.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-4">
+        <img src="assets/img/chapter 5/figure 5-4.png" alt="figure 5-4">
         <div class="caption">Figure 5-4. Metaphase</div>
       </div>
     </div>
@@ -227,7 +227,7 @@ export default {
       <p>Each chromatid is now considered an individual chromosome.</p>
       <p>At the end of anaphase, the two poles of the cell have an equal set of chromosomes.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-5">
+        <img src="assets/img/chapter 5/figure 5-5.png" alt="figure 5-5">
         <div class="caption">Figure 5-5. Anaphase</div>
       </div>
     </div>
@@ -235,16 +235,16 @@ export default {
       `
     <div>
       <!-- Card 12 -->
-      <p>4. Telophase (2n=46) (figure 5-6)</p>
+      <p><strong>4. Telophase (2n=46) (figure 5-6)</strong></p>
       <p>Nuclear membranes start to re-form at the two poles of the cell where the chromosomes have gathered. The nuclear membranes are reconstructed from the fragments of the former nuclear membrane of the cell.</p>
       <p>The nucleoli reappear, and the chromatin fibers of each chromosome uncoil.</p>
       <p>The end of telophase marks the completion of the equal division of a nucleus into two genetically identical nuclei. This is called karyogenesis.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-6">
+        <img src="assets/img/chapter 5/figure 5-6.png" alt="figure 5-6">
         <div class="caption">Figure 5-6. Telophase</div>
       </div>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-7">
+        <img src="assets/img/chapter 5/figure 5-7.png" alt="figure 5-7">
         <div class="caption">Figure 5-7. Cytokinesis in (a) an animal cell and (b) a plant cell</div>
       </div>
     </div>
@@ -265,7 +265,7 @@ export default {
       <!-- Card 14 -->
       <p>In meiosis, one parent cell produces four daughter cells. Because of crossing-over, each daughter cell is genetically unique. Crossing-over, as shown in figure 5-8, takes place during prophase I, where homologous chromosomes pair up and exchange genetic materials at the point of contact called the chiasma (pl. chiasmata).</p>
       <div class="illustration">
-        <img src="assets/img" alt="">
+        <img src="assets/img/chapter 5/figure 5-8.png" alt="figure 5-8">
         <div class="caption">Figure 5-8. Crossing-over of homologous chromosomes</div>
       </div>
     </div>
@@ -279,7 +279,7 @@ export default {
       <p><strong>1. Prophase I (2n=46) (figure 5-9)</strong></p>
       <p>At the start of prophase I, the chromosomes, each composed of two sister chromatids, have already been duplicated. The chromosomes pair with their homologues in a process called synapsis. The paired homologues form a tetrad (since it is composed of four chromatids), cross over each other, and exchange genetic materials in a process called crossing-over.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-9">
+        <img src="assets/img/chapter 5/figure 5-9.png" alt="figure 5-9">
         <div class="caption">Figure 5-9. Prophase I</div>
       </div>
     </div>
@@ -290,7 +290,7 @@ export default {
       <p><strong>2. Metaphase I (2n=46) (figure 5-10)</strong></p>
       <p>When spindle fibers are fully formed, the paired homologous chromosomes align at the metaphase plate, with the homologues facing the opposite poles.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-10">
+        <img src="assets/img/chapter 5/figure 5-10.png" alt="figure 5-10">
         <div class="caption">Figure 5-10. Metaphase I</div>
       </div>
     </div>
@@ -301,7 +301,7 @@ export default {
       <p><strong>3. Anaphase I (2n=46) (figure 5-11)</strong></p>
       <p>Members of homologous pairs separate from each other and move toward opposite poles. The positioning of each pair of homologues at the metaphase plate and their subsequent direction of movement are random events. Their migration to the poles does not follow a specific pattern.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-11">
+        <img src="assets/img/chapter 5/figure 5-11.png" alt="figure 5-11">
         <div class="caption">Figure 5-11. Anaphase I</div>
       </div>
     </div>
@@ -312,7 +312,7 @@ export default {
       <p><strong>4. Telophase I and Cytokinesis (n=23) (figure 5-12)</strong></p>
       <p>In this stage, two daughter cells are formed. Each daughter cell contains only one chromosome from each homologous pair. This means that each daughter cell contains only a haploid number of chromosomes. The result of telophase I is required for meiosis II.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-12">
+        <img src="assets/img/chapter 5/figure 5-12.png" alt="figure 5-12">
         <div class="caption">Figure 5-12. Telophase I and cytokinesis</div>
       </div>
     </div>
@@ -326,7 +326,7 @@ export default {
       <p><strong>1. Prophase II (n=23) (figure 5-13)</strong></p>
       <p>There is no DNA replication in this stage. The sister chromatids of each chromosome are still attached at the centromere.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-13">
+        <img src="assets/img/chapter 5/figure 5-13.png" alt="figure 5-13">
         <div class="caption">Figure 5-13. Prophase II</div>
       </div>
     </div>
@@ -337,13 +337,13 @@ export default {
       <p><strong>2. Metaphase II (n=23) (figure 5-14)</strong></p>
       <p>Each chromosome aligns at the metaphase plate with the sister chromatids facing the opposite poles.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-14">
+        <img src="assets/img/chapter 5/figure 5-14.png" alt="figure 5-14">
         <div class="caption">Figure 5-14. Metaphase II</div>
       </div>
-      <p>3. Anaphase II (n=23) (figure 5-15)</p>
+      <p><strong>3. Anaphase II (n=23) (figure 5-15)</strong></p>
       <p>The sister chromatids of each chromosome in this stage separate and migrate toward opposite poles.</p>
       <div class="illustration">
-        <img src="assets/img" alt="figure 5-15">
+        <img src="assets/img/chapter 5/figure 5-15.png" alt="figure 5-15">
         <div class="caption">Figure 5-15. Anaphase II</div>
       </div>
     </div>
@@ -353,8 +353,10 @@ export default {
       <!-- Card 21 -->
       <p><strong>4. Telophase II and Cytokinesis (n=23) (figure 5-16)</strong></p>
       <p>Cell division is completed in this stage. Four haploid cells are formed. After cytokinesis, each gamete has a haploid number of chromosomes.</p>
-      <p>image</p>
-      <p>Figure 5-16. Telophase II and cytokinesis</p>
+      <div class="illustration">
+        <img src="assets/img/chapter 5/figure 5-16.png" alt="figure 5-16">
+        <div class="caption">Figure 5-16. Telophase II and cytokinesis</div>
+      </div>
     </div>
     `,
       `

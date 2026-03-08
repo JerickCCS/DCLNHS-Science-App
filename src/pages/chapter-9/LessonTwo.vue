@@ -511,16 +511,7 @@ export default {
 
         // lifecycle
         onMounted(() => {
-            // one-time full reload to fix layout rendering issue
-            if (!route.query._reloaded) {
-                router.replace({
-                    path: route.path,
-                    query: { ...route.query, _reloaded: '1' }
-                }).then(() => {
-                    window.location.reload()
-                })
-                return // stop further execution until reload
-            }
+            /* Reload Fix */
 
             // normal logic runs after reload
             currentUser.value = getCurrentUser()

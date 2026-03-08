@@ -73,6 +73,7 @@
                 </button>
             </div>
         </q-dialog>
+    </q-layout>
 </template>
 <script>
 import { ref, computed, onMounted, onUnmounted } from "vue"
@@ -105,33 +106,154 @@ export default {
         const currentUser = ref(getCurrentUser())
         let confettiInterval = null
         const lesson = flatLessons.find(l => l.route === route.path)
-        const lessonId = lesson ? String(lesson.id) : "70"
+        const lessonId = lesson ? String(lesson.id) : "65"
 
         // bookmarks
         const bookmarkedPages = ref([])
-        const pages = [
+        const pages = ref([
             `
     <div>
-      <!-- Card 1 -->
-      <div class="illustration">
-      <img src="assets/img/chapter 10/stem challenge.png" alt="Placeholder">
-    </div>
-      <div class="header">
-        <div class="title">STEM CHALLENGE</div>
-        <div class="subtitle">Solar Cooker</div>
-      </div>
-      <p>The energy from the sun has many potential uses. One of these is solar cooking, which uses the energy from sunlight to cook and heat food. Solar cooking is used in some parts of the world where access to electricity is limited or nonexistent.</p>
-      <p>People use a solar cooker when they go camping or swimming at the beach because it is portable, fuel-free, and requires minimum supervision. Food cooked in a solar cooker is also considered healthier and tastier since most of the natural nutrients are preserved as it operates at a lower temperature than that of gas or electric stoves.</p>
+        <div class="header">
+            <div class="banner">
+                <img src="assets/img/chapter 9/attic_roof.png" alt="Attic and roof space">
+                <p style="display: none;">Saving Energy Efficiently</p>
+            </div>
+            <div class="title">How can we save energy efficiently in our homes?</div>
+        </div>
+        <p>
+            An attic is a space located just beneath the roof of a house, often with limited headroom. Is having an attic a good idea in tropical countries? Its primary purpose is to create a buffer zone between the living spaces of the house and the external environment. While an attic can provide additional storage, ventilation, and insulation, it can become excessively hot in some tropical countries, especially without proper insulation, ventilation, and shading.
+        </p>
+        <p>
+            Some houses are built with well-ventilated roof spaces instead of attics. These spaces contribute to passive cooling by providing a buffer zone between internal and external spaces, particularly in the most difficult area to shade: the roof.
+        </p>
     </div>
     `,
             `
     <div>
-      <!-- Card 2 -->
-      <p>Solar cooking may have a lot of advantages, but it also comes with limitations. For one, because a solar cooker operates at a lower temperature, food takes longer to cook. The type and amount of food, as well as the weather, also affects cooking time.</p>
-      <p>How can you apply your knowledge of the three modes of heat transfer to address this limitation of solar cooking? Design and construct a solar cooker that incorporates all of the three modes and determine whether doing so can improve cooking time when using a solar cooker.</p>
+        <div class="illustration">
+            <img src="assets/img/chapter 9/figure_9_10.png" alt="A house with an attic and structure of roof space ventilation">
+            <div class="caption">Figure 9-10. (a) A house with an attic and (b) structure of roof space ventilation</div>
+        </div>
+        <p>
+            Passive cooling is crucial for maintaining or reducing the temperature inside a house without relying on active mechanical systems like air conditioning. This approach focuses on managing heat gain and naturally promoting cooling as a design strategy to minimize high energy consumption.
+        </p>
     </div>
     `,
-        ];
+            `
+    <div>
+        <p>
+            Properly orienting and designing the layout of the house can minimize direct exposure to intense sunlight. Windows and vents can allow for more natural ventilation, taking advantage of prevailing winds to encourage natural airflow and dissipate heat. Materials such as stone, concrete, and adobe can absorb and store heat during the day, releasing it slowly at night at lower temperatures.
+        </p>
+        <p>
+            Shading devices, such as overhangs, and strategically placed vegetation can block direct sunlight and reduce solar heat gain. Using insulation and light-colored, highly reflective roofing materials can prevent excess heat from entering the house. High thermal performance windows with low-emissivity coatings and multiple panes can also reduce the amount of heat that enters the house.
+        </p>
+    </div>
+    `,
+            `
+    <div>
+        <p>
+            Incorporating natural cooling elements like ponds, fountains, and vegetation can create cooler microclimates than the surrounding area. When a house is designed to be energy-efficient, it consumes less energy, significantly contributing to less greenhouse gas emissions and decreasing the effect of global warming.
+        </p>
+        <div class="illustration">
+            <img src="assets/img/chapter 9/figure_9_11.png" alt="Passive cooling techniques">
+            <div class="caption">Figure 9-11. Passive cooling techniques: (a) natural cooling system and (b) highly reflective roofing</div>
+        </div>
+    </div>
+    `,
+            `
+    <div>
+        <p>
+            Saving energy means lower energy bills, improved air quality, conservation of energy resources, and reduced pollution. In other words, saving energy means making an effort to create a better environment, ecosystem, and biodiversity.
+        </p>
+        <p>
+            When all individuals take part in saving energy, it can lead to a more sustainable, resilient, and environmentally responsible global energy landscape that contributes to a brighter future for both current and future generations.
+        </p>
+    </div>
+    `,
+            `
+    <div>
+        <div class="info-card">
+            <div class="info-title">MINI TEST 9–4</div>
+            <div class="info-content">
+                <div class="info-text">
+                    <div class="mini-questions">
+                        <p>Choose three out of seven passive cooling techniques and discuss the underlying heat transfer principles involved in each one. Write an essay to explain how these techniques can help reduce energy consumption.</p>
+                    </div>
+                    <div class="start-btn-container">
+                        <q-btn data-route="/mini-test-9-4" unelevated class="start-btn">Answer</q-btn>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `,
+            `
+    <div>
+        <div class="header">
+            <div class="banner">
+                <img src="assets/img/chapter 9/heat_to_electricity.png" alt="Technologies transforming heat into electrical energy">
+                <p style="display: none;">Technologies in Transforming Heat into Electrical Energy</p>
+            </div>
+            <div class="title">Technologies in Transforming Heat into Electrical Energy</div>
+        </div>
+        <p>
+            An increased emphasis on energy efficiency encourages research and development of new technologies and solutions, driving innovation in the energy sector. The following are some innovative devices that can be used to transform heat into electrical energy.
+        </p>
+    </div>
+    `,
+            `
+    <div>
+        <p>
+            <strong>1. Thermomagnetic Generators</strong><br>
+            Thermomagnetic generators convert waste heat into electricity. Researchers from Karlsruhe Institute of Technology (KIT) and Tohoku University in Japan have improved these generators to harness waste heat from various processes, which is typically released into the environment unused. Utilizing higher temperatures makes the process of harnessing heat for heating or power generation easier and more cost-effective.
+        </p>
+        <p>
+            The collaboration between KIT and Tohoku University significantly improved the efficiency of thermomagnetic generators, making them comparable to conventional thermoelectric generators even with small temperature differences. These generators rely on special alloys that undergo significant changes in magnetic properties with temperature fluctuations, resulting in electricity generation.
+        </p>
+    </div>
+    `,
+            `
+    <div>
+        <p>
+            Optimizing the alloy's film thickness resulted in a 3.4-fold increase in electrical power generation. This advancement opens the door to the development of custom-made thermomagnetic generators that efficiently utilize waste heat, particularly at near-room temperatures.
+        </p>
+        <div class="illustration">
+            <img src="assets/img/chapter 9/figure_9_12.png" alt="Thermomagnetic generators based on magnetic thin films">
+            <div class="caption">Figure 9-12. Thermomagnetic generators based on magnetic thin films</div>
+        </div>
+    </div>
+    `,
+            `
+    <div>
+        <p>
+            <strong>2. Thermal Photovoltaic Cells</strong><br>
+            Antora Energy has created special cells much better than regular solar cells, producing 100 times more power in similarly sized devices. These cells efficiently convert high-temperature heat into electricity, primarily for thermal energy grid storage (TEGS) applications.
+        </p>
+        <p>
+            At the heart of this innovation is a unique technology called <strong>thermophotovoltaics (TPV)</strong>, which utilizes heat to generate power. Antora Energy has significantly enhanced its efficiency, now boasting a performance of over 40%, meaning they can produce substantial amounts of power in a highly efficient manner.
+        </p>
+    </div>
+    `,
+            `
+    <div>
+        <div class="illustration">
+            <img src="assets/img/chapter 9/figure_9_13.png" alt="A wafer awaiting inspection by a confocal microscope that is part of Antora's 2MW TPV factory">
+            <div class="caption">Figure 9-13. A wafer awaiting inspection by a confocal microscope that is part of Antora's 2MW TPV factory</div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-title">SKILL-BOOSTER</div>
+            <div class="info-content">
+                <div class="info-text">
+                    <div class="mini-questions">
+                        <p>Conduct research using secondary resources (journals, reports, reviews, articles) to know other innovative devices that effectively convert heat into electrical energy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `
+        ])
         // lesson saving
         const isLessonComplete = computed(() =>
             currentUser.value?.progress?.[lessonId]?.completed || false
@@ -251,12 +373,12 @@ export default {
 
         // progress and navigation
         const updateProgress = () => {
-            progress.value = (currentPage.value + 1) / pages.length
+            progress.value = (currentPage.value + 1) / pages.value.length
         }
 
         const nextPage = async () => {
             await stopSpeaking()
-            if (currentPage.value < pages.length - 1) {
+            if (currentPage.value < pages.value.length - 1) {
                 currentPage.value++
                 updateProgress()
             } else {
@@ -328,16 +450,15 @@ export default {
             updateProgress()
 
             const pageFromQuery = parseInt(route.query.page, 10)
-            if (!isNaN(pageFromQuery) && pageFromQuery < pages.length) {
+            if (!isNaN(pageFromQuery) && pageFromQuery < pages.value.length) {
                 currentPage.value = pageFromQuery
             }
         })
 
-
-        onUnmounted(() => { stopSpeaking() })
-
         onUnmounted(() => {
+            stopSpeaking()
             speechSynthesis.cancel()
+            stopConfetti()
             audioManager.restoreBg()
         })
 
