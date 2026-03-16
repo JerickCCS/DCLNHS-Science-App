@@ -116,7 +116,11 @@ export default {
         </div>
         <p>How are the components of the living world built up from the simplest to the most complex?</p>
         <p>The biosphere is an organized collection of components of organisms and organisms themselves. Organisms interact with one another and with their environment. This interaction takes place from the most basic unit of life (cell) to the most complex level of the biological hierarchy (biosphere). All levels of life have interrelated systems and parts such as the environmental factors and the organisms that are necessary for the existence or functioning of one another. The study of the different levels of organization provides a simple way of connecting the simplest part of the living world to the most complex. Figure 6-1 shows an example of a biological organization from cell to organism.</p>
-        <p>Figure 6-1. The biological levels of organization from cell to organism</p>
+        <div class="illustration">
+            <img src="assets/img/chapter 6/figure 6-1.png" alt="Figure 6-1">
+            <div class="caption">Figure 6-1. The biological levels of organization from cell to organism</div>
+        </div>
+        <p></p>
     </div>
     `,
             `
@@ -140,7 +144,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 6-2. Animal tissues have different types.">
+            <img src="assets/img/chapter 6/figure 6-2.png" alt="Figure 6-2. Animal tissues have different types.">
             <div class="caption">Figure 6-2. Animal tissues have different types.</div>
         </div>
         <p>Plants are also composed of various tissues. Similar to animals, these tissues have their own unique structure and function. Meristematic or embryonic tissues are made up of young, actively dividing cells. These cells are typically small, six-sided, and boxlike in structure. However, as they mature, they transform into many different shapes and sizes according to their functions. They are usually found at the tips of roots and stems or shoots. Nonmeristematic or permanent tissues are composed of mature (nondividing) and differentiated cells. There are two types of nonmeristematic tissues: simple and complex.</p>
@@ -162,7 +166,7 @@ export default {
     <div>
         <p>Just like animals, plants are also composed of several organs, which include the roots, stems, leaves, and flowers (figure 6-3). Table 6-2 shows some plant organs and their functions.</p>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 6-3. Some organs of a flowering plant and of the human body">
+            <img src="assets/img/chapter 6/figure 6-3.png" alt="Figure 6-3. Some organs of a flowering plant and of the human body">
             <div class="caption">Figure 6-3. Some organs of a flowering plant and of the human body</div>
         </div>
     </div>
@@ -202,7 +206,7 @@ export default {
         </div>
         <p>A population is a group of organisms that belong to the same species living in a given geographical area. Organisms within a population can breed with one another. Specific kinds of plants, animals, fungi, protists, and bacteria found in a specific place are separately referred to as a population.</p>
         <div class="illustration">
-            <img src="assets/img" alt="Figure 6-4. The biological levels of organization from organism to biosphere">
+            <img src="assets/img/chapter 6/figure 6-4.png" alt="Figure 6-4. The biological levels of organization from organism to biosphere">
             <div class="caption">Figure 6-4. The biological levels of organization from organism to biosphere</div>
         </div>
     </div>
@@ -217,8 +221,10 @@ export default {
     `,
             `
     <div>
-        <p>SCIENCE CAREER</p>
-        <p>Wildlife Biologist</p>
+        <div class="header">
+            <div class="title">SCIENCE CAREER</div>
+        </div>
+        <p style="font-weight: bold; padding-top: 10px; margin-bottom: 5px; font-size: 19px;">Wildlife Biologist</p>
         <p>Wildlife biologists study animals in the wild and in captivity, including how they interact with their environment. A wildlife biologist is one who is willing to go out in the field and patiently study animals in their natural habitats. Their studies are focused on a variety of animals that inhabit the ocean or the forests.</p>
         <p>How can one become a wildlife biologist? First, you must earn a four-year college degree in one of the following disciplines: biology, zoology, or ecology. To advance your position, you can enroll in a master's degree in the fields mentioned, or earn a professional certification from the Biodiversity Conservation Society of the Philippines (BCSP), Haribon Foundation, and Marine Wildlife Watch of the Philippines, among others.</p>
     </div>
@@ -264,8 +270,10 @@ export default {
     `,
             `
     <div>
-        <p>SCIENCE HISTORY</p>
-        <p>The Guimaras Oil Spill</p>
+        <div class="header">
+        <div class="title">SCIENCE HISTORY</div>
+        </div>
+        <p style="font-weight: bold; padding-top: 10px; margin-bottom: 5px; font-size: 19px;">The Guimaras Oil Spill</p>
         <p>The Guimaras oil spill in 2006 is dubbed as the worst massive oil spill in Philippine history. The oil tanker M/T Solar 1, chartered by Petron, carrying more than two million liters of bunker fuel, sank on August 11, 2006, at the Guimaras Strait off the Coast of Guimaras and Negros Occidental provinces. The oil spill adversely affected marine sanctuaries and mangrove reserves in three out of five municipalities in the Guimaras Island, and even reached the shores of Iloilo and Negros. According to officials, around 1000 hectares of mangrove forests were affected, including part of the Taklong island city sanctuary, a feeding and breeding ground for fish and other species.</p>
         <p>It was only after 13 years that Guimaras can once again boast of its beautiful white, sandy beaches, and fisherfolks have returned to harvest the abundance of their marine resources.</p>
     </div>
@@ -454,7 +462,11 @@ export default {
 
         // --- Lifecycle ---
         onMounted(() => {
-            /* Reload Fix */
+            if (!route.query._reloaded) {
+                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } })
+                    .then(() => window.location.reload())
+                return
+            }
 
             currentUser.value = getCurrentUser()
             bookmarkedPages.value = loadBookmarks()

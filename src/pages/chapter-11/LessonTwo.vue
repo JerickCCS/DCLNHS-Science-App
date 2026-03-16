@@ -393,7 +393,11 @@ ITCZ. This is why sailors refer to the ITCZ as the doldrums or the calms."</p>
 
         // --- Lifecycle ---
         onMounted(() => {
-            /* Reload Fix */
+            if (!route.query._reloaded) {
+                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } })
+                    .then(() => window.location.reload())
+                return
+            }
 
             currentUser.value = getCurrentUser()
             bookmarkedPages.value = loadBookmarks()

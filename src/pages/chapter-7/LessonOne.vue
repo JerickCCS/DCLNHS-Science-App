@@ -162,7 +162,7 @@ export default {
       <!-- Card 5 -->
       <p>Suppose a man slides a fruit crate along the floor by applying a 200 N force to the right. The 200 N is the magnitude of the force while its direction is to the right. To represent the applied force, you can draw a five-centimeter-long arrow directed to the right (figure 7-2). This scale (1 cm = 40 N), however, is arbitrary.</p>
       <div class="illustration">
-        <img src="assets/img" alt="Figure 7-2. Vector representation of a 200 N force applied to slide a fruit crate along the floor">
+        <img src="assets/img/chapter 7/figure 7-2.png" alt="Figure 7-2. Vector representation of a 200 N force applied to slide a fruit crate along the floor">
         <div class="caption">Figure 7-2. Vector representation of a 200 N force applied to slide a fruit crate along the floor</div>
       </div>
       <p>In the next section, you will learn the different types of force. Arrows are used to visually represent several forces acting on an object in specific directions.</p>
@@ -190,7 +190,7 @@ export default {
   <p>\\( \\vec{F}_B \\) <strong>Buoyant Force</strong> – This is an upward force exerted by a fluid on a submerged object. In figure 7-3g, some objects, such as a boat, float in water because the buoyant force from the fluid is greater than their weight.</p>
 
       <div class="illustration">
-        <img src="assets/img" alt="Figure 7-3. Contact forces">
+        <img src="assets/img/chapter 7/figure 7-3.png" alt="Figure 7-3. Contact forces">
         <div class="caption">Figure 7-3. Contact forces</div>
       </div>
     </div>
@@ -207,7 +207,7 @@ export default {
   <p>\\( \\vec{F}_E \\) or \\( \\vec{F}_M \\) <strong>Electromagnetic Force</strong> – This force can be either attractive or repulsive and acts between charged bodies. For example, in figure 7-4b, electrostatic force can be observed when a balloon is charged, attracting the hair. The magnetic force is evident when the magnet attracts the metal nails and screws, as shown in figure 7-4c.</p>
 
       <div class="illustration">
-        <img src="assets/img" alt="Figure 7-4. Non-contact forces">
+        <img src="assets/img/chapter 7/figure 7-4.png" alt="Figure 7-4. Non-contact forces">
         <div class="caption">Figure 7-4. Non-contact forces</div>
       </div>
     </div>
@@ -220,7 +220,7 @@ export default {
       </div>
       <p>A basic method to measure force is by using a spring scale. This device consists of a spring with a pointer on one end and a hook on the other. When you hang an object on the hook, the spring stretches and the pointer indicates the measured force. However, it is important to ensure accuracy by calibrating the spring scale before use. This guarantees precise measurements.</p>
       <div class="illustration">
-        <img src="assets/img" alt="Figure 7-5. Calibrating a spring scale">
+        <img src="assets/img/chapter 7/figure 7-5.png" alt="Figure 7-5. Calibrating a spring scale">
         <div class="caption">Figure 7-5. Calibrating a spring scale</div>
       </div>
       <p>To calibrate the spring balance, follow these steps:</p>
@@ -460,7 +460,11 @@ export default {
 
         // --- Lifecycle ---
         onMounted(() => {
-            /* Reload Fix */
+            if (!route.query._reloaded) {
+                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } })
+                    .then(() => window.location.reload())
+                return
+            }
 
             processAllPages()
             currentUser.value = getCurrentUser()

@@ -113,11 +113,9 @@ export default {
     <div>
       <!-- Card 1 -->
       <div class="header">
-        <span class="lesson-pill">CHAPTER REVIEW</span>
-        <div>
-          <div class="title">Nanoparticles</div>
-        </div>
+        <div class="title">CHAPTER REVIEW</div>
       </div>
+      <p style="font-weight: bold; font-weight: bold; padding-top: 10px; margin-bottom: 5px; font-size: 19px;">Nanoparticles</p>
       <div class="illustration">
         <img src="assets/img/chapter 2/nanoparticles.png" alt="nanoparticles">
         <div class="caption">Nanoparticles seen under a microscope</div>
@@ -128,10 +126,9 @@ export default {
             `
     <div>
       <!-- Card 2 -->
-      <div class="question">
-        <div class="question-header">
-          <i class="fa-solid fa-key"></i>
-          <span>ICT CHALLENGE</span>
+      <div class="header">
+        <div class="title">
+          ICT CHALLENGE
         </div>
       </div>
       <p>Form a group with three members. Discuss how nanoscale particle manipulation is changing industries, medicine, and the environment, and offering new solutions. Present your output in class using an electronic presentation or 3D models.</p>
@@ -265,7 +262,11 @@ export default {
 
         // --- Lifecycle ---
         onMounted(() => {
-            /* Reload Fix */
+            if (!route.query._reloaded) {
+                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } })
+                    .then(() => window.location.reload())
+                return
+            }
 
             currentUser.value = getCurrentUser()
             bookmarkedPages.value = loadBookmarks()

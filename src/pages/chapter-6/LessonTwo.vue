@@ -138,7 +138,10 @@ export default {
     <div>
       <!-- Card 4 -->
       <p>The flow of energy in an ecosystem can be described using models and diagrams. A food chain is a linear arrangement of organisms according to the order in which one organism feeds on another. It identifies what organism is eaten by another organism. Figure 6-6 shows an example of a food chain where each organism is positioned according to its trophic level. For example, grass, a primary producer, is at the start of the food chain or the first trophic level. The first animal, the grasshopper, is the primary consumer and positioned at the second trophic level. The next animal, the mouse, considered the secondary consumer is positioned at the third trophic level, followed by the snake as the tertiary consumer at the fourth trophic level. When the snake dies, it is broken down by decomposers, and its nutrients are consumed by plants like grass.</p>
-      <p>IMAGE Figure 6-6. An example of a terrestrial food chain</p>
+      <div class="illustration">
+            <img src="assets/img/chapter 6/figure 6-6.png" alt="Figure 6-6">
+            <div class="caption">Figure 6-6. An example of a terrestrial food chain</div>
+        </div>
     </div>
     `,
             `
@@ -146,7 +149,7 @@ export default {
       <!-- Card 5 -->
       <p>Rarely do organisms eat just one type of food. If you list every species in an ecosystem and connect them to their food sources, you will come up with a model made up of interlocking arrows that resemble a spider web. This interconnecting food chain is called a food web. It shows the precise feeding relationships among a population of organisms. Food webs describe feeding relations in an ecosystem more accurately than food chains. An example of a food web is shown in figure 6-7.</p>
       <div class="illustration">
-        <img src="assets/img" alt="Figure 6-7. An example of a food web. What are the different food chains that constitute this food web?">
+        <img src="assets/img/chapter 6/figure 6-7.png" alt="Figure 6-7. An example of a food web. What are the different food chains that constitute this food web?">
         <div class="caption">Figure 6-7. An example of a food web. What are the different food chains that constitute this food web?</div>
       </div>
     </div>
@@ -180,7 +183,7 @@ export default {
       </div>
       <p>The number of organisms at each trophic level can be visualized through a pyramid, known as the pyramid of numbers. Other ecological pyramids, such as energy and biomass pyramids, are used to quantitatively show how much energy is transferred from one trophic level to the next.</p>
       <div class="illustration">
-        <img src="assets/img" alt="Figure 6-8. A sample pyramid of numbers">
+        <img src="assets/img/chapter 6/figure 6-8.png" alt="Figure 6-8. A sample pyramid of numbers">
         <div class="caption">Figure 6-8. A sample pyramid of numbers</div>
       </div>
       <p>A pyramid of numbers shows the abundance or number of individual organisms at each trophic level in an ecological community (figure 6-8). It suggests that a thriving community would have more plants than herbivores, and more herbivores than carnivores; otherwise, the community would collapse. However, the pyramid of numbers does not always appear as a regular pyramid. For example, a single tree (primary producer) may feed hundreds of caterpillars (primary consumer), or a deer (primary consumer) may be infested with numerous ticks (secondary consumer). Hence, the pyramid of numbers is not always upright when the number of organisms in a trophic level exceeds the number of organisms in the trophic level below it.</p>
@@ -200,11 +203,11 @@ export default {
     <div>
       <!-- Card 8 -->
       <div class="illustration">
-        <img src="assets/img" alt="Figure 6-9. A sample pyramid of biomass (in g/m²)">
+        <img src="assets/img/chapter 6/figure 6-9.png" alt="Figure 6-9. A sample pyramid of biomass (in g/m²)">
         <div class="caption">Figure 6-9. A sample pyramid of biomass (in g/m²)</div>
       </div>
       <div class="illustration">
-        <img src="assets/img" alt="Figure 6-10. A sample pyramid of energy (in thousands of kcal/cm² per year)">
+        <img src="assets/img/chapter 6/figure 6-10.png" alt="Figure 6-10. A sample pyramid of energy (in thousands of kcal/cm² per year)">
         <div class="caption">Figure 6-10. A sample pyramid of energy (in thousands of kcal/cm² per year)</div>
       </div>
       <p>In some aquatic ecosystems, the ecological pyramids are inverted-that is, there are more primary consumers (zooplankton) by mass than producers (phytoplankton). This can be attributed to the rapid growth of phytoplanktons, as well as the even higher rate of consumption by zooplanktons.</p>
@@ -358,7 +361,11 @@ export default {
 
         // --- Lifecycle ---
         onMounted(() => {
-            /* Reload Fix */
+            if (!route.query._reloaded) {
+                router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } })
+                    .then(() => window.location.reload())
+                return
+            }
 
             currentUser.value = getCurrentUser()
             bookmarkedPages.value = loadBookmarks()

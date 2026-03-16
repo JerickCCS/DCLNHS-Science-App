@@ -687,7 +687,11 @@ Light earthquakes are felt by most people in the affected area and generally cau
 
     // --- Lifecycle ---
     onMounted(() => {
-      /* Reload Fix */
+      if (!route.query._reloaded) {
+        router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } })
+          .then(() => window.location.reload())
+        return
+      }
 
       currentUser.value = getCurrentUser()
       bookmarkedPages.value = loadBookmarks()

@@ -252,10 +252,6 @@ export default {
             <img src="assets/img/chapter 2/figure 2-6.png" alt="figure 2-6">
             <div class="caption">Figure 2-6. Water molecules during state changes</div>
         </div>
-    </div>
-    `,
-      `
-    <div>
         <div class="info-card">
             <div class="info-title">MINI TEST 2-4</div>
             <div class="info-content">
@@ -273,7 +269,6 @@ export default {
         </div>
     </div>
     `
-
     ])
 
     // --- Lesson completion ---
@@ -402,7 +397,11 @@ export default {
 
     // --- Lifecycle ---
     onMounted(() => {
-      /* Reload Fix */
+      if (!route.query._reloaded) {
+        router.replace({ path: route.path, query: { ...route.query, _reloaded: '1' } })
+          .then(() => window.location.reload())
+        return
+      }
 
       currentUser.value = getCurrentUser()
       bookmarkedPages.value = loadBookmarks()
