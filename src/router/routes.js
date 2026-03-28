@@ -111,6 +111,11 @@ const routes = [
 
       //Chapter 7
       { path: 'chapter-7', component: () => import('pages/chapter-7/Chapter-7.vue'), name: 'chapter-7' },
+      { path: 'mini-test-7-1', component: () => import('pages/chapter-7/MiniTest7-1.vue'), name: 'mini-test-7-1' },
+      { path: 'mini-test-7-3', component: () => import('pages/chapter-7/MiniTest7-3.vue'), name: 'mini-test-7-3' },
+      { path: 'mini-test-7-4', component: () => import('pages/chapter-7/MiniTest7-4.vue'), name: 'mini-test-7-4' },
+      { path: 'mini-test-7-6', component: () => import('pages/chapter-7/MiniTest7-6.vue'), name: 'mini-test-7-6' },
+      { path: 'mini-test-7-7', component: () => import('pages/chapter-7/MiniTest7-7.vue'), name: 'mini-test-7-7' },
       { path: 'unit-3-chapter-7-lesson-1', component: () => import('pages/chapter-7/LessonOne.vue'), name: 'unit-3-chapter-7-lesson-1' },
       { path: 'unit-3-chapter-7-lesson-2', component: () => import('pages/chapter-7/LessonTwo.vue'), name: 'unit-3-chapter-7-lesson-2' },
       { path: 'chapter-7-technology', component: () => import('pages/chapter-7/TechnologyFocus.vue'), name: 'chapter-7-technology' },
@@ -130,6 +135,10 @@ const routes = [
 
       //Chapter 9
       { path: 'chapter-9', component: () => import('pages/chapter-9/Chapter-9.vue'), name: 'chapter-9' },
+      { path: 'mini-test-9-1', component: () => import('pages/chapter-9/MiniTest9-1.vue'), name: 'mini-test-9-1' },
+      { path: 'mini-test-9-2', component: () => import('pages/chapter-9/MiniTest9-2.vue'), name: 'mini-test-9-2' },
+      { path: 'mini-lab-9-1', component: () => import('pages/chapter-9/MiniLab9-1.vue'), name: 'mini-lab-9-1' },
+      { path: 'mini-test-9-3', component: () => import('pages/chapter-9/MiniTest9-3.vue'), name: 'mini-test-9-3' },
       { path: 'unit-3-chapter-9-lesson-1', component: () => import('pages/chapter-9/LessonOne.vue'), name: 'unit-3-chapter-9-lesson-1' },
       { path: 'unit-3-chapter-9-lesson-2', component: () => import('pages/chapter-9/LessonTwo.vue'), name: 'unit-3-chapter-9-lesson-2' },
       { path: 'unit-3-chapter-9-lesson-3', component: () => import('pages/chapter-9/LessonThree.vue'), name: 'unit-3-chapter-9-lesson-3' },

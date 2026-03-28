@@ -120,7 +120,7 @@ export default {
       </div>
       <p>The word microscope comes from the Greek words mikros, meaning "small," and skopein, meaning "to see.” The function of the microscope is to magnify very small objects so that they can be seen and examined. One of the most commonly used type of microscopes is the compound microscope. A compound microscope has two sets of lenses: the eyepiece or ocular lens at the top end of the body tube and the objective lenses at the lower end of the revolving nosepiece.</p>
       <p>The compound microscope is a fragile and expensive instrument, and it should be handled with care. In this activity, you will be introduced to the parts of a compound microscope and their functions. More importantly, you will learn how to handle the microscope properly.</p>
-      <p>OBJECTIVES</p>
+      <p><strong>OBJECTIVES</strong></p>
       <p>1. State the function of each part of a compound microscope</p>
       <p>2. Handle the microscope properly and carefully</p>
       <p>3. Properly focus a specimen under the microscope</p>
@@ -131,12 +131,12 @@ export default {
             `
     <div>
       <!-- Card 2 -->
-      <p>MATERIALS</p>
+      <p><strong>Materials</strong></p>
       <p>☐ alcohol or xylene</p>
       <p>☐ prepared slide of any specimen</p>
       <p>☐ compound microscope</p>
       <p>☐ lens paper or cotton swab</p>
-      <p>PROCEDURE</p>
+      <p><strong>PROCEDURE</strong></p>
       <p>1. Identify the parts of a microscope and list down their functions in table 1.</p>
       <p>2. In using the microscope, observe the following:</p>
       <p>a. Carry the microscope with both hands. Grasp the arm with one hand and support the base with the other hand.</p>
@@ -161,7 +161,7 @@ export default {
             `
     <div>
       <!-- Card 4 -->
-      <p>DATA AND RESULTS</p>
+      <p><strong>DATA AND RESULTS</strong></p>
       <p>Table 1. Parts of a Compound Microscope and Their Fuctions</p>
       <p>Table 2. Computation of Total Magnification</p>
       <p>ANALYSIS AND INTEREPRETATION</p>
@@ -175,7 +175,7 @@ export default {
             `
     <div>
       <!-- Card 5 -->
-      <p>GENERALIZATION</p>
+      <p><strong>GENERALIZATION</strong></p>
       <p>1. What are the three classifications of the parts of a microscope?</p>
       <p>2. How should one use and maintain a microscope?</p>
       <p>3. How do you compute for the total magnification of a microscope?</p>

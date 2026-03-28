@@ -117,13 +117,13 @@ export default {
     <div>
       <!-- Card 1 -->
       <div class="header">
-        <div class="title">Lesson 1 Force and Interaction</div>
+        <div class="title">Force and Interaction</div>
       </div>
       <p>Forces are present everywhere in your daily life. Whether you are sitting, standing, writing, or playing, different kinds of forces are at work. When you sit on a chair and you push on it, it pushes back on you. The same goes for when you stand on the floor. You press down, and the floor pushes back. When you write on paper, especially if it is a bit rough, you are applying force. Therefore, force is basically an interaction between two things or between something and its surroundings.</p>
       <p>A force is essentially a push or a pull, capable of setting an object into motion or bringing it to a halt. Moreover, it can even change the shape of an object when applied.</p>
       <p>Look at figure 7-1. Can you identify which of these illustrations demonstrate a force setting an object in motion, bringing it to a stop, or changing the shape of an object?</p>
       <div class="illustration">
-        <img src="assets/img" alt="Figure 7-1. Effects of forces">
+        <img src="assets/img/chapter 7/figure 7-1.png" alt="Figure 7-1. Effects of forces">
         <div class="caption">Figure 7-1. Effects of forces</div>
       </div>
     </div>
@@ -140,6 +140,21 @@ export default {
       <!-- Card 3 -->
       <p>Lastly, in figures 7-le and 7-1f, you see forces that change the shape or deform an object. In order to mold a clay, you need to apply force on it. When you blow air into a balloon, the pressure inside increases because the air molecules push more against the walls, creating a force on the inside surface.</p>
       <p>Forces play a crucial role not only in the physical world, but also across various scientific disciplines, such as biology, chemistry, and Earth science. In the earlier chapters, you explored concepts in chemistry and biology that have direct connections to physics. For example, the solubility of a substance in a specific solvent is determined by the forces between solute and solvent particles. Furthermore, in processes such as mitosis and meiosis, forces come into play by ensuring the accurate separation of chromosomes to each daughter cell. In the next chapters, you will learn how forces in the Earth's mantle propel the movement of tectonic plates, giving rise to different phenomena such as earthquakes, volcanic eruptions, and the formation of mountain ranges.</p>
+      <div class="info-card">
+  <div class="info-title">MINI TEST 7-1</div>
+  <div class="info-content">
+    <div class="info-text">
+      <div class="mini-questions">
+        <p>Examine the following situations where forces are applied and predict the effect of the force(s).
+      </div>
+      <div class="start-btn-container">
+        <q-btn data-route="/mini-test-7-1" unelevated class="start-btn">
+          Answer
+        </q-btn>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
     `,
             `
@@ -152,8 +167,7 @@ export default {
       <p>Force is a vector quantity and is usually expressed in its SI unit, the newton (N). As a vector, force is represented as a line with an arrowhead at its tip. The length of the arrow indicates the magnitude of the force, while the arrowhead tells its direction.</p>
       <p>Meanwhile, the four cardinal directions—north (N), south (S), east (E), and west (W)—are fundamental conventions employed in a Cartesian plane. Consequently, north and east signify positive directions, while south and west signify their negative counterparts. Northwest (NW), southwest (SW), northeast (NE), and southeast (SE) form an angle of 45 degrees from the reference directions.</p>
       <div class="illustration">
-        <img src="assets/img" alt="Cardinal directions diagram">
-        <div class="caption">Cardinal directions diagram</div>
+        <img src="assets/img/chapter 7/directions.png" alt="Cardinal directions diagram">
       </div>
     </div>
     `,
@@ -166,6 +180,21 @@ export default {
         <div class="caption">Figure 7-2. Vector representation of a 200 N force applied to slide a fruit crate along the floor</div>
       </div>
       <p>In the next section, you will learn the different types of force. Arrows are used to visually represent several forces acting on an object in specific directions.</p>
+      <div class="info-card">
+  <div class="info-title">MINI TEST 7-2</div>
+  <div class="info-content">
+    <div class="info-text">
+      <div class="mini-questions">
+        <p>Draw an accurate representation of the following forces using a scale (1 cm = 40 N):</p>
+        <p><strong>1.</strong> A 20 N force applied to the east</p>
+        <p><strong>2.</strong> A 100 N force applied to the west</p>
+        <p><strong>3.</strong> A 120 N force applied to the southeast</p>
+        <p><strong>4.</strong> An 85 N force applied to the north</p>
+        <p><strong>5.</strong> A 180 N force applied to the northwest</p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
     `,
             `
@@ -210,6 +239,23 @@ export default {
         <img src="assets/img/chapter 7/figure 7-4.png" alt="Figure 7-4. Non-contact forces">
         <div class="caption">Figure 7-4. Non-contact forces</div>
       </div>
+
+      <div class="info-card">
+  <div class="info-title">MINI TEST 7-3</div>
+  <div class="info-content">
+    <div class="info-text">
+      <div class="mini-questions">
+        <p>Determine the forces involved various situations</p>
+      </div>
+      <div class="start-btn-container">
+        <q-btn data-route="/mini-test-7-3" unelevated class="start-btn">
+          Answer
+        </q-btn>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
     `,
             `
@@ -240,7 +286,7 @@ export default {
         <div class="title">SCIENCE HISTORY</div>
       </div>
       <div class="illustration">
-        <img src="assets/img" alt="Spring scale diagram">
+        <img src="assets/img/chapter 7/science history.png" alt="Spring scale diagram">
         <div class="caption">A spring scale is used to measure the force or weight of an object. It has a spring fixed at one end and a hook at the other end.</div>
       </div>
       <p>Richard Salter invented the first spring scale in 1770. This device works by following Hooke's law, which states that the force applied to a spring is directly proportional to the elongation or displacement of the spring from its equilibrium position.</p>
@@ -250,29 +296,14 @@ export default {
     <div>
       <!-- Card 11 -->
       <div class="info-card">
-  <div class="info-title">MINI TEST</div>
+  <div class="info-title">MINI TEST 7-4</div>
   <div class="info-content">
     <div class="info-text">
       <div class="mini-questions">
-        <p><strong>1.</strong> Applying force on the brake lever</p>
-        <p><strong>2.</strong> Applying force on the shopping cart</p>
-        <p><strong>3.</strong> Applying force in molding the clay pot</p>
-        <p><strong>4.</strong> Applying force on the ping-pong ball</p>
-        <p><strong>5.</strong> Applying force on the javelin</p>
-        <p><strong>6.</strong> 20 N, east</p>
-        <p><strong>7.</strong> 100 N, west</p>
-        <p><strong>8.</strong> 120 N, southeast</p>
-        <p><strong>9.</strong> 85 N, north</p>
-        <p><strong>10.</strong> 180 N, northwest</p>
-        <p><strong>11.</strong> swinging a pendulum</p>
-        <p><strong>12.</strong> pushing a box on an inclined plane</p>
-        <p><strong>13.</strong> a stone hung using a spring balance</p>
-        <p><strong>14.</strong> (Blank)</p>
-        <p><strong>15.</strong> (Blank)</p>
-        <p><strong>16.</strong> (Blank)</p>
+        <p><strong>Try and measure the amount of force indicated in the different spring balances.</strong></p>
       </div>
       <div class="start-btn-container">
-        <q-btn data-route="/mini-test" unelevated class="start-btn">
+        <q-btn data-route="/mini-test-7-4" unelevated class="start-btn">
           Answer
         </q-btn>
       </div>

@@ -128,7 +128,7 @@ export default {
       <!-- Card 2 -->
       <p>This smartphone uses a Li-ion battery.</p>
       <div class="illustration">
-        <img src="assets/img" alt="This smartphone uses a Li-ion battery.">
+        <img src="assets/img/chapter 3/battery.png" alt="This smartphone uses a Li-ion battery.">
         <div class="caption">This smartphone uses a Li-ion battery.</div>
       </div>
       <p>Researchers are currently looking into switching from a liquid to a solid-state battery in which all components are solid. This advancement will solve the flammability and liquid leakage issues of conventional batteries. However, like any other technologies, solid-state batteries have drawbacks, such as their expensive fabrication cost and fast degradation after several charge-discharge cycles. Scientists are continuously investigating possible solutions to these issues to develop more reliable and better-performing batteries.</p>

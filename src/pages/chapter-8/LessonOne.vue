@@ -114,7 +114,6 @@ export default {
     <div>
       <!-- Card 1 -->
       <div class="header">
-        <span class="lesson-pill">Lesson 1</span>
         <div>
           <div class="title">Basic Concepts of Motion</div>
         </div>
@@ -129,23 +128,33 @@ export default {
       <!-- Card 2 -->
       <p>In the previous chapter, we already introduced the four cardinal directions-north (N), south (S), east (E), and west (W)-as fundamental conventions utilized in a Cartesian plane. The positive directions are north and east, while the south and west are the negative ones.</p>
       <div class="illustration">
-        <img src="assets/images/cartesian_plane.jpg" alt="Cartesian Coordinate System with four quadrants and cardinal directions">
-        <div class="caption">Cartesian Coordinate System showing quadrants and directions</div>
+        <img src="assets/img/chapter 8/directions.png" alt="Cartesian Coordinate System with four quadrants and cardinal directions">
       </div>
     </div>
     `,
       `
     <div>
       <!-- Card 3 -->
-      <div class="info-card">
-        <div class="info-title">SCIENCE HISTORY</div>
+      <div class="header">
+        <div>
+          <div class="title">Science History</div>
+        </div>
+        <div class="illustration">
+          <img src="assets/img/chapter 8/rene descartes.png" alt="Portrait of René Descartes">
+        </div>
+      </div>
+      <p>French mathematician and philosopher René Descartes developed the Cartesian Coordinate System in the 17th Century. The Cartesian Coordinate System is also called a rectangular coordinate system with x- and y-axes.</p>
+ 
+<p>René Descartes came up with the idea of the coordinate system when he was relaxing on his bed. He observed and got curious about how to figure out the crisscross motion of the fly in the ceiling. He used a piece of paper and represented the ceiling as rectangular. He picked the corner of the rectangle as the starting point and determined the location of the fly by measuring the horizontal and vertical positions from the reference point. Descartes could now explain the exact location of the fly on the paper using the numbers on the paper.</p>
+ 
+<p>In physics, Cartesian coordinates can be used to describe the position of objects in space. In addition, it can also be used to graphically represent motion, forces, and other physical phenomena.</p>
+
+<div class="info-card">
+        <div class="info-title">MINI TEST 8-1</div>
         <div class="info-content">
           <div class="info-text">
-            <p>Learn about René Descartes and the development of the Cartesian Coordinate System. Click the button to explore the history.</p>
-            <div class="start-btn-container">
-              <q-btn data-route="/science-history-8-1" unelevated class="start-btn">
-                Explore
-              </q-btn>
+            <p>Cite applications of motion in biology, chemistry, and Earth science that were not mentioned yet in the discussion. Briefly explain your answers.</p>
+            
             </div>
           </div>
         </div>
@@ -156,7 +165,6 @@ export default {
     <div>
       <!-- Card 4 -->
       <div class="header">
-        <span class="lesson-pill">Lesson 1</span>
         <div>
           <div class="title">Distance or Displacement</div>
         </div>
@@ -164,24 +172,6 @@ export default {
       <p>Talking about motion, we look at simple ideas like how far and how fast things go, and how they change speed. The fundamental concepts of motion, such as time, distance or displacement, and speed or velocity, will help us determine how things move.</p>
       <p>Moreover, the concept of motion has applications in other scientific domains, such as biology, chemistry, and Earth science. For instance, some processes, such as diffusion, osmosis, and active transport, help in the movement of molecules and ions within cells.</p>
       <p>Understanding motion also aids in predicting the reaction rates and products since atoms and molecules rearrange to form a new substance in chemical reactions. Weather patterns and long-term climates can be determined through the motion of air masses and ocean currents.</p>
-    </div>
-    `,
-      `
-    <div>
-      <!-- Card 5 -->
-      <div class="info-card">
-        <div class="info-title">MINI TEST 8-1</div>
-        <div class="info-content">
-          <div class="info-text">
-            <p>Cite applications of motion in biology, chemistry, and Earth science that were not mentioned yet in the discussion. Briefly explain your answers.</p>
-            <div class="start-btn-container">
-              <q-btn data-route="/mini-test-8-1" unelevated class="start-btn">
-                Answer
-              </q-btn>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     `,
       `
@@ -217,7 +207,7 @@ export default {
     <div>
       <!-- Card 10 -->
       <div class="illustration">
-        <img src="assets/images/distance_displacement.jpg" alt="Diagram of an athlete running from point A to C, then back to B">
+        <img src="assets/img/chapter 8/figure 8-1.png" alt="Diagram of an athlete running from point A to C, then back to B">
         <div class="caption">Figure 8-1. The distance and displacement of the athlete are not equal (not drawn to scale).</div>
       </div>
     </div>
@@ -226,7 +216,6 @@ export default {
     <div>
       <!-- Card 11 -->
       <div class="header">
-        <span class="lesson-pill">Lesson 1</span>
         <div>
           <div class="title">Problem-Solving Techniques</div>
         </div>
@@ -252,15 +241,13 @@ export default {
     <div>
       <!-- Card 13 -->
       <div class="header">
-        <span class="lesson-pill">Lesson 1</span>
         <div>
           <div class="title">EXAMPLE 8-1</div>
-          <div class="subtitle">Baseball Field Dimensions</div>
         </div>
       </div>
+      <p style="font-weight: bold; padding-top: 10px; margin-bottom: 5px; font-size: 19px; text-align: center;">Baseball Field Dimensions</p>
       <div class="illustration">
-        <img src="assets/images/baseball_diamond.jpg" alt="Diagram of a baseball diamond with base distances labeled">
-        <div class="caption">Baseball field dimensions</div>
+        <img src="assets/img/chapter 8/example 8-1.png" alt="Diagram of a baseball diamond with base distances labeled">
       </div>
     </div>
     `,
@@ -291,18 +278,29 @@ export default {
     <div>
       <!-- Card 16 -->
       <div class="info-card">
-        <div class="info-title">MINI TEST 8-2</div>
-        <div class="info-content">
-          <div class="info-text">
-            <p>Solve the following problems and show your systematic solutions (Given, Find, Solution, and Rationalization).</p>
-            <div class="start-btn-container">
-              <q-btn data-route="/mini-test-8-2" unelevated class="start-btn">
-                Answer
-              </q-btn>
-            </div>
-          </div>
-        </div>
+  <div class="info-title">MINI TEST 8-2</div>
+  <div class="info-content">
+    <div class="info-text">
+      <p>Solve the following problems and show your systematic solutions (Given, Find, Solution, and Rationalization).</p>
+      <div class="mini-questions">
+        <p><strong>1.</strong> A boy walks 6 m to the right. He then walks 5 m to the left.</p>
+        <p>a. What is the total distance he traveled?</p>
+        <p>b. What is his displacement?</p>
+        <p><em>For your rationalization, answer this question: Are your answers to (a) and (b) the same? Explain your answer.</em></p>
+        <br/>
+        <p><strong>2.</strong> A toy car travels in a circular path of a radius of 1 m.</p>
+        <p>a. What is the distance traveled by the toy car?</p>
+        <p>b. What is the displacement covered by the toy car in 1 circular path?</p>
+        <p><em>For your rationalization, answer this question: Are your answers to (a) and (b) the same? Explain your answer.</em></p>
       </div>
+      <div class="start-btn-container">
+        <q-btn data-route="/mini-test-8-2" unelevated class="start-btn">
+          Answer
+        </q-btn>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
     `,
       `
@@ -311,6 +309,22 @@ export default {
       <div class="header">
           <div class="title">Speed or Velocity</div>
       </div>
+      <div class="info-card">
+  <div class="info-title">MINI LAB 8-1</div>
+  <div class="info-content">
+    <div class="info-text">
+      <p><strong>How fast can you walk?</strong></p>
+      <p><strong>Materials:</strong> meterstick and stopwatch</p>
+      <p><strong>Procedure:</strong></p>
+      <div class="mini-questions">
+        <p><strong>1.</strong> Assign one corner of a room as the reference point.</p>
+        <p><strong>2.</strong> Using the meterstick, measure the distance (in meters) between the reference point and another corner of the room.</p>
+        <p><strong>3.</strong> Ask a partner to stay at the other corner and record the time (in seconds) it takes you to walk from the reference point to the other corner.</p>
+        <p><strong>4.</strong> Calculate your speed. Express it in meters per second.</p>
+      </div>
+    </div>
+  </div>
+</div>
       <p>When moving along the road, you can move at the same speed, speed up, or slow down, depending on the situation. When you are late for an appointment, you usually speed up to cover a greater distance at a lesser time of travel.</p>
       <p>When you encounter a yellow or red traffic signal along the way, you need to slow down in order to stop within the stopping distance to avoid any traffic law violation. When you drive around a curved path, it is better to slow down instead of speeding up in order to avoid accidents. These are some situations showing varying speeds or velocities.</p>
     </div>
@@ -328,19 +342,6 @@ export default {
       <!-- Card 19 -->
       <p>Given that the SI units for length are meter (m) and second (s), respectively, it follows that we can express speed and velocity using the unit meter per second (m/s). Moreover, velocity can carry additional information, such as a particular direction, or, in certain instances, positive or negative values indicating the motion's orientation.</p>
       <p>Other common units of speed or velocity include feet per second (ft/s), kilometers per hour (km/h) and miles per hour (mi/h).</p>
-      <div class="info-card">
-        <div class="info-title">MINI LAB 8-1</div>
-        <div class="info-content">
-          <div class="info-text">
-            <p>How fast can you walk? Measure your walking speed using simple materials and follow the procedure.</p>
-            <div class="start-btn-container">
-              <q-btn data-route="/mini-lab-8-1" unelevated class="start-btn">
-                Start Lab
-              </q-btn>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     `,
       `
@@ -367,7 +368,6 @@ export default {
     <div>
       <!-- Card 22 -->
       <div class="header">
-        <span class="lesson-pill">Lesson 1</span>
         <div>
           <div class="title">EXAMPLE 8-2</div>
         </div>

@@ -119,6 +119,9 @@ export default {
       <div class="header">
         <div class="title">Preserving Lives through Road Safety</div>
       </div>
+      <div class="illustration">
+        <img src="assets/img/chapter 8/technology.png" alt="Displacement-time graph showing linear motion">
+      </div>
       <p>Traffic rules serve as essential guidelines to regulate the movement of vehicles and pedestrians to prevent road accidents. Adherence to these rules is important in establishing a secure and well-organized traffic environment. Ensuring the use of safety features installed in vehicles, such as seat belts, airbags, and rear-view cameras, significantly contributes in minimizing the impact of forces and abrupt changes in motion on passengers.</p>
       <p>This, in turn, protects individuals from potential injuries or fatal accidents. According to data from the WHO Global Health Estimates (2020), there is an average of 12 deaths per 100,000 Filipino population due to road accidents from 2015-2019, which include drivers, passengers, motorcyclists, cyclists, and pedestrians.</p>
     </div>

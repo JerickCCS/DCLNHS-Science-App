@@ -119,7 +119,7 @@ export default {
 <p>OBJECTIVE</p>
 <p>Measure the amount of water vapor in the air</p>
 
-<p>MATERIALS</p>
+<p><strong>Materials</strong></p>
 <table style="border-collapse: collapse;">
   <tr>
     <td>■ Water at room temperature</td>
@@ -142,7 +142,7 @@ export default {
             ,
             `
     <div>
-        <p>PROCEDURE</p>
+        <p><strong>PROCEDURE</strong></p>
         
         <p style="padding-left: 10px;">1. Attach the strings to the upper part of the illustration board to form the handles.</p>
 <p style="padding-left: 10px;">2. Tape two thermometers side by side on the illustration board with their bulbs hanging off the bottom of the illustration board</p>

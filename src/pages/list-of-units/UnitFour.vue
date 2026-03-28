@@ -94,7 +94,10 @@
 
             <!-- Handle -->
             <div class="sheet-handle" @pointerdown="startDrag">
-                <div class="handle-bar"></div>
+                <div class="handle-arrow">
+                    <q-icon name="keyboard_arrow_up" size="28px" />
+                </div>
+                <!-- <div class="handle-hint">Drag to expand</div> -->
                 <div class="handle-label">
                     <span class="handle-title">Chapters</span>
                     <span class="handle-count">{{ chapters.length }} available</span>
@@ -606,12 +609,24 @@ function goBack() {
     cursor: grabbing;
 }
 
-.handle-bar {
-    width: 40px;
-    height: 4px;
-    background: #d1d5db;
-    border-radius: 2px;
-    margin: 0 auto 10px;
+.handle-arrow {
+    display: flex;
+    justify-content: center;
+    color: #9ca3af;
+    margin-bottom: 2px;
+    animation: handle-bounce 2s ease-in-out infinite;
+}
+
+@keyframes handle-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
 }
 
 .handle-label {

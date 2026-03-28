@@ -115,10 +115,6 @@ export default {
             `
     <div>
 <div class="header">
-          <div class="banner">
-        <img src="assets/img/chapter 9/particle_motion.png" alt="Particle motion">
-        <p style="display: none;">Energy and Temperature</p>
-      </div>
           <div class="title">How does the motion of the particles of a body determine its energy and temperature?</div>
         </div>
       
@@ -137,11 +133,12 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img/chapter 9/figure_9_1.png" alt="Particles in motion">
+            <img src="assets/img/chapter 9/figure 9-1.png" alt="Particles in motion">
+            <div class="caption">Figure 9-1. Particles of matter (shown here as spheres) are in constant random motion</div>
         </div>
         <div class="illustration">
-            <img src="assets/img/chapter 9/figure_9_2.png" alt="Two containers with different temperatures">
-                <div class="caption">Figure 9-1. Particles of matter (shown here as spheres) are in constant random motion</div>
+            <img src="assets/img/chapter 9/figure 9-2.png" alt="Two containers with different temperatures">
+
                 <div class="caption">Figure 9-2. The substances in both containers have the same mass. However, the temperature of container A is higher than that of container B. Thus, the particles in substance A move faster compared to the particles in substance B.</div>
         </div>
     </div>
@@ -156,7 +153,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img/chapter 9/figure_9_3.png" alt="Cup vs kettle of boiling tea">
+            <img src="assets/img/chapter 9/figure 9-3.png" alt="Cup vs kettle of boiling tea">
                 <div class="caption">Figure 9-3. Which has more internal energy: a cup of boiling tea or a kettle of boiling tea?</div>
         </div>
         <p>
@@ -186,10 +183,6 @@ export default {
             `
     <div>
 <div class="header">
-          <div class="banner">
-        <img src="assets/img/chapter 9/heat_transfer.png" alt="Heat transfer">
-        <p style="display: none;">Basic Concepts of Heat</p>
-      </div>
           <div class="title">How is heat related to temperature?</div>
         </div>
       
@@ -226,7 +219,7 @@ export default {
             In Mini Lab 9-1, your palm and the ice cube initially have different temperatures. Your palm has a higher temperature than the ice. When the two come in contact with each other, some of the energy from your palm is transferred to the ice and partially melts it. The energy in transit from one body to another is called <strong>heat</strong>. Heat transfer between bodies occurs solely because of the temperature difference between them.
         </p>
         <div class="illustration">
-            <img src="assets/img/chapter 9/figure_9_4.png" alt="Heat transfer from hand to ice">
+            <img src="assets/img/chapter 9/figure 9-4.png" alt="Heat transfer from hand to ice">
                 <div class="caption">Figure 9-4. Heat is transferred from the palm to the ice due to temperature difference</div>
         </div>
     </div>
@@ -244,7 +237,7 @@ export default {
             In Figure 9-5, as heat flows from block A (hot body) to block B (cold body), the temperature of block A decreases, while the temperature of block B increases. When the two bodies reach the same temperature, heat transfer stops. This means the bodies have reached their <strong>thermal equilibrium</strong>, a condition in which there is no flow of internal energy.
         </p>
         <div class="illustration">
-            <img src="assets/img/chapter 9/figure_9_5.png" alt="Heat transfer mechanism">
+            <img src="assets/img/chapter 9/figure 9-5.png" alt="Heat transfer mechanism">
                 <div class="caption">Figure 9-5. The mechanism of heat transfer: (A) heat flows from a body of higher temperature to a body of lower temperature until they reach (B) thermal equilibrium.</div>
         </div>
     </div>

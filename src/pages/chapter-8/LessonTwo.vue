@@ -114,7 +114,6 @@ export default {
     <div>
       <!-- Card 1 -->
       <div class="header">
-        <span class="lesson-pill">Lesson 2</span>
         <div>
           <div class="title">Uniform Motion</div>
         </div>
@@ -122,13 +121,8 @@ export default {
       <p>An object has uniform motion if it moves at a constant velocity. The only formula you need in solving a problem with uniform motion is</p>
       <p>\\( v = \\frac{d}{t} \\)</p>
       <p>If there are only three physical quantities, you can use the triangle technique to solve for the different unknowns. By just covering the unknown quantity, you can get the formula using the triangle technique.</p>
-    </div>
-    `,
-      `
-    <div>
-      <!-- Card 2 -->
       <div class="illustration">
-        <img src="assets/images/triangle_technique.jpg" alt="Triangle technique diagram showing v = d/t with covering method">
+        <img src="assets/img/chapter 8/triangle.jpeg" alt="Triangle technique diagram showing v = d/t with covering method">
         <div class="caption">Triangle technique for solving uniform motion problems</div>
       </div>
     </div>
@@ -139,11 +133,6 @@ export default {
       <p>Solving for the distance, \\( d = vt \\).</p>
       <p>Solving for the time, \\( t = \\frac{d}{v} \\).</p>
       <p>However, the triangle technique is not applicable when dealing with more than three quantities; instead, the derivation of the formula should be done. To derive the distance formula, you should multiply both sides of the equation by time. Whatever is done on one side of the equation should be done on the other side. This method can provide a deeper understanding and flexibility in solving problems even with more than three quantities.</p>
-    </div>
-    `,
-      `
-    <div>
-      <!-- Card 4 -->
       <p>\\( v = \\frac{d}{t} \\)</p>
       <p>\\( t(v) = \\left( \\frac{d}{t} \\right) t \\)</p>
       <p>\\( d = vt \\)</p>
@@ -166,7 +155,6 @@ export default {
     <div>
       <!-- Card 6: Visual Representation of Motion -->
       <div class="header">
-        <span class="lesson-pill">Visual Representation</span>
         <div>
           <div class="title">Visual Representation of Motion</div>
         </div>
@@ -174,7 +162,7 @@ export default {
       <p>Motion experiments often employ tape charts to help us discern the nature of movement. These charts can reveal outcomes that align with specific scenarios.</p>
       <p><strong>Case I: Constant Velocity</strong></p>
       <div class="illustration">
-        <img src="assets/images/constant_velocity.jpg" alt="Tape chart showing constant velocity motion">
+        <img src="assets/img/chapter 8/constant velocity.gif" alt="Tape chart showing constant velocity motion">
         <div class="caption">Constant velocity - equal displacements in equal time intervals</div>
       </div>
       <p>In this case, the car maintains a constant rightward velocity. During equal time intervals, the race car covers the same displacement, which indicates that it moves at constant velocity.</p>
@@ -185,7 +173,7 @@ export default {
       <!-- Card 7: Case II -->
       <p><strong>Case II: Uniformly Increasing Velocity</strong></p>
       <div class="illustration">
-        <img src="assets/images/increasing_velocity.jpg" alt="Tape chart showing uniformly increasing velocity">
+        <img src="assets/img/chapter 8/increasing velocity.gif" alt="Tape chart showing uniformly increasing velocity">
         <div class="caption">Uniformly increasing velocity - progressively larger displacements</div>
       </div>
       <p>Here, the car moves to the right while its velocity steadily increases. Over equal time intervals, the race car covers progressively larger displacements. This pattern indicates that the car's velocity is rising uniformly rightward.</p>
@@ -196,7 +184,7 @@ export default {
       <!-- Card 8: Case III -->
       <p><strong>Case III: Uniformly Decreasing Velocity</strong></p>
       <div class="illustration">
-        <img src="assets/images/decreasing_velocity.jpg" alt="Tape chart showing uniformly decreasing velocity">
+        <img src="assets/img/chapter 8/decreasing velocity.gif" alt="Tape chart showing uniformly decreasing velocity">
         <div class="caption">Uniformly decreasing velocity - progressively smaller displacements</div>
       </div>
       <p>For an equal time interval, decreasing displacement was covered by the car. This indicates that the car is slowing down. The final velocity is lower than the initial velocity.</p>
@@ -206,14 +194,13 @@ export default {
     <div>
       <!-- Card 9: Graphical Analysis of Motion -->
       <div class="header">
-        <span class="lesson-pill">Graphical Analysis</span>
         <div>
           <div class="title">Graphical Analysis of Motion</div>
         </div>
       </div>
       <p>If a bicycle has a velocity of 4 m/s, it means that it travels 4 m every second. From its initial position (0 m) at 0 s, it reaches the 8 m position after 2 s and the 12 m position after 3 s. The bicycle covers equal distances within the same lengths of time. Thus, its velocity is uniform, or constant. A constant-velocity motion is described as uniform motion.</p>
       <div class="illustration">
-        <img src="assets/images/table_8_1.jpg" alt="Table 8-1 showing positions of bicycle at different times">
+        <img src="assets/img/chapter 8/table 8-1.png" alt="Table 8-1 showing positions of bicycle at different times">
         <div class="caption">Table 8-1. Positions of a Bicycle at Different Times</div>
       </div>
     </div>
@@ -268,7 +255,8 @@ export default {
     <div>
       <!-- Card 15 -->
       <div class="illustration">
-        <img src="assets/images/position_time_graphs.jpg" alt="Various position-time graphs showing different types of motion">
+        <img src="assets/img/chapter 8/table 8-2.png" alt="position-time">
+        <img src="assets/img/chapter 8/table 8-2 b.png" alt="position-time">
         <div class="caption">Table 8-2. Descriptions of Different Position-Time Graphs with Examples</div>
       </div>
     </div>
@@ -277,14 +265,13 @@ export default {
     <div>
       <!-- Card 16 -->
       <div class="header">
-        <span class="lesson-pill">Lesson 2</span>
         <div>
           <div class="title">EXAMPLE 8-3</div>
         </div>
       </div>
       <p>Consider the displacement-time graph below. Determine the velocity of the object and describe its motion using the graph.</p>
       <div class="illustration">
-        <img src="assets/images/example_8_3_graph.jpg" alt="Displacement-time graph showing linear motion">
+        <img src="assets/img/chapter 8/examples 8-3.png" alt="Displacement-time graph showing linear motion">
         <div class="caption">Displacement-time graph for Example 8-3</div>
       </div>
     </div>
@@ -310,11 +297,11 @@ export default {
           <div class="info-text">
             <p>A motorcycle running along a straight path is at the 20 m position from its point of origin after 2 s. If it runs at a constant velocity, at what time will it reach the (a) 40 m, (b) 60 m, (c) 80 m, and (d) 100 m positions? Note that the positions are all from the point of origin and that the time being asked is from the moment the motorcycle passes its point of origin. (e) Draw a position-time graph of the motorcycle's motion.</p>
             <p>For your rationalization, determine the slope of the position-time graph and describe the motion of the motorcycle.</p>
-            <div class="start-btn-container">
+            <!-- <div class="start-btn-container">
               <q-btn data-route="/mini-test-8-4" unelevated class="start-btn">
                 Answer
               </q-btn>
-            </div>
+            </div>  -->
           </div>
         </div>
       </div>

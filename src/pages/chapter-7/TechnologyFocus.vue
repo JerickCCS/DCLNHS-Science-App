@@ -127,8 +127,16 @@ export default {
     <div>
       <!-- Card 2 -->
       <p>The structural design considers dead loads (the structure's self-weight), superimposed dead loads (partitions, floor finishes), live loads (occupants, furniture), and environmental loads (wind, snow, seismic). To reduce disaster risk and ensure safety, engineers must analyze these loads when constructing structures such as houses and buildings. Engineers use any of the following in load analysis:</p>
+      <div class="illustration">
+        <img src="assets/img/chapter 7/accelerometer.png" alt="an accelerometer">
+        <div class="caption">an accelerometer</div>
+      </div>
       <p>1. Accelerometers are sensors utilized to measure vibrations in structures subjected to dynamic loading. Based on the data provided, such as the magnitude and frequency of external forces acting on a system, engineers can assess structural integrity, predict fatigue failure, and even optimize design.</p>
       <p>2. Computer-aided design (CAD) Software is used to make detailed digital models of structures and mechanical components that are subjected to virtual load analysis. Engineers can assess the performance, identify potential failure modes, and optimize the design of the structures before constructing them. Examples of CAD software tools are SolidWorks, Autodesk Inventor, and CATIA.</p>
+      <div class="illustration">
+        <img src="assets/img/chapter 7/cad.png" alt="a computer-aided design model of a kitchen">
+        <div class="caption">a computer-aided design model of a kitchen</div>
+      </div>
     </div>
     `,
             `

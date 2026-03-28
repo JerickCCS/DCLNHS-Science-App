@@ -120,7 +120,7 @@ export default {
       </div>
       <p>Temperature sensors are devices that detect and measure the hotness or coldness of a substance or system and convert the data (temperature) into an electrical signal or some other understandable form that could be read out of the same or a different device. The basic types of temperature sensors are contact sensors and noncontact sensors.</p>
       <div class="illustration">
-        <img src="/imgassets/chapter-1/technology in focus.png" alt="technology in focus">
+        <img src="assets/img/chapter 1/technology.png" alt="technology in focus">
         <div class="caption">(A)Temperature probes are contact temperature sensors, while thermometers are noncontact temperature sensors.</div>
       </div>
       <p>Contact temperature sensors require physical contact with the substance or system being observed. They can be used for solids, liquids, and gases. Temperature probes, thermistors, and resistive temperature detectors (RTDs) are examples of this type. On the other hand, noncontact temperature sensors can be used on objects or systems at a distance, ranging from a few millimeters to millions of light-years.</p>

@@ -5,7 +5,7 @@
                 <button class="toolbar-btn" @click="goBack">
                     <q-icon name="arrow_back" size="24px" />
                 </button>
-                <div class="lesson-toolbar-title">Lesson 1: Earthquakes along Faults</div>
+                <div class="lesson-toolbar-title">Lesson 2: Modes of Heat Transfer</div>
                 <button class="bookmark-btn" @click="toggleBookmark">
                     <span class="material-icons"
                         :style="{ color: isBookmarked ? '#FFD600' : 'white', fontSize: '24px' }">
@@ -114,9 +114,7 @@ export default {
             `
     <div>
 <div class="header">
-          <div class="banner">
-        <img src="assets/img/chapter 9/heat_transfer_modes.png" alt="Heat transfer modes">
-        <p style="display: none;">Modes of Heat Transfer</p>
+        <div class="title">Modes of Heat Transfer</div>
       </div>
           <div class="title">How is heat transferred through conduction, convection, and radiation?</div>
         </div>
@@ -143,7 +141,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img/chapter 9/figure_9_6.png" alt="Cooking heat transfer">
+            <img src="assets/img/chapter 9/figure 9-6.png" alt="Cooking heat transfer">
                 <div class="caption">Figure 9-6. Cooking involves the three modes of heat transfer: conduction, convection, and radiation.</div>
         </div>
         <p>
@@ -154,7 +152,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img/chapter 9/figure_9_7.png" alt="Conduction process">
+            <img src="assets/img/chapter 9/figure 9-7.png" alt="Conduction process">
                 <div class="caption">Figure 9-7. The heat from the torch causes energy to be transferred to the particles of the material that are near the torch. Heat is conducted along the material through the transfer of this acquired energy from particle to particle via collisions between them.</div>
         </div>
         <p>
@@ -179,7 +177,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img/chapter 9/figure_9_8.png" alt="Convection current">
+            <img src="assets/img/chapter 9/figure 9-8.png" alt="Convection current">
                 <div class="caption">Figure 9-8. Convection current in water</div>
         </div>
         <div class="info-card">
@@ -258,7 +256,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img/chapter 9/figure_9_9.png" alt="Sun radiation">
+            <img src="assets/img/chapter 9/figure 9-9.png" alt="Sun radiation">
                 <div class="caption">Figure 9-9. The energy of the sun reaches Earth through radiation.</div>
         </div>
         <p>
@@ -272,7 +270,7 @@ export default {
             `
     <div>
         <div class="illustration">
-            <img src="assets/img/chapter 9/figure_9_10.png" alt="Summer clothing">
+            <img src="assets/img/chapter 9/figure 9-10.png" alt="Summer clothing">
                 <div class="caption">Figure 9-10. Many people prefer to wear light-colored shirts rather than dark-colored ones in summer. Why?</div>
         </div>
         <div class="info-card">

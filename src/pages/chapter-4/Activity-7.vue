@@ -124,11 +124,11 @@ export default {
             `
     <div>
       <!-- Card 2 -->
-      <p>OBJECTIVES</p>
+      <p><strong>OBJECTIVES</strong></p>
       <p>Prepare slides for examination under the microscope</p>
       <p>Locate the specimen of interest and focus it under LPO and HPO</p>
       <p>Calculate the magnification of an image observed under the microscope</p>
-      <p>MATERIALS</p>
+      <p><strong>Materials</strong></p>
       <p>◾ water</p>
       <p>◾ letter e (cut from a magazine or newspaper)</p>
       <p>◾ hair strand with follicle (use one that has naturally fallen or taken by comb)</p>
@@ -144,7 +144,7 @@ export default {
             `
     <div>
       <!-- Card 3 -->
-      <p>PROCEDURE</p>
+      <p><strong>PROCEDURE</strong></p>
       <p>1. Place the cutout letter e at the center of the glass slide. Using a medicine dropper, place a small amount of water on it. Carefully put a coverslip over the specimen, starting from the edge to prevent the formation of bubbles.</p>
       <p>2. Place the slide at the center of the stage and secure it with the stage clips.</p>
       <p>3. Set the scanner in place and use the coarse adjustment knob to lower the objective as close as possible to the slide.</p>

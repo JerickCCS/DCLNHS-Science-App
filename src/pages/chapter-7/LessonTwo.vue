@@ -5,7 +5,7 @@
                 <button class="toolbar-btn" @click="goBack">
                     <q-icon name="arrow_back" size="24px" />
                 </button>
-                <div class="lesson-toolbar-title">Lesson 1: Net Force</div>
+                <div class="lesson-toolbar-title">Lesson 2: Net Force</div>
                 <button class="bookmark-btn" @click="toggleBookmark">
                     <span class="material-icons"
                         :style="{ color: isBookmarked ? '#FFD600' : 'white', fontSize: '24px' }">
@@ -128,11 +128,11 @@ export default {
     <div>
       <!-- Card 2 -->
       <div class="illustration">
-        <img src="assets/img" alt="Figure 7-6. The net force of two forces in the same direction is the sum of these forces.">
+        <img src="assets/img/chapter 7/figure 7-6.png" alt="Figure 7-6. The net force of two forces in the same direction is the sum of these forces.">
         <div class="caption">Figure 7-6. The net force of two forces in the same direction is the sum of these forces.</div>
       </div>
       <div class="illustration">
-        <img src="assets/img" alt="Figure 7-7. The net force of two forces in opposite directions is the difference between the magnitudes of these forces.">
+        <img src="assets/img/chapter 7/figure 7-7.png" alt="Figure 7-7. The net force of two forces in opposite directions is the difference between the magnitudes of these forces.">
         <div class="caption">Figure 7-7. The net force of two forces in opposite directions is the difference between the magnitudes of these forces.</div>
       </div>
       <p>For opposing forces with different magnitudes (figure 7-7b), the direction of the net force is always the same as the direction of the force with greater magnitude. \\( \\vec{F}_{\\text{net}} \\) is the vector sum of all the forces acting on it.</p>
@@ -147,7 +147,7 @@ export default {
       <p>In many situations, multiple forces, such as the force of gravity, normal force, friction, and applied force, come into play. Let's look at this example:</p>
       <p>Figure 7-8 illustrates various forces applied on a crate. Initially, an applied force (\\( \\vec{F}_A \\)) pushes the crate to the right. However, counteracting this motion is the force of friction (\\( \\vec{F}_f \\)) between the floor and the crate, eventually bringing it to a halt. Additionally, there is an upward normal force (\\( \\vec{F}_N \\)) and a downward force of gravity (\\( \\vec{F}_G \\)) acting on the crate.</p>
       <div class="illustration">
-        <img src="assets/img" alt="Figure 7-8. Pushing a crate and its free-body diagram">
+        <img src="assets/img/chapter 7/figure 7-8.png" alt="Figure 7-8. Pushing a crate and its free-body diagram">
         <div class="caption">Figure 7-8. Pushing a crate and its free-body diagram</div>
       </div>
     </div>
@@ -162,6 +162,23 @@ export default {
       <p>4. Use arrows on a Cartesian plane to represent these forces. If forces are not along the cardinal directions (north, south, west, and east), specify their angles with respect to a reference axis.</p>
       <p>5. Label all the forces on the body.</p>
       <p>6. Double-check to ensure you have included all relevant forces.</p>
+      <div class="info-card">
+  <div class="info-title">MINI TEST 7-6</div>
+  <div class="info-content">
+    <div class="info-text">
+      <div class="mini-questions">
+        <p><strong>Identify all the forces involved in each situation below.</strong></p>
+      </div>
+      <div class="illustration">
+        <img src="assets/img/chapter 7/mini test 7-6.png" alt="Mini Test 7-6 setup">
+    </div>
+    <div class="start-btn-container">
+        <q-btn data-route="/mini-test-7-6" unelevated class="start-btn">
+          Answer
+        </q-btn>
+      </div>
+  </div>
+</div>
     </div>
     `,
             `
@@ -188,11 +205,8 @@ export default {
         <p><strong>1.</strong> What are the types of force acting on the system?</p>
         <p><strong>2.</strong> What is the net force of the system?</p>
       </div>
-      <div class="start-btn-container">
-        <q-btn data-route="/mini-lab-7-1" unelevated class="start-btn">
-          Answer
-        </q-btn>
-      </div>
+      <div class="illustration">
+        <img src="assets/img/chapter 7/mini lab 7-1.png" alt="Mini Lab 7-1 setup">
     </div>
   </div>
 </div>
@@ -207,7 +221,7 @@ export default {
       <p>To observe the effects of various forces acting on an object, it is important to determine the net force acting upon the object. For two-dimensional problems, the net force should be calculated by combining forces acting in the same direction (e.g., along the x- or y-axis).</p>
       <p>Based on figure 7-9, the forces in the x-axis are friction and applied forces, while the gravitational and normal forces are along the y-axis. If the applied force, the frictional force, the normal force, and the force of gravity are 144 N, 94 N, 490 N, and 490 N, respectively, what is the net force along the x- and y-axes? Frictional and gravitational forces are negative, while normal and applied forces are positive. Combining forces along the x- and y-axes, the net forces are as follows:</p>
       <div class="illustration">
-        <img src="assets/img" alt="Figure 7-9. A free-body diagram of the cart being pushed in figure 7-8.">
+        <img src="assets/img/chapter 7/figure 7-9.png" alt="Figure 7-9. A free-body diagram of the cart being pushed in figure 7-8.">
         <div class="caption">Figure 7-9. A free-body diagram of the cart being pushed in figure 7-8.</div>
       </div>
       <p>\\( \\vec{F}_{\\text{net}_x} = \\vec{F}_{\\text{App}} + (-\\vec{F}_f) \\)</p>
@@ -231,33 +245,24 @@ export default {
     <div>
       <!-- Card 8 -->
       <div class="info-card">
-  <div class="info-title">MINI TEST</div>
+  <div class="info-title">MINI TEST 7-7</div>
   <div class="info-content">
     <div class="info-text">
       <div class="mini-questions">
-        <p><strong>1.</strong> Calculate the net force: 2 N, east, and 5 N, west</p>
-        <p><strong>2.</strong> Calculate the net force: 10 N, south, and 5 N, south</p>
-        <p><strong>3.</strong> Calculate the net force: 20 N, north, and 60 N, south</p>
-        <p><strong>4.</strong> Calculate the net force: 100 N, northeast, and 60 N, southwest</p>
-        <p><strong>5.</strong> Calculate the net force: 150 N, southeast, and 300 N, northwest</p>
-        <p><strong>6.</strong> Identify forces and draw a free-body diagram: A floating stationary ball</p>
-        <p><strong>7.</strong> Identify forces and draw a free-body diagram: A kid playing on a frictionless slide</p>
-        <p><strong>8.</strong> Identify forces and draw a free-body diagram: A man lifting a load</p>
-        <p><strong>9.</strong> Identify forces and draw a free-body diagram: A man pushing a crate upward along an inclined plane</p>
-        <p><strong>10.</strong> Identify forces and draw a free-body diagram: A man descending on a parachute</p>
-        <p><strong>11.</strong> Determine balanced/unbalanced forces: tossing a coin</p>
-        <p><strong>12.</strong> Determine balanced/unbalanced forces: sitting on a chair</p>
-        <p><strong>13.</strong> Determine balanced/unbalanced forces: throwing a ball</p>
-        <p><strong>14.</strong> Determine balanced/unbalanced forces: a falling stone</p>
-        <p><strong>15.</strong> Determine balanced/unbalanced forces: hanging a mobile sculpture</p>
-        <p><strong>16.</strong> Determine balanced/unbalanced forces: a car moving at a constant speed</p>
-        <p><strong>17.</strong> Determine balanced/unbalanced forces: the stable structure of a building</p>
-        <p><strong>18.</strong> Determine balanced/unbalanced forces: a kid sliding on a pool slide</p>
-        <p><strong>19.</strong> Determine balanced/unbalanced forces: swinging a hammer to drive a nail</p>
-        <p><strong>20.</strong> Determine balanced/unbalanced forces: a box on top of a table</p>
-      </div>
+  <p>Determine whether the following situations involved balanced (B) or unbalanced (UB) forces.</p>
+  <p><strong>1.</strong> Tossing a coin</p>
+  <p><strong>2.</strong> Sitting on a chair</p>
+  <p><strong>3.</strong> Throwing a ball</p>
+  <p><strong>4.</strong> A falling stone</p>
+  <p><strong>5.</strong> Hanging a mobile sculpture</p>
+  <p><strong>6.</strong> A car moving at a constant speed</p>
+  <p><strong>7.</strong> The stable structure of a building</p>
+  <p><strong>8.</strong> A kid sliding on a pool slide</p>
+  <p><strong>9.</strong> Swinging a hammer to drive a nail</p>
+  <p><strong>10.</strong> A box on top of a table</p>
+</div>
       <div class="start-btn-container">
-        <q-btn data-route="/mini-test" unelevated class="start-btn">
+        <q-btn data-route="/mini-test-7-7" unelevated class="start-btn">
           Answer
         </q-btn>
       </div>

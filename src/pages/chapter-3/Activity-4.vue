@@ -120,7 +120,7 @@ export default {
       </div>
       <p>One way of expressing the concentration of a solution is by percent by mass, which is defined as</p>
       <div class="illustration">
-        <img src="assets/img" alt="Formula Image">
+        <img src="assets/img/chapter 3/activity 4.png" alt="Formula Image">
         <div class="caption">Formula Image</div>
       </div>
       <p>The mass of the solution is the total mass of the solute and the solvent. Solutions being prepared using water as solvent are called aqueous solutions. In this experiment, you will prepare different concentrations of sodium chloride aqueous solutions. You will also calculate the amount of solute and solvent needed to prepare the solutions.</p>
@@ -158,7 +158,7 @@ export default {
       <p>6. Record your data in Data and Results.</p>
       <p><strong>DATA AND RESULTS</strong></p>
       <div class="illustration">
-        <img src="assets/img" alt="Data and Results Table">
+        <img src="assets/img/chapter 3/activity 4 table.png" alt="Data and Results Table">
         <div class="caption">Data and Results Table</div>
       </div>
     </div>
@@ -168,8 +168,7 @@ export default {
       <!-- Card 5 -->
       <p><strong>COMPUTATIONS</strong></p>
       <div class="illustration">
-        <img src="assets/img" alt="Computations Image">
-        <div class="caption">Computations Image</div>
+        <img src="assets/img/chapter 3/computation.png" alt="Computations Image">
       </div>
       <p><strong>ANALYSIS AND INTERPRETATION</strong></p>
       <p>1. How did the amount of NaCl change as the concentration of the solution increased?</p>

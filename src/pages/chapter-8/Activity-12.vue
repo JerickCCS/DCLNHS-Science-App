@@ -118,9 +118,10 @@ export default {
       <!-- Card 1 -->
       <div class="header">
         <div class="title">ACTIVITY 12</div>
-        <div class="subtitle">Factors Affecting Motion in Toy Cars</div>
+        <p><strong>Factors Affecting Motion in Toy Cars</strong></p>
       </div>
-      <p><strong>Controlled Experiment</strong></p>
+
+      <p>Controlled Experiment</p>
       <p>When doing an experiment, one should follow the steps in the scientific method. It is also essential that the experiment should be controlled in order to observe directly the effect of the independent variable on the dependent variable, while other variables that may affect the experiment should be kept constant or controlled. Here are some important steps in doing a controlled experiment.</p>
     </div>
     `,
@@ -158,7 +159,7 @@ export default {
       <p>1. Investigate the factors affecting the motion of toy cars.</p>
       <p>2. Describe the motion of toy cars.</p>
       <div class="illustration">
-        <img src="assets/images/table_2_toy_car.jpg" alt="Table 2: Varying Paths of Toy Car">
+        <img src="assets/img/chapter 8/table 2.png" alt="Table 2: Varying Paths of Toy Car">
         <div class="caption">Table 2. Varying Paths of Toy Car</div>
       </div>
     </div>
@@ -167,7 +168,7 @@ export default {
     <div>
       <!-- Card 6 -->
       <div class="illustration">
-        <img src="assets/images/table_3_ramp_angles.jpg" alt="Table 3: Varying Angles of the Ramp">
+        <img src="assets/img/chapter 8/table 3.png" alt="Table 3: Varying Angles of the Ramp">
         <div class="caption">Table 3. Varying Angles of the Ramp</div>
       </div>
     </div>

@@ -156,7 +156,7 @@ export default {
       <p><strong>DATA AND RESULTS</strong></p>
       <p>Table 1. Reactions of Indicators with Acids</p>
       <div class="illustration">
-        <img src="assets/img" alt="Table 1. Reactions of Indicators with Acids">
+        <img src="assets/img/chapter 3/activity 5 table 1.png" alt="Table 1. Reactions of Indicators with Acids">
         <div class="caption">Table 1. Reactions of Indicators with Acids</div>
       </div>
     </div>
@@ -166,7 +166,7 @@ export default {
       <!-- Card 5 -->
       <p>Table 2. Reactions of Indicators with Bases</p>
       <div class="illustration">
-        <img src="assets/img" alt="Table 2. Reactions of Indicators with Bases">
+        <img src="assets/img/chapter 3/activity 5 table 2.png" alt="Table 2. Reactions of Indicators with Bases">
         <div class="caption">Table 2. Reactions of Indicators with Bases</div>
       </div>
       <p><strong>ANALYSIS AND INTERPRETATION</strong></p>

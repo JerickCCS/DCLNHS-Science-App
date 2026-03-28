@@ -5,7 +5,7 @@
             <button class="back-button" @click="goBack">
                 ←
             </button>
-            <h1 class="title">Chapter 2 Test</h1>
+            <h1 class="title">Chapter 1 Test</h1>
         </header>
 
         <!-- Main Content -->
@@ -103,7 +103,7 @@ export default {
                     "Flow charts are examples of scientific models that must always appear as physical replicas."
                 ],
                 correctAnswer: "Mathematical equations and computer simulations are forms of scientific models.",
-                image: "/assets/img/chapter 2/figure 2-1.png" // Optional image field added
+                image: null // Optional image field added
             },
             {
                 question: "What is the best way to convert units of measurement?",

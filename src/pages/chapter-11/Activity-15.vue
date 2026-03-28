@@ -118,10 +118,10 @@ export default {
         </div>
       </div>
 <p>Uneven Heating of Earth's Surface</p>
-<p>OBJECTIVES</p>
+<p><strong>OBJECTIVES</strong></p>
 <p>• Compare the heating of the land surface with that of the water</p>
 <p>• Simulate how the greenhouse effect happens</p>
-<p>MATERIALS</p>
+<p><strong>Materials</strong></p>
 <table style="border-collapse: collapse;">
   <tr>
     <td>■ Four clear glasses or bowl-shaped clear containers with transparent lid or cling-wrap cover</td>
@@ -145,7 +145,7 @@ export default {
             ,
             `
     <div>
-        <p>PROCEDURE</p>
+        <p><strong>PROCEDURE</strong></p>
         <p>Covered heating and covered cooling</p>
         <p style="padding-left: 10px;">1. Fill two-thirds of one container with soil. Fill two-thirds of another container with room temperature water.</p>
 <p style="padding-left: 10px;">2. Suspend the thermometer in each container. Secure each thermometer with the clothespin. Make sure that the thermometer bulb is barely below the surface of the soil and water, as shown in the figure.</p>

@@ -113,7 +113,6 @@ export default {
     <div>
       <!-- Card 1 -->
       <div class="header">
-        <span class="lesson-pill">ACTIVITY 2</span>
         <div>
           <div class="title">The Particle Nature of Matter</div>
         </div>

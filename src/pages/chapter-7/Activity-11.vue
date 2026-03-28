@@ -174,10 +174,9 @@ export default {
       <p><strong>DATA COLLECTION AND ANALYSIS</strong></p>
       <p><strong>Table 1. Force in lifting objects</strong></p>
       <div class="illustration">
-        <img src="assets/img" alt="Table 1. Force in lifting objects">
+        <img src="assets/img/chapter 7/table 1.png" alt="Table 1. Force in lifting objects">
         <div class="caption">Table 1. Force in lifting objects</div>
       </div>
-      <p>Sketch the Free-Body Diagram:</p>
     </div>
     `,
             `
@@ -185,10 +184,9 @@ export default {
       <!-- Card 6 -->
       <p><strong>Table 2. Force in pulling objects along an inclined plane</strong></p>
       <div class="illustration">
-        <img src="assets/img" alt="Table 2. Force in pulling objects along an inclined plane">
+        <img src="assets/img/chapter 7/table 2.png" alt="Table 2. Force in pulling objects along an inclined plane">
         <div class="caption">Table 2. Force in pulling objects along an inclined plane</div>
       </div>
-      <p>Sketch the Free-Body Diagram:</p>
     </div>
     `,
             `
@@ -196,10 +194,9 @@ export default {
       <!-- Card 7 -->
       <p><strong>Table 3. Force of hanging objects submerged in water</strong></p>
       <div class="illustration">
-        <img src="assets/img" alt="Table 3. Force of hanging objects submerged in water">
+        <img src="assets/img/chapter 7/table 3.png" alt="Table 3. Force of hanging objects submerged in water">
         <div class="caption">Table 3. Force of hanging objects submerged in water</div>
       </div>
-      <p>Sketch the Free-Body Diagram:</p>
     </div>
     `,
             `
